@@ -27,6 +27,7 @@ if classn == "Merchant":
     Per = int(8)
     Cha = int(10)
     Int = int(6)
+    TotHea = int(30)
 
 
 adlist = "common","rare","mythical","legendary"
@@ -65,10 +66,15 @@ if opo == 1:
     if n == "warlord" or n == "dictator" or n == "imp":
         if Str >= 7 and Dex >= 5:
             chance = random.randint(1,2)
-        if chance == 1:
-            print("You triumph over the "+n+". You gain nothing.")
-        if chance == 2:
-            print("You triumph over the "+n+". You gained a "+ad+" "+item+".")
+            if chance == 1:
+                print("You triumph over the "+n+". You gain nothing.")
+            if chance == 2:
+                print("You triumph over the "+n+". You gained a "+ad+" "+item+".")
+        else:
+            nTotHea = int(TotHea) - random.randint(1,TotHea)
+            nTotHea = str(nTotHea)
+            TotHea = str(TotHea)
+            print("You lost. HP falls from "+TotHea+" to "+nTotHea)
 
 
 #return stops any instructions after it from working; it ends the specific area.
