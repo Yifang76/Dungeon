@@ -2,6 +2,19 @@ import random
 
 name = input("Name, please ")
 
+print("Knight: Honourable warriors of the Lennish empire, they are extremely strong and are representatives of the law. (Strength: 10, Agility: 3, Dexterity: 8, Health: 7, Perception: 4, Charisma: 6 (Within lawful lands) or 0 (in foreign lands), Intelligence: 5 )")
+print("Merchant: (Strength: 1, Agility: 8, Dexterity: 1, Health: 3, Perception: 8, Charisma: 10, Intelligence: 10 )")
+
+classn = input("Pick a class ").capitalize()
+
+def classo(chosen, cl):
+    if classn == input(chosen):
+        print("Welcome to the game, "+cl+" "+name+".")
+
+classo("Knight", "knight")
+classo("Merchant", "merchant")
+
+
 def noun(one, two, three):
     nlist = one, two, three
     n = random.choice(nlist)
