@@ -1,6 +1,6 @@
 import random
 
-name = input("Name, please ")
+name = input("Name, please ").capitalize()
 print("Knight: Honourable warriors of the Lennish empire, they are extremely strong and are representatives of the law. (Strength: 10, Agility: 3, Dexterity: 8, Health: 7, Perception: 4, Charisma: 6 (Within lawful lands) or 0 (in foreign lands), Intelligence: 5 )")
 print("Merchant: (Strength: 1, Agility: 8, Dexterity: 1, Health: 3, Perception: 8, Charisma: 10, Intelligence: 6 )")
 
@@ -29,6 +29,12 @@ if classn == "Merchant":
     Int = int(6)
 
 
+adlist = "common","rare","mythical","legendary"
+ad = random.choice(adlist)
+
+itemlist = "axe","sword","stick"
+item = random.choice(itemlist)
+
 nlist = "imp","warlord","dictator"
 n = random.choice(nlist)
 
@@ -56,11 +62,13 @@ t = str(" "+det+" "+n+" "+v+" "+ex+" ")
 opo = int(input("As you "+pv+" down the path,"+t+"menacingly. What will you do? "))
 
 if opo == 1:
-    if n = "warlord" or n == "dictator" or n == "imp":
+    if n == "warlord" or n == "dictator" or n == "imp":
         if Str >= 7 and Dex >= 5:
-        print("You triumph over the "+n+". ")
-
-
+            chance = random.randint(1,2)
+        if chance == 1:
+            print("You triumph over the "+n+". You gain nothing.")
+        if chance == 2:
+            print("You triumph over the "+n+". You gained a "+ad+" "+item+".")
 
 
 #return stops any instructions after it from working; it ends the specific area.
