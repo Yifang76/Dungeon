@@ -2,19 +2,31 @@ import random
 
 name = input("Name, please ")
 print("Knight: Honourable warriors of the Lennish empire, they are extremely strong and are representatives of the law. (Strength: 10, Agility: 3, Dexterity: 8, Health: 7, Perception: 4, Charisma: 6 (Within lawful lands) or 0 (in foreign lands), Intelligence: 5 )")
-print("Merchant: (Strength: 1, Agility: 8, Dexterity: 1, Health: 3, Perception: 8, Charisma: 10, Intelligence: 10 )")
+print("Merchant: (Strength: 1, Agility: 8, Dexterity: 1, Health: 3, Perception: 8, Charisma: 10, Intelligence: 6 )")
 
 classn = input("Pick a class ").capitalize()
 
-def classo(chosen, cl):
-    if classn == input(chosen):
-        print("Welcome to the game, "+cl+" "+name+".")
+if classn == "Knight":
+    print("Welcome, knight "+name+".")
+    Str = int(10)
+    Agi = int(3)
+    Dex = int(8)
+    Hea = int(7)
+    Per = int(4)
+    Cha = int(6)
+    Int = int(5)
+    TotHea = int(70)
 
-classo("Knight", "knight")
-classo("Merchant", "merchant")
 
-
-
+if classn == "Merchant":
+    print("Welcome, merchant "+name+".")
+    Str = int(1)
+    Agi = int(8)
+    Dex = int(1)
+    Hea = int(3)
+    Per = int(8)
+    Cha = int(10)
+    Int = int(6)
 
 
 nlist = "imp","warlord","dictator"
@@ -42,6 +54,11 @@ t = str(" "+det+" "+n+" "+v+" "+ex+" ")
 
 
 opo = int(input("As you "+pv+" down the path,"+t+"menacingly. What will you do? "))
+
+if opo == 1:
+    if n = "warlord" or n == "dictator" or n == "imp":
+        if Str >= 7 and Dex >= 5:
+        print("You triumph over the "+n+". ")
 
 
 
