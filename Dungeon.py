@@ -16,7 +16,11 @@ v = random.choice(vlist)
 palist = "saunter","walk","run"
 pv = random.choice(palist)
 
-print("As you "+pv+" down the path, "+det+ " "+n+ " "+v+ " there menacingly. What will you do? ")
+t = str(" "+det+" "+n+" "+v+" ")
+
+
+
+print("As you "+pv+" down the path,"+t+"there menacingly. What will you do? ")
 
 
 
