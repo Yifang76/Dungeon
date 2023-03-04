@@ -130,7 +130,7 @@ if opo == 1:
                         TotHea = int(TotHea) - int(etd)
                         TotHea = str(TotHea)
                         etd = str(etd)
-                        print("Mediocre   hit. Your enemy deals "+etd+" to you, leaving you with "+TotHea+" left.")
+                        print("Mediocre hit. Your enemy deals "+etd+" to you, leaving you with "+TotHea+" left.")
                     if eguess <= int(guess) - int(3) or eguess >= int(guess) + int(3):
                         etd = int(eStr) + int(eDex) - int(5)
                         TotHea = int(TotHea) - int(etd)
