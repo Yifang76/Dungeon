@@ -1,4 +1,5 @@
 import random
+
 name = input("Name, please ").capitalize()
 print("Knight: Honourable warriors of the Lennish empire, they are extremely strong and are representatives of the law. (Strength: 10, Agility: 3, Dexterity: 8, Health: 7, Perception: 4, Charisma: 6 (Within lawful lands) or 0 (in foreign lands), Intelligence: 5 )")
 print("Merchant: (Strength: 1, Agility: 8, Dexterity: 1, Health: 3, Perception: 8, Charisma: 10, Intelligence: 6 )")
@@ -101,15 +102,21 @@ if opo == 1:
                     if pguess == int(guess) or pguess == int(guess) - int(1) or pguess == int(guess) + int(1):
                         td = int(Str) + int(Dex) + int(2)
                         td = str(td)
-                        print("Critical hit! You deal "+td+" against your enemy.")
+                        eTotHea = int(eTotHea) - int(td)
+                        eTotHea = str(eTotHea)
+                        print("Critical hit! You deal "+td+" against your enemy, leaving them with "+eTotHea+" health left.")
                     if pguess == int(guess) - int(2) or pguess == int(guess) + int(2):
                         td = int(Str) + int(Dex) - int(1)
                         td = str(td)
-                        print("Mediocre hit. You deal "+td+" against your enemy.")
-                        if pguess <= int(guess) - int(3) or pguess >= int(guess) + int(3):
-                            td = int(Str) + int(Dex) - int(5)
-                            td = str(td) 
-                            print("Weak hit. You deal "+td+" against your enemy")
+                        eTotHea = int(eTotHea) - int(td)
+                        eTotHea = str(eTotHea)
+                        print("Mediocre hit. You deal "+td+" against your enemy, leaving them with "+eTotHea+" health left.")
+                    if pguess <= int(guess) - int(3) or pguess >= int(guess) + int(3):
+                        td = int(Str) + int(Dex) - int(5)
+                        td = str(td) 
+                        eTotHea = int(eTotHea) - int(td)
+                        eTotHea = str(eTotHea)
+                            print("Weak hit. You deal "+td+" against your enemy, leaving them with "+eTotHea+" health left.")
                             
                     eguess = random.randint(1,10)
                     if eguess == int(guess) or eguess == int(guess) - int(1) or eguess == int(guess) + int(1):
@@ -157,13 +164,13 @@ if opo == 1:
                             print("You obtained a "+ad+" "+item+".")
                         else:
                             print("You obtained nothing")
-            print("You lost")    
                 
-        else:
-            nTotHea = int(TotHea) - random.randint(1,TotHea)
-            nTotHea = str(nTotHea)
-            TotHea = str(TotHea)
-            print("You aren't strong enough to wield your weapon effectively.")
-            print("You lost. HP falls from "+TotHea+" to "+nTotHea)
+                
+            else:
+                nTotHea = int(TotHea) - random.randint(1,TotHea)
+                nTotHea = str(nTotHea)
+                TotHea = str(TotHea)
+                print("You aren't strong enough to wield your weapon effectively.")
+                print("You lost. HP falls from "+TotHea+" to "+nTotHea)
 
 
