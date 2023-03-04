@@ -77,24 +77,26 @@ t = str(" "+det+" "+n+" "+v+" "+ex+" ")
 opo = int(input("As you "+pv+" down the path,"+t+"menacingly. What will you do? "))
 if opo == 1:
     if n == "imp" or n == "warlord" or n == "dictator":
+        if n == "imp":
+            eTotHea = int("25")
+            eStr = int(1)
+            eDex = int(1)
+        if n == "dictator":
+            eTotHea = int("75")
+            eStr = int(1)
+            eDex = int(1)
+        if n == "warlord":
+            eTotHea = int("100")
+            eStr = int(1)
+            eDex = int(1)
+        eTotHea == int(eTotHea)
         if Str >= 1 and Dex >= 1:
-            TotHea == str(TotHea)
+            TotHea == int(TotHea)
             #print("You have "+TotHea+".")
             #print("Minigame starting")
             print("Rules: you are given a number between 1 and 10. If you get within 1 digit of the original number, you deal a fatal wound (which does the highest damage). Three digits difference leads to a body hit (which does mediocre damage) and finally anything over a three number difference will be a miss")
             while TotHea > 0:
-                if n == "imp":
-                    eTotHea = int("25")
-                    eStr = int(1)
-                    eDex = int(1)
-                if n == "dictator":
-                    eTotHea = int("75")
-                    eStr = int(1)
-                    eDex = int(1)
-                if n == "warlord":
-                    eTotHea = int("100")
-                    eStr = int(1)
-                    eDex = int(1)
+                eTotHea = int(eTotHea)
                 if eTotHea > 0:
                     guess = random.randint(1,10)
                     print(guess)
@@ -116,7 +118,7 @@ if opo == 1:
                         td = str(td) 
                         eTotHea = int(eTotHea) - int(td)
                         eTotHea = str(eTotHea)
-                            print("Weak hit. You deal "+td+" against your enemy, leaving them with "+eTotHea+" health left.")
+                        print("Weak hit. You deal "+td+" against your enemy, leaving them with "+eTotHea+" health left.")
                             
                     eguess = random.randint(1,10)
                     if eguess == int(guess) or eguess == int(guess) - int(1) or eguess == int(guess) + int(1):
@@ -168,7 +170,7 @@ if opo == 1:
                 print("You lost")
                 
         else:
-             nTotHea = int(TotHea) - random.randint(1,TotHea)
+            nTotHea = int(TotHea) - random.randint(1,TotHea)
             nTotHea = str(nTotHea)
             TotHea = str(TotHea)
             print("You aren't strong enough to wield your weapon effectively.")
