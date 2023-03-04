@@ -164,13 +164,14 @@ if opo == 1:
                             print("You obtained a "+ad+" "+item+".")
                         else:
                             print("You obtained nothing")
-                
-                
             else:
-                nTotHea = int(TotHea) - random.randint(1,TotHea)
-                nTotHea = str(nTotHea)
-                TotHea = str(TotHea)
-                print("You aren't strong enough to wield your weapon effectively.")
-                print("You lost. HP falls from "+TotHea+" to "+nTotHea)
+                print("You lost")
+                
+        else:
+             nTotHea = int(TotHea) - random.randint(1,TotHea)
+            nTotHea = str(nTotHea)
+            TotHea = str(TotHea)
+            print("You aren't strong enough to wield your weapon effectively.")
+            print("You lost. HP falls from "+TotHea+" to "+nTotHea)
 
 
