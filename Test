@@ -10,28 +10,43 @@ if attriQuery == "Yes":
 
 classn = input("Pick a class ").capitalize()
 
-def classw(className, welcomeMessage, StrInt, AgiInt, DexInt, HeaInt, PerInt, ChaInt, IntInt, THInt):
-    if classn == className:
-        print(welcomeMessage)
-        global Str
-        global Agi
-        global Dex
-        global Hea
-        global Per
-        global Cha
-        global Int
-        global TotHea
-        Str = int(StrInt)
-        Agi = int(AgiInt)
-        Dex = int(DexInt)
-        Hea = int(HeaInt)
-        Per = int(PerInt)
-        Cha = int(ChaInt)
-        Int = int(IntInt)
-        TotHea = int(THInt)
+if classn == "Knight":
+    print("Welcome, knight "+name+".")
+    Str = int(10)
+    Agi = int(3)
+    Dex = int(8)
+    Hea = int(7)
+    Per = int(4)
+    Cha = int(6)
+    Int = int(5)
+    TotHea = int(70)
 
-classw("Knight", "Welcome, knight "+name+".", 10, 3, 8, 7, 4, 6, 70)
-classw("Merchant", "Welcome, merchant "+name+".", 1, 8, 1, 3, 8, 10, 30)
+
+if classn == "Merchant":
+    print("Welcome, merchant "+name+".")
+    Str = int(1)
+    Agi = int(8)
+    Dex = int(1)
+    Hea = int(3)
+    Per = int(8)
+    Cha = int(10)
+    Int = int(6)
+    TotHea = int(30)
+
+if classn == "Summoner":
+    print("Welcome, summoner "+name+".")
+    Str = int(1)
+    Agi = int(4)
+    Dex = int(1)
+    Hea = int(2)
+    Per = int(9)
+    Cha = int(2)
+    Int = int(8)
+    TotHea = int(20)
+    summonNumber = int(0)
+    maxSummon = int(8)
+    
+
 
 adlist = "common","rare","mythical","legendary"
 ad = random.choice(adlist)
