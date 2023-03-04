@@ -44,6 +44,7 @@ if classn == "Summoner":
     Int = int(8)
     TotHea = int(20)
     summonNumber = int(0)
+    maxSummon = int(8)
     
 
 
