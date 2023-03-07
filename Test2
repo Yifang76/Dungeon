@@ -9,28 +9,32 @@ if attriQuery == "Yes":
 
 classn = input("Pick a class ").capitalize()
 
-if classn == "Knight":
-    print("Welcome, knight "+name+".")
-    Str = int(10)
-    Agi = int(3)
-    Dex = int(8)
-    Hea = int(7)
-    Per = int(4)
-    Cha = int(6)
-    Int = int(5)
-    TotHea = int(70)
+def classv(className, message. StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG):
+    global classn
+    global className
+    global message
+    global Str
+    global Agi
+    global Dex
+    global Hea
+    global Per
+    global Cha
+    global Int
+    global TotHea
+    global name
+    if classn == className:
+        print(message)
+        Str = int(StrG)
+        Agi = int(AgiG)
+        Dex = int(DexG)
+        Hea = int(HeaG)
+        Per = int(PerG)
+        Cha = int(ChaG)
+        Int = int(IntG)
+        TotHea = int(TotHeaG)
 
+classv("Merchant", "Welcome, merchant "+name+".", 1, 8, 1, 3, 8, 10, 6, 30)
 
-if classn == "Merchant":
-    print("Welcome, merchant "+name+".")
-    Str = int(1)
-    Agi = int(8)
-    Dex = int(1)
-    Hea = int(3)
-    Per = int(8)
-    Cha = int(10)
-    Int = int(6)
-    TotHea = int(30)
 
 if classn == "Summoner":
     print("Welcome, summoner "+name+".")
