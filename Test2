@@ -100,37 +100,43 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                         guess = random.randint(1,10)
                         print(guess)
                         pguess = int(input("What do you believe the number is? "))
-                        if pguess == int(guess) or pguess == int(guess) - int(1) or pguess == int(guess) + int(1):
-                            td = int(Str) + int(Dex) + int(2)
-                            td = str(td)
-                            print("Critical hit! You deal "+td+" against your enemy.")
-                        if pguess == int(guess) - int(2) or pguess == int(guess) + int(2):
-                            td = int(Str) + int(Dex) - int(1)
-                            td = str(td)
-                            print("Mediocre hit. You deal "+td+" against your enemy.")
-                        if pguess <= int(guess) - int(3) or pguess >= int(guess) + int(3):
-                            td = int(Str) + int(Dex) - int(5)
-                            td = str(td) 
-                            print("Weak hit. You deal "+td+" against your enemy")
+                    if pguess == int(guess) or pguess == int(guess) - int(1) or pguess == int(guess) + int(1):
+                        td = int(Str) + int(Dex) + int(2)
+                        eTotHea = int(eTotHea) - int(td)
+                        td = str(td)
+                        eTotHea = str(eTotHea)
+                        print("Critical hit! You deal "+td+" against your enemy, leaving them with "+eTotHea+" health left.")
+                    if pguess == int(guess) - int(2) or pguess == int(guess) + int(2):
+                        td = int(Str) + int(Dex) - int(1)
+                        eTotHea = int(eTotHea) - int(td)
+                        td = str(td)
+                        eTotHea = str(eTotHea)
+                        print("Mediocre hit. You deal "+td+" against your enemy, leaving them with "+eTotHea+" health left.")
+                    if pguess <= int(guess) - int(3) or pguess >= int(guess) + int(3):
+                        td = int(Str) + int(Dex) - int(5) 
+                        eTotHea = int(eTotHea) - int(td)
+                        td = str(td)
+                        eTotHea = str(eTotHea)
+                        print("Weak hit. You deal "+td+" against your enemy, leaving them with "+eTotHea+" health left.")
                             
                         eguess = random.randint(1,10)
                         if eguess == int(guess) or eguess == int(guess) - int(1) or eguess == int(guess) + int(1):
                             etd = int(eStr) + int(eDex) + int(2)
-                            etd = str(etd)
                             TotHea = int(TotHea) - int(etd)
                             TotHea = str(TotHea)
+                            etd = str(etd)
                             print("Critical hit! Your enemy deals "+etd+" to you, leaving you with "+TotHea+" left.")
                         if eguess == int(guess) - int(2) or eguess == int(guess) + int(2):
                             etd = int(eStr) + int(eDex) - int(1)
-                            etd = str(etd)
                             TotHea = int(TotHea) - int(etd)
                             TotHea = str(TotHea)
+                            etd = str(etd)
                             print("Mediocre hit. Your enemy deals "+etd+" to you, leaving you with "+TotHea+" left.")
                         if eguess <= int(guess) - int(3) or eguess >= int(guess) + int(3):
                             etd = int(eStr) + int(eDex) - int(5)
-                            etd = str(etd)
                             TotHea = int(TotHea) - int(etd)
                             TotHea = str(TotHea)
+                            etd = str(etd)
                             print("Weak hit. Your enemy deals "+etd+" to you, leaving you with "+TotHea+" left.")
                         TotHea = int(TotHea)
                     else:
