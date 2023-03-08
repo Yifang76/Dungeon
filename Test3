@@ -157,6 +157,7 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                                 print("You obtained a "+ad+" "+item+".")
                             else:
                                 print("You obtained nothing")
+                            break
                 
                 
             else:
