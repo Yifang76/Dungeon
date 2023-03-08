@@ -86,6 +86,7 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                 while TotHea > 0:
                     global eTotHea
                     print(eTotHea)
+                    eTotHea = int(eTotHea)
                     if eTotHea > 0:
                         guess = random.randint(1,10)
                         print(guess)
@@ -129,6 +130,7 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                                 etd = str(etd)
                                 print("Weak hit. Your enemy deals "+etd+" to you, leaving you with "+TotHea+" left.")
                             TotHea = int(TotHea)
+                            eTotHea = str(eTotHea)
                     else:
                         if classn == "Summoner":
                             summon = random.randint(1,2)
