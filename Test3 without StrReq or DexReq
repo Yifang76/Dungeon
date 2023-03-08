@@ -84,15 +84,15 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
             TotHea == str(TotHea)
             #print("You have "+TotHea+".")
             #print("Minigame starting")
-            print("Rules: you are given a number between 1 and 10. If you get within 1 digit of the original number, you deal a fatal wound (which does the highest damage). Three digits difference leads to a body hit (which does mediocre damage) and finally anything over a three number difference will be a miss")                while TotHea > 0:
+            print("Rules: you are given a number between 1 and 10. If you get within 1 digit of the original number, you deal a fatal wound (which does the highest damage). Three digits difference leads to a body hit (which does mediocre damage) and finally anything over a three number difference will be a miss")                
+            while TotHea > 0:
                 global eTotHea
                 print(eTotHea)
                 eTotHea = int(eTotHea)
                 if eTotHea > 0:
                     guess = random.randint(1,10)
-                    print(guess)
                     pguess = int(input("What do you believe the number is? "))
-                if pguess == int(guess) or pguess == int(guess) - int(1) or pguess == int(guess) + int(1):
+                    if pguess == int(guess) or pguess == int(guess) - int(1) or pguess == int(guess) + int(1):
                         td = int(Str) + int(Dex) + int(2)
                         eTotHea = int(eTotHea) - int(td)
                         td = str(td)
@@ -137,6 +137,8 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                         summon = random.randint(1,2)
                         if summon == 1:
                             aq = input("You have defeated our enemy. Would you like to add this creature to your army?").capitalize()
+                            global summonNumber
+                            global maxSummon
                             if "Yes" or "Y":
                                 print("You gain a new summon.")
                                 summonNumber = summonNumber + 1
@@ -160,13 +162,7 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                             print("You obtained nothing")
                             break
                 
-                
-            else:
-                nTotHea = int(TotHea) - random.randint(1,TotHea)
-                nTotHea = str(nTotHea)
-                TotHea = str(TotHea)
-                print("You aren't strong enough to wield your weapon effectively.")
-                print("You lost. HP falls from "+TotHea+" to "+nTotHea)
+        
                 
 fight("imp",7, 5, 1, 1)
 fight("warlord",7, 5, 7, 9)
