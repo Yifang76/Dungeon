@@ -73,9 +73,12 @@ if n == "warlord":
 if n == "dictator":
     eTotHea = int(75)
 
+
+opo = int(input("As you "+pv+" down the path,"+t+"menacingly. What will you do? "))
+
 def fight(noun, StrReq, DexReq, eStr, eDex):
     global TotHea
-    opo = int(input("As you "+pv+" down the path,"+t+"menacingly. What will you do? "))
+    global opo
     if opo == 1:
         if n == noun:
             if Str >= StrReq and Dex >= DexReq:
