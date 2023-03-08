@@ -33,8 +33,8 @@ def classv(className, message, StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG
         if classn == Sclass:
             SpecialAbi = int(SpecialAbiNum)
 
-classv("Knight", "Welcome, knight "+name+".", 10, 3, 8, 7, 4, 6, 5, 70, "0", t, 0)
-classv("Merchant", "Welcome, merchant "+name+".", 1, 8, 1, 3, 8, 10, 6, 30, "0", t, 0)
+classv("Knight", "Welcome, knight "+name+".", 10, 3, 8, 7, 4, 6, 5, 70, "0", "Pi", 0)
+classv("Merchant", "Welcome, merchant "+name+".", 1, 8, 1, 3, 8, 10, 6, 30, "0", "Pi", 0)
 classv("Summoner", "Welcome, summoner "+name+".", 1, 4, 1, 2, 9, 2, 8, 20, "Summoner", summonNumber, 0)
 
 
