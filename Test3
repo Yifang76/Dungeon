@@ -170,7 +170,7 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                 print("You aren't strong enough to wield your weapon effectively.")
                 print("You lost. HP falls from "+TotHea+" to "+nTotHea)
     if opo == 2:
-        retreat == random.randint(1,100-Agi)
+        retreat = random.randint(1,100-Agi)
         if retreat >= 50:
             print("You successfully fled, coward.")
         else:
