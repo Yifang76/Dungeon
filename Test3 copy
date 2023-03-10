@@ -38,43 +38,55 @@ classv("Knight", "Welcome, knight "+name+".", 10, 3, 8, 7, 4, 6, 5, 70, "0", "Pi
 classv("Merchant", "Welcome, merchant "+name+".", 1, 8, 1, 3, 8, 10, 6, 30, "0", "Pi", 0)
 classv("Summoner", "Welcome, summoner "+name+".", 1, 4, 1, 2, 9, 2, 8, 20, "Summoner", summonNumber, 0)
 
+def encounter():
+    global adlist
+    global ad
+    global itemlist
+    global item
+    global nlist
+    global n
+    global vlist
+    global v
+    global palist
+    global pv
+    global ex
+    global eTotHea
+    adlist = "common","rare","mythical","legendary"
+    ad = random.choice(adlist)
 
-adlist = "common","rare","mythical","legendary"
-ad = random.choice(adlist)
+    itemlist = "axe","sword","stick"
+    item = random.choice(itemlist)
 
-itemlist = "axe","sword","stick"
-item = random.choice(itemlist)
+    nlist = "imp","warlord","dictator"
+    n = random.choice(nlist)
 
-nlist = "imp","warlord","dictator"
-n = random.choice(nlist)
-
-vlist = "stands","looks","glares"
-v = random.choice(vlist)
-
-
-palist = "saunter","walk","run"
-pv = random.choice(palist)
-
-if n == "warlord" or n == "dictator":
-    det = str("a")
-else:
-    det = str("an")
-
-if v == "looks" or v == "glares":
-    ex = str("at you")
-else:
-    ex = str("there")
-t = str(" "+det+" "+n+" "+v+" "+ex+" ")
-
-if n == "imp":
-    eTotHea = int(25)
-if n == "warlord":
-    eTotHea = int(100)
-if n == "dictator":
-    eTotHea = int(75)
+    vlist = "stands","looks","glares"
+    v = random.choice(vlist)
 
 
-opo = int(input("As you "+pv+" down the path,"+t+"menacingly. What will you do? "))
+    palist = "saunter","walk","run"
+    pv = random.choice(palist)
+
+    if n == "warlord" or n == "dictator":
+        det = str("a")
+    else:
+        det = str("an")
+
+    if v == "looks" or v == "glares":
+        ex = str("at you")
+    else:
+        ex = str("there")
+    t = str(" "+det+" "+n+" "+v+" "+ex+" ")
+
+    if n == "imp":
+        eTotHea = int(25)
+    if n == "warlord":
+        eTotHea = int(100)
+    if n == "dictator":
+        eTotHea = int(75)
+
+    global opo
+    opo = int(input("As you "+pv+" down the path,"+t+"menacingly. What will you do? "))
 
 def fight(noun, StrReq, DexReq, eStr, eDex):
     global TotHea
@@ -179,7 +191,7 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
 
 
 
-
+encounter()
 fight("imp",7, 5, 1, 1)
 fight("warlord",7, 5, 7, 9)
 fight("dictator",7, 5, 3, 3)
