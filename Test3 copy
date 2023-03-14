@@ -112,13 +112,13 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                             td = str(td)
                             eTotHea = str(eTotHea)
                             print("Critical hit! You deal "+td+" against your enemy, leaving them with "+eTotHea+" health left.")
-                        if pguess == int(guess) - int(2) or pguess == int(guess) + int(2):
+                        elif pguess == int(guess) - int(2) or pguess == int(guess) + int(2):
                             td = int(Str) + int(Dex) - int(1)
                             eTotHea = int(eTotHea) - int(td)
                             td = str(td)
                             eTotHea = str(eTotHea)
                             print("Mediocre hit. You deal "+td+" against your enemy, leaving them with "+eTotHea+" health left.")
-                        if pguess <= int(guess) - int(3) or pguess >= int(guess) + int(3):
+                        elif pguess <= int(guess) - int(3) or pguess >= int(guess) + int(3):
                             td = int(Str) + int(Dex) - int(5) 
                             eTotHea = int(eTotHea) - int(td)
                             td = str(td)
@@ -132,13 +132,13 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                             TotHea = str(TotHea)
                             etd = str(etd)
                             print("Critical hit! Your enemy deals "+etd+" to you, leaving you with "+TotHea+" left.")
-                        if eguess == int(guess) - int(2) or eguess == int(guess) + int(2):
+                        elif eguess == int(guess) - int(2) or eguess == int(guess) + int(2):
                             etd = int(eStr) + int(eDex) - int(1)
                             TotHea = int(TotHea) - int(etd)
                             TotHea = str(TotHea)
                             etd = str(etd)
                             print("Mediocre hit. Your enemy deals "+etd+" to you, leaving you with "+TotHea+" left.")
-                        if eguess <= int(guess) - int(3) or eguess >= int(guess) + int(3):
+                        elif eguess <= int(guess) - int(3) or eguess >= int(guess) + int(3):
                             etd = int(eStr) + int(eDex) - int(5)
                             TotHea = int(TotHea) - int(etd)
                             TotHea = str(TotHea)
@@ -154,7 +154,7 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                                 if "Yes" or "Y":
                                     print("You gain a new summon.")
                                     summonNumber = summonNumber + 1
-                                if summonNumber >= maxSummon:
+                                elif summonNumber >= maxSummon:
                                     TotHea = int(TotHea) - int(2)
                                     TotHea = str(TotHea)
                                     print("Attempting to gain a new minion, you discover that the toll is too much. You are left with "+TotHea+ "health.")
@@ -190,10 +190,12 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
 
 
 
-
-encounter()
-fight("imp",7, 5, 1, 1)
-fight("warlord",7, 5, 7, 9)
-fight("dictator",7, 5, 3, 3)
-
+def chance():
+    chanceEn = random.randint(1,3)
+    if chanceEn == 1:
+        encounter()
+        fight("imp",7, 5, 1, 1)
+        fight("warlord",7, 5, 7, 9)
+        fight("dictator",7, 5, 3, 3)
+    elif 
 
