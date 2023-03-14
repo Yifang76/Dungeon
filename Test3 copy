@@ -38,6 +38,25 @@ classv("Knight", "Welcome, knight "+name+".", 10, 3, 8, 7, 4, 6, 5, 70, "0", "Pi
 classv("Merchant", "Welcome, merchant "+name+".", 1, 8, 1, 3, 8, 10, 6, 30, "0", "Pi", 0)
 classv("Summoner", "Welcome, summoner "+name+".", 1, 4, 1, 2, 9, 2, 8, 20, "Summoner", summonNumber, 0)
 
+def classSellandBuy():
+    global classn
+    global itemList
+    global itemListChosen
+    if classn == className:
+        itemList = one,two,three,four,five,six
+        itemListChosen = random.choice(itemList)
+def shop():
+
+    BoS = input("Would you like to buy or sell? ").capitalize()
+    if BoS == "Buy":
+        print(itemList)
+        buy = int(input("What would you like to buy? "))
+
+    if BoS == "Sell":
+        print(Inventory)
+        sell = int(input("What would you like to sell? "))
+
+
 def encounter():
     global adlist
     global ad
@@ -170,6 +189,8 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                             if lootdrop == 1:
                                 lootRarity = ad
                                 print("You obtained a "+ad+" "+item+".")
+                                newItem = lootRarity + item
+                                Inventory = Inventory + newItem
                             else:
                                 print("You obtained nothing")
                             break
@@ -197,5 +218,6 @@ def chance():
         fight("imp",7, 5, 1, 1)
         fight("warlord",7, 5, 7, 9)
         fight("dictator",7, 5, 3, 3)
-    elif 
+    elif chanceEn == 2:
+        shop()
 
