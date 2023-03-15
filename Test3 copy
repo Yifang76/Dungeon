@@ -1,5 +1,6 @@
 import random
 summonNumber = int(0)
+Inventory = []
 eTotHea = int(1)
 name = input("Name, please ").capitalize()
 print("Knight: Honourable warriors of the Lennish empire, they are extremely strong and are representatives of the law. (Strength: 10, Agility: 3, Dexterity: 8, Health: 7, Perception: 4, Charisma: 6 (Within lawful lands) or 0 (in foreign lands), Intelligence: 5 )")
@@ -42,11 +43,11 @@ def classSellandBuy():
     global classn
     global itemList
     global itemListChosen
+    global Inventory
     if classn == className:
-        itemList = one,two,three,four,five,six
+        itemList = [one,two,three,four,five,six]
         itemListChosen = random.choice(itemList)
 def shop():
-
     BoS = input("Would you like to buy or sell? ").capitalize()
     if BoS == "Buy":
         print(itemList)
@@ -70,20 +71,20 @@ def encounter():
     global pv
     global ex
     global eTotHea
-    adlist = "common","rare","mythical","legendary"
+    adlist = ["common","rare","mythical","legendary"]
     ad = random.choice(adlist)
 
-    itemlist = "axe","sword","stick"
+    itemlist = ["axe","sword","stick"]
     item = random.choice(itemlist)
 
-    nlist = "imp","warlord","dictator"
+    nlist = ["imp","warlord","dictator"]
     n = random.choice(nlist)
 
-    vlist = "stands","looks","glares"
+    vlist = ["stands","looks","glares"]
     v = random.choice(vlist)
 
 
-    palist = "saunter","walk","run"
+    palist = ["saunter","walk","run"]
     pv = random.choice(palist)
 
     if n == "warlord" or n == "dictator":
@@ -190,7 +191,10 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                                 lootRarity = ad
                                 print("You obtained a "+ad+" "+item+".")
                                 newItem = lootRarity + item
+                                newItem = [newItem,]
+                                global Inventory
                                 Inventory = Inventory + newItem
+                                print(Inventory)
                             else:
                                 print("You obtained nothing")
                             break
@@ -221,3 +225,4 @@ def chance():
     elif chanceEn == 2:
         shop()
 
+chance()
