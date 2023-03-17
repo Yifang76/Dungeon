@@ -205,7 +205,7 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                 TotHea = str(TotHea)
                 print("You aren't strong enough to wield your weapon effectively.")
                 print("You lost. HP falls from "+TotHea+" to "+nTotHea)
-    if opo == 2:
+    elif opo == 2:
         retreat = random.randint(1+Agi,100)
         if retreat >= 50:
             print("You successfully fled, coward.")
@@ -222,13 +222,21 @@ def chance():
         fight("warlord",7, 5, 7, 9)
         fight("dictator",7, 5, 3, 3)
     elif chanceEn == 2:
-        shop()
+        print("Placeholder")
 carry = True
 while carry == True:
     chance()
     carryOn = int(input("Would you like to carry on? "))
     if carryOn == 1:
         print("You are returning to the city of Celkis.")
+        townQuestion = int(input("Where would you like to go? You may go to the Alchemist, the Blacksmith and the Market. ")).capitalize()
+        if townQuestion == "Shop" or townQuestion == 3 or townQuestion == "Market":
+            print("Going to the Market")
+            shop()
+        elif townQuestion == "Blacksmith" or townQuestion == 2:
+            print("Going to the Blacksmith")
+        elif townQuestion == "Alchemist" or townQuestion == 1:
+            print("Going to the Alchemist")
         carry = False
     elif carryOn == 2:
         print("You are resuming with your journey. ")
