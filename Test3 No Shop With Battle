@@ -232,6 +232,7 @@ while carry == True:
         townQuestion = int(input("Where would you like to go? You may go to the Alchemist, the Blacksmith and the Market. ")).capitalize()
         if townQuestion == "Shop" or townQuestion == 3 or townQuestion == "Market":
             print("Going to the Market")
+            classSellandBuy()
             shop()
         elif townQuestion == "Blacksmith" or townQuestion == 2:
             print("Going to the Blacksmith")
