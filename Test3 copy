@@ -223,5 +223,15 @@ def chance():
         fight("dictator",7, 5, 3, 3)
     elif chanceEn == 2:
         shop()
-
-chance()
+carry = True
+while carry == True:
+    chance()
+    carryOn = int(input("Would you like to carry on? "))
+    if carryOn == 1:
+        print("You are returning to the city of Celkis.")
+        carry = False
+    elif carryOn == 2:
+        print("You are resuming with your journey. ")
+        
+    else:
+        print("That is not an option.")
