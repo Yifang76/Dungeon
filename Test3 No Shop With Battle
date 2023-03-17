@@ -22,7 +22,6 @@ def classv(className, message, StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG
     global Int
     global TotHea
     global name
-    global className
     if classn == className:
         print(message)
         Str = int(StrG)
