@@ -71,7 +71,7 @@ def encounter():
     global pv
     global ex
     global eTotHea
-    adlist = ["common","rare","mythical","legendary"]
+    adlist = ["common ","rare ","mythical ","legendary "]
     ad = random.choice(adlist)
 
     itemlist = ["axe","sword","stick"]
@@ -188,10 +188,9 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                             print("You have vanquished your enemy.")
                             lootdrop = random.randint(1,2)
                             if lootdrop == 1:
-                                lootRarity = ad
-                                print("You obtained a "+ad+" "+item+".")
-                                newItem = lootRarity + item
-                                newItem = [newItem,]
+                                loot = ad + item
+                                print("You obtained a "+loot+".")
+                                newItem = [loot,]
                                 global Inventory
                                 Inventory = Inventory + newItem
                                 print(Inventory)
