@@ -1,4 +1,5 @@
 import random
+gold = 0
 summonNumber = int(0)
 Inventory = []
 eTotHea = int(1)
@@ -36,29 +37,38 @@ def classv(className, message, StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG
             SpecialAbi = int(SpecialAbiNum)
 
 classv("Knight", "Welcome, knight "+name+".", 10, 3, 8, 7, 4, 6, 5, 70, "0", "Pi", 0)
-classv("Merchant", "Welcome, merchant "+name+".", 1, 8, 1, 3, 8, 10, 6, 30, "0", "Pi", 0)
+classv("Merchant", "Welcome, merchant "+name+".", 1, 8, 1, 3, 8, 10, 6, 30, "Merchant", "Banked Gold", 1000)
 classv("Summoner", "Welcome, summoner "+name+".", 1, 4, 1, 2, 9, 2, 8, 20, "Summoner", summonNumber, 0)
 
-def buySlashSell(variable,number,statement,numberw):
+def buySlashSell(variable,number,statement,variabling,variablingtwo,numberw):
     global one
     global two
     global three
     global four
     global five
     global six
+    global gold
+    global BoS
     if variable == number:
         price = 1
         print(price)
         buyorsell = int(input(statement))
-        if buyorsell == numberw:
-            if gold >= price:    
-                gold = gold - price
-                gold = str(gold)
-                print("You have "+gold+" gold left.")
+        if BoS == variabling:
+            if buyorsell == numberw:
+                if gold >= price:    
+                    gold = gold - price
+                    gold = str(gold)
+                    print("You have "+gold+" gold left.")
+                else:
+                    print("You do not have enough gold.")
             else:
-                print("You do not have enough gold.")
-        else:
-            print("Placeholder")
+                print("Placeholder")
+        elif BoS == variablingtwo:
+            if buyorsell == numberw:
+                gold = int(2)
+                print(gold)
+                
+
 def classSellandBuy(className, one, two, three, four, five, six):
     global classn
     global itemList
@@ -74,21 +84,27 @@ def shop():
     global four
     global five
     global six
+    global BoS
     BoS = input("Would you like to buy or sell? ").capitalize()
     if BoS == "Buy":
         print(itemList)
         buy = int(input("What would you like to buy? "))
-        buySlashSell(buy,1,"Would you like to buy the "+one+" for "+price+" gold?",1)
-        buySlashSell(buy,2,"Would you like to buy the "+two+" for "+price+" gold?",1)
-        buySlashSell(buy,3,"Would you like to buy the "+three+" for "+price+" gold?",1)
-        buySlashSell(buy,4,"Would you like to buy the "+four+" for "+price+" gold?",1)
-        buySlashSell(buy,5,"Would you like to buy the "+five+" for "+price+" gold?",1)
-        buySlashSell(buy,6,"Would you like to buy the "+six+" for "+price+" gold?",1)
+        buySlashSell(buy,1,"Would you like to buy the longsword for 60 gold?","buy","sell",1)
+        buySlashSell(buy,2,"Would you like to buy the axe for 20 gold?","buy","sell",1)
+        buySlashSell(buy,3,"Would you like to buy the spear for 20 gold?","buy","sell",1)
+        buySlashSell(buy,4,"Would you like to buy the shortsword for 20 gold?","buy","sell",1)
+        buySlashSell(buy,5,"Would you like to buy the katana for 20 gold?","buy","sell",1)
+        buySlashSell(buy,6,"Would you like to buy the placeholder for 20 gold?","buy","sell",1)
 
     if BoS == "Sell":
         print(Inventory)
         sell = int(input("What would you like to sell? "))
-
+        buySlashSell(sell,1,"Would you like to sell the longsword for 60 gold?","buy","sell",1)
+        buySlashSell(sell,2,"Would you like to sell the axe for 20 gold?","buy","sell",1)
+        buySlashSell(sell,3,"Would you like to sell the spear for 20 gold?","buy","sell",1)
+        buySlashSell(sell,4,"Would you like to sell the shortsword for 20 gold?","buy","sell",1)
+        buySlashSell(sell,5,"Would you like to sell the katana for 20 gold?","buy","sell",1)
+        buySlashSell(sell,6,"Would you like to sell the placeholder for 20 gold?","buy","sell",1)
 
 def encounter():
     global adlist

@@ -39,13 +39,14 @@ classv("Knight", "Welcome, knight "+name+".", 10, 3, 8, 7, 4, 6, 5, 70, "0", "Pi
 classv("Merchant", "Welcome, merchant "+name+".", 1, 8, 1, 3, 8, 10, 6, 30, "0", "Pi", 0)
 classv("Summoner", "Welcome, summoner "+name+".", 1, 4, 1, 2, 9, 2, 8, 20, "Summoner", summonNumber, 0)
 
-def buySlashSell(variable,number,statement,numberw):
-    global one
-    global two
-    global three
-    global four
-    global five
-    global six
+def buySlashSell(className, one, two, three, four, five, six, variable, number, statement, numberw):
+    global classn
+    global itemList
+    global itemListChosen
+    global Inventory
+    if classn == className:
+        itemList = [one,two,three,four,five,six]
+        itemListChosen = random.choice(itemList)
     if variable == number:
         price = 1
         print(price)
@@ -59,14 +60,14 @@ def buySlashSell(variable,number,statement,numberw):
                 print("You do not have enough gold.")
         else:
             print("Placeholder")
-def classSellandBuy(className, one, two, three, four, five, six):
-    global classn
-    global itemList
-    global itemListChosen
-    global Inventory
-    if classn == className:
-        itemList = [one,two,three,four,five,six]
-        itemListChosen = random.choice(itemList)
+#def classSellandBuy(className, one, two, three, four, five, six):
+    #global classn
+    #global itemList
+    #global itemListChosen
+    #global Inventory
+   # if classn == className:
+       # itemList = [one,two,three,four,five,six]
+        #itemListChosen = random.choice(itemList)
 def shop():
     global one
     global two
@@ -78,12 +79,12 @@ def shop():
     if BoS == "Buy":
         print(itemList)
         buy = int(input("What would you like to buy? "))
-        buySlashSell(buy,1,"Would you like to buy the "+one+" for "+price+" gold?",1)
-        buySlashSell(buy,2,"Would you like to buy the "+two+" for "+price+" gold?",1)
-        buySlashSell(buy,3,"Would you like to buy the "+three+" for "+price+" gold?",1)
-        buySlashSell(buy,4,"Would you like to buy the "+four+" for "+price+" gold?",1)
-        buySlashSell(buy,5,"Would you like to buy the "+five+" for "+price+" gold?",1)
-        buySlashSell(buy,6,"Would you like to buy the "+six+" for "+price+" gold?",1)
+        buySlashSell("Knight","Longsword","Axe","Spear","Shortsword","Katana","Placeholder",buy,1,"Would you like to buy the "+one+" for "+price+" gold?",1)
+        buySlashSell("Knight","Longsword","Axe","Spear","Shortsword","Katana","Placeholder",buy,2,"Would you like to buy the "+two+" for "+price+" gold?",1)
+        buySlashSell("Knight","Longsword","Axe","Spear","Shortsword","Katana","Placeholder",buy,3,"Would you like to buy the "+three+" for "+price+" gold?",1)
+        buySlashSell("Knight","Longsword","Axe","Spear","Shortsword","Katana","Placeholder",buy,4,"Would you like to buy the "+four+" for "+price+" gold?",1)
+        buySlashSell("Knight","Longsword","Axe","Spear","Shortsword","Katana","Placeholder",buy,5,"Would you like to buy the "+five+" for "+price+" gold?",1)
+        buySlashSell("Knight","Longsword","Axe","Spear","Shortsword","Katana","Placeholder",buy,6,"Would you like to buy the "+six+" for "+price+" gold?",1)
 
     if BoS == "Sell":
         print(Inventory)
@@ -266,10 +267,10 @@ while carry == True:
         townQuestion = int(input("Where would you like to go? You may go to the Alchemist, the Blacksmith and the Market. "))
         if townQuestion == 3:
             print("Going to the Market")
-            classSellandBuy("Knight", "Longsword","Axe","Spear","Shortsword","Katana","Placeholder")
-            classSellandBuy("Merchant","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder",)
-            classSellandBuy("Summoner","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder",)
-            classSellandBuy("Placeholder","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder",)
+            #classSellandBuy("Knight", "Longsword","Axe","Spear","Shortsword","Katana","Placeholder")
+            #classSellandBuy("Merchant","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder",)
+            #classSellandBuy("Summoner","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder",)
+            #classSellandBuy("Placeholder","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder",)
             shop()
         elif townQuestion == 2:
             print("Going to the Blacksmith")
