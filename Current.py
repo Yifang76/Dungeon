@@ -95,7 +95,7 @@ def shop():
     if BoS == "Sell":
         print(Inventory)
         sell = int(input("What would you like to sell? "))
-        buySlashSell(sell,1,"Would you like to sell the longsword for 60 gold? ",1,2,1)
+        buySlashSell(sell,1,"Would you like to sell "+Inventory[1]+"for 60 gold? ",1,2,1)
         buySlashSell(sell,2,"Would you like to sell the axe for 20 gold? ",1,2,1)
         buySlashSell(sell,3,"Would you like to sell the spear for 20 gold? ",1,2,1)
         buySlashSell(sell,4,"Would you like to sell the shortsword for 20 gold? ",1,2,1)
@@ -153,6 +153,7 @@ def encounter():
     opo = int(input("As you "+pv+" down the path,"+t+"menacingly. What will you do? "))
 
 def fight(noun, StrReq, DexReq, eStr, eDex):
+    global gold
     global TotHea
     global opo
     if opo == 1:
@@ -230,7 +231,7 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                                 print("The enemy dies")
                         else:
                             print("You have vanquished your enemy.")
-                            lootdrop = random.randint(1,2)
+                            lootdrop = random.randint(1,3)
                             if lootdrop == 1:
                                 loot = ad + item
                                 print("You obtained a "+loot+".")
@@ -238,7 +239,16 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                                 global Inventory
                                 Inventory = Inventory + newItem
                                 print(Inventory)
-                            else:
+                            elif lootdrop == 2:
+                                if classn == "Merchant":
+                                    goldDrop = random.randint(50,100)
+                                    gold = gold + goldDrop
+                                    print(gold)
+                                else:
+                                    goldDrop = random.randint(1,100)
+                                    gold = gold + goldDrop
+                                    print(gold)
+                            elif lootdrop == 3:
                                 print("You obtained nothing")
                             break
                 
@@ -278,9 +288,9 @@ while carry == True:
         townQuestion = int(input("Where would you like to go? You may go to the Alchemist, the Blacksmith and the Market. "))
         if townQuestion == 3:
             print("Going to the Market")
-            classSellandBuy("Knight", "Longsword","Axe","Spear","Shortsword","Katana","Placeholder")
-            classSellandBuy("Merchant","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder",)
-            classSellandBuy("Summoner","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder",)
+            classSellandBuy("Knight", "Longsword","Axe","Spear","Shortsword","Katana","Shield")
+            classSellandBuy("Merchant","Scales","Dagger","Gold Pouch","Placeholder","Placeholder","Placeholder",)
+            classSellandBuy("Summoner","Oak Staff","Staff of Scathing","Placeholder","Placeholder","Placeholder","Placeholder",)
             classSellandBuy("Placeholder","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder",)
             shop()
         elif townQuestion == 2:
