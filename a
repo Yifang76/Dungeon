@@ -53,7 +53,7 @@ def buySlashSell(variable,number,statement,variabling,variablingtwo,numberw):
         price = 1
         print(price)
         buyorsell = int(input(statement))
-        if BoS == variabling:
+        if variable == variabling:
             if buyorsell == numberw:
                 if gold >= price:    
                     gold = gold - price
@@ -63,7 +63,7 @@ def buySlashSell(variable,number,statement,variabling,variablingtwo,numberw):
                     print("You do not have enough gold.")
             else:
                 print("Placeholder")
-        elif BoS == variablingtwo:
+        elif variable == variablingtwo:
             if buyorsell == numberw:
                 gold = int(2)
                 print(gold)
