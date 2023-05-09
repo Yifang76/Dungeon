@@ -40,6 +40,19 @@ classv("Knight", "Welcome, knight "+name+".", 10, 3, 8, 7, 4, 6, 5, 70, "0", "Pi
 classv("Merchant", "Welcome, merchant "+name+".", 1, 8, 1, 3, 8, 10, 6, 30, "Merchant", "Banked Gold", 1000)
 classv("Summoner", "Welcome, summoner "+name+".", 1, 4, 1, 2, 9, 2, 8, 20, "Summoner", summonNumber, 0)
 
+
+def ItemSellCost(variableOne, sOne, variableTwo, sTwo, variableThree, sThree, variableFour, sFour, variableFive, sFive, variableSix, sSix, variableSeven, sSeven, variableEight, sEight, variableNine, sNine, variableTen, sTen):
+    variableOne = int(sOne)
+    variableTwo = int(sTwo)
+    variableThree = int(sThree)
+    variableFour = int(sFour)
+    variableFive = int(sFive)
+    variableSix = int(sSix)
+    variableSeven = int(sSeven)
+    variableEight = int(sEight)
+    variableNine = int(sNine)
+    variableTen = int(sTen)
+
 def buySlashSell(variable,number,statement,variabling,variablingtwo,numberw):
     global one
     global two
