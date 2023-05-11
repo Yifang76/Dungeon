@@ -119,6 +119,9 @@ def shop():
         buySlashSell(sell,5,"Would you like to sell the katana for 20 gold?","buy","sell",1)
         buySlashSell(sell,6,"Would you like to sell the placeholder for 20 gold?","buy","sell",1)
 
+
+ItemSellCost("common axe", 10, "rare axe", 50, "mythical axe", 1000, "legendary axe", 500000, "common stick", 1, "rare stick", 2, "mythical stick", 3, "legendary stick", 5, "common sword", 20, "rare sword", 60)
+ItemSellCost("mythical sword", 1100, "legendary sword", 1000000)
 def encounter():
     global adlist
     global ad
