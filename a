@@ -41,17 +41,19 @@ classv("Merchant", "Welcome, merchant "+name+".", 1, 8, 1, 3, 8, 10, 6, 30, "Mer
 classv("Summoner", "Welcome, summoner "+name+".", 1, 4, 1, 2, 9, 2, 8, 20, "Summoner", summonNumber, 0)
 
 
-
+items {
 "common axe" == int(10)
 "rare axe" == int(50)
 "mythical axe" == int(1000)
-"legendary axe" == int(500000)
-"common stick" == int(1)
-"rare stick" == int(2)
+"legendary axe":int(500000)
+"common stick":int(1)
+"rare stick":int(2)
 "mythical stick" == int(3)
 "legendary stick" == int(5)
 "common sword" == int(20)
-"rare sword" == int(60)
+"rare sword" == int(60)    
+}
+
 
 IVLoop = True
 
