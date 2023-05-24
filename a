@@ -42,16 +42,16 @@ classv("Summoner", "Welcome, summoner "+name+".", 1, 4, 1, 2, 9, 2, 8, 20, "Summ
 
 
 items = {
-"common axe": 10
-"rare axe"  50
-"mythical axe" 1000
-"legendary axe": 500000
-"common stick": 1
-"rare stick": 2
-"mythical stick": 3
-"legendary stick": 5
-"common sword": 20
-"rare sword": 60    
+"common axe": 10,
+"rare axe": 50,
+"mythical axe": 1000,
+"legendary axe": 500000,
+"common stick": 1,
+"rare stick": 2,
+"mythical stick": 3,
+"legendary stick": 5,
+"common sword": 20,
+"rare sword": 60, 
 }
 
 
