@@ -41,17 +41,17 @@ classv("Merchant", "Welcome, merchant "+name+".", 1, 8, 1, 3, 8, 10, 6, 30, "Mer
 classv("Summoner", "Welcome, summoner "+name+".", 1, 4, 1, 2, 9, 2, 8, 20, "Summoner", summonNumber, 0)
 
 
-items {
-"common axe" == int(10)
-"rare axe" == int(50)
-"mythical axe" == int(1000)
-"legendary axe":int(500000)
-"common stick":int(1)
-"rare stick":int(2)
-"mythical stick" == int(3)
-"legendary stick" == int(5)
-"common sword" == int(20)
-"rare sword" == int(60)    
+items = {
+"common axe": 10
+"rare axe"  50
+"mythical axe" 1000
+"legendary axe": 500000
+"common stick": 1
+"rare stick": 2
+"mythical stick": 3
+"legendary stick": 5
+"common sword": 20
+"rare sword": 60    
 }
 
 
