@@ -51,9 +51,10 @@ items = {
 "mythical stick": 3,
 "legendary stick": 5,
 "common sword": 20,
-"rare sword": 60, 
+"rare sword": 60
 }
 
+itemsLength = len(items)
 
 IVLoop = True
 
