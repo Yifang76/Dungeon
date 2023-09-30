@@ -337,24 +337,24 @@ def chance():
 carry = True
 while carry == True:
     chance()
-    carryOn = int(input("Would you like to carry on? "))
-    if carryOn == 1:
+    carryOn = input("Would you like to carry on? ").capitalize()
+    if carryOn == "No":
         print("You are returning to the city of Celkis.")
-        townQuestion = int(input("Where would you like to go? You may go to the Alchemist, the Blacksmith and the Market. "))
-        if townQuestion == 3:
+        townQuestion = int(input("Where would you like to go? You may go to the Alchemist (A), the Blacksmith (B) or the Market (M). "))
+        if townQuestion == "Market" or townQuestion == "M":
             print("Going to the Market")
             classSellandBuy("Knight", "Longsword","Axe","Spear","Shortsword","Katana","Placeholder")
             classSellandBuy("Merchant","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder",)
             classSellandBuy("Summoner","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder",)
             classSellandBuy("Placeholder","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder",)
             shop()
-        elif townQuestion == 2:
+        elif townQuestion == "Blacksmith" or townQuestion == "B":
             print("Going to the Blacksmith")
             blacksmith()
-        elif townQuestion == 1:
+        elif townQuestion == "Alchemist" or townQuestion == "A":
             print("Going to the Alchemist")
         carry = False
-    elif carryOn == 2:
+    elif carryOn == "Yes":
         print("You are resuming with your journey. ")
         
     else:
