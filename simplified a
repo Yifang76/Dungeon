@@ -89,7 +89,7 @@ def buySlashSell(variable,number,statement,variabling,variablingtwo,numberw):
     gold = int(gold)
                 
 
-def classSellandBuy(className, one, SecondItem, three, four, five, six):
+def classSellandBuy(className, one, two, three, four, five, six):
     global classn
     global itemList
     global itemListChosen
@@ -99,7 +99,7 @@ def classSellandBuy(className, one, SecondItem, three, four, five, six):
         itemListChosen = random.choice(itemList)
 def shop():
     global one
-    global SecondItem
+    global two
     global three
     global four
     global five
@@ -267,9 +267,8 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                             if lootdrop == 1:
                                 loot = ad + item
                                 print("You obtained a "+loot+".")
-                                newItem = [loot,]
                                 global Inventory
-                                Inventory = Inventory + newItem
+                                Inventory.append(loot)
                                 print(Inventory)
                             else:
                                 print("You obtained nothing")

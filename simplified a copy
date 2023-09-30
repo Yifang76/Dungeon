@@ -274,9 +274,8 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                             if lootdrop == 1:
                                 loot = ad + item
                                 print("You obtained a "+loot+".")
-                                newItem = [loot,]
                                 global Inventory
-                                Inventory = Inventory + newItem
+                                Inventory.append(loot)
                                 print(Inventory)
                             else:
                                 print("You obtained nothing")
@@ -327,6 +326,7 @@ while carry == True:
             print("Going to the Blacksmith")
         elif townQuestion == 1:
             print("Going to the Alchemist")
+
         carry = False
     elif carryOn == 2:
         print("You are resuming with your journey. ")

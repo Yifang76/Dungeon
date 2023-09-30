@@ -271,9 +271,8 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                             if lootdrop == 1:
                                 loot = ad + item
                                 print("You obtained a "+loot+".")
-                                newItem = [loot,]
                                 global Inventory
-                                Inventory = Inventory + newItem
+                                Inventory.append(loot)
                                 print(Inventory)
                             else:
                                 print("You obtained nothing")
