@@ -59,9 +59,9 @@ itemsLength = len(items)
 IVLoop = True
 
 def buySlashSell(variable,number,statement,variabling,variablingtwo,numberw):
-    global one
-    global two
-    global three
+    global FirstItem
+    global SecondItem
+    global ThirdItem
     global four
     global five
     global six
@@ -93,18 +93,18 @@ def buySlashSell(variable,number,statement,variabling,variablingtwo,numberw):
     gold = int(gold)
                 
 
-def classSellandBuy(className, one, two, three, four, five, six):
+def classSellandBuy(className, FirstItem, SecondItem, ThirdItem, four, five, six):
     global classn
     global itemList
     global itemListChosen
     global Inventory
     if classn == className:
-        itemList = [one,two,three,four,five,six]
+        itemList = [FirstItem,SecondItem,ThirdItem,four,five,six]
         itemListChosen = random.choice(itemList)
 def shop():
-    global one
-    global two
-    global three
+    global FirstItem
+    global SecondItem
+    global ThirdItem
     global four
     global five
     global six
