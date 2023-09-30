@@ -1,17 +1,14 @@
 import random
 gold = 0
 summonNumber = int(0)
-inventory = []
+Inventory = []
 eTotHea = int(1)
-name = input("Name, please ").capitalize()
 print("Knight: Honourable warriors of the Lennish empire, they are extremely strong and are representatives of the law. (Strength: 10, Agility: 3, Dexterity: 8, Health: 7, Perception: 4, Charisma: 6 (Within lawful lands) or 0 (in foreign lands), Intelligence: 5 )")
 print("Merchant: (Strength: 1, Agility: 8, Dexterity: 1, Health: 3, Perception: 8, Charisma: 10, Intelligence: 6 )")
 print("Summoner: (Strength: 1, Agility: 4, Dexterity: 1, Health: 2, Perception: 9, Charisma: 2, Intelligence: 8 )")
-attriQuery = input("Would you like a guide on the attributes? ").capitalize()
-if attriQuery == "Yes":
-    print("Strength determines the base damage you do, Agility determines your evasion, Dexterity determines ______, Perception determines your critical chance, Charisma determines your barter rate and speech, Intelligence determines your spellcraft and Health determines your starting health.")
 
-classn = input("Pick a class ").capitalize()
+name = "PH"
+classn = "Knight"
 def classv(className, message, StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG, Sclass, SpeciaAbi, SpecialAbiNum):
     global classn
     global Str
@@ -37,7 +34,6 @@ def classv(className, message, StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG
             SpecialAbi = int(SpecialAbiNum)
 
 classv("Knight", "Welcome, knight "+name+".", 10, 3, 8, 7, 4, 6, 5, 70, "0", "Pi", 0)
-classv("Merchant", "Welcome, merchant "+name+".", 1, 8, 1, 3, 8, 10, 6, 30, "Merchant", "Banked Gold", 1000)
 classv("Summoner", "Welcome, summoner "+name+".", 1, 4, 1, 2, 9, 2, 8, 20, "Summoner", summonNumber, 0)
 
 
@@ -59,9 +55,9 @@ itemsLength = len(items)
 IVLoop = True
 
 def buySlashSell(variable,number,statement,variabling,variablingtwo,numberw):
-    global FirstItem
-    global SecondItem
-    global ThirdItem
+    global one
+    global two
+    global three
     global four
     global five
     global six
@@ -93,18 +89,18 @@ def buySlashSell(variable,number,statement,variabling,variablingtwo,numberw):
     gold = int(gold)
                 
 
-def classSellandBuy(className, FirstItem, SecondItem, ThirdItem, four, five, six):
+def classSellandBuy(className, one, SecondItem, three, four, five, six):
     global classn
     global itemList
     global itemListChosen
-    global inventory
+    global Inventory
     if classn == className:
-        itemList = [FirstItem,SecondItem,ThirdItem,four,five,six]
+        itemList = [FirstItem,SecondItem,three,four,five,six]
         itemListChosen = random.choice(itemList)
 def shop():
-    global FirstItem
+    global one
     global SecondItem
-    global ThirdItem
+    global three
     global four
     global five
     global six
@@ -125,21 +121,18 @@ def shop():
             buySlashSell(buy,6,"Would you like to buy the placeholder for 20 gold?",1,2,1)
             
         if BoS == "Sell":
-            if not inventory:
+            if not Inventory:
                 print("You have nothing to sell.")
             else:
                 IVLoop = False
-                print(inventory)
+                print(Inventory)
                 sell = int(input("What would you like to sell? "))
-                buySlashSell(sell,1,"Would you like to sell the "+str(next(zip(inventory)))+"for 60 gold?","buy","sell",1)
+                buySlashSell(sell,1,"Would you like to sell the "+str(next(zip(Inventory)))+"for 60 gold?","buy","sell",1)
                 buySlashSell(sell,2,"Would you like to sell the axe for 20 gold?","buy","sell",1)
                 buySlashSell(sell,3,"Would you like to sell the spear for 20 gold?","buy","sell",1)
                 buySlashSell(sell,4,"Would you like to sell the shortsword for 20 gold?","buy","sell",1)
                 buySlashSell(sell,5,"Would you like to sell the katana for 20 gold?","buy","sell",1)
                 buySlashSell(sell,6,"Would you like to sell the placeholder for 20 gold?","buy","sell",1)
-
-
-
 
 
 def encounter():
@@ -295,32 +288,6 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
         else:
             print("You failed to escape.")
 
-def blacksmith():
-    global inventory
-    global ad
-    global adlist
-    CraftorUpgrade = input("Would you like to craft or upgrade? ").capitalize()
-    if CraftorUpgrade == "Craft":
-        craft = input("What would you like to craft: charm or weapon? ").capitalize()
-        if craft == "Charm":
-            if "gem" in inventory:
-                if "leather" in inventory:
-                    inventory.remove("gem")
-                    inventory.remove("leather")
-                    newCharm = ad + "charm"
-                    inventory.append(newCharm)
-                    print("s")
-        #elif craft == "Weapon":
-
-
-
-    #elif CraftorUpgrade == "Upgrade":
-
-
-    #else:
-        #print("That is not an option.")
-
-
 
 
 def chance():
@@ -350,7 +317,6 @@ while carry == True:
             shop()
         elif townQuestion == "Blacksmith" or townQuestion == "B":
             print("Going to the Blacksmith")
-            blacksmith()
         elif townQuestion == "Alchemist" or townQuestion == "A":
             print("Going to the Alchemist")
         carry = False
