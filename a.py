@@ -1,10 +1,23 @@
-import random
+#import random
+from random import *
 gold = 0
 summonNumber = int(0)
 inventory = []
 eTotHea = int(1)
+
+
 adlist = ["common ","rare ","mythical ","legendary "]
-ad = random.choice(adlist)
+ad = choice(adlist)
+weaponlist = ["axe","sword","stick"]
+weapon = choice(weaponlist)
+
+resourcelist = ["leather"]
+resource = choice(resourcelist)
+
+valuablelist = ["iron"]
+valuable = choice(valuablelist)
+
+
 name = input("Name, please ").capitalize()
 print("Knight: Honourable warriors of the Lennish empire, they are extremely strong and are representatives of the law. (Strength: 10, Agility: 3, Dexterity: 8, Health: 7, Perception: 4, Charisma: 6 (Within lawful lands) or 0 (in foreign lands), Intelligence: 5 )")
 print("Merchant: (Strength: 1, Agility: 8, Dexterity: 1, Health: 3, Perception: 8, Charisma: 10, Intelligence: 6 )")
@@ -102,7 +115,7 @@ def classSellandBuy(className, FirstItem, SecondItem, ThirdItem, four, five, six
     global inventory
     if classn == className:
         itemList = [FirstItem,SecondItem,ThirdItem,four,five,six]
-        itemListChosen = random.choice(itemList)
+        itemListChosen = choice(itemList)
 def shop():
     global FirstItem
     global SecondItem
@@ -157,21 +170,33 @@ def encounter():
     global pv
     global ex
     global eTotHea
+    global weapon
+    global weaponlist
+    global resource
+    global resourcelist
+    global valuable
+    global valuablelist
     adlist = ["common ","rare ","mythical ","legendary "]
-    ad = random.choice(adlist)
+    ad = choice(adlist)
 
-    itemlist = ["axe","sword","stick"]
-    item = random.choice(itemlist)
+    weaponlist = ["axe","sword","stick"]
+    weapon = choice(weaponlist)
+
+    resourcelist = ["leather"]
+    resource = choice(resourcelist)
+
+    valuablelist = ["iron"]
+    valuable = choice(valuablelist)
 
     nlist = ["imp","warlord","dictator"]
-    n = random.choice(nlist)
+    n = choice(nlist)
 
     vlist = ["stands","looks","glares"]
-    v = random.choice(vlist)
+    v = choice(vlist)
 
 
     palist = ["saunter","walk","run"]
-    pv = random.choice(palist)
+    pv = choice(palist)
 
     if n == "warlord" or n == "dictator":
         det = str("a")
@@ -209,7 +234,7 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                     print(eTotHea)
                     eTotHea = int(eTotHea)
                     if eTotHea > 0:
-                        guess = random.randint(1,10)
+                        guess = randint(1,10)
                         print(guess)
                         pguess = int(input("What do you believe the number is? "))
                         if pguess == int(guess) or pguess == int(guess) - int(1) or pguess == int(guess) + int(1):
@@ -231,7 +256,7 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                             eTotHea = str(eTotHea)
                             print("Weak hit. You deal "+td+" against your enemy, leaving them with "+eTotHea+" health left.")
                                 
-                        eguess = random.randint(1,10)
+                        eguess = randint(1,10)
                         if eguess == int(guess) or eguess == int(guess) - int(1) or eguess == int(guess) + int(1):
                             etd = int(eStr) + int(eDex) + int(2)
                             TotHea = int(TotHea) - int(etd)
@@ -254,7 +279,7 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                         eTotHea = str(eTotHea)
                     else:
                         if classn == "Summoner":
-                            summon = random.randint(1,2)
+                            summon = randint(1,2)
                             if summon == 1:
                                 aq = input("You have defeated our enemy. Would you like to add this creature to your army?").capitalize()
                                 if "Yes" or "Y":
@@ -272,9 +297,15 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                                 print("The enemy dies")
                         else:
                             print("You have vanquished your enemy.")
-                            lootdrop = random.randint(1,2)
+                            lootdrop = randint(1,2)
                             if lootdrop == 1:
-                                loot = ad + item
+                                itemDrop = randint(1,3)
+                                if itemDrop == 1:
+                                    loot = ad + weapon
+                                elif itemDrop == 2:
+                                    loot = resource
+                                else:
+                                    loot = ad + valuable
                                 print("You obtained a "+loot+".")
                                 global inventory
                                 inventory.append(loot)
@@ -285,13 +316,13 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                 
                 
             else:
-                nTotHea = int(TotHea) - random.randint(1,TotHea)
+                nTotHea = int(TotHea) - randint(1,TotHea)
                 nTotHea = str(nTotHea)
                 TotHea = str(TotHea)
                 print("You aren't strong enough to wield your weapon effectively.")
                 print("You lost. HP falls from "+TotHea+" to "+nTotHea)
     elif opo == "Run" or opo == "R":
-        retreat = random.randint(1+Agi,100)
+        retreat = randint(1+Agi,100)
         if retreat >= 50:
             print("You successfully fled, coward.")
         else:
@@ -340,7 +371,7 @@ def blacksmith():
 
 
 def chance():
-    chanceEn = random.randint(1,3)
+    chanceEn = randint(1,3)
     if chanceEn == 1:
         encounter()
         fight("imp",7, 5, 1, 1)
