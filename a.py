@@ -3,6 +3,8 @@ gold = 0
 summonNumber = int(0)
 inventory = []
 eTotHea = int(1)
+adlist = ["common ","rare ","mythical ","legendary "]
+ad = random.choice(adlist)
 name = input("Name, please ").capitalize()
 print("Knight: Honourable warriors of the Lennish empire, they are extremely strong and are representatives of the law. (Strength: 10, Agility: 3, Dexterity: 8, Health: 7, Perception: 4, Charisma: 6 (Within lawful lands) or 0 (in foreign lands), Intelligence: 5 )")
 print("Merchant: (Strength: 1, Agility: 8, Dexterity: 1, Health: 3, Perception: 8, Charisma: 10, Intelligence: 6 )")
@@ -310,15 +312,29 @@ def blacksmith():
                     newCharm = ad + "charm"
                     inventory.append(newCharm)
                     print("s")
-        #elif craft == "Weapon":
+        elif craft == "Weapon":
+            if "leather" in inventory:
+                if "iron" in inventory:
+                    inventory.remove("leather")
+                    inventory.remove("iron")
+                    inventory.append("weapon")
 
 
+    elif CraftorUpgrade == "Upgrade":
+        print(inventory)
+        whichUp = input("What would you like to upgrade? ")
+        if whichUp in inventory:
+            correct = input(f"Do you want to upgrade {whichUp}? ").capitalize()
+            if correct == "Yes" or correct == "Y":
+                if "iron" in inventory:
+                    inventory.remove("iron")
+                    inventory.remove(whichUp)
+                    inventory.append(ad + whichUp)
+                    print(inventory)
+                
 
-    #elif CraftorUpgrade == "Upgrade":
-
-
-    #else:
-        #print("That is not an option.")
+    else:
+        print("That is not an option.")
 
 
 
@@ -340,7 +356,7 @@ while carry == True:
     carryOn = input("Would you like to carry on? ").capitalize()
     if carryOn == "No":
         print("You are returning to the city of Celkis.")
-        townQuestion = int(input("Where would you like to go? You may go to the Alchemist (A), the Blacksmith (B) or the Market (M). "))
+        townQuestion = input("Where would you like to go? You may go to the Alchemist (A), the Blacksmith (B) or the Market (M). ").capitalize()
         if townQuestion == "Market" or townQuestion == "M":
             print("Going to the Market")
             classSellandBuy("Knight", "Longsword","Axe","Spear","Shortsword","Katana","Placeholder")
