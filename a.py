@@ -1,10 +1,10 @@
-#import random
 from random import *
+import sys
 gold = 0
 summonNumber = int(0)
 inventory = []
 eTotHea = int(1)
-
+carry = True
 
 adlist = ["common ","rare ","mythical ","legendary "]
 ad = choice(adlist)
@@ -51,9 +51,9 @@ def classv(className, message, StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG
         if classn == Sclass:
             SpecialAbi = int(SpecialAbiNum)
 
-classv("Knight", "Welcome, knight "+name+".", 10, 3, 8, 7, 4, 6, 5, 70, "0", "Pi", 0)
-classv("Merchant", "Welcome, merchant "+name+".", 1, 8, 1, 3, 8, 10, 6, 30, "Merchant", "Banked Gold", 1000)
-classv("Summoner", "Welcome, summoner "+name+".", 1, 4, 1, 2, 9, 2, 8, 20, "Summoner", summonNumber, 0)
+classv("Knight", f"Welcome, knight {name}.", 10, 3, 8, 7, 4, 6, 5, 70, "0", "Pi", 0)
+classv("Merchant", f"Welcome, merchant {name}.", 1, 8, 1, 3, 8, 10, 6, 30, "Merchant", "Banked Gold", 1000)
+classv("Summoner", f"Welcome, summoner {name}.", 1, 4, 1, 2, 9, 2, 8, 20, "Summoner", summonNumber, 0)
 
 
 items = {
@@ -207,7 +207,6 @@ def encounter():
         ex = str("at you")
     else:
         ex = str("there")
-    t = str(" "+det+" "+n+" "+v+" "+ex+" ")
 
     if n == "imp":
         eTotHea = int(25)
@@ -217,11 +216,12 @@ def encounter():
         eTotHea = int(75)
 
     global opo
-    opo = input("As you "+pv+" down the path,"+t+"menacingly. What will you do? (Fight (F) or Run (R)? ").capitalize()
+    opo = input(f"As you {pv} down the path, {det} {n} {v} {ex} menacingly. What will you do? (Fight (F) or Run (R))? ").capitalize()
 
 def fight(noun, StrReq, DexReq, eStr, eDex):
     global TotHea
     global opo
+    global carry
     if opo == "Fight" or opo == "F":
         if n == noun:
             if Str >= StrReq and Dex >= DexReq:
@@ -234,54 +234,61 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                     print(eTotHea)
                     eTotHea = int(eTotHea)
                     if eTotHea > 0:
-                        guess = randint(1,10)
-                        print(guess)
-                        pguess = int(input("What do you believe the number is? "))
-                        if pguess == int(guess) or pguess == int(guess) - int(1) or pguess == int(guess) + int(1):
-                            td = int(Str) + int(Dex) + int(2)
-                            eTotHea = int(eTotHea) - int(td)
-                            td = str(td)
+                        if TotHea > 0:
+                            guess = randint(1,10)
+                            print(guess)
+                            pguess = int(input("What do you believe the number is? "))
+                            if pguess == int(guess) or pguess == int(guess) - int(1) or pguess == int(guess) + int(1):
+                                td = int(Str) + int(Dex) + int(2)
+                                eTotHea = int(eTotHea) - int(td)
+                                td = str(td)
+                                eTotHea = str(eTotHea)
+                                print("Critical hit! You deal "+td+" against your enemy, leaving them with "+eTotHea+" health left.")
+                            elif pguess == int(guess) - int(2) or pguess == int(guess) + int(2):
+                                td = int(Str) + int(Dex) - int(1)
+                                eTotHea = int(eTotHea) - int(td)
+                                td = str(td)
+                                eTotHea = str(eTotHea)
+                                print("Mediocre hit. You deal "+td+" against your enemy, leaving them with "+eTotHea+" health left.")
+                            elif pguess <= int(guess) - int(3) or pguess >= int(guess) + int(3):
+                                td = int(Str) + int(Dex) - int(5) 
+                                eTotHea = int(eTotHea) - int(td)
+                                td = str(td)
+                                eTotHea = str(eTotHea)
+                                print("Weak hit. You deal "+td+" against your enemy, leaving them with "+eTotHea+" health left.")
+                                    
+                            eguess = randint(1,10)
+                            if eguess == int(guess) or eguess == int(guess) - int(1) or eguess == int(guess) + int(1):
+                                etd = int(eStr) + int(eDex) + int(2)
+                                TotHea = int(TotHea) - int(etd)
+                                TotHea = str(TotHea)
+                                etd = str(etd)
+                                print("Critical hit! Your enemy deals "+etd+" to you, leaving you with "+TotHea+" left.")
+                            elif eguess == int(guess) - int(2) or eguess == int(guess) + int(2):
+                                etd = int(eStr) + int(eDex) - int(1)
+                                TotHea = int(TotHea) - int(etd)
+                                TotHea = str(TotHea)
+                                etd = str(etd)
+                                print("Mediocre hit. Your enemy deals "+etd+" to you, leaving you with "+TotHea+" left.")
+                            elif eguess <= int(guess) - int(3) or eguess >= int(guess) + int(3):
+                                etd = int(eStr) + int(eDex) - int(5)
+                                TotHea = int(TotHea) - int(etd)
+                                TotHea = str(TotHea)
+                                etd = str(etd)
+                                print("Weak hit. Your enemy deals "+etd+" to you, leaving you with "+TotHea+" left.")
+                            TotHea = int(TotHea)
                             eTotHea = str(eTotHea)
-                            print("Critical hit! You deal "+td+" against your enemy, leaving them with "+eTotHea+" health left.")
-                        elif pguess == int(guess) - int(2) or pguess == int(guess) + int(2):
-                            td = int(Str) + int(Dex) - int(1)
-                            eTotHea = int(eTotHea) - int(td)
-                            td = str(td)
-                            eTotHea = str(eTotHea)
-                            print("Mediocre hit. You deal "+td+" against your enemy, leaving them with "+eTotHea+" health left.")
-                        elif pguess <= int(guess) - int(3) or pguess >= int(guess) + int(3):
-                            td = int(Str) + int(Dex) - int(5) 
-                            eTotHea = int(eTotHea) - int(td)
-                            td = str(td)
-                            eTotHea = str(eTotHea)
-                            print("Weak hit. You deal "+td+" against your enemy, leaving them with "+eTotHea+" health left.")
-                                
-                        eguess = randint(1,10)
-                        if eguess == int(guess) or eguess == int(guess) - int(1) or eguess == int(guess) + int(1):
-                            etd = int(eStr) + int(eDex) + int(2)
-                            TotHea = int(TotHea) - int(etd)
-                            TotHea = str(TotHea)
-                            etd = str(etd)
-                            print("Critical hit! Your enemy deals "+etd+" to you, leaving you with "+TotHea+" left.")
-                        elif eguess == int(guess) - int(2) or eguess == int(guess) + int(2):
-                            etd = int(eStr) + int(eDex) - int(1)
-                            TotHea = int(TotHea) - int(etd)
-                            TotHea = str(TotHea)
-                            etd = str(etd)
-                            print("Mediocre hit. Your enemy deals "+etd+" to you, leaving you with "+TotHea+" left.")
-                        elif eguess <= int(guess) - int(3) or eguess >= int(guess) + int(3):
-                            etd = int(eStr) + int(eDex) - int(5)
-                            TotHea = int(TotHea) - int(etd)
-                            TotHea = str(TotHea)
-                            etd = str(etd)
-                            print("Weak hit. Your enemy deals "+etd+" to you, leaving you with "+TotHea+" left.")
-                        TotHea = int(TotHea)
-                        eTotHea = str(eTotHea)
+                        else:
+                            print("You died")
+                            carry = False
+                            sys.exit()
+
+
                     else:
                         if classn == "Summoner":
                             summon = randint(1,2)
                             if summon == 1:
-                                aq = input("You have defeated our enemy. Would you like to add this creature to your army?").capitalize()
+                                aq = input("You have defeated your enemy. Would you like to add this creature to your army?").capitalize()
                                 if "Yes" or "Y":
                                     print("You gain a new summon.")
                                     summonNumber = summonNumber + 1
@@ -291,6 +298,8 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                                     print("Attempting to gain a new minion, you discover that the toll is too much. You are left with "+TotHea+ "health.")
                                     if TotHea <= 0:
                                         print("You died.")
+                                        carry = False
+                                        sys.exit()
                                 else:
                                     print("The enemy dies")
                             else:
@@ -305,7 +314,7 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                                 elif itemDrop == 2:
                                     loot = resource
                                 else:
-                                    loot = ad + valuable
+                                    loot = valuable
                                 print("You obtained a "+loot+".")
                                 global inventory
                                 inventory.append(loot)
@@ -371,17 +380,21 @@ def blacksmith():
 
 
 def chance():
+    global n
     chanceEn = randint(1,3)
     if chanceEn == 1:
         encounter()
-        fight("imp",7, 5, 1, 1)
-        fight("warlord",7, 5, 7, 9)
-        fight("dictator",7, 5, 3, 3)
+        if n == "imp":
+            fight("imp",7, 5, 1, 1)
+        elif n == "warlord":
+            fight("warlord",7, 5, 7, 9)
+        elif n == "dictator":
+            fight("dictator",7, 5, 3, 3)
     elif chanceEn == 2:
         print("Placeholder")
 
 
-carry = True
+
 while carry == True:
     chance()
     carryOn = input("Would you like to carry on? ").capitalize()
