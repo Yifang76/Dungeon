@@ -5,6 +5,7 @@ summonNumber = int(0)
 inventory = []
 eTotHea = int(1)
 carry = True
+summons = []
 
 adlist = ["common ","rare ","mythical ","legendary "]
 ad = choice(adlist)
@@ -292,6 +293,7 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                                 if "Yes" or "Y":
                                     print("You gain a new summon.")
                                     summonNumber = summonNumber + 1
+                                    summons = summons.append(n)
                                 elif summonNumber >= maxSummon:
                                     TotHea = int(TotHea) - int(2)
                                     TotHea = str(TotHea)
