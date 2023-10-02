@@ -371,6 +371,7 @@ def blacksmith():
                 if "iron" in inventory:
                     inventory.remove("iron")
                     inventory.remove(whichUp)
+                    ad = choice(adlist)
                     inventory.append(ad + whichUp)
                     print(inventory)
                 
