@@ -1,6 +1,9 @@
+Unable to sell items. !FIXED!
+Buying produces a len(?) error. !FIXED!
 problem with fleeing; whether success or fail it repeats fight or flight response. !FIXED!
 after exiting shop immediately thrown out into the Outer Lands. !FIXED!
+
 Unable to die; game doesn't quit out
 !Possible Error! Adds a second adjective to an item with an adjective, e.g. legendary axe becomes
 mythical legendary axe
- 
+
