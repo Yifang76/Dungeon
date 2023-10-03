@@ -78,7 +78,11 @@ items = {
 "iron" : 20,
 }
 
-itemsLength = len(items)
+liteList = ["common axe",
+"rare axe", "mythical axe", "legendary axe", 
+"common stick", "rare stick", "mythical stick", 
+"legendary stick", "common sword", "rare sword",
+"leather", "iron" ]
 
 def sell():
     global gold
@@ -111,7 +115,7 @@ def buy():
     shopStock = []
 
     for i in range(randint(1,20)):
-        shopStock.append(choice(items.keys))
+        shopStock.append(choice(liteList))
     print(f"You currently have {gold} gold.")
     print(f"You currently have {inventory}.")
     while True:
@@ -120,29 +124,35 @@ def buy():
         if buyWhich in shopStock:
             YN = input(f"Would you like to buy {buyWhich} for {str(items[buyWhich])} gold? ").capitalize()
             if YN == "Yes":
-                gold = int(gold) - items[buyWhich]
-                shopStock.remove(buyWhich)
-                inventory.append(buyWhich)
-                again = input("Would you like to use the shop again? ").capitalize()
-                if again == "No":
-                    break
+                phGold = int(gold) - items[buyWhich]
+                if phGold > 0:
+                    gold = phGold
+                    shopStock.remove(buyWhich)
+                    inventory.append(buyWhich)
+                    print(f"You currently have {gold} gold.")
+                    again = input("Would you like to use the shop again? ").capitalize()
+                    if again == "No":
+                        break
+                else:
+                    print(f"You do not have enough gold; you need {str(int(items[buyWhich]) - int(gold))} more gold.")
+                    esc = input("Would you like to stop buying? ").capitalize()
+                    if esc == "Yes":
+                        break
+
             elif YN == "No":
-                esc = input("Would you like to stop selling? ").capitalize()
+                esc = input("Would you like to stop buying? ").capitalize()
                 if esc == "Yes":
                     break
         else:
-            print("You do not have this item")
-            esc = input("Would you like to stop selling? ").capitalize()
+            print(f"The shop does not have {buyWhich} in stock")
+            esc = input("Would you like to stop buying? ").capitalize()
             if esc == "Yes":
                 break
 
     for i in range(randint(1,20)):
-        shopStock.append(choice(items.keys))
+        shopStock.append(choice(liteList))
     print(f"You currently have {gold} gold.")
     print(f"You currently have {inventory}.")
-
-
-
 
 def shop():
     IVLoop = True
@@ -158,12 +168,6 @@ def shop():
             else:
                 IVLoop = False
                 sell()
-
-
-
-
-
-
 
 def encounter():
     global adlist
@@ -346,6 +350,7 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
             retreat = randint(1+Agi,100)
             if retreat >= 50:
                 print("You successfully fled, coward.")
+                break
             else:
                 print("You failed to escape.")
         else:
@@ -376,24 +381,27 @@ def blacksmith():
 
 
     elif CraftorUpgrade == "Upgrade":
-        print(inventory)
-        whichUp = input("What would you like to upgrade? ")
-        if whichUp in inventory:
-            correct = input(f"Do you want to upgrade {whichUp}? ").capitalize()
-            if correct == "Yes" or correct == "Y":
-                if "iron" in inventory:
-                    inventory.remove("iron")
-                    inventory.remove(whichUp)
-                    ad = choice(adlist)
-                    inventory.append(ad + whichUp)
-                    print(inventory)
-                
+        if not inventory:
+            print("You have nothing to upgrade.")
+        else:
+            print(inventory)
+            whichUp = input("What would you like to upgrade? ")
+            if whichUp in inventory:
+                correct = input(f"Do you want to upgrade {whichUp}? ").capitalize()
+                if correct == "Yes" or correct == "Y":
+                    if "iron" in inventory:
+                        inventory.remove("iron")
+                        inventory.remove(whichUp)
+                        ad = choice(adlist)
+                        inventory.append(ad + whichUp)
+                        print(inventory)
+                    else:
+                        print(f"You do not meet the requirements to upgrade {whichUp}.")
+            else:
+                print("You do not have this item.")    
 
     else:
         print("That is not an option.")
-
-
-
 
 def chance():
     global n
@@ -409,30 +417,44 @@ def chance():
     elif chanceEn == 2:
         print("Placeholder")
 
-
-
-while carry == True:
-    chance()
-    carryOn = input("Would you like to carry on? ").capitalize()
-    if carryOn == "No":
-        print("You are returning to the city of Celkis.")
-        townQuestion = input("Where would you like to go? You may go to the Alchemist (A), the Blacksmith (B) or the Market (M). ").capitalize()
+def chois():
+    global carry
+    while True:
+        townQuestion = input("Where would you like to go? You may go to the Alchemist (P), the Blacksmith (B), the Market (M) or back Out (O). ").capitalize()
         if townQuestion == "Market" or townQuestion == "M":
             print("Going to the Market")
             shop()
+            chois()
         elif townQuestion == "Blacksmith" or townQuestion == "B":
             print("Going to the Blacksmith")
             blacksmith()
-        elif townQuestion == "Alchemist" or townQuestion == "A":
+            #NOTE: The function can be used within its definition, as shown below
+            chois()
+        elif townQuestion == "Alchemist" or townQuestion == "P":
             print("Going to the Alchemist")
-        carry = False
-    elif carryOn == "Yes":
-        print("You are resuming with your journey. ")
-        
-    else:
-        print("That is not an option.")
+            chois()
+        elif townQuestion == "Armory" or townQuestion == "A":
+            #armory()
+        elif townQuestion == "Out" or townQuestion == "O":
+            car()
+        else:
+            print("That is not an option.") 
 
+def car():
+    global carry
+    while carry == True:
+        chance()
+        carryOn = input("Would you like to carry on? ").capitalize()
+        if carryOn == "No" or carryOn == "N":
+            print("You are returning to the city of Celkis.")
+            chois()
+        elif carryOn == "Yes" or carryOn == "Y":
+            print("You are resuming with your journey. ")
+            
+        else:
+            print("That is not an option.")
 
-
+car()
 
 #problem with fleeing; whether success or fail it repeats fight or flight response.
+#after exiting shop immediately thrown out into the Outer Lands.
