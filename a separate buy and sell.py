@@ -296,7 +296,7 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                             else:
                                 print("You died")
                                 carry = False
-                                sys.exit()
+                                return()
 
 
                         else:
@@ -315,7 +315,7 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                                         if TotHea <= 0:
                                             print("You died.")
                                             carry = False
-                                            sys.exit()
+                                            return()
                                     else:
                                         print("The enemy dies")
                                 else:
