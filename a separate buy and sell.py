@@ -293,12 +293,6 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                                     print("Weak hit. Your enemy deals "+etd+" to you, leaving you with "+TotHea+" left.")
                                 TotHea = int(TotHea)
                                 eTotHea = str(eTotHea)
-                            else:
-                                print("You died")
-                                carry = False
-                                return()
-
-
                         else:
                             if classn == "Summoner":
                                 summon = randint(1,2)
@@ -337,7 +331,9 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                                     print(inventory)
                                 else:
                                     print("You obtained nothing")
-                                break
+                                
+                    print("You died.")
+                    sys.exit()
                     
                     
                 else:
