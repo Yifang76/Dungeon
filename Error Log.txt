@@ -6,4 +6,4 @@ Unable to die; game doesn't quit out !FIXED!
 
 !Possible Error! Adds a second adjective to an item with an adjective, e.g. legendary axe becomes
 mythical legendary axe
-
+Summoner has multiple chances to resurrect enemies

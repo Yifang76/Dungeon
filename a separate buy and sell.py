@@ -295,27 +295,30 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                                 eTotHea = str(eTotHea)
                         else:
                             if classn == "Summoner":
-                                summon = randint(1,2)
+                                summon = randint(1,100-int+summonNumber)
                                 if summon == 1:
                                     aq = input("You have defeated your enemy. Would you like to add this creature to your army?").capitalize()
                                     if "Yes" or "Y":
-                                        print("You gain a new summon.")
-                                        summonNumber = summonNumber + 1
-                                        summons = summons.append(n)
-                                    elif summonNumber >= maxSummon:
-                                        TotHea = int(TotHea) - int(2)
-                                        TotHea = str(TotHea)
-                                        print("Attempting to gain a new minion, you discover that the toll is too much. You are left with "+TotHea+ "health.")
-                                        if TotHea <= 0:
-                                            print("You died.")
-                                            carry = False
-                                            return()
+                                        if summonNumber >= maxSummon:
+                                            TotHea = int(TotHea) - int(2)
+                                            TotHea = str(TotHea)
+                                            print("Attempting to gain a new minion, you discover that the toll is too much. You are left with "+TotHea+ "health.")
+                                            if TotHea <= 0:
+                                                print("You died.")
+                                                sys.exit()
+                                        else:
+                                            global summonNumber
+                                            global summons
+                                            print("You gain a new summon.")
+                                            summonNumber = summonNumber + 1
+                                            summons = summons.append(n)
+                                            print(f"Congratulations, {n} has been conscripted to your army, said army consisting of {summons}.")
                                     else:
                                         print("The enemy dies")
                                 else:
                                     print("The enemy dies")
                             else:
-                                print("You have vanquished your enemy.")
+                                print("ENEMY VANQUISHED")
                                 lootdrop = randint(1,2)
                                 if lootdrop == 1:
                                     itemDrop = randint(1,3)
@@ -330,8 +333,7 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                                     inventory.append(loot)
                                     print(inventory)
                                 else:
-                                    print("You obtained nothing")
-                                
+                                    print("You obtained nothing")   
                     print("You died.")
                     sys.exit()
                     
