@@ -293,30 +293,35 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                                     print("Weak hit. Your enemy deals "+etd+" to you, leaving you with "+TotHea+" left.")
                                 TotHea = int(TotHea)
                                 eTotHea = str(eTotHea)
+                            else:
+                                print("You died")
+                                carry = False
+                                return()
+
+
                         else:
                             if classn == "Summoner":
-                                summon = randint(1,100)
+                                summon = randint(1,2)
                                 if summon == 1:
                                     aq = input("You have defeated your enemy. Would you like to add this creature to your army?").capitalize()
                                     if "Yes" or "Y":
-                                        if summonNumber >= maxSummon:
-                                            TotHea = int(TotHea) - int(2)
-                                            TotHea = str(TotHea)
-                                            print("Attempting to gain a new minion, you discover that the toll is too much. You are left with "+TotHea+ "health.")
-                                            if TotHea <= 0:
-                                                print("You died.")
-                                                sys.exit()
-                                        else:
-                                            print("You gain a new summon.")
-                                            summonNumber = summonNumber + 1
-                                            summons = summons.append(n)
-                                            print(f"Congratulations, {n} has been conscripted to your army, said army consisting of {summons}.")
+                                        print("You gain a new summon.")
+                                        summonNumber = summonNumber + 1
+                                        summons = summons.append(n)
+                                    elif summonNumber >= maxSummon:
+                                        TotHea = int(TotHea) - int(2)
+                                        TotHea = str(TotHea)
+                                        print("Attempting to gain a new minion, you discover that the toll is too much. You are left with "+TotHea+ "health.")
+                                        if TotHea <= 0:
+                                            print("You died.")
+                                            carry = False
+                                            return()
                                     else:
                                         print("The enemy dies")
                                 else:
                                     print("The enemy dies")
                             else:
-                                print("ENEMY VANQUISHED")
+                                print("You have vanquished your enemy.")
                                 lootdrop = randint(1,2)
                                 if lootdrop == 1:
                                     itemDrop = randint(1,3)
@@ -331,10 +336,8 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                                     inventory.append(loot)
                                     print(inventory)
                                 else:
-                                    print("You obtained nothing")   
-                    if TotHea <= 0:
-                        print("You died.")
-                        sys.exit()
+                                    print("You obtained nothing")
+                                break
                     
                     
                 else:
@@ -430,7 +433,7 @@ def chois():
         elif townQuestion == "Alchemist" or townQuestion == "P":
             print("Going to the Alchemist")
             chois()
-        elif townQuestion == "Armory" or townQuestion == "A":
+        #elif townQuestion == "Armory" or townQuestion == "A":
             #armory()
         elif townQuestion == "Out" or townQuestion == "O":
             car()
@@ -452,3 +455,5 @@ def car():
             print("That is not an option.")
 
 car()
+
+#unableToDie
