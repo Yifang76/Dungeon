@@ -342,6 +342,10 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                                 print("ENEMY VANQUISHED")
                                 lootIsDropped()
                                 break
+                    if TotHea <= 0:
+                        print("You died")
+                        sys.exit()
+                    
                 else:
                     nTotHea = int(TotHea) - randint(1,TotHea)
                     nTotHea = str(nTotHea)
