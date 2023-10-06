@@ -426,7 +426,11 @@ def chance():
 def chois():
     global carry
     while True:
-        townQuestion = input("Where would you like to go? You may go to the Alchemist (P), the Blacksmith (B), the Market (M) or back Out (O). ").capitalize()
+        townQuestion = input("Where would you like to go?"
+                    " You may go to the Alchemist (P),"
+                    " the Blacksmith (W), the Armory (A), the Bank (B)"
+                    " the Market (M), or back Out (O). ").capitalize()
+
         if townQuestion == "Market" or townQuestion == "M":
             print("Going to the Market")
             shop()
@@ -459,5 +463,5 @@ def car():
             
         else:
             print("That is not an option.")
-
+chois()
 car()
