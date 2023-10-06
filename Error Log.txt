@@ -11,3 +11,4 @@ mythical legendary axe
 Summoner has multiple chances to resurrect enemies
 Unable to die
 LootDrop rolls numerous times, not just once.
+Summoner has problems

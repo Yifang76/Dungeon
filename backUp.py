@@ -169,6 +169,27 @@ def shop():
                 IVLoop = False
                 sell()
 
+def lootIsDropped():
+    lootdrop = randint(1,2)
+    if lootdrop == 1:
+        itemDrop = randint(1,3)
+        if itemDrop == 1:
+            loot = ad + weapon
+        elif itemDrop == 2:
+            loot = resource
+        else:
+            loot = valuable
+        print("You obtained a "+loot+".")
+        global inventory
+        inventory.append(loot)
+        print(inventory)
+    else:
+        print("You obtained nothing")
+
+
+
+
+
 def encounter():
     global adlist
     global ad
@@ -295,10 +316,7 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                                 eTotHea = str(eTotHea)
                             else:
                                 print("You died")
-                                carry = False
-                                return()
-
-
+                                sys.exit()
                         else:
                             if classn == "Summoner":
                                 summon = randint(1,2)
@@ -314,31 +332,19 @@ def fight(noun, StrReq, DexReq, eStr, eDex):
                                         print("Attempting to gain a new minion, you discover that the toll is too much. You are left with "+TotHea+ "health.")
                                         if TotHea <= 0:
                                             print("You died.")
-                                            carry = False
-                                            return()
+                                            sys.exit()
+
                                     else:
                                         print("The enemy dies")
                                 else:
                                     print("The enemy dies")
                             else:
-                                print("You have vanquished your enemy.")
-                                lootdrop = randint(1,2)
-                                if lootdrop == 1:
-                                    itemDrop = randint(1,3)
-                                    if itemDrop == 1:
-                                        loot = ad + weapon
-                                    elif itemDrop == 2:
-                                        loot = resource
-                                    else:
-                                        loot = valuable
-                                    print("You obtained a "+loot+".")
-                                    global inventory
-                                    inventory.append(loot)
-                                    print(inventory)
-                                else:
-                                    print("You obtained nothing")
+                                print("ENEMY VANQUISHED")
+                                lootIsDropped()
                                 break
-                    
+                    if TotHea <= 0:
+                        print("You died")
+                        sys.exit()
                     
                 else:
                     nTotHea = int(TotHea) - randint(1,TotHea)
@@ -455,5 +461,3 @@ def car():
             print("That is not an option.")
 
 car()
-
-#unableToDie
