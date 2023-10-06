@@ -430,25 +430,25 @@ def chois():
                     " You may go to the Alchemist (P),"
                     " the Blacksmith (W), the Armory (A), the Bank (B)"
                     " the Market (M), or back Out (O). ").capitalize()
-
-        if townQuestion == "Market" or townQuestion == "M":
-            print("Going to the Market")
-            shop()
-            chois()
-        elif townQuestion == "Blacksmith" or townQuestion == "B":
-            print("Going to the Blacksmith")
-            blacksmith()
-            #NOTE: The function can be used within its definition, as shown below
-            chois()
-        elif townQuestion == "Alchemist" or townQuestion == "P":
-            print("Going to the Alchemist")
-            chois()
-        #elif townQuestion == "Armory" or townQuestion == "A":
-            #armory()
-        elif townQuestion == "Out" or townQuestion == "O":
-            car()
-        else:
-            print("That is not an option.") 
+        match townQuestion:
+            case "Market" | "M":
+                print("Going to the Market")
+                shop()
+                chois()
+            case "Blacksmith" | "B":
+                print("Going to the Blacksmith")
+                blacksmith()
+                #NOTE: The function can be used within its definition, as shown below
+                chois()
+            case "Alchemist" | "P":
+                print("Going to the Alchemist")
+                chois()
+            #case "Armory" | "A":
+                #armory()
+            case "Out" | "O":
+                car()
+            case _:
+                print("That is not an option.") 
 
 def car():
     global carry
