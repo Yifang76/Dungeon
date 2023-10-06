@@ -7,6 +7,7 @@ eTotHea = int(1)
 carry = True
 summons = []
 shopStock = []
+bankedGold = 0
 
 adlist = ["common ","rare ","mythical ","legendary "]
 ad = choice(adlist)
@@ -40,6 +41,7 @@ def classv(className, message, StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG
     global Int
     global TotHea
     global name
+    global bankedGold
     if classn == className:
         print(message)
         Str = int(StrG)
@@ -54,7 +56,7 @@ def classv(className, message, StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG
             SpecialAbi = int(SpecialAbiNum)
 
 classv("Knight", f"Welcome, knight {name}.", 10, 3, 8, 7, 4, 6, 5, 70, "0", "Pi", 0)
-classv("Merchant", f"Welcome, merchant {name}.", 1, 8, 1, 3, 8, 10, 6, 30, "Merchant", "Banked Gold", 1000)
+classv("Merchant", f"Welcome, merchant {name}.", 1, 8, 1, 3, 8, 10, 6, 30, "Merchant", bankedGold, 1000)
 classv("Summoner", f"Welcome, summoner {name}.", 1, 4, 1, 2, 9, 2, 8, 20, "Summoner", summonNumber, 0)
 
 
@@ -169,6 +171,18 @@ def shop():
                 IVLoop = False
                 sell()
 
+def bank():
+    global bankedGold
+    purpose = input("Are you withrawing (W) or depositing (D)? ").capitalize()
+    match purpose:
+        case "W" | "Withdrawing" | "Withdraw":
+        wthDrw = input("Are you withrawing items or gold? ")             
+        case "D" | "Depositing" | "Deposit":
+        wthDepot = input("Are you depositing items or gold? ")
+
+#def armory():
+
+
 def lootIsDropped():
     lootdrop = randint(1,2)
     if lootdrop == 1:
@@ -185,10 +199,6 @@ def lootIsDropped():
         print(inventory)
     else:
         print("You obtained nothing")
-
-
-
-
 
 def encounter():
     global adlist
@@ -435,7 +445,7 @@ def chois():
                 print("Going to the Market")
                 shop()
                 chois()
-            case "Blacksmith" | "B":
+            case "Blacksmith" | "W":
                 print("Going to the Blacksmith")
                 blacksmith()
                 #NOTE: The function can be used within its definition, as shown below
@@ -445,6 +455,10 @@ def chois():
                 chois()
             #case "Armory" | "A":
                 #armory()
+                chois()
+            #case "Bank" | "B":
+                #bank()
+                chois()
             case "Out" | "O":
                 car()
             case _:
