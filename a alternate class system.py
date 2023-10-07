@@ -31,8 +31,7 @@ if attriQuery == "Yes":
     print("Strength determines the base damage you do, Agility determines your evasion, Dexterity determines ______, Perception determines your critical chance, Charisma determines your barter rate and speech, Intelligence determines your spellcraft and Health determines your starting health.")
 
 classn = input("Pick a class ").capitalize()
-def classv(className, message, StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG, Sclass, SpeciaAbi, SpecialAbiNum):
-    global classn
+def classv(StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG):
     global Str
     global Agi
     global Dex
@@ -41,24 +40,27 @@ def classv(className, message, StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG
     global Cha
     global Int
     global TotHea
-    global name
-    global bankedGold
-    if classn == className:
-        print(message)
-        Str = int(StrG)
-        Agi = int(AgiG)
-        Dex = int(DexG)
-        Hea = int(HeaG)
-        Per = int(PerG)
-        Cha = int(ChaG)
-        Int = int(IntG)
-        TotHea = int(TotHeaG)
-        if classn == Sclass:
-            SpecialAbi = int(SpecialAbiNum)
+    print(f"Welcome, {classn} {name}.")
+    Str = int(StrG)
+    Agi = int(AgiG)
+    Dex = int(DexG)
+    Hea = int(HeaG)
+    Per = int(PerG)
+    Cha = int(ChaG)
+    Int = int(IntG)
+    TotHea = int(TotHeaG)
 
-classv("Knight", f"Welcome, knight {name}.", 10, 3, 8, 7, 4, 6, 5, 70, "0", "Pi", 0)
-classv("Merchant", f"Welcome, merchant {name}.", 1, 8, 1, 3, 8, 10, 6, 30, "Merchant", bankedGold, 1000)
-classv("Summoner", f"Welcome, summoner {name}.", 1, 4, 1, 2, 9, 2, 8, 20, "Summoner", summonNumber, 0)
+match classn:
+    case "Knight":
+        classv(10, 3, 8, 7, 4, 6, 5, 70)
+    case "Summoner":
+        classv(1, 4, 1, 2, 9, 2, 8, 20)
+    case "Merchant":
+        classv(1, 8, 1, 3, 8, 10, 6, 30)
+        bankedGold = 1000
+    case _:
+        print("That is not an option")
+
 
 
 items = {
@@ -190,11 +192,12 @@ def wth():
     wthWhch = input("Would you like to withdraw Items (I) or Gold (G)? ").capitalize()
     match wthWhch:
         case "Items" | "Item" | "I":
-            print(bankedItems)
+            print(f"You currently have {inventory} and the bank currently contains {bankedItems}.")
             whichDraw = input("Which item would you like to withdraw? ")
             if whichDraw in bankedItems:
                 inventory.append(whichDraw)
                 bankedItems.remove(whichDraw)
+                print(f"You currently have {inventory} and the bank currently contains {bankedItems}.")
             else:
                 print("That is not an option.")    
         case "Gold" | "G":
@@ -220,21 +223,22 @@ def depo():
     depWhch = input("Would you like to deposit Items (I) or Gold (G)? ").capitalize()
     match depWhch:
         case "Items" | "Item" | "I":
-            print(bankedItems)
+            print(f"You currently have {inventory} and the bank currently contains {bankedItems}.")
             whichDep = input("Which item would you like to deposit? ")
             if whichDep in inventory:
-                inventory.remove(whichDraw)
-                bankedItems.append(whichDraw)
+                inventory.remove(whichDep)
+                bankedItems.append(whichDep)
+                print(f"You currently have {inventory} and the bank currently contains {bankedItems}.")
             else:
                 print("That is not an option.")    
         case "Gold" | "G":
             print(f"You currently have {bankedGold} gold banked and {gold} gold on your person.")
             amountDep = int(input("How much would you like to deposit? "))
             if gold - amountDep >= 0:
-                bankedGold = bankedGold + amountDraw
-                gold = gold - amountDraw
+                bankedGold = bankedGold + amountDep
+                gold = gold - amountDep
                 print(f"You currently have {bankedGold} gold banked and {gold} gold on your person.")
-            elif bankedGold - amountDraw < 0:
+            elif bankedGold - amountDep < 0:
                 print("You do not have enough gold at hand.")
             else:
                 print("That is not an option.")
