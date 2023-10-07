@@ -182,6 +182,8 @@ def bank():
             wth()       
         case "D" | "Depositing" | "Deposit":
             depo()
+        case _:
+            print("That is not an option.")
 
 
 def wth():
