@@ -5,10 +5,12 @@ after exiting shop immediately thrown out into the Outer Lands. !FIXED!
 Unable to die; game doesn't quit out !FIXED!
 !MAJOR ERROR! After killing an enemy in 'a separate buy and sell.py', infinite loop occurs.
 'functioning a has no such error.!FIXED!
+LootDrop rolls numerous times, not just once. !FIXED!
+Unable to die !FIXED!
 
 !Possible Error! Adds a second adjective to an item with an adjective, e.g. legendary axe becomes
 mythical legendary axe
 Summoner has multiple chances to resurrect enemies
-Unable to die
-LootDrop rolls numerous times, not just once.
 Summoner has problems
+Armory - Doesn't register equipped items
+Armory - equipped items have no effect (reason: no dict for values YET)
