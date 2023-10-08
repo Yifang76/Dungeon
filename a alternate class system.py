@@ -2,7 +2,7 @@ from random import *
 import sys
 gold = 0
 summonNumber = int(0)
-inventory = []
+inventory = ["helmet", "sword"]
 eTotHea = int(1)
 carry = True
 summons = []
@@ -269,7 +269,7 @@ def armory():
             "Right Hand (RH) or Left Hand (LH)? ").capitalize()
             match whereEq:
                 case "Head" | "H":
-                    hEqItem = equip(hEqItem, "wearing")
+                    equip(hEqItem, "wearing")
                 case "Chest" | "C":
                     cEqItem = equip(cEqItem, "wearing")
                 case "Gloves" | "G":
@@ -297,16 +297,15 @@ def equip(itemEquip, eVerb):
     global bEqItem
     global rhEqItem
     global lhEqItem
-    if itemEquip is not None:
-        print(f"You already have {itemEquip} in this slot.")
-    else:
+    if itemEquip is None:
         print(f"You currently have {inventory}.")
         whichEq = input("What would you like to equip? ")
         if whichEq in inventory:
             itemEquip = whichEq
             inventory.remove(whichEq)
             print(f"You are now {eVerb} {itemEquip}.")
-
+        else:
+            print(f"You already have {itemEquip} in this slot.")
 
 
 
