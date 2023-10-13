@@ -1,7 +1,7 @@
-Tom Class
+Tom Class !DONE!
 Link Sheet
 Pyinstaller
-Pycharm
+Pycharm !DONE!
 Luck
 Charisma change
 Different lands

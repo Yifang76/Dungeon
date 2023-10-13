@@ -65,6 +65,12 @@ match classn:
     case "Merchant":
         classv(1, 8, 1, 3, 8, 10, 6, 30)
         bankedGold = 1000
+    case "Tom":
+        if name == "Tom":
+            classv()
+    case "William":
+        if name == "William":
+            classv(3,3,3,5,3,0,10,50)
     case _:
         print("That is not an option")
 
@@ -307,10 +313,10 @@ def equip(whereEq):
 
 
 def remove():
-    whereRem = input("From which slot would you like to remove equipment? ").capitalize()
+    whereRem = input("From which slot would you like to remove equipment? (Do NOT use abbreviations) ").capitalize()
     if whereRem in equipped_items:
         item = equipped_items[whereRem]
-        if item:
+        if item is not None:
             inventory.append(item)
             equipped_items[whereRem] = None
             print(f"You have removed the {item} from {whereRem}.")
@@ -318,6 +324,7 @@ def remove():
             print(f"There is no equipment in {whereRem} to remove.")
     else:
         print("Invalid slot selection.")
+
 
 def lootIsDropped():
     lootdrop = randint(1,2)
