@@ -38,7 +38,8 @@ if attriQuery == "Yes":
     print("Strength determines the base damage you do, Agility determines your evasion, Dexterity determines ______, Perception determines your critical chance, Charisma determines your barter rate and speech, Intelligence determines your spellcraft and Health determines your starting health.")
 
 classn = input("Pick a class ").capitalize()
-def classv(StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG):
+def classv(LevelG, StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG):
+    global Level
     global Str
     global Agi
     global Dex
@@ -48,6 +49,7 @@ def classv(StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG):
     global Int
     global TotHea
     print(f"Welcome, {classn} {name}.")
+    Level = int(LevelG)
     Str = int(StrG)
     Agi = int(AgiG)
     Dex = int(DexG)
@@ -59,18 +61,18 @@ def classv(StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG):
 
 match classn:
     case "Knight":
-        classv(10, 3, 8, 7, 4, 6, 5, 70)
+        classv(15, 10, 3, 8, 7, 4, 6, 5, 70)
     case "Summoner":
-        classv(1, 4, 1, 2, 9, 2, 8, 20)
+        classv(5, 1, 4, 1, 2, 9, 2, 8, 20)
     case "Merchant":
-        classv(1, 8, 1, 3, 8, 10, 6, 30)
+        classv(7, 1, 8, 1, 3, 8, 10, 6, 30)
         bankedGold = 1000
     case "Tom":
         if name == "Tom":
             classv()
     case "William":
         if name == "William":
-            classv(3,3,3,5,3,0,10,50)
+            classv(120,3,3,3,5,3,0,10,50)
     case _:
         print("That is not an option")
 
@@ -115,6 +117,17 @@ slot_mapping = {
     "RH": "Right Hand",
     "LH": "Left Hand",
 }
+
+places = {
+    "Stormcrag" : 10,
+    "Havoc's Rock" : 50,
+    "Duskmire" : 25,
+    "Ironhold" : 7,
+    "Thornwood" : 5,
+}
+
+
+pList = ["Stormcrag", "Havoc's Rock", "Duskmire", "Ironhold", "Thornwood"]
 
 liteList = ["common axe",
 "rare axe", "mythical axe", "legendary axe", 
@@ -563,6 +576,23 @@ def blacksmith():
     else:
         print("That is not an option.")
 
+def where():
+    
+    whr = input(f"Where would you like to go? {pList} ").capitalize()
+    if whr in pList:
+        if int(places[whr]) > int(Level):
+            con = input(f"Are you sure you want to go to {whr}? At your current level, it is quite \033[91m dangerous\033[0m.").capitalize()
+            if con == "Yes" or con == "Y":
+                car()
+            elif con == "No" or con == "N":
+                print("Returning to the city.")
+                chois()
+            else:
+                print("That is not an option")
+                chois()
+        else:
+            print(f"You are going to {whr}.")
+
 
 def chance():
     global n
@@ -605,7 +635,7 @@ def chois():
                 bank()
                 chois()
             case "Out" | "O":
-                car()
+                where()
             case _:
                 print("That is not an option.") 
 

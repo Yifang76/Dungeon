@@ -1,8 +1,10 @@
 Tom Class !DONE!
-Link Sheet
-Pyinstaller
+Link Sheet - https://stackoverflow.com/questions/1054022/best-way-to-store-password-in-database
+Pyinstaller !DONE!
 Pycharm !DONE!
 Luck
 Charisma change
 Different lands
 Summoner
+Add Functions to Places
+Add stats to equipment

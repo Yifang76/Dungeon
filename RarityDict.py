@@ -14,3 +14,14 @@ if q.split() in inventory:
     print(factor)
     tFactor = rarityValues + factor
     print(tFactor)
+
+
+
+
+
+rarities = {
+    "common" : ,
+    "rare" : ,
+    "mythical" : ,
+    "legendary" : ,
+}
