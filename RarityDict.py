@@ -6,22 +6,22 @@ rarityValues = {
 "legendary": "100",
 }
 inventory = ["common axe"]
-factors = ["int","faith","strength","dexterity","health"]
+factors = [" int", " faith", " strength", " dexterity", " health"]
 factor = choice(factors)
 q = input("")
-print(q.split)
+f = q.split()
+print(f)
 if q in inventory:
-    print(factor)
-    tFactor = rarityValues + factor
-    print(tFactor)
+    if f[0] in rarityValues:
+        print(factor)
+        print(f[0])
+        tFactor = str(rarityValues[f[0]]) + factor
+        print(tFactor)
+    else:
+        print("NO")
+else:
+    print("NO")
 
 
 
 
-
-rarities = {
-    "common" : ,
-    "rare" : ,
-    "mythical" : ,
-    "legendary" : ,
-}

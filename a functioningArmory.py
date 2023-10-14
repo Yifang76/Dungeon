@@ -118,6 +118,14 @@ slot_mapping = {
     "LH": "Left Hand",
 }
 
+rarityValues = {
+    "common": "5",
+    "rare": "20",
+    "mythical": "50",
+    "legendary": "100",
+}
+
+
 places = {
     "Stormcrag" : 10,
     "Havoc's Rock" : 50,
