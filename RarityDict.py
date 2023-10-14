@@ -10,7 +10,7 @@ factors = ["int","faith","strength","dexterity","health"]
 factor = choice(factors)
 q = input("")
 print(q.split)
-if q.split() in inventory:
+if q in inventory:
     print(factor)
     tFactor = rarityValues + factor
     print(tFactor)
