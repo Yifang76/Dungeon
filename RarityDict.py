@@ -16,7 +16,7 @@ if q in inventory:
         print(factor)
         print(f[0])
         tFactor = str(rarityValues[f[0]]) + factor
-        print(tFactor)
+        print(f"{q} = {tFactor}.")
     else:
         print("NO")
 else:
