@@ -79,23 +79,23 @@ match classn:
 
 
 items = {
-#weapons
-"common axe": 10,
-"rare axe": 50,
-"mythical axe": 1000,
-"legendary axe": 500000,
-"common stick": 1,
-"rare stick": 2,
-"mythical stick": 3,
-"legendary stick": 5,
-"common sword": 20,
-"rare sword": 60,
+    #weapons
+    "common axe": 10,
+    "rare axe": 50,
+    "mythical axe": 1000,
+    "legendary axe": 500000,
+    "common stick": 1,
+    "rare stick": 2,
+    "mythical stick": 3,
+    "legendary stick": 5,
+    "common sword": 20,
+    "rare sword": 60,
 
-#resources
-"leather" : 2,
+    #resources
+    "leather" : 2,
 
-#valuables
-"iron" : 20,
+    #valuables
+    "iron" : 20,
 }
 
 equipped_items = {
@@ -591,3 +591,6 @@ def car():
             print("That is not an option.")
 chois()
 car()
+
+#ctrl + k, ctrl + 0 = collapse all
+#ctrl + k, ctrl + j = expand all
