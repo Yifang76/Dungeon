@@ -7,10 +7,11 @@ Unable to die; game doesn't quit out !FIXED!
 'functioning a has no such error.!FIXED!
 LootDrop rolls numerous times, not just once. !FIXED!
 Unable to die !FIXED!
+Armory - Doesn't register equipped items !FIXED!
 
 !Possible Error! Adds a second adjective to an item with an adjective, e.g. legendary axe becomes
 mythical legendary axe
 Summoner has multiple chances to resurrect enemies
 Summoner has problems
-Armory - Doesn't register equipped items
 Armory - equipped items have no effect (reason: no dict for values YET)
+modNlist failing; encounter fails

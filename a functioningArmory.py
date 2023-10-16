@@ -9,6 +9,7 @@ summons = []
 shopStock = []
 bankedGold = 0
 bankedItems = []
+n = None
 hEqItem = None
 cEqItem = None
 lEqItem = None
@@ -16,7 +17,6 @@ gEqItem = None
 bEqItem = None
 rhEqItem = None
 lhEqItem = None
-
 adlist = ["common ","rare ","mythical ","legendary "]
 ad = choice(adlist)
 weaponlist = ["axe","sword","stick"]
@@ -379,25 +379,62 @@ def lootIsDropped():
     else:
         print("You obtained nothing")
 
+#Works
+def nounList(firstV, secondV, thirdV, fourthV, fifthV, sixthV, seventhV, eighthV, ninthV, tenthV):
+    global n
+    global modNlist
+    nlist = [firstV, secondV, thirdV, fourthV, fifthV, sixthV, seventhV, eighthV, ninthV, tenthV]
+    modNlist = [item for item in nlist if item is not None]
+    n = choice(modNlist)
+
+#Works
+def where():
+    global whr
+    whr = input(f"Where would you like to go? {pList} ").capitalize()
+    if whr in pList:
+        if int(places[whr]) > int(Level):
+            con = input(f"Are you sure you want to go to {whr}? At your current level, it is quite dangerous.").capitalize()
+            if con == "Yes" or con == "Y":
+                car()
+            elif con == "No" or con == "N":
+                print("Returning to the city.")
+                chois()
+            else:
+                print("That is not an option")
+                chois()
+                
+        else:
+            print(f"You are going to {whr}.")
+            car()
+
+#Works
+def enemyInPlace():
+    global whr
+    match whr:
+        case "Thornwood":
+            nounList("bandit", "wolf", "insect", "ent", None, None, None, None, None, None)
+        case "Stormcrag":
+            nounList(None, None, None, None, None, None, None, None, None, None)
+        case "Ironhold":
+            nounList(None, None, None, None, None, None, None, None, None, None)
+        case "Duskmire":
+            nounList(None, None, None, None, None, None, None, None, None, None)
+        case "Havoc's Rock":
+            nounList(None, None, None, None, None, None, None, None, None, None)
+
+
 def encounter():
-    global adlist
     global ad
     global itemlist
     global item
-    global nlist
     global n
-    global vlist
     global v
-    global palist
     global pv
     global ex
     global eTotHea
     global weapon
-    global weaponlist
     global resource
-    global resourcelist
     global valuable
-    global valuablelist
     adlist = ["common ","rare ","mythical ","legendary "]
     ad = choice(adlist)
 
@@ -410,9 +447,6 @@ def encounter():
     valuablelist = ["iron"]
     valuable = choice(valuablelist)
 
-    nlist = ["imp","warlord","dictator"]
-    n = choice(nlist)
-
     vlist = ["stands","looks","glares"]
     v = choice(vlist)
 
@@ -420,10 +454,11 @@ def encounter():
     palist = ["saunter","walk","run"]
     pv = choice(palist)
 
-    if n == "warlord" or n == "dictator":
-        det = str("a")
-    else:
-        det = str("an")
+    match n:
+        case "warlord" | "dictator" | "bandit" | "wolf":
+            det = str("a")
+        case _:
+            det = str("an")
 
     if v == "looks" or v == "glares":
         ex = str("at you")
@@ -431,6 +466,7 @@ def encounter():
         ex = str("there")
     global opon
     opon = str(f"As you {pv} down the path, {det} {n} {v} {ex} menacingly. Would you like to Fight (F), Use Item (I) or Retreat (R)? ")
+
 
 def fight(noun, eTotHea, eStr, eDex):
     global TotHea
@@ -513,35 +549,30 @@ def blacksmith():
     else:
         print("That is not an option.")
 
-def where():
-    whr = input(f"Where would you like to go? {pList} ").capitalize()
-    if whr in pList:
-        if int(places[whr]) > int(Level):
-            con = input(f"Are you sure you want to go to {whr}? At your current level, it is quite dangerous.").capitalize()
-            if con == "Yes" or con == "Y":
-                car()
-            elif con == "No" or con == "N":
-                print("Returning to the city.")
-                chois()
-            else:
-                print("That is not an option")
-                chois()
-        else:
-            print(f"You are going to {whr}.")
-            car()
+
 
 
 def chance():
     global n
+    global modNlist
     chanceEn = randint(1,3)
+    actions = {
+    1: ("imp", 25, 1, 1),
+    2: ("warlord", 100, 7, 9),
+    3: ("dictator", 75, 3, 3),
+    4: ("bandit", 10, 2, 2),
+    5: ("wolf", 7, 4, 4),
+    6: ("insect", 2, 1, 1),
+    7: ("ent", 50, 7, 7),
+    8: ("dictator", 75, 3, 3),
+    9: ("dictator", 75, 3, 3),
+    10: ("dictator", 75, 3, 3),
+    11: ("dictator", 75, 3, 3),
+    }
     if chanceEn == 1:
         encounter()
-        if n == "imp":
-            fight("imp", 25, 1, 1)
-        elif n == "warlord":
-            fight("warlord", 100, 7, 9)
-        elif n == "dictator":
-            fight("dictator", 75, 3, 3)
+        n, health, attack, defense = actions[randint(1,len(modNlist))]
+        fight(n, health, attack, defense)
     elif chanceEn == 2:
         print("Placeholder")
 
