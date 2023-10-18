@@ -571,8 +571,8 @@ def chance():
     }
     if chanceEn == 1:
         encounter()
-        n, health, attack, defense = actions[randint(1,len(modNlist))]
-        fight(n, health, attack, defense)
+        no, health, attack, defense = actions[randint(1,11)]
+        fight(no, health, attack, defense)
     elif chanceEn == 2:
         print("Placeholder")
 

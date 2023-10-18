@@ -536,12 +536,13 @@ def blacksmith():
                 correct = input(f"Do you want to upgrade {whichUp}? ").capitalize()
                 if correct == "Yes" or correct == "Y":
                     if "iron" in inventory:
-                        inventory.remove("iron")
-                        inventory.remove(whichUp)
-                        ad = choice(adlist)
-                        inventory.append(ad + whichUp)
-                        print(inventory)
-                        #tFactor = str(rarityValues[f[0]]) + factor
+                        splinch = whichUp.split()
+                        if splinch[0] not in rarityValues:
+                            inventory.remove("iron")
+                            inventory.remove(whichUp)
+                            ad = choice(adlist)
+                            inventory.append(ad + whichUp)
+                            print(inventory)
                     else:
                         print(f"You do not meet the requirements to upgrade {whichUp}.")
             else:
