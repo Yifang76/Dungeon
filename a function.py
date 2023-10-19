@@ -64,6 +64,8 @@ match classn:
         classv(15, 10, 3, 8, 7, 4, 6, 5, 70)
     case "Summoner":
         classv(5, 1, 4, 1, 2, 9, 2, 8, 20)
+        totalSummonNumber = Int
+
     case "Merchant":
         classv(7, 1, 8, 1, 3, 8, 10, 6, 30)
         bankedGold = 1000
@@ -469,6 +471,8 @@ def encounter(noun):
 
 
 def fight(noun, eTotHea, eStr, eDex):
+    global summonNumber
+    global summons
     global TotHea
     while TotHea > 0:
         if eTotHea > 0:
@@ -496,13 +500,23 @@ def fight(noun, eTotHea, eStr, eDex):
                 lootIsDropped()
                 break
             else:
-                print("")
+                print(f"You currently have {summons} under your control.\n You can only convert {totalSummonNumber - summonNumber} more.")
+                q = input("Would you like to summon {noun}? ").capitalize()
+                if q == "Yes" or q == "Y":
+                    summonS = randint(1,2)
+                    if summonS == 1:
+                        if totalSummonNumber > summonNumber:
+                            summon.append(noun)
+                            print(f"Congratulations, you gained {noun}.")
+
+
+                
 
     if TotHea <= 0:
         print("You died.")
         sys.exit()
 
-
+    
 def blacksmith():
     global inventory
     global ad
@@ -543,6 +557,17 @@ def blacksmith():
                             ad = choice(adlist)
                             inventory.append(ad + whichUp)
                             print(inventory)
+                        else:
+                            q = input(f"{whichUp} has modifier {splinch[0]}. Would you like to change this? ").capitalize()
+                            if q == "Yes" or q == "Y":
+                                inventory.remove("iron")
+                                inventory.remove(whichUp)
+                                ad = choice(adlist)
+                                inventory.append(ad + splinch[1])
+                                print(inventory)
+                            else:
+                                print("Cancelling process")
+
                     else:
                         print(f"You do not meet the requirements to upgrade {whichUp}.")
             else:
