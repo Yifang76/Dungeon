@@ -8,10 +8,11 @@ Unable to die; game doesn't quit out !FIXED!
 LootDrop rolls numerous times, not just once. !FIXED!
 Unable to die !FIXED!
 Armory - Doesn't register equipped items !FIXED!
-
+modNlist failing; encounter fails !FIXED!
 !Possible Error! Adds a second adjective to an item with an adjective, e.g. legendary axe becomes
-mythical legendary axe
-Summoner has multiple chances to resurrect enemies
-Summoner has problems
+mythical legendary axe !FIXED!
+Summoner has multiple chances to resurrect enemies !FIXED!
+Summoner has problems !FIXED!
+
 Armory - equipped items have no effect (reason: no dict for values YET)
-modNlist failing; encounter fails
+noDifferenceInEnemiesInArea

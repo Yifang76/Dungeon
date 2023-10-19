@@ -381,12 +381,13 @@ def lootIsDropped():
     else:
         print("You obtained nothing")
 
-#Works
+#Possibly Uneeded
 def nounList(firstV, secondV, thirdV, fourthV, fifthV, sixthV, seventhV, eighthV, ninthV, tenthV):
     global n
     global modNlist
     nlist = [firstV, secondV, thirdV, fourthV, fifthV, sixthV, seventhV, eighthV, ninthV, tenthV]
     modNlist = [item for item in nlist if item is not None]
+    print(modNlist)
     n = choice(modNlist)
 
 #Works
@@ -475,6 +476,7 @@ def fight(noun, eTotHea, eStr, eDex):
     global summons
     global TotHea
     global classn
+    global totalSummonNumber
     while TotHea > 0:
         if eTotHea > 0:
             opt = input(opon).capitalize()
@@ -496,15 +498,26 @@ def fight(noun, eTotHea, eStr, eDex):
                 case _:
                     print("That is not an option")
         if eTotHea <= 0:
-            if classn != "Summoner" or classn != "Necromancer":
-                print(f"You currently have {summons} under your control.\n You can only convert {totalSummonNumber - summonNumber} more.")
+            if classn == "Summoner" or classn == "Necromancer":
+                lootIsDropped()
+                print(f"You currently have {summons} under your control.\nYou can only convert {totalSummonNumber - summonNumber} more.")
                 q = input(f"Would you like to summon {noun}? ").capitalize()
                 if q == "Yes" or q == "Y":
                     summonS = randint(1,2)
                     if summonS == 1:
                         if totalSummonNumber > summonNumber:
-                            summon.append(noun)
+                            summons.append(noun)
+                            totalSummonNumber = totalSummonNumber - 1
                             print(f"Congratulations, you gained {noun}.")
+                            break
+                    else:
+                        print("NO")
+                        break
+                elif q == "No" or q == "N":
+                    print(f"You give up on converting the {noun}.")
+                    break
+                else:
+                    print("That is not an option")
             else:
                 print("ENEMY VANQUISHED")
                 lootIsDropped()

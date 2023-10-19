@@ -5,6 +5,6 @@ Pycharm !DONE!
 Luck
 Charisma change
 Different lands
-Summoner
-Add Functions to Places
+Summoner !DONE!
+Add Functions to Places !DONE!
 Add stats to equipment
