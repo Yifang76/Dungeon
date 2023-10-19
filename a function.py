@@ -474,6 +474,7 @@ def fight(noun, eTotHea, eStr, eDex):
     global summonNumber
     global summons
     global TotHea
+    global classn
     while TotHea > 0:
         if eTotHea > 0:
             opt = input(opon).capitalize()
@@ -496,18 +497,18 @@ def fight(noun, eTotHea, eStr, eDex):
                     print("That is not an option")
         if eTotHea <= 0:
             if classn != "Summoner" or classn != "Necromancer":
-                print("ENEMY VANQUISHED")
-                lootIsDropped()
-                break
-            else:
                 print(f"You currently have {summons} under your control.\n You can only convert {totalSummonNumber - summonNumber} more.")
-                q = input("Would you like to summon {noun}? ").capitalize()
+                q = input(f"Would you like to summon {noun}? ").capitalize()
                 if q == "Yes" or q == "Y":
                     summonS = randint(1,2)
                     if summonS == 1:
                         if totalSummonNumber > summonNumber:
                             summon.append(noun)
                             print(f"Congratulations, you gained {noun}.")
+            else:
+                print("ENEMY VANQUISHED")
+                lootIsDropped()
+                break
 
 
                 
@@ -590,10 +591,10 @@ def chance():
     5: ("wolf", 7, 4, 4),
     6: ("insect", 2, 1, 1),
     7: ("ent", 50, 7, 7),
-    8: ("dictator", 75, 3, 3),
-    9: ("dictator", 75, 3, 3),
-    10: ("dictator", 75, 3, 3),
-    11: ("dictator", 75, 3, 3),
+    8: ("insect", 2, 1, 1),
+    9: ("insect", 2, 1, 1),
+    10: ("insect", 2, 1, 1),
+    11: ("insect", 2, 1, 1),
     }
     if chanceEn == 1:
         no, health, attack, defense = actions[randint(1,11)]
