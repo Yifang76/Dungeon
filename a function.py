@@ -79,6 +79,9 @@ match classn:
         print("That is not an option")
 
 
+weaponModifier = {
+
+}
 
 items = {
     #weapons
@@ -147,6 +150,7 @@ liteList = ["common axe",
 
 
 def rarities(q):
+    global weaponModifier
     factors = [" int", " faith", " strength", " dexterity", " health"]
     factor = choice(factors)
     f = q.split()
@@ -155,6 +159,8 @@ def rarities(q):
         if f[0] in rarityValues:
             tFactor = str(rarityValues[f[0]]) + factor
             print(f"{q} has effect +{tFactor}.")
+            weaponModifier.update({q : tFactor})
+
         else:
             print("NO")
     else:
@@ -380,6 +386,14 @@ def lootIsDropped():
 
     else:
         print("You obtained nothing")
+
+def menu():
+    print(f"Without modifiers, you have:\nHealth: {TotHea}\nStrength: {Str}\nDexterity: {Dex}\n"
+    f"Perception: {Per}\nCharisma: {Cha}\nIntelligence: {Int} ")
+    print(f"With modifiers, you have:\nHealth: {nTotHea}\nStrength: {nStr}\n Dexterity: {nDex}"
+    f"Perception: {nPer}\nCharisma: {nCha}\nIntelligence: {nInt} ")
+
+
 
 #Possibly Uneeded
 def nounList(firstV, secondV, thirdV, fourthV, fifthV, sixthV, seventhV, eighthV, ninthV, tenthV):
@@ -622,7 +636,7 @@ def chois():
         townQuestion = input("Where would you like to go?"
                     " You may go to the Alchemist (P),"
                     " the Blacksmith (W), the Armory (A), the Bank (B)"
-                    " the Market (M), or back Out (O). ").capitalize()
+                    " the Market (M), the Menu or back Out (O). ").capitalize()
         match townQuestion:
             case "Market" | "M":
                 print("Going to the Market")
@@ -641,6 +655,9 @@ def chois():
                 chois()
             case "Bank" | "B":
                 bank()
+                chois()
+            case "Menu":
+                menu()
                 chois()
             case "Out" | "O":
                 where()
