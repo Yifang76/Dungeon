@@ -85,22 +85,22 @@ weaponModifier = {
 
 items = {
     #weapons
-    "common axe": 10,
-    "rare axe": 50,
-    "mythical axe": 1000,
-    "legendary axe": 500000,
-    "common stick": 1,
-    "rare stick": 2,
-    "mythical stick": 3,
-    "legendary stick": 5,
-    "common sword": 20,
-    "rare sword": 60,
+    "common axe": 10-Cha,
+    "rare axe": 50-Cha,
+    "mythical axe": 1000-Cha,
+    "legendary axe": 500000-Cha,
+    "common stick": 5-Cha,
+    "rare stick": 25-Cha,
+    "mythical stick": 50-Cha,
+    "legendary stick": 100-Cha,
+    "common sword": 20-Cha,
+    "rare sword": 60-Cha,
 
     #resources
-    "leather" : 2,
+    "leather" : 15-Cha,
 
     #valuables
-    "iron" : 20,
+    "iron" : 40-Cha,
 }
 
 equipped_items = {
@@ -139,6 +139,12 @@ places = {
     "Thornwood" : 5,
 }
 
+fenceDict = {
+    "necronomicon" : ,
+    "demon heart" : ,
+    "dragon scale" : ,
+    "human flesh" : ,
+}
 
 pList = ["Stormcrag", "Havoc's Rock", "Duskmire", "Ironhold", "Thornwood"]
 
@@ -148,6 +154,7 @@ liteList = ["common axe",
 "legendary stick", "common sword", "rare sword",
 "leather", "iron" ]
 
+illItems = ["necronomicon", "demon heart", "dragon scale", "human flesh"]
 
 def rarities(q):
     global weaponModifier
@@ -225,6 +232,8 @@ def buy():
                 esc = input("Would you like to stop buying? ").capitalize()
                 if esc == "Yes":
                     break
+            else:
+                print("That is not an option")
         else:
             print(f"The shop does not have {buyWhich} in stock")
             esc = input("Would you like to stop buying? ").capitalize()
@@ -236,15 +245,89 @@ def buy():
     print(f"You currently have {gold} gold.")
     print(f"You currently have {inventory}.")
 
+def fence():
+    IVLoop = True
+    passw = input("What is the passcode? ")
+    if passw == "":
+        print("You may enter, sinner.")
+        if classn == "Knight":
+            Char = -5
+            print("Surrounded by sinners, miscreants, spies and traitors, the King's Charter has no"
+            f" effect here. On the contrary, it enrages the inhabitants. Charisma drops to {Char}")
+        while IVLoop == True:
+            BoS = input("Would you like to buy or sell, sinful one? ").capitalize()
+            if BoS == "Buy" or BoS == "B":
+                IVLoop = False
+                fenBuy()
+            if BoS == "Sell" or BoS == "S":
+                if not inventory:
+                    print("You have nothing of value, devious one.")
+                else:
+                    IVLoop = False
+                    fenSell()
+                    
+    else:
+        print("You are not one of us. Leave.")
+        chois()
+
+def fenBuy():
+    global gold
+    shopStock = []
+
+    for i in range(randint(1,20)):
+        shopStock.append(choice(illItems))
+    print(f"You currently have {gold} gold.")
+    print(f"You currently have {inventory}.")
+    while True:
+        print(f"The shop currently has {shopStock}")
+        buyWhich = input("What would you like to buy? ")
+        if buyWhich in shopStock:
+            YN = input(f"Would you like to buy {buyWhich} for {str(fenceDict[buyWhich])} gold? ").capitalize()
+            if YN == "Yes":
+                phGold = int(gold) - fenceDict[buyWhich]
+                if phGold > 0:
+                    gold = phGold
+                    shopStock.remove(buyWhich)
+                    inventory.append(buyWhich)
+                    print(f"You currently have {gold} gold.")
+                    again = input("Would you like to use the shop again? ").capitalize()
+                    if again == "No":
+                        break
+                else:
+                    print(f"You do not have enough gold; you need {str(int(fenceDict[buyWhich]) - int(gold))} more gold.")
+                    esc = input("Would you like to stop buying? ").capitalize()
+                    if esc == "Yes":
+                        break
+
+            elif YN == "No":
+                esc = input("Would you like to stop buying? ").capitalize()
+                if esc == "Yes":
+                    break
+            else:
+                print("That is not an option")
+        else:
+            print(f"The shop does not have {buyWhich} in stock")
+            esc = input("Would you like to stop buying? ").capitalize()
+            if esc == "Yes":
+                break
+
+    for i in range(randint(1,20)):
+        shopStock.append(choice(liteList))
+    print(f"You currently have {gold} gold.")
+    print(f"You currently have {inventory}.")
+
+def fenSell():
+
+
 def shop():
     IVLoop = True
     while IVLoop == True:
         BoS = input("Would you like to buy or sell? ").capitalize()
-        if BoS == "Buy":
+        if BoS == "Buy" or BoS == "B":
             IVLoop = False
             buy()
             
-        if BoS == "Sell":
+        if BoS == "Sell" or BoS == "S":
             if not inventory:
                 print("You have nothing to sell.")
             else:
@@ -658,6 +741,9 @@ def chois():
                 chois()
             case "Menu":
                 menu()
+                chois()
+            case "Fence" | "BM":
+                fence()
                 chois()
             case "Out" | "O":
                 where()

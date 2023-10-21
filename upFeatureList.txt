@@ -8,3 +8,8 @@ Different lands
 Summoner !DONE!
 Add Functions to Places !DONE!
 Add stats to equipment
+Upgrade items/ class change items (e.g. necronomicon) - Implemented using a second dict containing
+these items specifically and using randint to decide if it pulls from usual drop table or special table
+Bosses - The Wicked
+A story
+
