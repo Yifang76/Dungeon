@@ -174,12 +174,15 @@ def rarities(q):
         print("NO2")
 
 def guard(statement, tim, time):
+    global tim
     q = input(f"You are under arrest for {statement}. You will be sentenced for {tim} {time}. "
     "What will you do? (Resist Arrest (F), Evade Arrest (E) Bribe Guard (B), "
     "Persuade Guard (P) Intimidate Guard (I) or Accept Arrest (A)) ").capitalize()
+    answer = False
     match q:
+    while answer == False:
         case "Resist Arrest" | "Resist" | "Fight" |"F":
-
+            guardF()
         case "Evade Arrest" | "Evade" |"E":
 
         case "Accept Arrest" | "Accept" | "A":
@@ -191,7 +194,45 @@ def guard(statement, tim, time):
         case "Intimidate Guard" | "Intimidate" | "I":
 
         case _:
+            print("Hey, stop trying to evade justice!")
 
+def guardF(place, safe, danger):
+    global summonNumber
+    global summons
+    global TotHea
+    global classn
+    global totalSummonNumber
+    global tim
+    global time
+    while TotHea > 0:
+        if eTotHea > 0:
+            opt = input(opon).capitalize()
+            match opt:
+                case "Fight" | "F":
+                    eTotHea = eTotHea - (int(Str) * int(Dex))
+                    print(f"The {noun} currently has {eTotHea} health left.")
+                    TotHea = TotHea - (int(eStr) * int(eDex))
+                    print(f"You currently have {TotHea} health left.")
+                case "Use Item" | "Use" | "Item" | "I":
+                    print("")
+                case "Retreat" | "R":
+                    retreat = randint(1+Agi,100)
+                    if retreat >= 50:
+                        print("You successfully fled, coward.")
+                        break
+                    else:
+                        print("You failed to escape.")
+                case _:
+                    print("That is not an option")
+        if eTotHea <= 0:       
+
+    if TotHea <= 0:
+        if place == safe:
+            tim = tim + 20
+            print(f"Wounded, you are dragged to prison by the guards, sentence increasing to {tim} {time}.")
+        elif place == danger:
+            print("You died")
+            sys.exit()
 
 def sell():
     global gold
