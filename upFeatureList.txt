@@ -12,4 +12,6 @@ Upgrade items/ class change items (e.g. necronomicon) - Implemented using a seco
 these items specifically and using randint to decide if it pulls from usual drop table or special table
 Bosses - The Wicked
 A story
-
+Renown
+Honour
+Relinquishment of King's Charter

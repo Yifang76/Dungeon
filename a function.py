@@ -173,29 +173,67 @@ def rarities(q):
     else:
         print("NO2")
 
+def guard(statement, tim, time):
+    q = input(f"You are under arrest for {statement}. You will be sentenced for {tim} {time}. "
+    "What will you do? (Resist Arrest (F), Evade Arrest (E) Bribe Guard (B), "
+    "Persuade Guard (P) Intimidate Guard (I) or Accept Arrest (A)) ").capitalize()
+    match q:
+        case "Resist Arrest" | "Resist" | "Fight" |"F":
+
+        case "Evade Arrest" | "Evade" |"E":
+
+        case "Accept Arrest" | "Accept" | "A":
+
+        case "Bribe Guard" | "Bribe" | "B":
+
+        case "Persuade Guard" | "Persuade" | "P":
+
+        case "Intimidate Guard" | "Intimidate" | "I":
+
+        case _:
+
+
 def sell():
     global gold
     while True:
         print(f"You currently have {gold} gold.")
         print(inventory)
         sellWhich = input("What would you like to sell? ")
-        if sellWhich in inventory:
-            YN = input(f"Would you like to sell {sellWhich} for {str(items[sellWhich])} gold? ").capitalize()
-            if YN == "Yes":
-                inventory.remove(sellWhich)
-                gold = int(gold) + items[sellWhich]
-                again = input("Would you like to use the shop again? ").capitalize()
-                if again == "No":
-                    break
-            elif YN == "No":
+        if sellWhich in fenceDict:
+            q = input(f"{sellWhich.capitalize()}! Get that thing away from me; it's illegal. "
+            "Of course, only if you don't have the gold. How about you give me 10,000 gold and I'll "
+            "tell you where you can sell it. ").capitalize()
+            if q == "Yes" or q == "Y":
+                if int(gold)-int(10000) >= 0:
+                    gold = gold - 10000
+                    print("Thanks for the gold. As promised, if you go to the 'Fence', and say "
+                    " then you can buy and sell less 'savoury' wares.")
+            else:
+                print("Seems like you can't pay up. Well then, guards!")
+                guard("intention to sell an illegal item", "20", "years")
+                break
+            else:
+                print("I see, I see. Well then, guards!")
+                guard("intention to sell an illegal item", "20", "years")
+                break
+        else:
+            if sellWhich in inventory:
+                YN = input(f"Would you like to sell {sellWhich} for {str(items[sellWhich])} gold? ").capitalize()
+                if YN == "Yes":
+                    inventory.remove(sellWhich)
+                    gold = int(gold) + items[sellWhich]
+                    again = input("Would you like to use the shop again? ").capitalize()
+                    if again == "No":
+                        break
+                elif YN == "No":
+                    esc = input("Would you like to stop selling? ").capitalize()
+                    if esc == "Yes":
+                        break
+            else:
+                print("You do not have this item")
                 esc = input("Would you like to stop selling? ").capitalize()
                 if esc == "Yes":
                     break
-        else:
-            print("You do not have this item")
-            esc = input("Would you like to stop selling? ").capitalize()
-            if esc == "Yes":
-                break
 
     print(f"You currently have {gold} gold.")
 
