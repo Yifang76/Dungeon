@@ -15,3 +15,5 @@ A story
 Renown
 Honour
 Relinquishment of King's Charter
+Add Bounty for player
+Add bountyboard

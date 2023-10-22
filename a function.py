@@ -156,6 +156,8 @@ liteList = ["common axe",
 
 illItems = ["necronomicon", "demon heart", "dragon scale", "human flesh"]
 
+safe = ["Cetus","Ashborn"]
+
 def rarities(q):
     global weaponModifier
     factors = [" int", " faith", " strength", " dexterity", " health"]
@@ -173,28 +175,27 @@ def rarities(q):
     else:
         print("NO2")
 
-def guard(statement, tim, time):
-    global tim
-    q = input(f"You are under arrest for {statement}. You will be sentenced for {tim} {time}. "
+def guard(statement, tim):
+    q = input(f"You are charged with {statement}. You will be sentenced for {tim}. "
     "What will you do? (Resist Arrest (F), Evade Arrest (E) Bribe Guard (B), "
     "Persuade Guard (P) Intimidate Guard (I) or Accept Arrest (A)) ").capitalize()
     answer = False
-    match q:
     while answer == False:
-        case "Resist Arrest" | "Resist" | "Fight" |"F":
-            guardF()
-        case "Evade Arrest" | "Evade" |"E":
+        match q:
+            case "Resist Arrest" | "Resist" | "Fight" |"F":
+                guardF()
+            case "Evade Arrest" | "Evade" |"E":
 
-        case "Accept Arrest" | "Accept" | "A":
+            case "Accept Arrest" | "Accept" | "A":
 
-        case "Bribe Guard" | "Bribe" | "B":
+            case "Bribe Guard" | "Bribe" | "B":
 
-        case "Persuade Guard" | "Persuade" | "P":
+            case "Persuade Guard" | "Persuade" | "P":
 
-        case "Intimidate Guard" | "Intimidate" | "I":
+            case "Intimidate Guard" | "Intimidate" | "I":
 
-        case _:
-            print("Hey, stop trying to evade justice!")
+            case _:
+                print("Hey, stop trying to evade justice!")
 
 def guardF(place, safe, danger):
     global summonNumber
@@ -203,7 +204,6 @@ def guardF(place, safe, danger):
     global classn
     global totalSummonNumber
     global tim
-    global time
     while TotHea > 0:
         if eTotHea > 0:
             opt = input(opon).capitalize()
@@ -225,12 +225,22 @@ def guardF(place, safe, danger):
                 case _:
                     print("That is not an option")
         if eTotHea <= 0:       
+            tim = tim + 5
+            if randint(1,2) == 1:
+                print("Another guard arrives to stop you")
+                guardF(place, safe, danger)
+            else:
+                print(f"Escaping, the knowledge that you cannot enter {place} again without "
+                "being pursued by the guards sets in.")
+                chois()
+
 
     if TotHea <= 0:
-        if place == safe:
+        if place in safe:
+            #change to 20 years eventually; make it compatible with months, ect.
             tim = tim + 20
-            print(f"Wounded, you are dragged to prison by the guards, sentence increasing to {tim} {time}.")
-        elif place == danger:
+            print(f"Wounded, you are dragged to prison by the guards, sentence increasing to {tim}.")
+        else:
             print("You died")
             sys.exit()
 
@@ -249,13 +259,13 @@ def sell():
                     gold = gold - 10000
                     print("Thanks for the gold. As promised, if you go to the 'Fence', and say "
                     " then you can buy and sell less 'savoury' wares.")
-            else:
-                print("Seems like you can't pay up. Well then, guards!")
-                guard("intention to sell an illegal item", "20", "years")
-                break
+                else:
+                    print("Seems like you can't pay up. Well then, guards!")
+                    guard("intention to sell an illegal item", "20 years")
+                    break
             else:
                 print("I see, I see. Well then, guards!")
-                guard("intention to sell an illegal item", "20", "years")
+                guard("intention to sell an illegal item", "20 years")
                 break
         else:
             if sellWhich in inventory:
