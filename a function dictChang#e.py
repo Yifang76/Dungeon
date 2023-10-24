@@ -581,6 +581,9 @@ def lootIsDropped():
         print("You obtained nothing")
 
 def menu():
+    cChangeDict = {
+        "necronomicon" : "Necromancer"
+    }
     q = input("What would you like to do. View Stats (S), View Inventory (I), Use Item (U) or Check Level (L). ").capitalize()
     match q:
         case "View Stats" | "S":
@@ -592,11 +595,14 @@ def menu():
 
         case "Use Item" | "U":
         print(inventory)
-            whichItem = input("Which item would you like to use? ")
+        whichItem = input("Which item would you like to use? ")
             if whichItem in inventory:
                 sure = input(f"Are you sure you want to use {whichItem}? ").capitalize()
                 if sure == "Yes" or sure == "Y":
                     if sure in cChangeItem:
+                        match whichItem:
+                            case "necronomicon":
+                                classChange(str(cChangeDict[whichItem]),whichItem, 1, 2, 6, 2, 1, 10, 0, 15, 10, totalSummonNumber, inte*2)
 
                 else:
                     print(f"You have decided to not use {whichItem}.")
