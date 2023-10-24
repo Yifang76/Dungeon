@@ -2,6 +2,7 @@ from random import *
 import sys
 gold = 0
 summonNumber = int(0)
+totalSummonNumber = None
 inventory = ["helmet", "sword"]
 eTotHea = int(1)
 carry = True
@@ -62,6 +63,7 @@ def classv(LevelG, StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG):
 match classn:
     case "Knight":
         classv(15, 10, 3, 8, 7, 4, 6, 5, 70)
+        inventory.append("King's Charter")
     case "Summoner":
         classv(5, 1, 4, 1, 2, 9, 2, 8, 20)
         totalSummonNumber = Int
@@ -140,10 +142,11 @@ places = {
 }
 
 fenceDict = {
-    "necronomicon" : ,
-    "demon heart" : ,
-    "dragon scale" : ,
-    "human flesh" : ,
+    "necronomicon" : 10,
+    "demon heart" : 20,
+    "dragon scale" : 50,
+    "human flesh" : 5,
+    "dragon tooth" : 50
 }
 
 
@@ -155,30 +158,29 @@ liteList = ["common axe",
 "legendary stick", "common sword", "rare sword",
 "leather", "iron" ]
 
+invalidSell = ["King's Charter"]
 illItems = ["necronomicon", "demon heart", "dragon scale", "human flesh"]
 #cChangeItem are all items that perform a class change
-cChangeItem = ["Necronomicon"]
+cChangeItem = ["necronomicon", "demon heart", "dragon tooth"]
 safe = ["Cetus","Ashborn"]
 
 #NEED TO TEST
 def classChange(newClass, itemUsing, lev, stre, agi, dex, hea, per, cha, inte, totHea, specialAbility, specialAbilityValue):
     global classn
-    global used
-    if used == True:
-        while True:
-            q = input(f"Would you like to switch class? You will change from {classn} to {newClass}. You will be reset to level 1 and the {itemUsing} will be consumed.").capitalize()
-            if q == "Yes" or q == "Y":
-                inventory.remove(itemUsing)
-                classn = newClass
-                classv(lev,stre,agi,dex,hea,per,cha,inte,totHea)
-                specialAbility = specialAbilityValue
-
-                break
-            elif q == "No" or q == "N":
-                print(f"You reject the urge to use the {itemUsing} and remain as a {classn}.")
-                break
-            else:
-                print("That is not an option.")
+    while True:
+        q = input(f"Would you like to switch class? You will change from {classn} to {newClass}. You will be reset to level 1 and the {itemUsing} will be consumed.").capitalize()
+        if q == "Yes" or q == "Y":
+            inventory.remove(itemUsing)
+            classn = newClass
+            classv(lev,stre,agi,dex,hea,per,cha,inte,totHea)
+            specialAbility = specialAbilityValue
+            break
+        elif q == "No" or q == "N":
+            print(f"You reject the urge to use the {itemUsing} and remain as a {classn}.")
+            break
+        else:
+            print("That is not an option.")
+            
 def rarities(q):
     global weaponModifier
     factors = [" int", " faith", " strength", " dexterity", " health"]
@@ -290,17 +292,20 @@ def sell():
                 break
         else:
             if sellWhich in inventory:
-                YN = input(f"Would you like to sell {sellWhich} for {str(items[sellWhich])} gold? ").capitalize()
-                if YN == "Yes":
-                    inventory.remove(sellWhich)
-                    gold = int(gold) + items[sellWhich]
-                    again = input("Would you like to use the shop again? ").capitalize()
-                    if again == "No":
-                        break
-                elif YN == "No":
-                    esc = input("Would you like to stop selling? ").capitalize()
-                    if esc == "Yes":
-                        break
+                if sellWhich not in invalidSell:
+                    YN = input(f"Would you like to sell {sellWhich} for {str(items[sellWhich])} gold? ").capitalize()
+                    if YN == "Yes":
+                        inventory.remove(sellWhich)
+                        gold = int(gold) + items[sellWhich]
+                        again = input("Would you like to use the shop again? ").capitalize()
+                        if again == "No":
+                            break
+                    elif YN == "No":
+                        esc = input("Would you like to stop selling? ").capitalize()
+                        if esc == "Yes":
+                            break
+                else:
+                    print("You can't sell that!")
             else:
                 print("You do not have this item")
                 esc = input("Would you like to stop selling? ").capitalize()
@@ -582,7 +587,9 @@ def lootIsDropped():
 
 def menu():
     cChangeDict = {
-        "necronomicon" : "Necromancer"
+        "necronomicon" : "Necromancer",
+        "demon heart" : "Demon",
+        "dragon tooth" : "Dragonkin",
     }
     q = input("What would you like to do. View Stats (S), View Inventory (I), Use Item (U) or Check Level (L). ").capitalize()
     match q:
@@ -594,15 +601,16 @@ def menu():
         case "View Inventory" | "I":
 
         case "Use Item" | "U":
-        print(inventory)
-        whichItem = input("Which item would you like to use? ")
+            print(inventory)
+            whichItem = input("Which item would you like to use? ")
             if whichItem in inventory:
                 sure = input(f"Are you sure you want to use {whichItem}? ").capitalize()
                 if sure == "Yes" or sure == "Y":
-                    if sure in cChangeItem:
+                    if whichItem in cChangeItem:
                         match whichItem:
                             case "necronomicon":
-                                classChange(str(cChangeDict[whichItem]),whichItem, 1, 2, 6, 2, 1, 10, 0, 15, 10, totalSummonNumber, inte*2)
+                            #check for adverwse affects using an integer instead of inte*2 for specialAbilityValue
+                                classChange(str(cChangeDict[whichItem]),whichItem, 1, 2, 6, 2, 1, 10, 0, 15, 10, totalSummonNumber, 30)
 
                 else:
                     print(f"You have decided to not use {whichItem}.")
@@ -611,7 +619,7 @@ def menu():
                 print("That is not an option")
                # chois() 
         case "Check Level" | "L":
-        print(f"You are currently level {Level}.")
+            print(f"You are currently level {Level}.")
 
 
 
