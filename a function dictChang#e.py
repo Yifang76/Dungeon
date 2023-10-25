@@ -80,7 +80,7 @@ match classn:
     case _:
         print("That is not an option")
 
-
+#Meant To be Empty to store Values
 weaponModifier = {
 
 }
@@ -151,7 +151,7 @@ fenceDict = {
 
 
 pList = ["Stormcrag", "Havoc's Rock", "Duskmire", "Ironhold", "Thornwood"]
-
+crime = []
 liteList = ["common axe",
 "rare axe", "mythical axe", "legendary axe", 
 "common stick", "rare stick", "mythical stick", 
@@ -198,7 +198,7 @@ def rarities(q):
     else:
         print("NO2")
 
-def guard(statement, tim):
+def guard(statement, tim, place):
     q = input(f"You are charged with {statement}. You will be sentenced for {tim}. "
     "What will you do? (Resist Arrest (F), Evade Arrest (E) Bribe Guard (B), "
     "Persuade Guard (P) Intimidate Guard (I) or Accept Arrest (A)) ").capitalize()
@@ -206,9 +206,9 @@ def guard(statement, tim):
     while answer == False:
         match q:
             case "Resist Arrest" | "Resist" | "Fight" |"F":
-                guardF()
+                guardF(place)
             case "Evade Arrest" | "Evade" |"E":
-
+                guardE(place,tim)
             case "Accept Arrest" | "Accept" | "A":
 
             case "Bribe Guard" | "Bribe" | "B":
@@ -220,24 +220,32 @@ def guard(statement, tim):
             case _:
                 print("Hey, stop trying to evade justice!")
 
-def guardF(place, safe, danger):
+#eStr and (presumably) eDex undefined. Try using method in chance?
+def guardF(place):
     global summonNumber
     global summons
     global TotHea
     global classn
     global totalSummonNumber
     global tim
+    enemyHealth = {
+        "Cetus" : 10,
+        "Ashborn" : 50,
+    }
+    eTotHea = int(enemyHealth[place])
     while TotHea > 0:
         if eTotHea > 0:
-            opt = input(opon).capitalize()
+            opt = input("What will you do? (Fight (F), Use Item (U), Surrender (S) or Retreat (R).) ").capitalize()
             match opt:
                 case "Fight" | "F":
                     eTotHea = eTotHea - (int(Str) * int(Dex))
-                    print(f"The {noun} currently has {eTotHea} health left.")
+                    print(f"The guard currently has {eTotHea} health left.")
                     TotHea = TotHea - (int(eStr) * int(eDex))
                     print(f"You currently have {TotHea} health left.")
                 case "Use Item" | "Use" | "Item" | "I":
-                    print("")
+                    print("Item")
+                case "Surrender" | "S":
+                    print("Surrender")
                 case "Retreat" | "R":
                     retreat = randint(1+Agi,100)
                     if retreat >= 50:
@@ -267,6 +275,16 @@ def guardF(place, safe, danger):
             print("You died")
             sys.exit()
 
+#Need to Run
+def guardE(place,tim):
+    global crime
+    q = randint(1,100-Agi)
+    if q <= 10:
+        print("You successfully escaped the guards, however your crime has not been forgotten.")
+        crime.append(tim)
+    else:
+        guardF(place)
+
 def sell():
     global gold
     while True:
@@ -284,11 +302,11 @@ def sell():
                     " then you can buy and sell less 'savoury' wares.")
                 else:
                     print("Seems like you can't pay up. Well then, guards!")
-                    guard("intention to sell an illegal item", "20 years")
+                    guard("intention to sell an illegal item", "20 years","Cetus")
                     break
             else:
                 print("I see, I see. Well then, guards!")
-                guard("intention to sell an illegal item", "20 years")
+                guard("intention to sell an illegal item", "20 years","Cetus")
                 break
         else:
             if sellWhich in inventory:
