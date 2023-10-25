@@ -625,6 +625,9 @@ def menu():
         "demon heart" : "Demon",
         "dragon tooth" : "Dragonkin",
     }
+    descDict = {
+        "sword" : "A common sword, favoured by scavengers lucky enough to find one.",
+    }
     q = input("What would you like to do. View Stats (S), View Inventory (I), Use Item (U) or Check Level (L). ").capitalize()
     match q:
         case "View Stats" | "S":
@@ -633,6 +636,18 @@ def menu():
             print(f"With modifiers, you have:\nHealth: {nTotHea}\nStrength: {nStr}\n Dexterity: {nDex}"
             f"Perception: {nPer}\nCharisma: {nCha}\nIntelligence: {nInt} ")
         case "View Inventory" | "I":
+            print(f"You currently carry {inventory}.")
+            checkDesc = input("Would you like to check an item description? ").capitalize()
+            if checkDesc == "Yes" or checkDesc == "Y":
+                whichDesc = input("Which item would you like check? ")
+                if whichDesc in inventory:
+                    print(f"{whichDesc.capitalize()} : {str(descDict[whichDesc])}")
+                else:
+                    print(f"You do not have {whichDesc}.")
+            elif checkDesc == "No" or checkDesc == "N":
+                print("You conclude your check.")
+            else:
+                print("That is not an option")
 
         case "Use Item" | "U":
             print(inventory)
