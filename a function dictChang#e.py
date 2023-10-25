@@ -432,7 +432,41 @@ def fenBuy():
     print(f"You currently have {inventory}.")
 
 def fenSell():
+    global gold
+    while True:
+        print(f"You currently have {gold} gold.")
+        print(inventory)
+        sellWhich = input("What would you like to sell? ")
+        if sellWhich in fenceDict:
+            if sellWhich in inventory:
+                if sellWhich not in invalidSell:
+                    YN = input(f"Would you like to sell {sellWhich} for {str(fenceDict[sellWhich])} gold? ").capitalize()
+                    if YN == "Yes":
+                        inventory.remove(sellWhich)
+                        gold = int(gold) + fenceDict[sellWhich]
+                        again = input("Would you like to use the shop again? ").capitalize()
+                        if again == "No":
+                            break
+                    elif YN == "No":
+                        esc = input("Would you like to stop selling? ").capitalize()
+                        if esc == "Yes":
+                            break
+                else:
+                    print("You can't sell that!")
+            else:
+                print("You do not have this item")
+                esc = input("Would you like to stop selling? ").capitalize()
+                if esc == "Yes":
+                    break
+        else:
+            if sellWhich in inventory:
+                print("Sorry, we don't accept common goods here.")
+                break
+            else:
+                print("You do not have this item.")
+                break
 
+    print(f"You currently have {gold} gold.")
 
 def shop():
     IVLoop = True
