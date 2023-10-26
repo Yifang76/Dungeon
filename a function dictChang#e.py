@@ -37,8 +37,6 @@ print("Summoner: (Strength: 1, Agility: 4, Dexterity: 1, Health: 2, Perception: 
 attriQuery = input("Would you like a guide on the attributes? ").capitalize()
 if attriQuery == "Yes":
     print("Strength determines the base damage you do, Agility determines your evasion, Dexterity determines ______, Perception determines your critical chance, Charisma determines your barter rate and speech, Intelligence determines your spellcraft and Health determines your starting health.")
-
-classn = input("Pick a class ").capitalize()
 def classv(LevelG, StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG):
     global Level
     global Str
@@ -60,25 +58,31 @@ def classv(LevelG, StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG):
     Int = int(IntG)
     TotHea = int(TotHeaG)
 
-match classn:
-    case "Knight":
-        classv(15, 10, 3, 8, 7, 4, 6, 5, 70)
-        inventory.append("King's Charter")
-    case "Summoner":
-        classv(5, 1, 4, 1, 2, 9, 2, 8, 20)
-        totalSummonNumber = Int
-
-    case "Merchant":
-        classv(7, 1, 8, 1, 3, 8, 10, 6, 30)
-        bankedGold = 1000
-    case "Tom":
-        if name == "Tom":
-            classv()
-    case "William":
-        if name == "William":
-            classv(120,3,3,3,5,3,0,10,50)
-    case _:
-        print("That is not an option")
+while True:
+    classn = input("Pick a class ").capitalize()
+    match classn:
+        case "Knight":
+            classv(15, 10, 3, 8, 7, 4, 6, 5, 70)
+            inventory.append("King's Charter")
+            break
+        case "Summoner":
+            classv(5, 1, 4, 1, 2, 9, 2, 8, 20)
+            totalSummonNumber = Int
+            break
+        case "Merchant":
+            classv(7, 1, 8, 1, 3, 8, 10, 6, 30)
+            bankedGold = 1000
+            break
+        case "Tom":
+            if name == "Tom":
+                classv()
+                break
+        case "William":
+            if name == "William":
+                classv(120,3,3,3,5,3,0,10,50)
+                break
+        case _:
+            print("That is not an option")
 
 #Meant To be Empty to store Values
 weaponModifier = {
@@ -304,7 +308,7 @@ def guardB(place):
                 guardF(place)
         success = randint(1,int(bribe[place])-Cha)
         if success < 10:
-                        print(f"Give me {int(bribe[place])} gold and we'll call it even.")
+            print(f"Give me {int(bribe[place])} gold and we'll call it even.")
             if q == "Yes" or q == "Y":
                 gold = gold - int(bribe[place])
                 print(f"You have {gold} gold left.")
