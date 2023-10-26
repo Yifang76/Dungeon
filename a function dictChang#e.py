@@ -210,9 +210,9 @@ def guard(statement, tim, place):
             case "Evade Arrest" | "Evade" |"E":
                 guardE(place,tim)
             case "Accept Arrest" | "Accept" | "A":
-
+                guardA()
             case "Bribe Guard" | "Bribe" | "B":
-
+                guardB(place)
             case "Persuade Guard" | "Persuade" | "P":
 
             case "Intimidate Guard" | "Intimidate" | "I":
@@ -284,6 +284,42 @@ def guardE(place,tim):
         crime.append(tim)
     else:
         guardF(place)
+
+#ADD
+def guardA():
+    print("You have been apprehended.")
+
+def guardB(place):
+    bribe = {
+        "Cetus" : 100,
+    }
+    if place in bribe:
+        if int(bribe[place])-Cha <= 0:
+            print(f"Give me {int(bribe[place])} gold and we'll call it even.")
+            if q == "Yes" or q == "Y":
+                gold = gold - int(bribe[place])
+                print(f"You have {gold} gold left.")
+                tim = 0
+            else:
+                guardF(place)
+        success = randint(1,int(bribe[place])-Cha)
+        if success < 10:
+                        print(f"Give me {int(bribe[place])} gold and we'll call it even.")
+            if q == "Yes" or q == "Y":
+                gold = gold - int(bribe[place])
+                print(f"You have {gold} gold left.")
+                tim = 0
+            else:
+                guardF(place)
+        else:
+            print("No bribery!")
+            guardF(place)
+
+
+    else:
+        print("How dare you try to bribe an officer of the law!")
+        tim = tim + 5
+
 
 def sell():
     global gold
