@@ -162,6 +162,7 @@ liteList = ["common axe",
 "legendary stick", "common sword", "rare sword",
 "leather", "iron" ]
 
+ascensionItems = ["Lautrec's vessel", ]
 invalidSell = ["King's Charter"]
 illItems = ["necronomicon", "demon heart", "dragon scale", "human flesh"]
 #cChangeItem are all items that perform a class change
@@ -225,6 +226,7 @@ def guard(statement, tim, place):
                 print("Hey, stop trying to evade justice!")
 
 #eStr and (presumably) eDex undefined. Try using method in chance?
+#danger not defined and time not defined, along with eStr and eDex
 def guardF(place):
     global summonNumber
     global summons
@@ -275,6 +277,12 @@ def guardF(place):
             #change to 20 years eventually; make it compatible with months, ect.
             tim = tim + 20
             print(f"Wounded, you are dragged to prison by the guards, sentence increasing to {tim}.")
+            if classn == "Knight":
+                #CHANGE LINE UNDER THIS COMMENT TO ACCOUNT FOR MULTIPLE ITEMS. (E.G. King's Charter, Queen's Pardon, ect.)
+                if "King's Charter" in inventory:
+                    inventory.remove("King's Charter")
+                    print("Due to your crime, you have lost the King's Charter.")
+                    
         else:
             print("You died")
             sys.exit()
@@ -351,17 +359,20 @@ def sell():
         else:
             if sellWhich in inventory:
                 if sellWhich not in invalidSell:
-                    YN = input(f"Would you like to sell {sellWhich} for {str(items[sellWhich])} gold? ").capitalize()
-                    if YN == "Yes":
-                        inventory.remove(sellWhich)
-                        gold = int(gold) + items[sellWhich]
-                        again = input("Would you like to use the shop again? ").capitalize()
-                        if again == "No":
-                            break
-                    elif YN == "No":
-                        esc = input("Would you like to stop selling? ").capitalize()
-                        if esc == "Yes":
-                            break
+                    if sellWhich not in ascensionItems:
+                        YN = input(f"Would you like to sell {sellWhich} for {str(items[sellWhich])} gold? ").capitalize()
+                        if YN == "Yes":
+                            inventory.remove(sellWhich)
+                            gold = int(gold) + items[sellWhich]
+                            again = input("Would you like to use the shop again? ").capitalize()
+                            if again == "No":
+                                break
+                        elif YN == "No":
+                            esc = input("Would you like to stop selling? ").capitalize()
+                            if esc == "Yes":
+                                break
+                    else:
+                        print("Sorry; that's useless.")
                 else:
                     print("You can't sell that!")
             else:
@@ -518,8 +529,12 @@ def fenSell():
                     break
         else:
             if sellWhich in inventory:
-                print("Sorry, we don't accept common goods here.")
-                break
+                if sellWhich in ascensionItems:
+                    print("Sorry; that's useless.")
+                    break
+                else:
+                    print("Sorry, we don't accept common goods here.")
+                    break
             else:
                 print("You do not have this item.")
                 break
@@ -682,6 +697,8 @@ def menu():
         "necronomicon" : "Necromancer",
         "demon heart" : "Demon",
         "dragon tooth" : "Dragonkin",
+        "Lautrec's vessel" : "Lost Soul",
+
     }
     descDict = {
         "sword" : "A common sword, favoured by scavengers lucky enough to find one.",
@@ -964,6 +981,8 @@ def chance():
         fight(no, health, attack, defense)
     elif chanceEn == 2:
         print("Placeholder")
+    else:
+        print("Nothing notable occurs.")
 
 def chois():
     global carry
