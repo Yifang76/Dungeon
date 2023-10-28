@@ -11,6 +11,7 @@ shopStock = []
 bankedGold = 0
 bankedItems = []
 n = None
+renown = 0
 hEqItem = None
 cEqItem = None
 lEqItem = None
@@ -64,6 +65,7 @@ while True:
         case "Knight":
             classv(15, 10, 3, 8, 7, 4, 6, 5, 70)
             inventory.append("King's Charter")
+            renown = 50
             break
         case "Summoner":
             classv(5, 1, 4, 1, 2, 9, 2, 8, 20)
@@ -153,7 +155,6 @@ fenceDict = {
     "dragon tooth" : 50
 }
 
-
 pList = ["Stormcrag", "Havoc's Rock", "Duskmire", "Ironhold", "Thornwood"]
 crime = []
 liteList = ["common axe",
@@ -173,7 +174,7 @@ safe = ["Cetus","Ashborn"]
 def classChange(newClass, itemUsing, lev, stre, agi, dex, hea, per, cha, inte, totHea, specialAbility, specialAbilityValue):
     global classn
     while True:
-        q = input(f"Would you like to switch class? You will change from {classn} to {newClass}. You will be reset to level 1 and the {itemUsing} will be consumed.").capitalize()
+        q = input(f"Would you like to switch class? You will change from {classn} to {newClass}. You will be reset to level 1 and the {itemUsing} will be consumed. ").capitalize()
         if q == "Yes" or q == "Y":
             inventory.remove(itemUsing)
             if classn not in originClass:
@@ -707,14 +708,15 @@ def menu():
     descDict = {
         "sword" : "A common sword, favoured by scavengers lucky enough to find one.",
     }
-    q = input("What would you like to do. View Stats (S), View Inventory (I), Use Item (U) or Check Level (L). ").capitalize()
+    q = input("What would you like to do. View Stats (S), View Inventory (I), View Journal (J),"
+    " Use Item (U) or Check Level (L). ").capitalize()
     match q:
-        case "View Stats" | "S":
+        case "View Stats" | "Stats" | "S":
             print(f"Without modifiers, you have:\nHealth: {TotHea}\nStrength: {Str}\nDexterity: {Dex}\n"
             f"Perception: {Per}\nCharisma: {Cha}\nIntelligence: {Int} ")
             print(f"With modifiers, you have:\nHealth: {nTotHea}\nStrength: {nStr}\n Dexterity: {nDex}"
             f"Perception: {nPer}\nCharisma: {nCha}\nIntelligence: {nInt} ")
-        case "View Inventory" | "I":
+        case "View Inventory" | "Inventory" | "I":
             print(f"You currently carry {inventory}.")
             checkDesc = input("Would you like to check an item description? ").capitalize()
             if checkDesc == "Yes" or checkDesc == "Y":
@@ -727,7 +729,8 @@ def menu():
                 print("You conclude your check.")
             else:
                 print("That is not an option")
-
+        case "View Journal" | "Journal" | "J":
+            journal()
         case "Use Item" | "U":
             print(inventory)
             whichItem = input("Which item would you like to use? ")
@@ -748,6 +751,8 @@ def menu():
                # chois() 
         case "Check Level" | "L":
             print(f"You are currently level {Level}.")
+        case _:
+            print("That is not an option.")
 
 
 
@@ -993,8 +998,70 @@ def trainer():
             case _:
                 print("That is not an option")
 
+def journal():
+    global honor
+    global renown
+    q = input("What would you like to view? Honor (H), Quests (Q) or Bounties (B). ").capitalize()
+    match q:
+        case "Honor" | "H":
+            print(f"Title: {honor}")
+            print(f"You have {renown} renown.")
+        case "Quests" | "Q":
+            print("Active Quests Go Here")
+        case "Bounties" | "B":
+            print("Active Bounties Go Here")
+        case _:
+            print("That is not an option.")
 
 
+def renownCheck():
+    global honor
+    global renown
+    if renown <= -100:
+        honor = "Villain"
+    elif renown <=-50 and renown > -100:
+        honor = "Feared"
+    elif renown == 0:
+        honor = "Neutral"
+    elif renown <= 50 and renown > 100:
+        honor = "Loved"
+    elif renown <= 100:
+        honor = "Hero"
+    else:
+        honor = "Unidentified"
+
+#ADD A SEPARATOR (E.G.) # MAYBE TRY bountyList.append(state"#")?
+def bounty():
+    global liteList
+    global enemyList
+    global activeBounties
+    bountyList = []
+    for i in range(5):
+        rand = randint(1,2)
+        if rand == 1:
+            which = choice(enemyList)
+            act = "Kill"
+        else:
+            which = choice(liteList)
+            act = "Retrieve"
+        state = f"{act} {randint(1,10)} {which}."
+        bountyList.append(state)
+    while True:
+        print(bountyList)
+        q = input("Which bounty would you like to take? 0 (first) - 4 (last). ")
+        if q <= 0 and q >= 4:
+            activeBounties.append(bountyList[q])
+            bountyList.remove(bountyList[q])
+            print(f"Active commissions: {activeBounties}")
+            break
+        else:
+            print("Invalid")
+            leave = input("Would you like to leave the Commission Board? ").capitalize()
+            if leave == "Yes" or leave == "Y":
+                print("You leave the commission board.")
+                break
+            else:
+                print("You gaze upon the bounties on display.")
 
 
 def chance():
@@ -1024,10 +1091,12 @@ def chance():
 
 def chois():
     global carry
+    renownCheck()
     while True:
         townQuestion = input("Where would you like to go?"
                     " You may go to the Alchemist (P),"
-                    " the Blacksmith (W), the Armory (A), the Bank (B)"
+                    " the Blacksmith (W), the Armory (A), the Bank (B),"
+                    " the Tavern (H), the Bounty Board (C),"
                     " the Market (M), the Trainer (T), the Menu"
                     " or back Out (O). ").capitalize()
         match townQuestion:
@@ -1054,6 +1123,12 @@ def chois():
                 chois()
             case "Trainer" | "Teacher" | "T":
                 trainer()
+                chois()
+            case "Tavern" | "H":
+                #tavern()
+                chois()
+            case "Bounty Board" | "Bounty" | "C":
+                #bounty()
                 chois()
             case "Fence" | "BM":
                 fence()
