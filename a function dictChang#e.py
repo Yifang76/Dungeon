@@ -161,8 +161,8 @@ liteList = ["common axe",
 "common stick", "rare stick", "mythical stick", 
 "legendary stick", "common sword", "rare sword",
 "leather", "iron" ]
-
-ascensionItems = ["Lautrec's vessel", ]
+originClass = []
+ascensionItems = ["Vanta's vessel", "Murmur's mask, Lautrec's boon"]
 invalidSell = ["King's Charter"]
 illItems = ["necronomicon", "demon heart", "dragon scale", "human flesh"]
 #cChangeItem are all items that perform a class change
@@ -176,7 +176,11 @@ def classChange(newClass, itemUsing, lev, stre, agi, dex, hea, per, cha, inte, t
         q = input(f"Would you like to switch class? You will change from {classn} to {newClass}. You will be reset to level 1 and the {itemUsing} will be consumed.").capitalize()
         if q == "Yes" or q == "Y":
             inventory.remove(itemUsing)
+            if classn not in originClass:
+                originClass.append(classn)
             classn = newClass
+            if newClass not in originClass:
+                originClass.append(classn)
             classv(lev,stre,agi,dex,hea,per,cha,inte,totHea)
             specialAbility = specialAbilityValue
             break
@@ -697,7 +701,7 @@ def menu():
         "necronomicon" : "Necromancer",
         "demon heart" : "Demon",
         "dragon tooth" : "Dragonkin",
-        "Lautrec's vessel" : "Lost Soul",
+        "Vanta's vessel" : "Lost Soul",
 
     }
     descDict = {
@@ -956,6 +960,40 @@ def blacksmith():
     else:
         print("That is not an option.")
 
+def trainer():
+    print("Knight, Summoner, Berserker, Mage, Priest")
+    while True:
+        classn = input("Which class would you like to become? ").capitalize()
+        match classn:
+            case "Knight":
+                classv(15, 10, 3, 8, 7, 4, 6, 5, 70)
+                inventory.append("King's Charter")
+                break
+            case "Summoner":
+                classv(5, 1, 4, 1, 2, 9, 2, 8, 20)
+                totalSummonNumber = Int
+                break
+            case "Berserker":
+                print("Berserker")
+                break
+            case "Mage":
+                print("Mage")
+                break
+            case "Priest":
+                print("Priest")
+                break
+            case "Tom":
+                if name == "Tom":
+                    classv()
+                    break
+            case "William":
+                if name == "William":
+                    classv(120,3,3,3,5,3,0,10,50)
+                    break
+            case _:
+                print("That is not an option")
+
+
 
 
 
@@ -990,7 +1028,8 @@ def chois():
         townQuestion = input("Where would you like to go?"
                     " You may go to the Alchemist (P),"
                     " the Blacksmith (W), the Armory (A), the Bank (B)"
-                    " the Market (M), the Menu or back Out (O). ").capitalize()
+                    " the Market (M), the Trainer (T), the Menu"
+                    " or back Out (O). ").capitalize()
         match townQuestion:
             case "Market" | "M":
                 print("Going to the Market")
@@ -1012,6 +1051,9 @@ def chois():
                 chois()
             case "Menu":
                 menu()
+                chois()
+            case "Trainer" | "Teacher" | "T":
+                trainer()
                 chois()
             case "Fence" | "BM":
                 fence()
