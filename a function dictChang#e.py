@@ -1069,6 +1069,8 @@ def bounty():
             else:
                 print("You gaze upon the bounties on display.")
 
+def shrine():
+    print("Welcome to the shrine, the primary place of worship within the city.")
 
 def chance():
     global modNlist
@@ -1102,7 +1104,7 @@ def chois():
         townQuestion = input("Where would you like to go?"
                     " You may go to the Alchemist (P),"
                     " the Blacksmith (W), the Armory (A), the Bank (B),"
-                    " the Tavern (H), the Bounty Board (C),"
+                    " the Tavern (H), the Bounty Board (C), the Shrine (S),"
                     " the Market (M), the Trainer (T), the Menu"
                     " or back Out (O). ").capitalize()
         match townQuestion:
@@ -1132,6 +1134,9 @@ def chois():
                 chois()
             case "Tavern" | "H":
                 #tavern()
+                chois()
+            case "Shrine" | "S":
+                #shrine()
                 chois()
             case "Bounty Board" | "Bounty" | "C":
                 bounty()
