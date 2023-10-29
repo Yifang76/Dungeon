@@ -1011,7 +1011,7 @@ def journal():
         case "Quests" | "Q":
             print("Active Quests Go Here")
         case "Bounties" | "B":
-            print("Active Bounties Go Here")
+            print(activeBounties)
         case _:
             print("That is not an option.")
 
@@ -1055,7 +1055,7 @@ def bounty():
     while True:
         print(bountyList)
         q = int(input("Which bounty would you like to take? 0 (first) - 4 (last). "))
-        if q <= 0 and q >= 4:
+        if q >= 0 and q <= 4:
             activeBounties.append(bountyList[q])
             bountyList.remove(bountyList[q])
             print(f"Active commissions: {activeBounties}")

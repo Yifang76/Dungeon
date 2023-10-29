@@ -3,18 +3,18 @@ Link Sheet - https://stackoverflow.com/questions/1054022/best-way-to-store-passw
 Pyinstaller !DONE!
 Pycharm !DONE!
 Luck
-Charisma change
-Different lands
+Charisma change !PARTIALLY DONE!
+Different lands !Done!
 Summoner !DONE!
 Add Functions to Places !DONE!
 Add stats to equipment
 Upgrade items/ class change items (e.g. necronomicon) - Implemented using a second dict containing
-these items specifically and using randint to decide if it pulls from usual drop table or special table
+these items specifically and using randint to decide if it pulls from usual drop table or special table !DONE!
 Bosses - The Wicked
 A story
-Renown
-Honour
-Relinquishment of King's Charter
+Renown !DONE!
+Honour !DONE!
+Relinquishment of King's Charter !DONE!
 Add Bounty for player
-Add bountyboard
+Add bountyboard !Done!
 Religion
