@@ -1070,7 +1070,32 @@ def bounty():
                 print("You gaze upon the bounties on display.")
 
 def shrine():
-    print("Welcome to the shrine, the primary place of worship within the city.")
+    deities = {
+    "1" : "the deity of 1____, ", 
+    "2" : "the deity of 2____, ",
+    "3" : "the deity of 3____, ",
+    "4" : "the deity of 4____, ",
+    "5" : "the deity of 5____, ",
+    }
+    print("Welcome to the shrine, the primary place of worship within the city. "
+    f"the existing deities are {deities}.")
+    while True:
+        q = input("Which deity would you like to study? ").capitalize()
+        if q in deities:
+            print(f"{q}, {str(deities[q])}")
+            confirm = input("Would you like to worship this deity? ").capitalize()
+            if confirm == "Yes" or confirm == "Y":
+                print("Confirmed")
+                break
+            else:
+                print("You decide to browse the holy texts of the other deities.")
+        else:
+            print("That is not a deity worshipped here.")
+            leave = input("Would you like to leave the shrine? ").capitalize()
+            if leave == "Yes" or leave == "Y":
+                print("You leave the shrine.")
+                break
+
 
 def chance():
     global modNlist
@@ -1136,7 +1161,7 @@ def chois():
                 #tavern()
                 chois()
             case "Shrine" | "S":
-                #shrine()
+                shrine()
                 chois()
             case "Bounty Board" | "Bounty" | "C":
                 bounty()
