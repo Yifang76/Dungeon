@@ -5,6 +5,7 @@ summonNumber = int(0)
 totalSummonNumber = None
 activeBounties = []
 inventory = ["helmet", "sword"]
+faith = None
 eTotHea = int(1)
 carry = True
 summons = []
@@ -1070,6 +1071,7 @@ def bounty():
                 print("You gaze upon the bounties on display.")
 
 def shrine():
+    global faith
     deities = {
     "1" : "the deity of 1____, ", 
     "2" : "the deity of 2____, ",
@@ -1085,8 +1087,18 @@ def shrine():
             print(f"{q}, {str(deities[q])}")
             confirm = input("Would you like to worship this deity? ").capitalize()
             if confirm == "Yes" or confirm == "Y":
-                print("Confirmed")
-                break
+                if faith != None:
+                    change = input(f"You are already following {faith}. If you worship {q}, your faith in {faith} will be annulled. Do you wish to proceed? ").capitalize()
+                    if change == "Yes" or change == "Y":
+                        faith = q
+                        print(f"You have been converted to the faith of {faith}.")
+                        break
+                    else:
+                        print(f"You do not change faith, remaining loyal to the belief of {faith}.")
+                        break
+                else:
+                    print(f"You have entered the faith of {q}.")
+                    break
             else:
                 print("You decide to browse the holy texts of the other deities.")
         else:
