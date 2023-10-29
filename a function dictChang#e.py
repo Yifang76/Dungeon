@@ -3,6 +3,7 @@ import sys
 gold = 0
 summonNumber = int(0)
 totalSummonNumber = None
+activeBounties = []
 inventory = ["helmet", "sword"]
 eTotHea = int(1)
 carry = True
@@ -162,6 +163,7 @@ liteList = ["common axe",
 "common stick", "rare stick", "mythical stick", 
 "legendary stick", "common sword", "rare sword",
 "leather", "iron" ]
+enemyList = ["imp", "warlord", "dictator", "insect", "bandit", "ent", "wolf"]
 originClass = []
 ascensionItems = ["Vanta's vessel", "Murmur's mask, Lautrec's boon"]
 invalidSell = ["King's Charter"]
@@ -1044,11 +1046,15 @@ def bounty():
         else:
             which = choice(liteList)
             act = "Retrieve"
-        state = f"{act} {randint(1,10)} {which}."
+        rend = randint(1,10)
+        if rend == 1:
+            state = f"{act} {rend} {which}."
+        else:
+            state = f"{act} {rend} {which}s."
         bountyList.append(state)
     while True:
         print(bountyList)
-        q = input("Which bounty would you like to take? 0 (first) - 4 (last). ")
+        q = int(input("Which bounty would you like to take? 0 (first) - 4 (last). "))
         if q <= 0 and q >= 4:
             activeBounties.append(bountyList[q])
             bountyList.remove(bountyList[q])
@@ -1128,7 +1134,7 @@ def chois():
                 #tavern()
                 chois()
             case "Bounty Board" | "Bounty" | "C":
-                #bounty()
+                bounty()
                 chois()
             case "Fence" | "BM":
                 fence()
