@@ -4,6 +4,7 @@ gold = 0
 summonNumber = int(0)
 totalSummonNumber = None
 activeBounties = []
+bestiar = []
 inventory = ["helmet", "sword"]
 faith = None
 eTotHea = int(1)
@@ -1004,18 +1005,45 @@ def trainer():
 def journal():
     global honor
     global renown
-    q = input("What would you like to view? Honor (H), Quests (Q) or Bounties (B). ").capitalize()
+    q = input("What would you like to view? Honor (H), Bestiary (B), Quests (Q) or Bounties (C). ").capitalize()
     match q:
         case "Honor" | "H":
             print(f"Title: {honor}")
             print(f"You have {renown} renown.")
+        case "Bestiary" | "B":
+            bestiary()
         case "Quests" | "Q":
             print("Active Quests Go Here")
-        case "Bounties" | "B":
+        case "Bounties" | "C":
             print(activeBounties)
         case _:
             print("That is not an option.")
 
+def bestiary():
+    global bestiar
+    bestiaryDict = {
+        "imp" : "",
+        "dictator" : "":
+        "warlord" : "",
+        "insect" : "",
+        "bandit" : "",
+        "ent" : "",
+        "wolf" : "",
+    }
+    print(f"Your bestiary currently contains: {bestiar}.")
+    q = input("Would you like to view a certain creature? ").capitalize()
+    if q == "Yes" or q == "Y":
+        while True:
+            which = input("Which creature would you like to view? ")
+            if which in bestiar:
+                print(f"{which.capitalize()}: {str(bestiaryDict[which])}")
+                more = input("Would you like to view a new creature? ").capitalize()
+                if more == "No" or more == "N":
+                    break
+                else:
+                    print("You continue browsing the contents of the bestiary.")
+    else:
+        print("You close the bestiary.")
 
 def renownCheck():
     global honor
