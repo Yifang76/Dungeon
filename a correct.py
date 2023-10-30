@@ -856,6 +856,7 @@ def fight(noun, eTotHea, eStr, eDex):
     global TotHea
     global classn
     global totalSummonNumber
+    global bestiary
     while TotHea > 0:
         if eTotHea > 0:
             opt = input(opon).capitalize()
@@ -877,6 +878,7 @@ def fight(noun, eTotHea, eStr, eDex):
                 case _:
                     print("That is not an option")
         if eTotHea <= 0:
+            bestiar.append(noun)
             if classn == "Summoner" or classn == "Necromancer":
                 lootIsDropped()
                 print(f"You currently have {summons} under your control.\nYou can only convert {totalSummonNumber - summonNumber} more.")
@@ -1022,13 +1024,13 @@ def journal():
 def bestiary():
     global bestiar
     bestiaryDict = {
-        "imp" : "",
-        "dictator" : "":
-        "warlord" : "",
-        "insect" : "",
-        "bandit" : "",
-        "ent" : "",
-        "wolf" : "",
+        "imp" : "an imp",
+        "dictator" : "a dictator",
+        "warlord" : "a warlord",
+        "insect" : "an insect",
+        "bandit" : "a bandit",
+        "ent" : "an ent",
+        "wolf" : "a wolf",
     }
     print(f"Your bestiary currently contains: {bestiar}.")
     q = input("Would you like to view a certain creature? ").capitalize()
