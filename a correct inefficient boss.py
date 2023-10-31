@@ -1148,27 +1148,50 @@ def chance():
     global whr
     chanceEn = randint(1,100)
     if whr == "Thornwood":
-        print("T")
-    if whr == "Ironcrag":
-        print("I")
+        #Works but MAKE MORE EFFICIENT!
+        actions = {
+        1: ("imp", 25, 1, 1),
+        2: ("warlord", 100, 7, 9),
+        3: ("dictator", 75, 3, 3),
+        4: ("bandit", 10, 2, 2),
+        5: ("wolf", 7, 4, 4),
+        6: ("insect", 2, 1, 1),
+        7: ("ent", 50, 7, 7),
+        8: ("insect", 2, 1, 1),
+        9: ("insect", 2, 1, 1),
+        10: ("insect", 2, 1, 1),
+        11: ("insect", 2, 1, 1),
+        }
+    if whr == "Ironhold":
+        actions = {
+        1: ("im", 25, 1, 1),
+        2: ("wrlord", 100, 7, 9),
+        3: ("dctator", 75, 3, 3),
+        4: ("bndit", 10, 2, 2),
+        5: ("wlf", 7, 4, 4),
+        6: ("nsect", 2, 1, 1),
+        7: ("nt", 50, 7, 7),
+        8: ("nsect", 2, 1, 1),
+        9: ("nsect", 2, 1, 1),
+        10: ("nsect", 2, 1, 1),
+        11: ("nsect", 2, 1, 1),
+        }
     if whr == "Duskmire":
-        print("D")
+        actions = {
+        1: ("ip", 25, 1, 1),
+        2: ("walord", 100, 7, 9),
+        3: ("ditator", 75, 3, 3),
+        4: ("banit", 10, 2, 2),
+        5: ("wof", 7, 4, 4),
+        6: ("inect", 2, 1, 1),
+        7: ("en", 50, 7, 7),
+        8: ("inect", 2, 1, 1),
+        9: ("inect", 2, 1, 1),
+        10: ("inect", 2, 1, 1),
+        11: ("inect", 2, 1, 1),
+        }
     else:
         print("")
-
-    actions = {
-    1: ("imp", 25, 1, 1),
-    2: ("warlord", 100, 7, 9),
-    3: ("dictator", 75, 3, 3),
-    4: ("bandit", 10, 2, 2),
-    5: ("wolf", 7, 4, 4),
-    6: ("insect", 2, 1, 1),
-    7: ("ent", 50, 7, 7),
-    8: ("insect", 2, 1, 1),
-    9: ("insect", 2, 1, 1),
-    10: ("insect", 2, 1, 1),
-    11: ("insect", 2, 1, 1),
-    }
     if chanceEn <= 33:
         no, health, attack, defense = actions[randint(1,11)]
         encounter(no)
