@@ -878,7 +878,11 @@ def fight(noun, eTotHea, eStr, eDex):
                 case _:
                     print("That is not an option")
         if eTotHea <= 0:
-            bestiar.append(noun)
+            if noun not in bestiar:
+                bestiar.append(noun)
+                print(f"{noun.capitalize()} has been added to the bestiary.")
+            else:
+                print(f"{noun.capitalize()} is already in the bestiary.")
             if classn == "Summoner" or classn == "Necromancer":
                 lootIsDropped()
                 print(f"You currently have {summons} under your control.\nYou can only convert {totalSummonNumber - summonNumber} more.")
