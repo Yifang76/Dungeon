@@ -1145,7 +1145,7 @@ def shrine():
 
 def chance():
     global modNlist
-    chanceEn = randint(1,3)
+    chanceEn = randint(1,100)
     actions = {
     1: ("imp", 25, 1, 1),
     2: ("warlord", 100, 7, 9),
@@ -1159,14 +1159,16 @@ def chance():
     10: ("insect", 2, 1, 1),
     11: ("insect", 2, 1, 1),
     }
-    if chanceEn == 1:
+    if chanceEn <= 33:
         no, health, attack, defense = actions[randint(1,11)]
         encounter(no)
         fight(no, health, attack, defense)
-    elif chanceEn == 2:
+    elif chanceEn <= 66 and chanceEn > 33:
         print("Placeholder")
-    else:
+    elif chanceEn <= 99 and chanceEn > 66:
         print("Nothing notable occurs.")
+    else:
+        print("Boss Time")
 
 def chois():
     global carry
