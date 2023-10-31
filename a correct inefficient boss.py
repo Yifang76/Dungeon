@@ -13,6 +13,7 @@ summons = []
 shopStock = []
 bankedGold = 0
 bankedItems = []
+experience = 0
 n = None
 renown = 0
 hEqItem = None
@@ -173,6 +174,8 @@ illItems = ["necronomicon", "demon heart", "dragon scale", "human flesh"]
 #cChangeItem are all items that perform a class change
 cChangeItem = ["necronomicon", "demon heart", "dragon tooth"]
 safe = ["Cetus","Ashborn"]
+livingBosses = ["Reign", "Quasar", "The Wicked",]
+bosses = ["Reign", "Quasar", "The Wicked",]
 
 #NEED TO TEST
 def classChange(newClass, itemUsing, lev, stre, agi, dex, hea, per, cha, inte, totHea, specialAbility, specialAbilityValue):
@@ -850,13 +853,15 @@ def encounter(noun):
     opon = str(f"As you {pv} down the path, {det} {noun} {v} {ex} menacingly. Would you like to Fight (F), Use Item (I) or Retreat (R)? ")
 
 
-def fight(noun, eTotHea, eStr, eDex):
+def fight(noun, eTotHea, eStr, eDex, exp, bossDrop):
     global summonNumber
     global summons
     global TotHea
     global classn
     global totalSummonNumber
     global bestiary
+    global experience
+    global livingBosses
     while TotHea > 0:
         if eTotHea > 0:
             opt = input(opon).capitalize()
@@ -883,9 +888,13 @@ def fight(noun, eTotHea, eStr, eDex):
                 print(f"{noun.capitalize()} has been added to the bestiary.")
             else:
                 print(f"{noun.capitalize()} is already in the bestiary.")
+            if noun in bosses:
+                inventory.append(bossDrop)
+                if noun in livingBosses:
+                    livingBosses.remove(noun)
             if classn == "Summoner" or classn == "Necromancer":
                 lootIsDropped()
-                print(f"You currently have {summons} under your control.\nYou can only convert {totalSummonNumber - summonNumber} more.")
+                print(f"You currently have {summons} under your control.\nYou can only convert {totalSummonNumber - summonNumber} more. You will not gain experience.")
                 q = input(f"Would you like to summon {noun}? ").capitalize()
                 if q == "Yes" or q == "Y":
                     summonS = randint(1,2)
@@ -896,21 +905,19 @@ def fight(noun, eTotHea, eStr, eDex):
                             print(f"Congratulations, you gained {noun}.")
                             break
                     else:
-                        print("NO")
+                        print(f"You fail to convert the {noun}.")
                         break
                 elif q == "No" or q == "N":
                     print(f"You give up on converting the {noun}.")
+                    experience = experience + exp
                     break
                 else:
                     print("That is not an option")
             else:
                 print("ENEMY VANQUISHED")
                 lootIsDropped()
+                experience = experience + exp
                 break
-
-
-                
-
     if TotHea <= 0:
         print("You died.")
         sys.exit()
@@ -1066,6 +1073,16 @@ def renownCheck():
         honor = "Hero"
     else:
         honor = "Unidentified"
+def experienceCheck():
+    global experience
+    global Level
+    while True:
+        experienceRequired = Level*100
+        if experience >= experienceRequired:
+            Level = int(Level) + 1
+            experience = experience-experienceRequired
+            if experience < experienceRequired:
+                break
 
 #ADD A SEPARATOR (E.G.) # MAYBE TRY bountyList.append(state"#")?
 def bounty():
@@ -1103,7 +1120,6 @@ def bounty():
                 break
             else:
                 print("You gaze upon the bounties on display.")
-
 def shrine():
     global faith
     deities = {
@@ -1150,59 +1166,64 @@ def chance():
     if whr == "Thornwood":
         #Works but MAKE MORE EFFICIENT!
         actions = {
-        1: ("imp", 25, 1, 1),
-        2: ("warlord", 100, 7, 9),
-        3: ("dictator", 75, 3, 3),
-        4: ("bandit", 10, 2, 2),
-        5: ("wolf", 7, 4, 4),
-        6: ("insect", 2, 1, 1),
-        7: ("ent", 50, 7, 7),
-        8: ("insect", 2, 1, 1),
-        9: ("insect", 2, 1, 1),
-        10: ("insect", 2, 1, 1),
-        11: ("insect", 2, 1, 1),
+        1: ("imp", 25, 1, 1, 5, None),
+        2: ("warlord", 100, 7, 9, 50, None),
+        3: ("dictator", 75, 3, 3, 25, None),
+        4: ("bandit", 10, 2, 2, 5, None),
+        5: ("wolf", 7, 4, 4, 3, None),
+        6: ("insect", 2, 1, 1, 1, None),
+        7: ("ent", 50, 7, 7, 20, None),
+        8: ("insect", 2, 1, 1, 1, None),
+        9: ("insect", 2, 1, 1, 1, None),
+        10: ("insect", 2, 1, 1, 1, None),
+        11: ("insect", 2, 1, 1, 1, None),
         }
     if whr == "Ironhold":
         actions = {
-        1: ("im", 25, 1, 1),
-        2: ("wrlord", 100, 7, 9),
-        3: ("dctator", 75, 3, 3),
-        4: ("bndit", 10, 2, 2),
-        5: ("wlf", 7, 4, 4),
-        6: ("nsect", 2, 1, 1),
-        7: ("nt", 50, 7, 7),
-        8: ("nsect", 2, 1, 1),
-        9: ("nsect", 2, 1, 1),
-        10: ("nsect", 2, 1, 1),
-        11: ("nsect", 2, 1, 1),
+        1: ("im", 25, 1, 1, 1, None),
+        2: ("wrlord", 100, 7, 9, 1, None),
+        3: ("dctator", 75, 3, 3, 1, None),
+        4: ("bndit", 10, 2, 2, 1, None),
+        5: ("wlf", 7, 4, 4, 1, None),
+        6: ("nsect", 2, 1, 1, 1, None),
+        7: ("nt", 50, 7, 7, 1, None),
+        8: ("nsect", 2, 1, 1, 1, None),
+        9: ("nsect", 2, 1, 1, 1, None),
+        10: ("nsect", 2, 1, 1, 1, None),
+        11: ("nsect", 2, 1, 1, 1, None),
         }
     if whr == "Duskmire":
         actions = {
-        1: ("ip", 25, 1, 1),
-        2: ("walord", 100, 7, 9),
-        3: ("ditator", 75, 3, 3),
-        4: ("banit", 10, 2, 2),
-        5: ("wof", 7, 4, 4),
-        6: ("inect", 2, 1, 1),
-        7: ("en", 50, 7, 7),
-        8: ("inect", 2, 1, 1),
-        9: ("inect", 2, 1, 1),
-        10: ("inect", 2, 1, 1),
-        11: ("inect", 2, 1, 1),
+        1: ("ip", 25, 1, 1, 1, None),
+        2: ("walord", 100, 7, 9, 1, None),
+        3: ("ditator", 75, 3, 3, 1, None),
+        4: ("banit", 10, 2, 2, 1, None),
+        5: ("wof", 7, 4, 4, 1, None),
+        6: ("inect", 2, 1, 1, 1, None),
+        7: ("en", 50, 7, 7, 1, None),
+        8: ("inect", 2, 1, 1, 1, None),
+        9: ("inect", 2, 1, 1, 1, None),
+        10: ("inect", 2, 1, 1, 1, None),
+        11: ("inect", 2, 1, 1, 1, None),
         }
     else:
         print("")
     if chanceEn <= 33:
-        no, health, attack, defense = actions[randint(1,11)]
+        no, health, attack, defense, eXp, bossItem = actions[randint(1,11)]
         encounter(no)
-        fight(no, health, attack, defense)
+        fight(no, health, attack, defense, eXp, bossItem)
     elif chanceEn <= 66 and chanceEn > 33:
         print("Placeholder")
     elif chanceEn <= 99 and chanceEn > 66:
         print("Nothing notable occurs.")
     else:
-        print("Boss Time")
-
+        match whr:
+            case "Thornwood":
+                encounter("The Wicked")
+                fight("The Wicked", 1, 1, 1, 1, "Hell")
+            case "Ironhold":
+                encounter("The Wicked")
+                fight("The Wicked", 1, 1, 1, 1, "Hell")
 def chois():
     global carry
     renownCheck()

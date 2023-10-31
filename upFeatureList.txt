@@ -10,11 +10,11 @@ Add Functions to Places !DONE!
 Add stats to equipment
 Upgrade items/ class change items (e.g. necronomicon) - Implemented using a second dict containing
 these items specifically and using randint to decide if it pulls from usual drop table or special table !DONE!
-Bosses - The Wicked
+Bosses - The Wicked !DONE!
 A story
 Renown !DONE!
 Honour !DONE!
 Relinquishment of King's Charter !DONE!
 Add Bounty for player
 Add bountyboard !Done!
-Religion
+Religion !DONE!
