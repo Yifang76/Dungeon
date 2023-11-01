@@ -721,8 +721,8 @@ def menu():
         case "View Stats" | "Stats" | "S":
             print(f"Without modifiers, you have:\nHealth: {TotHea}\nStrength: {Str}\nDexterity: {Dex}\n"
             f"Perception: {Per}\nCharisma: {Cha}\nIntelligence: {Int} ")
-            print(f"With modifiers, you have:\nHealth: {nTotHea}\nStrength: {nStr}\n Dexterity: {nDex}"
-            f"Perception: {nPer}\nCharisma: {nCha}\nIntelligence: {nInt} ")
+        #    print(f"With modifiers, you have:\nHealth: {nTotHea}\nStrength: {nStr}\n Dexterity: {nDex}"
+        #    f"Perception: {nPer}\nCharisma: {nCha}\nIntelligence: {nInt} ")
         case "View Inventory" | "Inventory" | "I":
             print(f"You currently carry {inventory}.")
             checkDesc = input("Would you like to check an item description? ").capitalize()
@@ -758,6 +758,7 @@ def menu():
                # chois() 
         case "Check Level" | "L":
             print(f"You are currently level {Level}.")
+            print(f"You have {experience} EXP and you will need {experienceRequired-experience} EXP to level up.")
         case _:
             print("That is not an option.")
 
@@ -1088,6 +1089,7 @@ def renownCheck():
 def experienceCheck():
     global experience
     global Level
+    global experienceRequired
     while True:
         experienceRequired = Level*100
         if experience >= experienceRequired:
@@ -1095,6 +1097,8 @@ def experienceCheck():
             experience = experience-experienceRequired
             if experience < experienceRequired:
                 break
+        else:
+            break
 
 #ADD A SEPARATOR (E.G.) # MAYBE TRY bountyList.append(state"#")?
 def bounty():
@@ -1239,9 +1243,12 @@ def chance():
             case "Ironhold":
                 encounter("Precept", "From the depths of Ironhold, the mechanical Precept, life of the city, reveals itself.")
                 fight("Precept", 1, 1, 1, 1, "Hell")
+    experienceCheck()
+    
 def chois():
     global carry
     renownCheck()
+    experienceCheck()
     while True:
         townQuestion = input("Where would you like to go?"
                     " You may go to the Alchemist (P),"
