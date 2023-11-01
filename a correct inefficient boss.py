@@ -1139,7 +1139,7 @@ def bounty():
 def shrine():
     global faith
     deities = {
-    "1" : "the deity of 1____, ", 
+    "Galadrialus" : "the deity of warriors and gladiators alike. ", 
     "2" : "the deity of 2____, ",
     "3" : "the deity of 3____, ",
     "4" : "the deity of 4____, ",
