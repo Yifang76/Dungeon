@@ -808,7 +808,7 @@ def enemyInPlace():
             nounList(None, None, None, None, None, None, None, None, None, None)
 
 
-def encounter(noun):
+def encounter(noun, opening):
     global ad
     global itemlist
     global item
@@ -838,8 +838,9 @@ def encounter(noun):
 
     palist = ["saunter","walk","run"]
     pv = choice(palist)
-
-    match n:
+    
+    
+    match noun:
         case "warlord" | "dictator" | "bandit" | "wolf":
             det = str("a")
         case _:
@@ -850,8 +851,10 @@ def encounter(noun):
     else:
         ex = str("there")
     global opon
-    opon = str(f"As you {pv} down the path, {det} {noun} {v} {ex} menacingly. Would you like to Fight (F), Use Item (I) or Retreat (R)? ")
-
+    if noun not in bosses:
+        opon = str(f"As you {pv} down the path, {det} {noun} {v} {ex} menacingly.")
+    else:
+        opon = str(opening)
 
 def fight(noun, eTotHea, eStr, eDex, exp, bossDrop):
     global summonNumber
@@ -862,14 +865,23 @@ def fight(noun, eTotHea, eStr, eDex, exp, bossDrop):
     global bestiary
     global experience
     global livingBosses
+    if noun not in bosses:
+        determiner = str("The ")
+    else:
+        determiner = ""
     while TotHea > 0:
         if eTotHea > 0:
-            opt = input(opon).capitalize()
+            print(opon)
+            opt = input("Would you like to Fight (F), Use Item (I) or Retreat (R)? ").capitalize()
             match opt:
                 case "Fight" | "F":
                     eTotHea = eTotHea - (int(Str) * int(Dex))
-                    print(f"The {noun} currently has {eTotHea} health left.")
+                    if eTotHea - (int(Str) * int(Dex)) <= 0:
+                        eTotHea = 0
+                    print(f"{determiner}{noun} currently has {eTotHea} health left.")
                     TotHea = TotHea - (int(eStr) * int(eDex))
+                    if TotHea - (int(eStr) * int(eDex)) <= 0:
+                        TotHea = 0
                     print(f"You currently have {TotHea} health left.")
                 case "Use Item" | "Use" | "Item" | "I":
                     print("")
@@ -1210,7 +1222,7 @@ def chance():
         print("")
     if chanceEn <= 33:
         no, health, attack, defense, eXp, bossItem = actions[randint(1,11)]
-        encounter(no)
+        encounter(no, None)
         fight(no, health, attack, defense, eXp, bossItem)
     elif chanceEn <= 66 and chanceEn > 33:
         print("Placeholder")
@@ -1220,13 +1232,13 @@ def chance():
         match whr:
             case "Thornwood":
                 if "The Wicked" in livingBosses:
-                    encounter("The Wicked")
+                    encounter("The Wicked", "Rising from the corpses of the fallen giants, The Wicked rises for vengeance.")
                     fight("The Wicked", 1, 1, 1, 1, "Hell")
                 else:
                     print("The corpse of The Wicked has disappeared.")
-                case "Ironhold":
-                    encounter("The Wicked")
-                    fight("The Wicked", 1, 1, 1, 1, "Hell")
+            case "Ironhold":
+                encounter("Precept", "From the depths of Ironhold, the mechanical Precept, life of the city, reveals itself.")
+                fight("Precept", 1, 1, 1, 1, "Hell")
 def chois():
     global carry
     renownCheck()
