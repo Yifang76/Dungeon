@@ -1092,15 +1092,47 @@ def experienceCheck():
     global experience
     global Level
     global experienceRequired
+    global statUpgrade
     while True:
         experienceRequired = Level*100
         if experience >= experienceRequired:
             Level = int(Level) + 1
+            statUpgrade = statUpgrade + 1
             experience = experience-experienceRequired
             if experience < experienceRequired:
                 break
         else:
             break
+def chooseStat():
+    global statUpgrade
+    global Cha
+    global Str
+    global Dex
+    global TotHea
+    global Per
+    global Int
+    print(f"Without modifiers, you have:\nHealth: {TotHea}\nStrength: {Str}\nDexterity: {Dex}\n"
+    f"Perception: {Per}\nCharisma: {Cha}\nIntelligence: {Int}\nYou have {str(statUpgrade)} unspent stat points.")
+    stats = {
+        "Health": TotHea,
+        "Charisma": Cha,
+        "Strength": Str,
+        "Dexterity": Dex,
+        "Perception": Per,
+        "Intelligence": Int
+    }
+    if statUpgrade > 1:
+        while statUpgrade != 0:
+            q = input("Where would you like to allocate your stat points? ").capitalize()
+            if q in stats:
+                number = int(input("How many points would you like to allocate? "))
+                if statUpgrade - number >= 0:
+                    int(statUpgrade) = int(statUpgrade) - number
+                    int(stats[q]) = int(stats[q]) + number
+    
+        print(f"You have {statUpgrade} stat")
+
+
 
 #ADD A SEPARATOR (E.G.) # MAYBE TRY bountyList.append(state"#")?
 def bounty():
