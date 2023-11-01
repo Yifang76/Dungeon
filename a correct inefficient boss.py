@@ -1219,11 +1219,14 @@ def chance():
     else:
         match whr:
             case "Thornwood":
-                encounter("The Wicked")
-                fight("The Wicked", 1, 1, 1, 1, "Hell")
-            case "Ironhold":
-                encounter("The Wicked")
-                fight("The Wicked", 1, 1, 1, 1, "Hell")
+                if "The Wicked" in livingBosses:
+                    encounter("The Wicked")
+                    fight("The Wicked", 1, 1, 1, 1, "Hell")
+                else:
+                    print("The corpse of The Wicked has disappeared.")
+                case "Ironhold":
+                    encounter("The Wicked")
+                    fight("The Wicked", 1, 1, 1, 1, "Hell")
 def chois():
     global carry
     renownCheck()
