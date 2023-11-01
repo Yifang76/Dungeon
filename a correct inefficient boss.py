@@ -714,6 +714,8 @@ def menu():
     }
     descDict = {
         "sword" : "A common sword, favoured by scavengers lucky enough to find one.",
+        "Brandle" : "Brandle, Giant Slayer. Once wielded by a warmaster involved in the giant wars, this blade was used to fell many a giant. Its legend, whilst forgotten to many, still imbues this blade with giant-slaying capabilities.\n"
+        "And when the Giant Slayer died in battle, fallen like so many of his men, his soul couldn't handle it. And so, his life became forfeit as he held onto one purpose. To slay giants. Thus, the urban legend of The Wicked was formed."
     }
     q = input("What would you like to do. View Stats (S), View Inventory (I), View Journal (J),"
     " Use Item (U) or Check Level (L). ").capitalize()
@@ -1237,12 +1239,12 @@ def chance():
             case "Thornwood":
                 if "The Wicked" in livingBosses:
                     encounter("The Wicked", "Rising from the corpses of the fallen giants, The Wicked rises for vengeance.")
-                    fight("The Wicked", 1, 1, 1, 1, "Hell")
+                    fight("The Wicked", 100, 7, 15, 10000, "Brandle")
                 else:
                     print("The corpse of The Wicked has disappeared.")
             case "Ironhold":
                 encounter("Precept", "From the depths of Ironhold, the mechanical Precept, life of the city, reveals itself.")
-                fight("Precept", 1, 1, 1, 1, "Hell")
+                fight("Precept", 5000, 15, 5, 5000, "Hell")
     experienceCheck()
     
 def chois():
