@@ -1112,7 +1112,7 @@ def chooseStat():
     global TotHea
     global Per
     global Int
-    print(f"Without modifiers, you have:\nHealth: {TotHea}\nStrength: {Str}\nDexterity: {Dex}\n"
+    print(f"You have:\nHealth: {TotHea}\nStrength: {Str}\nDexterity: {Dex}\n"
     f"Perception: {Per}\nCharisma: {Cha}\nIntelligence: {Int}\nYou have {str(statUpgrade)} unspent stat points.")
     stats = {
         "Health": TotHea,
@@ -1123,20 +1123,24 @@ def chooseStat():
         "Intelligence": Int
     }
     if statUpgrade > 1:
-        while statUpgrade != 0:
-            q = input("Where would you like to allocate your stat points? ").capitalize()
-            if q in stats:
-                number = int(input("How many points would you like to allocate? "))
-                if statUpgrade - number >= 0:
-                    statUpgrade = int(statUpgrade) - number
-                    stats[q] = int(stats[q]) + number
-            else:
-                confirm = input("Would you like to carry on allocating? ").capitalize()
-                if confirm == "Yes" or confirm == "Y":
-                    break
-    
-        print(f"You have {statUpgrade} stat")
-
+        while True:
+            if statUpgrade != 0:
+                q = input("Where would you like to allocate your stat points? ").capitalize()
+                if q in stats:
+                    number = int(input("How many points would you like to allocate? "))
+                    if statUpgrade - number >= 0:
+                        statUpgrade = int(statUpgrade) - number
+                        stats[q] = int(stats[q]) + number
+                else:
+                    confirm = input("Would you like to carry on allocating? ").capitalize()
+                    if confirm == "No" or confirm == "N":
+                        break
+        
+            print(f"You have {statUpgrade} stat points left.")
+            print(f"You have:\nHealth: {TotHea}\nStrength: {Str}\nDexterity: {Dex}\n"
+            f"Perception: {Per}\nCharisma: {Cha}\nIntelligence: {Int}\nYou have {str(statUpgrade)} unspent stat points.")
+            break
+            
 def tavern():
     chooseStat()
 
