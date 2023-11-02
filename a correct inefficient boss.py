@@ -1,6 +1,7 @@
 from random import *
 import sys
 gold = 0
+statUpgrade = 0
 summonNumber = int(0)
 totalSummonNumber = None
 activeBounties = []
@@ -1127,11 +1128,17 @@ def chooseStat():
             if q in stats:
                 number = int(input("How many points would you like to allocate? "))
                 if statUpgrade - number >= 0:
-                    int(statUpgrade) = int(statUpgrade) - number
-                    int(stats[q]) = int(stats[q]) + number
+                    statUpgrade = int(statUpgrade) - number
+                    stats[q] = int(stats[q]) + number
+            else:
+                confirm = input("Would you like to carry on allocating? ").capitalize()
+                if confirm == "Yes" or confirm == "Y":
+                    break
     
         print(f"You have {statUpgrade} stat")
 
+def tavern():
+    chooseStat()
 
 
 #ADD A SEPARATOR (E.G.) # MAYBE TRY bountyList.append(state"#")?
@@ -1316,7 +1323,7 @@ def chois():
                 trainer()
                 chois()
             case "Tavern" | "H":
-                #tavern()
+                tavern()
                 chois()
             case "Shrine" | "S":
                 shrine()
