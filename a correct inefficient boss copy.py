@@ -869,6 +869,11 @@ def fight(noun, eTotHea, eStr, eDex, exp, bossDrop):
     global bestiary
     global experience
     global livingBosses
+    drinks = {
+        "Malchor's Maltor": 1,
+        "Alastor's Anchor": 5,
+        "Intrail's Ichor": 10,
+    }
     if noun not in bosses:
         determiner = str("The ")
     else:
@@ -1127,47 +1132,64 @@ def chooseStat():
                             statUpgrade -= number
                             Hea += number
                             TotHea = Hea*10
+                            print(f"Stat points allocated. You have {statUpgrade} stat points remaining.")
                     case "Strength" | "Str" | "S":
                         number = int(input("How many points would you like to allocate? "))
                         if statUpgrade - number >= 0:
                             statUpgrade -= number
                             Str += number
+                            print(f"Stat points allocated. You have {statUpgrade} stat points remaining.")
                     case "Dexterity" | "Dex" | "D":
                         number = int(input("How many points would you like to allocate? "))
                         if statUpgrade - number >= 0:
                             statUpgrade -= number
                             Dex += number
+                            print(f"Stat points allocated. You have {statUpgrade} stat points remaining.")
                     case "Perception" | "Per" | "P":
                         number = int(input("How many points would you like to allocate? "))
                         if statUpgrade - number >= 0:
                             statUpgrade -= number
                             Per += number
+                            print(f"Stat points allocated. You have {statUpgrade} stat points remaining.")
                     case "Charisma" | "Cha" | "C":
                         number = int(input("How many points would you like to allocate? "))
                         if statUpgrade - number >= 0:
                             statUpgrade -= number
                             Cha += number
+                            print(f"Stat points allocated. You have {statUpgrade} stat points remaining.")
                     case "Intelligence" | "Int" | "I":
                         number = int(input("How many points would you like to allocate? "))
                         if statUpgrade - number >= 0:
                             statUpgrade -= number
                             Int += number
+                            print(f"Stat points allocated. You have {statUpgrade} stat points remaining.")
                     case _:
                         confirm = input("Would you like to carry on allocating? ").capitalize()
                         if confirm == "No" or confirm == "N":
                             break
                         else:
                             print("You proceed to allocate stat points.")
-            else:
-                print(f"You have {statUpgrade} stat points left.")
-                print(f"You have:\nHealth: {TotHea}\nStrength: {Str}\nDexterity: {Dex}\n"
-                f"Perception: {Per}\nCharisma: {Cha}\nIntelligence: {Int}\nYou have {str(statUpgrade)} unspent stat points.") 
-                break
+    print(f"You have {statUpgrade} stat points left.")
+    print(f"You have:\nHealth: {TotHea}\nStrength: {Str}\nDexterity: {Dex}\n"
+    f"Perception: {Per}\nCharisma: {Cha}\nIntelligence: {Int}\nYou have {str(statUpgrade)} unspent stat points.") 
     
             
 def tavern():
-    chooseStat()
-
+    drinks = {
+        "Malchor's Maltor": 10,
+        "Alastor's Anchor": 25,
+        "Intrail's Ichor": 100,
+    }
+    q = input("What would you like to do? (Have a drink (D), Sleep (S).) ").capitalize()
+    match q:
+        case "Sleep" | "S":
+            chooseStat()
+        case "Drink" | "D":
+            whichDrink = input("Which drink would you like to buy?")
+            print(drinks)
+            if whichDrink in drinks:
+                inventory.append(q)
+                gold -= drinks[q]
 
 #ADD A SEPARATOR (E.G.) # MAYBE TRY bountyList.append(state"#")?
 def bounty():
