@@ -18,3 +18,4 @@ Relinquishment of King's Charter !DONE!
 Add Bounty for player
 Add bountyboard !Done!
 Religion !DONE!
+Despair

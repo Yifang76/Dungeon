@@ -1175,21 +1175,44 @@ def chooseStat():
     
             
 def tavern():
+    global gold
     drinks = {
         "Malchor's Maltor": 10,
         "Alastor's Anchor": 25,
         "Intrail's Ichor": 100,
     }
-    q = input("What would you like to do? (Have a drink (D), Sleep (S).) ").capitalize()
+    food = {
+        "apple": 5,
+    }
+    q = input("What would you like to do? (Buy a drink (D), Buy food (F) or Sleep (S).) ").capitalize()
     match q:
         case "Sleep" | "S":
             chooseStat()
         case "Drink" | "D":
-            whichDrink = input("Which drink would you like to buy?")
+            #Doesn't work, possibly because of space
             print(drinks)
+            whichDrink = input("Which drink would you like to buy? ").capitalize()
             if whichDrink in drinks:
-                inventory.append(q)
-                gold -= drinks[q]
+                if gold - drinks[whichDrink] >= 0:
+                    gold -= drinks[whichDrink]
+                    inventory.append(whichDrink)
+                    print(f"You gain 1 {whichDrink}.")
+                else:
+                    print("You do not have enough gold")
+            else:
+                print("That is not an option.")
+        case "Food" | "F":
+            print(food)
+            whichItem = input("Which item would you like to buy? ").capitalize()
+            if whichItem in food:
+                if gold - food[whichItem] >= 0:
+                    gold -= food[whichItem]
+                    inventory.append(whichItem)
+                    print(f"You gain 1 {whichItem}.")
+                else:
+                    print("You do not have enough gold")
+            else:
+                print("That is not an option.")
 
 #ADD A SEPARATOR (E.G.) # MAYBE TRY bountyList.append(state"#")?
 def bounty():
@@ -1326,20 +1349,27 @@ def chance():
     else:
         match whr:
             case "Thornwood":
+                if "" in livingBosses:
+                    encounter("Name", "Statement")
+                    fight("Name", 100, 7, 15, 10000, "Drop")
+                else:
+                    print("Placeholder")
+            case "Ironhold":
+                encounter("Precept", "From the depths of Ironhold, the mechanical Precept, life of the city, reveals itself.")
+                fight("Precept", 5000, 15, 5, 5000, "Machine Eye")
+            case "Giant's Mausoleum":
                 if "The Wicked" in livingBosses:
                     encounter("The Wicked", "Rising from the corpses of the fallen giants, The Wicked rises for vengeance.")
                     fight("The Wicked", 100, 7, 15, 10000, "Brandle")
                 else:
                     print("The corpse of The Wicked has disappeared.")
-            case "Ironhold":
-                encounter("Precept", "From the depths of Ironhold, the mechanical Precept, life of the city, reveals itself.")
-                fight("Precept", 5000, 15, 5, 5000, "Hell")
     experienceCheck()
     
 def chois():
     global carry
     renownCheck()
     experienceCheck()
+    totHea = Hea * 10
     while True:
         townQuestion = input("Where would you like to go?"
                     " You may go to the Alchemist (P),"
