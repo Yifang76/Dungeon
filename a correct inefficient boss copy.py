@@ -854,11 +854,6 @@ def fight(noun, eTotHea, eStr, eDex, exp, bossDrop):
     global bestiary
     global experience
     global livingBosses
-    drinks = {
-        "Malchor's Maltor": 1,
-        "Alastor's Anchor": 5,
-        "Intrail's Ichor": 10,
-    }
     if noun not in bosses:
         determiner = str("The ")
     else:
@@ -878,7 +873,11 @@ def fight(noun, eTotHea, eStr, eDex, exp, bossDrop):
                         TotHea = 0
                     print(f"You currently have {TotHea} health left.")
                 case "Use Item" | "Use" | "Item" | "I":
-                    print("")
+                    itemUse()
+                    TotHea = TotHea - (int(eStr) * int(eDex))
+                    if TotHea - (int(eStr) * int(eDex)) <= 0:
+                        TotHea = 0
+                    print(f"You currently have {TotHea} health left.")
                 case "Retreat" | "R":
                     retreat = randint(1+Agi,100)
                     if retreat >= 50:
@@ -929,11 +928,38 @@ def fight(noun, eTotHea, eStr, eDex, exp, bossDrop):
         sys.exit()
 
 def itemUse():
+    global TotHea
     global inventory
+    global despair
+    healthHeal = {
+        "apple" : 5,
+        "1" : 10,
+    }
+    despairHeal = {
+        "Malchor's Maltor": 1,
+        "Alastor's Anchor": 5,
+        "Intrail's Ichor": 10,
+    }
+    print(inventory)
     q = input("Which item would you like to use? ")
     if q in inventory:
-        inventory.remove(q)
-        
+        if q in healthHeal:
+            inventory.remove(q)
+            if TotHea + healthHeal[q] <= Hea*10:
+                TotHea += healthHeal[q]
+                print(f"You currently have {TotHea} health.")
+            else:
+                TotHea = Hea*10
+                print("Your health is maxed out")
+        if q in despairHeal:
+            inventory.remove(q)
+            if despair - despairHeal[q] < 0:
+                despair -= despairHeal[q]
+                print(f"Your despair is currently at {despair}.")
+            else:
+                despair = 0
+                print("Your despair completely subsides")
+
 def blacksmith():
     global inventory
     global ad
@@ -1362,7 +1388,7 @@ def chois():
     global carry
     renownCheck()
     experienceCheck()
-    totHea = Hea * 10
+    TotHea = Hea * 10
     while True:
         townQuestion = input("Where would you like to go?"
                     " You may go to the Alchemist (P),"
