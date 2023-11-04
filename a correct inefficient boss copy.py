@@ -150,6 +150,7 @@ places = {
     "Duskmire" : 25,
     "Ironhold" : 7,
     "Thornwood" : 5,
+    "Giant's Mausoleum" : 100,
 }
 
 fenceDict = {
@@ -776,13 +777,13 @@ def nounList(firstV, secondV, thirdV, fourthV, fifthV, sixthV, seventhV, eighthV
     print(modNlist)
     n = choice(modNlist)
 
-#Works
 def where():
     global whr
-    whr = input(f"Where would you like to go? {pList} ").capitalize()
-    if whr in pList:
-        if int(places[whr]) > int(Level):
-            con = input(f"Are you sure you want to go to {whr}? At your current level, it is quite dangerous.").capitalize()
+    whr = input(f"Where would you like to go? {pList} ").replace("'","").lower()
+    if whr in [x.lower().replace("'", "") for x in pList]:
+        location = [x for x in pList if whr == x.lower().replace("'", "")][0] #x is the number of elems in the list
+        if int(places[location]) > int(Level):
+            con = input(f"Are you sure you want to go to {location}? At your current level, it is quite dangerous.").capitalize()
             if con == "Yes" or con == "Y":
                 car()
             elif con == "No" or con == "N":
@@ -790,27 +791,11 @@ def where():
                 chois()
             else:
                 print("That is not an option")
-                chois()
-                
         else:
-            print(f"You are going to {whr}.")
+            print(f"You are going to {location}.")
             car()
-
-#Works
-def enemyInPlace():
-    global whr
-    match whr:
-        case "Thornwood":
-            nounList("bandit", "wolf", "insect", "ent", None, None, None, None, None, None)
-        case "Stormcrag":
-            nounList(None, None, None, None, None, None, None, None, None, None)
-        case "Ironhold":
-            nounList(None, None, None, None, None, None, None, None, None, None)
-        case "Duskmire":
-            nounList(None, None, None, None, None, None, None, None, None, None)
-        case "Havoc's Rock":
-            nounList(None, None, None, None, None, None, None, None, None, None)
-
+    else:
+        print("That is not an option")
 
 def encounter(noun, opening):
     global ad
@@ -1176,11 +1161,12 @@ def chooseStat():
             
 def tavern():
     global gold
-    drinks = {
+    drinksPrice = {
         "Malchor's Maltor": 10,
         "Alastor's Anchor": 25,
         "Intrail's Ichor": 100,
     }
+    drinks = ["Malchor's Maltor", "Alastor's Anchor", "Intrail's Ichor"]
     food = {
         "apple": 5,
     }
@@ -1189,12 +1175,13 @@ def tavern():
         case "Sleep" | "S":
             chooseStat()
         case "Drink" | "D":
-            #Doesn't work, possibly because of space
             print(drinks)
             whichDrink = input("Which drink would you like to buy? ").capitalize()
-            if whichDrink in drinks:
-                if gold - drinks[whichDrink] >= 0:
-                    gold -= drinks[whichDrink]
+            whichDrink = [drink for drink in drinks if drink.lower() in whichDrink.lower()]
+            if whichDrink:
+                whichDrink = whichDrink[0]
+                if gold - drinksPrice[whichDrink] >= 0:
+                    gold -= drinksPrice[whichDrink]
                     inventory.append(whichDrink)
                     print(f"You gain 1 {whichDrink}.")
                 else:
@@ -1293,7 +1280,7 @@ def chance():
     global modNlist
     global whr
     chanceEn = randint(1,100)
-    if whr == "Thornwood":
+    if whr == "thornwood":
         #Works but MAKE MORE EFFICIENT!
         actions = {
         1: ("imp", 25, 1, 1, 5, None),
@@ -1308,7 +1295,7 @@ def chance():
         10: ("insect", 2, 1, 1, 1, None),
         11: ("insect", 2, 1, 1, 1, None),
         }
-    if whr == "Ironhold":
+    if whr == "ironhold":
         actions = {
         1: ("im", 25, 1, 1, 1, None),
         2: ("wrlord", 100, 7, 9, 1, None),
@@ -1322,7 +1309,7 @@ def chance():
         10: ("nsect", 2, 1, 1, 1, None),
         11: ("nsect", 2, 1, 1, 1, None),
         }
-    if whr == "Duskmire":
+    if whr == "duskmire":
         actions = {
         1: ("ip", 25, 1, 1, 1, None),
         2: ("walord", 100, 7, 9, 1, None),
@@ -1348,16 +1335,16 @@ def chance():
         print("Nothing notable occurs.")
     else:
         match whr:
-            case "Thornwood":
+            case "thornwood":
                 if "" in livingBosses:
                     encounter("Name", "Statement")
                     fight("Name", 100, 7, 15, 10000, "Drop")
                 else:
                     print("Placeholder")
-            case "Ironhold":
+            case "ironhold":
                 encounter("Precept", "From the depths of Ironhold, the mechanical Precept, life of the city, reveals itself.")
                 fight("Precept", 5000, 15, 5, 5000, "Machine Eye")
-            case "Giant's Mausoleum":
+            case "giant's mausoleum":
                 if "The Wicked" in livingBosses:
                     encounter("The Wicked", "Rising from the corpses of the fallen giants, The Wicked rises for vengeance.")
                     fight("The Wicked", 100, 7, 15, 10000, "Brandle")
