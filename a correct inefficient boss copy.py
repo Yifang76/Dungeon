@@ -1176,8 +1176,8 @@ def tavern():
             chooseStat()
         case "Drink" | "D":
             print(drinks)
-            whichDrink = input("Which drink would you like to buy? ").capitalize()
-            whichDrink = [drink for drink in drinks if drink.lower() in whichDrink.lower()]
+            whichDrink = input("Which drink would you like to buy? ").replace("'","").lower()
+            whichDrink = [drink for drink in drinks if drink.replace("'","").lower() in whichDrink.replace("'","").lower()]
             if whichDrink:
                 whichDrink = whichDrink[0]
                 if gold - drinksPrice[whichDrink] >= 0:
