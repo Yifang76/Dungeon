@@ -928,7 +928,12 @@ def fight(noun, eTotHea, eStr, eDex, exp, bossDrop):
         print("You died.")
         sys.exit()
 
-    
+def itemUse():
+    global inventory
+    q = input("Which item would you like to use? ")
+    if q in inventory:
+        inventory.remove(q)
+        
 def blacksmith():
     global inventory
     global ad
