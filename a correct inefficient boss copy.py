@@ -1264,6 +1264,7 @@ def shrine():
                         print(f"You do not change faith, remaining loyal to the belief of {faith}.")
                         break
                 else:
+                    faith = q
                     print(f"You have entered the faith of {q}.")
                     break
             else:
