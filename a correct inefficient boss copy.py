@@ -864,35 +864,51 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
             opt = input("Would you like to Fight (F), Use Item (I) or Retreat (R)? ").capitalize()
             match opt:
                 case "Fight" | "F":
+                    NeTotHea = eTotHea
+                    nTotHea = TotHea
                     if Per+1 >= 100:
                         eTotHea -= (Str*Dex)*2
+                        print("You perform a Critical Hit.")
                     else:
                         if randint(1+Per, 100) >= 90:
                             eTotHea -= (Str*Dex)*2
+                            print("You perform a Critical Hit.")
                         else:
                             eTotHea -= (int(Str) * int(Dex))
-                    if eTotHea <= 0:
-                        eTotHea = 0
+                            print("You perform a normal attack.")
                     if eAgi+1 >= 100:
-                        eTotHea += Str*Dex
+                        eTotHea = NeTotHea
+                        print("The attack misses the enemy.")
                     else:
                         if randint(1+eAgi, 100) >= 90:
-                            eTotHea += Str*Dex
+                            eTotHea = NeTotHea
+                            print("The attack misses the enemy.")
+                        else:
+                            print("The attack hits the enemy.")
+                    if eTotHea <= 0:
+                        eTotHea = 0
                     print(f"{determiner}{noun} currently has {eTotHea} health left.")
                     if ePer+1 >= 100:
                         TotHea -= (eStr*eDex)*2
+                        print("The enemy performs a Critical Hit.")
                     else:
                         if randint(1+ePer, 100) >= 90:
                             TotHea -= (eStr*eDex)*2
+                            print("The enemy performs a Critical Hit.")
                         else:
                             TotHea -= (int(eStr) * int(eDex))
+                            print("The enemy performs a normal attack.")
+                    if Agi+1 >= 100:
+                        TotHea = nTotHea
+                        print("The attack misses you.")
+                    else:
+                        if randint(1+Agi, 100) >= 90:
+                            TotHea = nTotHea
+                            print("The attack misses you.")
+                        else:
+                            print("The attack hits you.")
                     if TotHea <= 0:
                         TotHea = 0
-                    if Agi+1 >= 100:
-                        TotHea += Str*Dex
-                    else:
-                        if randint(1+Agi, 100) < 50:
-                            TotHea += eStr*eDex
                     print(f"You currently have {TotHea} health left.")
                 case "Use Item" | "Use" | "Item" | "I":
                     itemUse()
