@@ -845,7 +845,7 @@ def encounter(noun, opening):
     else:
         opon = str(opening)
 
-def fight(noun, eTotHea, eStr, eDex, exp, bossDrop):
+def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
     global summonNumber
     global summons
     global TotHea
@@ -864,13 +864,35 @@ def fight(noun, eTotHea, eStr, eDex, exp, bossDrop):
             opt = input("Would you like to Fight (F), Use Item (I) or Retreat (R)? ").capitalize()
             match opt:
                 case "Fight" | "F":
-                    eTotHea = eTotHea - (int(Str) * int(Dex))
-                    if eTotHea - (int(Str) * int(Dex)) <= 0:
+                    if Per+1 >= 100:
+                        eTotHea -= (Str*Dex)*2
+                    else:
+                        if randint(1+Per, 100) >= 90:
+                            eTotHea -= (Str*Dex)*2
+                        else:
+                            eTotHea -= (int(Str) * int(Dex))
+                    if eTotHea <= 0:
                         eTotHea = 0
+                    if eAgi+1 >= 100:
+                        eTotHea += Str*Dex
+                    else:
+                        if randint(1+eAgi, 100) >= 90:
+                            eTotHea += Str*Dex
                     print(f"{determiner}{noun} currently has {eTotHea} health left.")
-                    TotHea = TotHea - (int(eStr) * int(eDex))
-                    if TotHea - (int(eStr) * int(eDex)) <= 0:
+                    if ePer+1 >= 100:
+                        TotHea -= (eStr*eDex)*2
+                    else:
+                        if randint(1+ePer, 100) >= 90:
+                            TotHea -= (eStr*eDex)*2
+                        else:
+                            TotHea -= (int(eStr) * int(eDex))
+                    if TotHea <= 0:
                         TotHea = 0
+                    if Agi+1 >= 100:
+                        TotHea += Str*Dex
+                    else:
+                        if randint(1+Agi, 100) < 50:
+                            TotHea += eStr*eDex
                     print(f"You currently have {TotHea} health left.")
                 case "Use Item" | "Use" | "Item" | "I":
                     itemUse()
@@ -1315,52 +1337,52 @@ def chance():
     if whr == "thornwood":
         #Works but MAKE MORE EFFICIENT!
         actions = {
-        1: ("imp", 25, 1, 1, 5, None),
-        2: ("warlord", 100, 7, 9, 50, None),
-        3: ("dictator", 75, 3, 3, 25, None),
-        4: ("bandit", 10, 2, 2, 5, None),
-        5: ("wolf", 7, 4, 4, 3, None),
-        6: ("insect", 2, 1, 1, 1, None),
-        7: ("ent", 50, 7, 7, 20, None),
-        8: ("insect", 2, 1, 1, 1, None),
-        9: ("insect", 2, 1, 1, 1, None),
-        10: ("insect", 2, 1, 1, 1, None),
-        11: ("insect", 2, 1, 1, 1, None),
+        1: ("imp", 25, 1, 1, 2, 10, 5, None),
+        2: ("warlord", 100, 7, 9, 5, 1, 50, None),
+        3: ("dictator", 75, 3, 3, 1, 5, 25, None),
+        4: ("bandit", 10, 2, 2, 10, 10, 5, None),
+        5: ("wolf", 7, 4, 4, 10, 3, 3, None),
+        6: ("insect", 2, 1, 1, 1, 1, 1, None),
+        7: ("ent", 50, 7, 7, 3, 1, 20, None),
+        8: ("insect", 2, 1, 1, 1, 1, 1, None),
+        9: ("insect", 2, 1, 1, 1, 1, 1, None),
+        10: ("insect", 2, 1, 1, 1, 1, 1, None),
+        11: ("insect", 2, 1, 1, 1, 1, 1, None),
         }
     if whr == "ironhold":
         actions = {
-        1: ("im", 25, 1, 1, 1, None),
-        2: ("wrlord", 100, 7, 9, 1, None),
-        3: ("dctator", 75, 3, 3, 1, None),
-        4: ("bndit", 10, 2, 2, 1, None),
-        5: ("wlf", 7, 4, 4, 1, None),
-        6: ("nsect", 2, 1, 1, 1, None),
-        7: ("nt", 50, 7, 7, 1, None),
-        8: ("nsect", 2, 1, 1, 1, None),
-        9: ("nsect", 2, 1, 1, 1, None),
-        10: ("nsect", 2, 1, 1, 1, None),
-        11: ("nsect", 2, 1, 1, 1, None),
+        1: ("im", 25, 1, 1, 1, 1, 1, None),
+        2: ("wrlord", 100, 7, 9, 1, 1, 1, None),
+        3: ("dctator", 75, 3, 3, 1, 1, 1, None),
+        4: ("bndit", 10, 2, 2, 1, 1, 1, None),
+        5: ("wlf", 7, 4, 4, 1, 1, 1, None),
+        6: ("nsect", 2, 1, 1, 1, 1, 1, None),
+        7: ("nt", 50, 7, 7, 1, 1, 1, None),
+        8: ("nsect", 2, 1, 1, 1, 1, 1, None),
+        9: ("nsect", 2, 1, 1, 1, 1, 1, None),
+        10: ("nsect", 2, 1, 1, 1, 1, 1, None),
+        11: ("nsect", 2, 1, 1, 1, 1, 1, None),
         }
     if whr == "duskmire":
         actions = {
-        1: ("ip", 25, 1, 1, 1, None),
-        2: ("walord", 100, 7, 9, 1, None),
-        3: ("ditator", 75, 3, 3, 1, None),
-        4: ("banit", 10, 2, 2, 1, None),
-        5: ("wof", 7, 4, 4, 1, None),
-        6: ("inect", 2, 1, 1, 1, None),
-        7: ("en", 50, 7, 7, 1, None),
-        8: ("inect", 2, 1, 1, 1, None),
-        9: ("inect", 2, 1, 1, 1, None),
-        10: ("inect", 2, 1, 1, 1, None),
-        11: ("inect", 2, 1, 1, 1, None),
+        1: ("ip", 25, 1, 1, 1, 1, 1, None),
+        2: ("walord", 100, 7, 9, 1, 1, 1, None),
+        3: ("ditator", 75, 3, 3, 1, 1, 1, None),
+        4: ("banit", 10, 2, 2, 1, 1, 1, None),
+        5: ("wof", 7, 4, 4, 1, 1, 1, None),
+        6: ("inect", 2, 1, 1, 1, 1, 1, None),
+        7: ("en", 50, 7, 7, 1, 1, 1, None),
+        8: ("inect", 2, 1, 1, 1, 1, 1, None),
+        9: ("inect", 2, 1, 1, 1, 1, 1, None),
+        10: ("inect", 2, 1, 1, 1, 1, 1, None),
+        11: ("inect", 2, 1, 1, 1, 1, 1, None),
         }
     else:
         print("")
     if chanceEn <= 33:
-        no, health, attack, defense, eXp, bossItem = actions[randint(1,11)]
+        no, health, attack, defense, perception, agility, eXp, bossItem = actions[randint(1,11)]
         encounter(no, None)
-        fight(no, health, attack, defense, eXp, bossItem)
+        fight(no, health, attack, defense, perception, agility, eXp, bossItem)
     elif chanceEn <= 66 and chanceEn > 33:
         print("Placeholder")
     elif chanceEn <= 99 and chanceEn > 66:
@@ -1370,16 +1392,16 @@ def chance():
             case "thornwood":
                 if "" in livingBosses:
                     encounter("Name", "Statement")
-                    fight("Name", 100, 7, 15, 10000, "Drop")
+                    fight("Name", 100, 7, 15, 1, 1, 10000, "Drop")
                 else:
                     print("Placeholder")
             case "ironhold":
                 encounter("Precept", "From the depths of Ironhold, the mechanical Precept, life of the city, reveals itself.")
-                fight("Precept", 5000, 15, 5, 5000, "Machine Eye")
+                fight("Precept", 5000, 15, 30, 1, 15000, "Machine Eye")
             case "giant's mausoleum":
                 if "The Wicked" in livingBosses:
                     encounter("The Wicked", "Rising from the corpses of the fallen giants, The Wicked rises for vengeance.")
-                    fight("The Wicked", 100, 7, 15, 10000, "Brandle")
+                    fight("The Wicked", 100, 7, 15, 25, 50, 10000, "Brandle")
                 else:
                     print("The corpse of The Wicked has disappeared.")
     experienceCheck()
