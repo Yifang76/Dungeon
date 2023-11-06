@@ -233,9 +233,9 @@ def guard(statement, tim, place):
             case "Bribe Guard" | "Bribe" | "B":
                 guardB(place)
             case "Persuade Guard" | "Persuade" | "P":
-
+                print("Persuade")
             case "Intimidate Guard" | "Intimidate" | "I":
-
+                print("Intimidate")
             case _:
                 print("Hey, stop trying to evade justice!")
 
@@ -597,7 +597,7 @@ def wth():
                 bankedItems.remove(whichDraw)
                 print(f"You currently have {inventory} and the bank currently contains {bankedItems}.")
             else:
-                print("That is not an option.")    
+                print("That is not an option.")
         case "Gold" | "G":
             print(f"You currently have {bankedGold} gold banked and {gold} gold on your person.")
             amountDraw = int(input("How much would you like to withdraw? "))
