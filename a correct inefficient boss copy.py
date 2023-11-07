@@ -98,16 +98,16 @@ weaponModifier = {
 
 items = {
     #weapons
-    "common axe": 10,
-    "rare axe": 50,
-    "mythical axe": 1000,
-    "legendary axe": 500000,
-    "common stick": 5,
-    "rare stick": 25,
-    "mythical stick": 50,
-    "legendary stick": 100,
-    "common sword": 20,
-    "rare sword": 60,
+    "training sword": 10,
+    "": 50,
+    "half life": 1000,
+    "terra blade": 500000,
+    "stick": 5,
+    "axe": 25,
+    "scimitar": 50,
+    "war axe": 100,
+    "sword": 20,
+    "hatchets": 60,
 
     #resources
     "leather" : 15-Cha,
@@ -163,10 +163,7 @@ fenceDict = {
 
 pList = ["Stormcrag", "Havoc's Rock", "Duskmire", "Ironhold", "Thornwood"]
 crime = []
-liteList = ["common axe",
-"rare axe", "mythical axe", "legendary axe", 
-"common stick", "rare stick", "mythical stick", 
-"legendary stick", "common sword", "rare sword",
+liteList = [
 "leather", "iron" ]
 enemyList = ["imp", "warlord", "dictator", "insect", "bandit", "ent", "wolf"]
 originClass = []
@@ -1011,6 +1008,7 @@ def blacksmith():
                     inventory.remove("gem")
                     inventory.remove("leather")
                     newCharm = ad + "charm"
+                    rarities(newCharm)
                     inventory.append(newCharm)
                     print("s")
         elif craft == "Weapon":
@@ -1019,8 +1017,6 @@ def blacksmith():
                     inventory.remove("leather")
                     inventory.remove("iron")
                     inventory.append("weapon")
-
-
     elif CraftorUpgrade == "Upgrade":
         if not inventory:
             print("You have nothing to upgrade.")
@@ -1033,11 +1029,35 @@ def blacksmith():
                     if "iron" in inventory:
                         splinch = whichUp.split()
                         if splinch[0] not in rarityValues:
-                            inventory.remove("iron")
-                            inventory.remove(whichUp)
-                            ad = choice(adlist)
-                            inventory.append(ad + whichUp)
-                            print(inventory)
+                            if splinch[0] == "Charm":
+                                inventory.remove("iron")
+                                inventory.remove(whichUp)
+                                inventory.append(ad + splinch[1])
+                                print(inventory)
+                            else:
+                                if len(splinch) >= 3:
+                                        inventory.remove(whichUp)
+                                        new = splinch[3].replace("+","")
+                                        new = int(new) + 1
+                                        splinch.remove(splinch[3])
+                                        splinch.append(new)
+                                        inventory.append(" ".join(splinch)) 
+                                        print(inventory)
+                                else:
+                                    if len(splinch) >= 2:
+                                        inventory.remove(whichUp)
+                                        new = splinch[2].replace("+","")
+                                        new = int(new) + 1
+                                        splinch.remove(splinch[3])
+                                        splinch.append(new)
+                                        inventory.append(" ".join(splinch)) 
+                                        print(inventory)
+                                    else:
+                                        inventory.remove(whichUp)
+                                        splinch.append("+1")
+                                        print(splinch)
+                                        inventory.append(" ".join(splinch))
+                                        print(inventory)
                         else:
                             q = input(f"{whichUp} has modifier {splinch[0]}. Would you like to change this? ").capitalize()
                             if q == "Yes" or q == "Y":
