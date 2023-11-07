@@ -999,6 +999,8 @@ def blacksmith():
     global inventory
     global ad
     global adlist
+    global weaponModifier
+    global new
     CraftorUpgrade = input("Would you like to craft or upgrade? ").capitalize()
     if CraftorUpgrade == "Craft":
         craft = input("What would you like to craft: charm or weapon? ").capitalize()
@@ -1036,22 +1038,25 @@ def blacksmith():
                                 print(inventory)
                             else:
                                 if len(splinch) == 1:
+                                    new = 1
                                     inventory.remove(whichUp)
                                     inventory.remove("iron")
                                     splinch.append("+1")
                                     print(splinch)
                                     inventory.append(" ".join(splinch))
                                     print(inventory)
+                                    weaponModifier.update({" ".join(splinch) : int(new)})
                                 else:
                                     inventory.remove(whichUp)
                                     inventory.remove("iron")
-                                    new = splinch[len(splinch)-1].replace("+","")
-                                    new = int(new) + 1
-                                    new = "+" + str(new)
+                                    ne = splinch[len(splinch)-1].replace("+","")
+                                    ne = int(ne) + 1
+                                    new = "+" + str(ne)
                                     splinch.remove(splinch[len(splinch)-1])
                                     splinch.append(new)
                                     inventory.append(" ".join(splinch)) 
                                     print(inventory)
+                                    weaponModifier.update({" ".join(splinch) : ne})
                         else:
                             q = input(f"{whichUp} has modifier {splinch[0]}. Would you like to change this? ").capitalize()
                             if q == "Yes" or q == "Y":
