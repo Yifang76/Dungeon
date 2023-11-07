@@ -1035,29 +1035,23 @@ def blacksmith():
                                 inventory.append(ad + splinch[1])
                                 print(inventory)
                             else:
-                                if len(splinch) >= 3:
-                                        inventory.remove(whichUp)
-                                        new = splinch[3].replace("+","")
-                                        new = int(new) + 1
-                                        splinch.remove(splinch[3])
-                                        splinch.append(new)
-                                        inventory.append(" ".join(splinch)) 
-                                        print(inventory)
+                                if len(splinch) == 1:
+                                    inventory.remove(whichUp)
+                                    inventory.remove("iron")
+                                    splinch.append("+1")
+                                    print(splinch)
+                                    inventory.append(" ".join(splinch))
+                                    print(inventory)
                                 else:
-                                    if len(splinch) >= 2:
-                                        inventory.remove(whichUp)
-                                        new = splinch[2].replace("+","")
-                                        new = int(new) + 1
-                                        splinch.remove(splinch[3])
-                                        splinch.append(new)
-                                        inventory.append(" ".join(splinch)) 
-                                        print(inventory)
-                                    else:
-                                        inventory.remove(whichUp)
-                                        splinch.append("+1")
-                                        print(splinch)
-                                        inventory.append(" ".join(splinch))
-                                        print(inventory)
+                                    inventory.remove(whichUp)
+                                    inventory.remove("iron")
+                                    new = splinch[len(splinch)-1].replace("+","")
+                                    new = int(new) + 1
+                                    new = "+" + str(new)
+                                    splinch.remove(splinch[len(splinch)-1])
+                                    splinch.append(new)
+                                    inventory.append(" ".join(splinch)) 
+                                    print(inventory)
                         else:
                             q = input(f"{whichUp} has modifier {splinch[0]}. Would you like to change this? ").capitalize()
                             if q == "Yes" or q == "Y":
