@@ -697,7 +697,6 @@ def lootIsDropped():
         global inventory
         inventory.append(loot)
         print("You obtained a "+loot+".")
-        rarities(loot)
         print(inventory)
 
     else:
@@ -806,9 +805,6 @@ def encounter(noun, opening):
     global weapon
     global resource
     global valuable
-    adlist = ["common ","rare ","mythical ","legendary "]
-    ad = choice(adlist)
-
     weaponlist = ["axe","sword","stick"]
     weapon = choice(weaponlist)
 
