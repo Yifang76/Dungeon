@@ -7,6 +7,7 @@ totalSummonNumber = None
 activeBounties = []
 bestiar = []
 inventory = ["helmet", "sword"]
+spells = []
 faith = None
 eTotHea = int(1)
 carry = True
@@ -16,6 +17,7 @@ bankedGold = 0
 bankedItems = []
 experience = 0
 n = None
+done = True
 renown = 0
 hEqItem = None
 cEqItem = None
@@ -35,6 +37,14 @@ resource = choice(resourcelist)
 valuablelist = ["iron"]
 valuable = choice(valuablelist)
 
+baseSpellsDict = {
+    "Elemental" : "Fireball",
+    "Chaos" : "Confusion",
+    "Occult" : "Curse",
+    "Divine" : "Bless",
+    "Nature" : "Bind",
+    "Aether" : "Barrage",
+}
 
 name = input("Name, please ").capitalize()
 print("Knight: Honourable warriors of the Lennish empire, they are extremely strong and are representatives of the law. (Strength: 10, Agility: 3, Dexterity: 8, Health: 7, Perception: 4, Charisma: 6 (Within lawful lands) or 0 (in foreign lands), Intelligence: 5 )")
@@ -68,17 +78,29 @@ while True:
     classn = input("Pick a class ").capitalize()
     match classn:
         case "Knight":
-            classv(15, 10, 3, 8, 7, 4, 6, 5, 70)
+            classv(43, 10, 3, 8, 7, 4, 6, 5, 70)
             inventory.append("King's Charter")
             renown = 50
             break
         case "Summoner":
-            classv(5, 1, 4, 1, 2, 9, 2, 8, 20)
+            classv(26, 1, 4, 1, 2, 9, 2, 8, 20)
             totalSummonNumber = Int
             break
         case "Merchant":
-            classv(7, 1, 8, 1, 3, 8, 10, 6, 30)
+            classv(37, 1, 8, 1, 3, 8, 10, 6, 30)
             bankedGold = 1000
+            break
+        case "Mage":
+            classv(33, 2, 4, 4, 5, 7, 3, 10, 50)
+            print("Elemental, Chaos, Occult, Divine, Nature, Aether")
+            while True:
+                whichCat = input("What sorcery will you dabble in? ").capitalize()
+                if whichCat in baseSpellsDict:
+                    spells.append(baseSpellsDict[whichCat])
+                    print(f"Spell List: {spells}")
+                    break
+                else:
+                    print("That is not an option")
             break
         case "Tom":
             if name == "Tom":
@@ -418,7 +440,7 @@ def buy():
                     if again == "No":
                         break
                 else:
-                    print(f"You do not have enough gold; you need {str(int(items[buyWhich]) - int(gold))} more gold.")
+                    print(f"You do not have enough gold; you need {str(int(items[buyWhich]-Cha) - int(gold))} more gold.")
                     esc = input("Would you like to stop buying? ").capitalize()
                     if esc == "Yes":
                         break
