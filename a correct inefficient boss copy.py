@@ -1359,7 +1359,22 @@ def shrine():
             if leave == "Yes" or leave == "Y":
                 print("You leave the shrine.")
                 break
+def incantations():
+    print("Elemental (E), Chaos (C), Occult (O), Divine (D), Nature (N), Aether (A)")
+    q = input("Which category of spell would you like to see? ").capitalize()
+    match q:
+        case "Elemental" | "E":
 
+        case "Chaos" | "C":
+
+        case "Occult" | "O":
+
+        case "Divine" | "D":
+
+        case "Nature" | "N":
+
+        case "Aether" | "A":
+            
 
 def chance():
     global modNlist
@@ -1448,7 +1463,7 @@ def chois():
                     " the Blacksmith (W), the Armory (A), the Bank (B),"
                     " the Tavern (H), the Bounty Board (C), the Shrine (S),"
                     " the Market (M), the Trainer (T), the Menu"
-                    " or back Out (O). ").capitalize()
+                    " the Incantation Store (I) or back Out (O). ").capitalize()
         match townQuestion:
             case "Market" | "M":
                 print("Going to the Market")
@@ -1479,6 +1494,9 @@ def chois():
                 chois()
             case "Shrine" | "S":
                 shrine()
+                chois()
+            case "Incantations" | "Incantation Store" | "I":
+                incantations()
                 chois()
             case "Bounty Board" | "Bounty" | "C":
                 bounty()
