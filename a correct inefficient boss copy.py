@@ -197,6 +197,29 @@ cChangeItem = ["necronomicon", "demon heart", "dragon tooth"]
 safe = ["Cetus","Ashborn"]
 livingBosses = ["Reign", "Quasar", "The Wicked",]
 bosses = ["Reign", "Quasar", "The Wicked",]
+legalSpells = ["Elemental", "E", "Divine", "D", "Nature", "N", "Aether", "A"]
+illegalSpells = ["Chaos", "C", "Occult", "O"]
+elementalList = ["Fireball", "Freeze"]
+chaosList = ["Confusion",]
+occultList = ["Curse",]
+divineList = ["Bless",]
+natureList = ["Bind",]
+aetherList = ["Barrage",]
+spellDict = {
+    "Elemental" : elementalList,
+    "E" : elementalList,
+    "Chaos" : chaosList,
+    "C" : chaosList,
+    "Occult" : occultList,
+    "O" : occultList,
+    "Divine" : divineList,
+    "D" : divineList,
+    "Nature" : natureList,
+    "N" : natureList,
+    "Aether" : aetherList,
+    "A" : aetherList,
+ }
+
 
 #NEED TO TEST
 def classChange(newClass, itemUsing, lev, stre, agi, dex, hea, per, cha, inte, totHea, specialAbility, specialAbilityValue):
@@ -1382,22 +1405,34 @@ def shrine():
                 print("You leave the shrine.")
                 break
 def incantations():
-    print("Elemental (E), Chaos (C), Occult (O), Divine (D), Nature (N), Aether (A)")
-    q = input("Which category of spell would you like to see? ").capitalize()
-    match q:
-        case "Elemental" | "E":
-
-        case "Chaos" | "C":
-
-        case "Occult" | "O":
-
-        case "Divine" | "D":
-
-        case "Nature" | "N":
-
-        case "Aether" | "A":
-            
-
+    global gold
+    global spells
+    spellGCost = {
+        "Fireball" : 50,
+        "Freeze" : 50,
+        "Bless" : 40,
+        "Bind" : 40,
+        "Barrage" : 50,
+    }
+    print("Elemental (E), Divine (D), Nature (N), Aether (A)")
+    while True:
+        q = input("Which category of spell would you like to see? ").capitalize()
+        if q in legalSpells:
+            print(spellDict[q])
+            whichSpell = input("Which spell would you like to learn? ").capitalize()
+            if whichSpell in spellDict[q]:
+                buy = input(f"Do you want to buy {whichSpell} for {str(spellGCost[whichSpell])} gold? ").capitalize()
+                if buy == "Yes" or buy == "Y":
+                    gold -= spellGCost[whichSpell]
+                    spells.append(spellDict[q])
+                else:
+                    print("You do not buy the spell.")
+        else:
+            print("Invalid")
+            continu = input("Would you like to continue learning? ").capitalize()
+            if continu == "Yes" or "Y":
+                break
+                
 def chance():
     global modNlist
     global whr
