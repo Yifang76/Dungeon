@@ -108,21 +108,16 @@ while True:
                 break
         case "William":
             if name == "William":
-                classv(120004,3,3,-432,5,3,0,-5,50)
+                classv(120,3,3,3,5,3,0,10,50)
                 break
         case _:
             print("That is not an option")
 
 #Meant To be Empty to store Values
 weaponModifier = {
-"sword +1" : 1,
-"sword +2"
+
 }
 
-dictionary = {
-    "sword" : 10,
-}
-damage = int(weaponModifier[q]) * int(dictionary[q]) 
 items = {
     #weapons
     "training sword": 10,
