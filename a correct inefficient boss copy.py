@@ -1527,7 +1527,7 @@ def chois():
                     " You may go to the Alchemist (P),"
                     " the Blacksmith (W), the Armory (A), the Bank (B),"
                     " the Tavern (H), the Bounty Board (C), the Shrine (S),"
-                    " the Market (M), the Trainer (T), the Menu"
+                    " the Market (M), the Trainer (T), the Menu,"
                     " the Incantation Store (I) or back Out (O). ").capitalize()
         match townQuestion:
             case "Market" | "M":
