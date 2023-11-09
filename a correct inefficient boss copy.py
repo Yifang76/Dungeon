@@ -902,6 +902,14 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
             opt = input("Would you like to Fight (F), Use Item (I) or Retreat (R)? ").capitalize()
             match opt:
                 case "Fight" | "F":
+                    q = input("Physical (P), Spell (S) or Incantation (I)? ").capitalize()
+                    match q:
+                        case "Physical" | "P":
+                            print("Physical")
+                        case "Spell" | "S":
+                            print("SPELL")
+                        case "Incantation" | "I":
+                            print("Incantation")
                     NeTotHea = eTotHea
                     nTotHea = TotHea
                     if Per+1 >= 100:
