@@ -734,7 +734,7 @@ def lootIsDropped():
     if lootdrop == 1:
         itemDrop = randint(1,3)
         if itemDrop == 1:
-            loot = ad + weapon
+            loot = weapon
         elif itemDrop == 2:
             loot = resource
         else:
@@ -753,15 +753,18 @@ def menu():
         "demon heart" : "Demon",
         "dragon tooth" : "Dragonkin",
         "Vanta's vessel" : "Lost Soul",
-
     }
-    descDict = {
+
+    spellDescDict = {
+        "fireball"
+    }
+    weaponDescDict = {
         "sword" : "A common sword, favoured by scavengers lucky enough to find one.",
         "Brandle" : "Brandle, Giant Slayer. Once wielded by a warmaster involved in the giant wars, this blade was used to fell many a giant. Its legend, whilst forgotten to many, still imbues this blade with giant-slaying capabilities.\n"
         "And when the Giant Slayer died in battle, fallen like so many of his men, his soul couldn't handle it. And so, his life became forfeit as he held onto one purpose. To slay giants. Thus, the urban legend of The Wicked was formed."
     }
     q = input("What would you like to do. View Stats (S), View Inventory (I), View Journal (J),"
-    " Use Item (U) or Check Level (L). ").capitalize()
+    " View Spells (T), Use Item (U) or Check Level (L). ").capitalize()
     match q:
         case "View Stats" | "Stats" | "S":
             print(f"Without modifiers, you have:\nHealth: {TotHea}\nStrength: {Str}\nDexterity: {Dex}\n"
@@ -774,13 +777,20 @@ def menu():
             if checkDesc == "Yes" or checkDesc == "Y":
                 whichDesc = input("Which item would you like check? ")
                 if whichDesc in inventory:
-                    print(f"{whichDesc.capitalize()} : {str(descDict[whichDesc])}")
+                    print(f"{whichDesc.capitalize()}: {str(weaponDescDict[whichDesc])}")
                 else:
                     print(f"You do not have {whichDesc}.")
             elif checkDesc == "No" or checkDesc == "N":
                 print("You conclude your check.")
             else:
                 print("That is not an option")
+        case "View Spells" | "Spells" | "T":
+            print(spells)
+            whichSpellDesc = input("Which spell would you like to view? ").replace("'","").lower()
+            if whichSpellDesc in [x.lower().replace("'", "") for x in spells]:
+                print(f"{whichSpellDesc.capitalize()}: {spellDescDict[whichSpellDesc]}")
+            else:
+                print("You do not have that spell")
         case "View Journal" | "Journal" | "J":
             journal()
         case "Use Item" | "U":
@@ -792,7 +802,7 @@ def menu():
                     if whichItem in cChangeItem:
                         match whichItem:
                             case "necronomicon":
-                            #check for adverwse affects using an integer instead of inte*2 for specialAbilityValue
+                            #check for adverse affects using an integer instead of inte*2 for specialAbilityValue
                                 classChange(str(cChangeDict[whichItem]),whichItem, 1, 2, 6, 2, 1, 10, 0, 15, 10, totalSummonNumber, 30)
 
                 else:
