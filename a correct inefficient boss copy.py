@@ -756,7 +756,7 @@ def menu():
     }
 
     spellDescDict = {
-        "fireball"
+        "fireball" : "1",
     }
     weaponDescDict = {
         "sword" : "A common sword, favoured by scavengers lucky enough to find one.",
