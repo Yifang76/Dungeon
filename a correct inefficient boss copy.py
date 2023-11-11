@@ -47,12 +47,12 @@ baseSpellsDict = {
 }
 
 name = input("Name, please ").capitalize()
-print("Knight: Honourable warriors of the Lennish empire, they are extremely strong and are representatives of the law. (Strength: 10, Agility: 3, Dexterity: 8, Health: 7, Perception: 4, Charisma: 6 (Within lawful lands) or 0 (in foreign lands), Intelligence: 5 )")
-print("Merchant: (Strength: 1, Agility: 8, Dexterity: 1, Health: 3, Perception: 8, Charisma: 10, Intelligence: 6 )")
-print("Summoner: (Strength: 1, Agility: 4, Dexterity: 1, Health: 2, Perception: 9, Charisma: 2, Intelligence: 8 )")
+print("Knight: (Strength: 10, Agility: 3, Dexterity: 8,\nHealth: 7, Perception: 4, Charisma: 6 (Within lawful lands) or 0 (in foreign lands),\nIntelligence: 5 )")
+print("Merchant: (Strength: 1, Agility: 8, Dexterity: 1,\nHealth: 3, Perception: 8, Charisma: 10,\nIntelligence: 6 )")
+print("Summoner: (Strength: 1, Agility: 4, Dexterity: 1,\nHealth: 2, Perception: 9, Charisma: 2,\nIntelligence: 8 )")
 attriQuery = input("Would you like a guide on the attributes? ").capitalize()
 if attriQuery == "Yes":
-    print("Strength determines the base damage you do, Agility determines your evasion, Dexterity determines ______, Perception determines your critical chance, Charisma determines your barter rate and speech, Intelligence determines your spellcraft and Health determines your starting health.")
+    print("Strength determines the base damage you do, Agility determines your evasion, Dexterity determines base damage,\nPerception determines your critical chance, Charisma determines your barter rate and speech, Intelligence determines your spellcraft\nand Health determines your HP.")
 def classv(LevelG, StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG):
     global Level
     global Str
