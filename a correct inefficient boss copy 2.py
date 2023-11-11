@@ -112,7 +112,6 @@ while True:
                 break
         case _:
             print("That is not an option")
-
 #Meant To be Empty to store Values
 weaponModifier = {
 
@@ -220,6 +219,20 @@ spellDict = {
     "A" : aetherList,
  }
 
+summonStats = {
+    "imp": (25, 1, 1, 2, 10,),
+    "warlord": (100, 7, 9, 5, 1,),
+    "dictator": (75, 3, 3, 1, 5,),
+    "bandit": (10, 2, 2, 10, 10,),
+    "wolf": (7, 4, 4, 10, 3,),
+    "insect": (2, 1, 1, 1, 1,),
+    "ent": (50, 7, 7, 3, 1,),
+    "insect": (2, 1, 1, 1, 1,),
+    "insect": (2, 1, 1, 1, 1,),
+    "insect": (2, 1, 1, 1, 1,),
+    "insect": (2, 1, 1, 1, 1,),
+}
+nTotHea = TotHea
 #NEED TO TEST
 def classChange(newClass, itemUsing, lev, stre, agi, dex, hea, per, cha, inte, totHea, specialAbility, specialAbilityValue):
     global classn
@@ -892,6 +905,7 @@ def encounter(noun, opening):
     else:
         opon = str(opening)
 
+
 def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
     global summonNumber
     global summons
@@ -901,20 +915,10 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
     global bestiary
     global experience
     global livingBosses
-    summonStats = {
-        "imp": (25, 1, 1, 2, 10,),
-        "warlord": (100, 7, 9, 5, 1,),
-        "dictator": (75, 3, 3, 1, 5,),
-        "bandit": (10, 2, 2, 10, 10,),
-        "wolf": (7, 4, 4, 10, 3,),
-        "insect": (2, 1, 1, 1, 1,),
-        "ent": (50, 7, 7, 3, 1,),
-        "insect": (2, 1, 1, 1, 1,),
-        "insect": (2, 1, 1, 1, 1,),
-        "insect": (2, 1, 1, 1, 1,),
-        "insect": (2, 1, 1, 1, 1,),
-    }
-    health = TotHea
+    global usingSummon
+    global health
+    global nTotHea
+    health = nTotHea
     strength = Str
     dexterity = Dex
     perception = Per
@@ -923,7 +927,7 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
         determiner = str("The ")
     else:
         determiner = ""
-    while TotHea > 0:
+    while health > 0:
         if eTotHea > 0:
             print(opon)
             opt = input("Would you like to Fight (F), Use Item (I) or Retreat (R)? ").capitalize()
@@ -932,14 +936,17 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
                     q = input("Physical (P), Spell (S) or Incantation (I) (R)? ").capitalize()
                     match q:
                         case "Physical" | "P":
-                            continue
+                            usingSummon = False
                         case "Spell" | "S":
+                            usingSummon = False
                             print("SPELL")
                         case "Incantation" | "I":
+                            usingSummon = False
                             print("Incantation")
                         case "Summon" | "R":
                             whichSummon = input("Which summon would you like to use? ")
                             if whichSummon in summons:
+                                usingSummon = True
                                 health, strength, dexterity, perception, agility = summonStats[whichSummon]
                                 print(f"{health},{strength},{dexterity},{perception},{agility}")
                             else:
@@ -947,7 +954,7 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
                     NeTotHea = eTotHea
                     nTotHea = health
                     if perception+1 >= 100:
-                        eTotHea -= (tStr*tDex)*2
+                        eTotHea -= (strength*dexterity)*2
                         print("You perform a Critical Hit.")
                     else:
                         if randint(1+perception, 100) >= 90:
@@ -969,37 +976,38 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
                         eTotHea = 0
                     print(f"{determiner}{noun} currently has {eTotHea} health left.")
                     if ePer+1 >= 100:
-                        TotHea -= (eStr*eDex)*2
+                        health -= (eStr*eDex)*2
                         print("The enemy performs a Critical Hit.")
                     else:
                         if randint(1+ePer, 100) >= 90:
-                            TotHea -= (eStr*eDex)*2
+                            health -= (eStr*eDex)*2
                             print("The enemy performs a Critical Hit.")
                         else:
-                            TotHea -= (int(eStr) * int(eDex))
+                            health -= (int(eStr) * int(eDex))
                             print("The enemy performs a normal attack.")
                     if agility+1 >= 100:
-                        TotHea = nTotHea
+                        #health = nTotHea
                         print("The attack misses you.")
                     else:
                         if randint(1+agility, 100) >= 90:
-                            TotHea = nTotHea
+                            #health = nTotHea
                             print("The attack misses you.")
                         else:
                             print("The attack hits you.")
-                    if TotHea <= 0:
-                        TotHea = 0
-                    print(f"You currently have {TotHea} health left.")
+                    if health <= 0:
+                        health = 0
+                    print(f"You currently have {health} health left.")
                 case "Use Item" | "Use" | "Item" | "I":
                     itemUse()
-                    TotHea = TotHea - (int(eStr) * int(eDex))
-                    if TotHea - (int(eStr) * int(eDex)) <= 0:
-                        TotHea = 0
-                    print(f"You currently have {TotHea} health left.")
+                    health = health - (int(eStr) * int(eDex))
+                    if health - (int(eStr) * int(eDex)) <= 0:
+                        health = 0
+                    print(f"You currently have {health} health left.")
                 case "Retreat" | "R":
                     retreat = randint(1+agility,100)
                     if retreat >= 50:
                         print("You successfully fled, coward.")
+                        nTotHea = health
                         break
                     else:
                         print("You failed to escape.")
@@ -1026,13 +1034,16 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
                             summons.append(noun)
                             totalSummonNumber = totalSummonNumber - 1
                             print(f"Congratulations, you gained {noun}.")
+                            nTotHea = health
                             break
                     else:
                         print(f"You fail to convert the {noun}.")
+                        nTotHea = health
                         break
                 elif q == "No" or q == "N":
                     print(f"You give up on converting the {noun}.")
                     experience = experience + exp
+                    nTotHea = health
                     break
                 else:
                     print("That is not an option")
@@ -1040,10 +1051,15 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
                 print("ENEMY VANQUISHED")
                 lootIsDropped()
                 experience = experience + exp
+                nTotHea = health
                 break
-    if TotHea <= 0:
-        print("You died.")
-        sys.exit()
+    if health <= 0:
+        if usingSummon == True:
+            summons.remove(whichSummon)
+            print("Your summon dies")
+        else:
+            print("You died.")
+            sys.exit()
 
 def itemUse():
     global TotHea
@@ -1058,16 +1074,22 @@ def itemUse():
         "Alastor's Anchor": 5,
         "Intrail's Ichor": 10,
     }
+    if usingSummon == True:
+        health, strength, dexterity, perception, agility = summonStats[whichSummon]
+        trueHea = health
+    else:
+        health = TotHea
+        trueHea = Hea*10
     print(inventory)
     q = input("Which item would you like to use? ")
     if q in inventory:
         if q in healthHeal:
             inventory.remove(q)
-            if TotHea + healthHeal[q] <= Hea*10:
-                TotHea += healthHeal[q]
-                print(f"You currently have {TotHea} health.")
+            if health + healthHeal[q] <= trueHea:
+                health += healthHeal[q]
+                print(f"You currently have {health} health.")
             else:
-                TotHea = Hea*10
+                health = trueHea
                 print("Your health is maxed out")
         if q in despairHeal:
             inventory.remove(q)
