@@ -13,6 +13,8 @@ modNlist failing; encounter fails !FIXED!
 mythical legendary axe !FIXED!
 Summoner has multiple chances to resurrect enemies !FIXED!
 Summoner has problems !FIXED!
+noDifferenceInEnemiesInArea !FIXED!
+Health resets when entering another fight!FIXED!
 
 Armory - equipped items have no effect (reason: no dict for values YET)
-noDifferenceInEnemiesInArea
+Summons have health reset when summoned again
