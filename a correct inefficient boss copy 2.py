@@ -220,7 +220,6 @@ spellDict = {
     "A" : aetherList,
  }
 
-
 #NEED TO TEST
 def classChange(newClass, itemUsing, lev, stre, agi, dex, hea, per, cha, inte, totHea, specialAbility, specialAbilityValue):
     global classn
@@ -893,7 +892,7 @@ def encounter(noun, opening):
     else:
         opon = str(opening)
 
-def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop, health, strength, dexterity, perception, agility):
+def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
     global summonNumber
     global summons
     global TotHea
@@ -902,6 +901,19 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop, health, strength
     global bestiary
     global experience
     global livingBosses
+    summonStats = {
+        "imp": (25, 1, 1, 2, 10,),
+        "warlord": (100, 7, 9, 5, 1,),
+        "dictator": (75, 3, 3, 1, 5,),
+        "bandit": (10, 2, 2, 10, 10,),
+        "wolf": (7, 4, 4, 10, 3,),
+        "insect": (2, 1, 1, 1, 1,),
+        "ent": (50, 7, 7, 3, 1,),
+        "insect": (2, 1, 1, 1, 1,),
+        "insect": (2, 1, 1, 1, 1,),
+        "insect": (2, 1, 1, 1, 1,),
+        "insect": (2, 1, 1, 1, 1,),
+    }
     health = TotHea
     strength = Str
     dexterity = Dex
@@ -926,13 +938,10 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop, health, strength
                         case "Incantation" | "I":
                             print("Incantation")
                         case "Summon" | "R":
-                            q = input("")
-                            if q in summons:
-                                health = 1
-                                strength = 1
-                                dexterity = 1
-                                perception = 1 
-                                agility = 1
+                            whichSummon = input("Which summon would you like to use? ")
+                            if whichSummon in summons:
+                                health, strength, dexterity, perception, agility = summonStats[whichSummon]
+                                print(f"{health},{strength},{dexterity},{perception},{agility}")
                             else:
                                 print("Not a summon")
                     NeTotHea = eTotHea
@@ -988,7 +997,7 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop, health, strength
                         TotHea = 0
                     print(f"You currently have {TotHea} health left.")
                 case "Retreat" | "R":
-                    retreat = randint(1+tAgi,100)
+                    retreat = randint(1+agility,100)
                     if retreat >= 50:
                         print("You successfully fled, coward.")
                         break
@@ -1473,17 +1482,17 @@ def chance():
     if whr == "thornwood":
         #Works but MAKE MORE EFFICIENT!
         actions = {
-        1: ("imp", 25, 1, 1, 2, 10, 5, None, 0 ,0 ,0 ,0 ,0),
-        2: ("warlord", 100, 7, 9, 5, 1, 50, None, 0 ,0 ,0 ,0 ,0),
-        3: ("dictator", 75, 3, 3, 1, 5, 25, None, 0 ,0 ,0 ,0 ,0),
-        4: ("bandit", 10, 2, 2, 10, 10, 5, None, 0 ,0 ,0 ,0 ,0),
-        5: ("wolf", 7, 4, 4, 10, 3, 3, None, 0 ,0 ,0 ,0 ,0),
-        6: ("insect", 2, 1, 1, 1, 1, 1, None, 0 ,0 ,0 ,0 ,0),
-        7: ("ent", 50, 7, 7, 3, 1, 20, None, 0 ,0 ,0 ,0 ,0),
-        8: ("insect", 2, 1, 1, 1, 1, 1, None, 0 ,0 ,0 ,0 ,0),
-        9: ("insect", 2, 1, 1, 1, 1, 1, None, 0 ,0 ,0 ,0 ,0),
-        10: ("insect", 2, 1, 1, 1, 1, 1, None, 0 ,0 ,0 ,0 ,0),
-        11: ("insect", 2, 1, 1, 1, 1, 1, None, 0 ,0 ,0 ,0 ,0),
+        1: ("imp", 25, 1, 1, 2, 10, 5, None),
+        2: ("warlord", 100, 7, 9, 5, 1, 50, None),
+        3: ("dictator", 75, 3, 3, 1, 5, 25, None),
+        4: ("bandit", 10, 2, 2, 10, 10, 5, None),
+        5: ("wolf", 7, 4, 4, 10, 3, 3, None),
+        6: ("insect", 2, 1, 1, 1, 1, 1, None),
+        7: ("ent", 50, 7, 7, 3, 1, 20, None),
+        8: ("insect", 2, 1, 1, 1, 1, 1, None),
+        9: ("insect", 2, 1, 1, 1, 1, 1, None),
+        10: ("insect", 2, 1, 1, 1, 1, 1, None),
+        11: ("insect", 2, 1, 1, 1, 1, 1, None),
         }
     if whr == "ironhold":
         actions = {
@@ -1516,9 +1525,9 @@ def chance():
     else:
         print("")
     if chanceEn <= 33:
-        no, health, attack, defense, perception, agility, eXp, bossItem, mhealth, mstr, mdex, mper, magi = actions[randint(1,11)]
+        no, health, attack, defense, perception, agility, eXp, bossItem = actions[randint(1,11)]
         encounter(no, None)
-        fight(no, health, attack, defense, perception, agility, eXp, bossItem, mhealth, mstr, mdex, mper, magi)
+        fight(no, health, attack, defense, perception, agility, eXp, bossItem)
     elif chanceEn <= 66 and chanceEn > 33:
         print("Placeholder")
     elif chanceEn <= 99 and chanceEn > 66:
@@ -1528,7 +1537,7 @@ def chance():
             case "thornwood":
                 if "" in livingBosses:
                     encounter("Name", "Statement")
-                    fight("Name", 100, 7, 15, 1, 1, 10000, "Drop", 0 ,0 ,0 ,0 ,0)
+                    fight("Name", 100, 7, 15, 1, 1, 10000, "Drop")
                 else:
                     print("Placeholder")
             case "ironhold":
