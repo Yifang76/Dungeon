@@ -716,7 +716,7 @@ def equip(whereEq):
         available_items = [item for item in inventory if item != equipped_items[whereEq]]
         if available_items:
             whichEq = input(f"Available items for {whereEq}: {available_items}\nWhat would you like to equip? ")
-            if whichEq in available_items:
+            if whichEq in available_items #and whichEq in correctItem:
                 equipped_items[whereEq] = whichEq
                 inventory.remove(whichEq)
                 print(f"You are now wearing {whichEq}.")
@@ -773,7 +773,7 @@ def menu():
     weaponDescDict = {
         "sword" : "A common sword, favoured by scavengers lucky enough to find one.",
         "Brandle" : "Brandle, Giant Slayer. Once wielded by a warmaster involved in the giant wars, this blade was used to fell many a giant. Its legend, whilst forgotten to many, still imbues this blade with giant-slaying capabilities.\n"
-        "And when the Giant Slayer died in battle, fallen like so many of his men, his soul couldn't handle it. And so, his life became forfeit as he held onto one purpose. To slay giants. Thus, the urban legend of The Wicked was formed."
+        "And when the Giant Slayer died in battle, fallen like so many of his men, his soul couldn't bear. And so, his life became forfeit as he held onto one purpose. To slay giants. Thus, the urban legend of The Wicked was formed."
     }
     q = input("What would you like to do. View Stats (S), View Inventory (I), View Journal (J),"
     " View Spells (T), Use Item (U) or Check Level (L). ").capitalize()
