@@ -19,3 +19,4 @@ Add Bounty for player
 Add bountyboard !Done!
 Religion !DONE!
 Despair
+lines 949 - 951

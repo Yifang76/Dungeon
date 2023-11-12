@@ -947,6 +947,8 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
                             if whichSpell in [x.lower().replace("'", "") for x in spells]:
                                 if whichSpell.split()[0] in [x.lower().replace("'", "") for x in spellDamage]:
                                     #Works but SHOULD BE CHANGED!!
+                                    #PROBLEM MAY OCCUR IF SPELL TAKES UP MORE THEN 1 LIST SPOT (IS LONGER THEN 1 WORD)
+                                    #TYPE OF DAMAGE DOESN'T MATTER YET
                                     strength = int(spellDamage[whichSpell.split()[0]].split()[0])
                                     dexterity = int(whichSpell.split()[len(whichSpell.split())-1])
                                 else:
