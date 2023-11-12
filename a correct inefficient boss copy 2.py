@@ -716,7 +716,7 @@ def equip(whereEq):
         available_items = [item for item in inventory if item != equipped_items[whereEq]]
         if available_items:
             whichEq = input(f"Available items for {whereEq}: {available_items}\nWhat would you like to equip? ")
-            if whichEq in available_items #and whichEq in correctItem:
+            if whichEq in available_items: #and whichEq in correctItem:
                 equipped_items[whereEq] = whichEq
                 inventory.remove(whichEq)
                 print(f"You are now wearing {whichEq}.")
@@ -907,6 +907,9 @@ def encounter(noun, opening):
 
 
 def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
+    spellDamage = {
+        "fireball" : "5 fire damage",
+    }
     global summonNumber
     global summons
     global TotHea
@@ -939,7 +942,17 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
                             usingSummon = False
                         case "Spell" | "S":
                             usingSummon = False
-                            print("SPELL")
+                            print(spells)
+                            whichSpell = input("Which spell would you like to cast? ").replace("'","").lower()
+                            if whichSpell in [x.lower().replace("'", "") for x in spells]:
+                                if whichSpell.split()[0] in [x.lower().replace("'", "") for x in spellDamage]:
+                                    #Works but SHOULD BE CHANGED!!
+                                    strength = int(spellDamage[whichSpell.split()[0]].split()[0])
+                                    dexterity = int(whichSpell.split()[len(whichSpell.split())-1])
+                                else:
+                                    print("Invalid spell")
+                            else:
+                                print("You do not have this spell")
                         case "Incantation" | "I":
                             usingSummon = False
                             print("Incantation")
