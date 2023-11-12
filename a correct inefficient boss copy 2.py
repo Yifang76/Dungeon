@@ -768,7 +768,7 @@ def menu():
     }
 
     spellDescDict = {
-        "fireball" : "1",
+        "fireball" : "Basic sorcery for Elemental mages.\nFire was once deemed as taboo before its uses were brought to light.\nDeals 5 base fire damage multiplied by upgrade level.",
     }
     weaponDescDict = {
         "sword" : "A common sword, favoured by scavengers lucky enough to find one.",
