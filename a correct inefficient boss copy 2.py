@@ -1486,9 +1486,19 @@ def shrine():
                 break
 def faithBuff():
     fBuff = {
-        "Galadrialus": "+5 Strength"
+        "Galadrialus": "+5 Str"
     }
     if faith in fBuff:
+        fate = fBuff[faith].split()
+        if len(fate) > 2:
+            count = 1
+            for i in range(int(fate/2)):
+                if fate[count] == "":
+                    variable = variable + fate[count-1]
+        else:
+            if fate[count] == "":
+                variable = variable + fate[count-1]
+
         
 def incantations():
     global gold
@@ -1625,7 +1635,7 @@ def chance():
     
 def chois():
     global carry
-    faithBuff()
+    #faithBuff()
     renownCheck()
     experienceCheck()
     TotHea = Hea * 10
