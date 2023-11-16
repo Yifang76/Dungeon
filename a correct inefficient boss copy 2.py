@@ -1484,6 +1484,12 @@ def shrine():
             if leave == "Yes" or leave == "Y":
                 print("You leave the shrine.")
                 break
+def faithBuff():
+    fBuff = {
+        "Galadrialus": "+5 Strength"
+    }
+    if faith in fBuff:
+        
 def incantations():
     global gold
     global spells
@@ -1619,6 +1625,7 @@ def chance():
     
 def chois():
     global carry
+    faithBuff()
     renownCheck()
     experienceCheck()
     TotHea = Hea * 10
