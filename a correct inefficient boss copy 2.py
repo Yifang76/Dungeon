@@ -1072,6 +1072,7 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
         if usingSummon == True:
             summons.remove(whichSummon)
             print("Your summon dies")
+            usingSummon = False
         else:
             print("You died.")
             sys.exit()
@@ -1544,6 +1545,34 @@ def chance():
         9: ("nsect", 2, 1, 1, 1, 1, 1, None),
         10: ("nsect", 2, 1, 1, 1, 1, 1, None),
         11: ("nsect", 2, 1, 1, 1, 1, 1, None),
+        }
+    if whr == "stormcrag":
+        actions = {
+        1: ("ip", 25, 1, 1, 1, 1, 1, None),
+        2: ("walord", 100, 7, 9, 1, 1, 1, None),
+        3: ("ditator", 75, 3, 3, 1, 1, 1, None),
+        4: ("banit", 10, 2, 2, 1, 1, 1, None),
+        5: ("wof", 7, 4, 4, 1, 1, 1, None),
+        6: ("inect", 2, 1, 1, 1, 1, 1, None),
+        7: ("en", 50, 7, 7, 1, 1, 1, None),
+        8: ("inect", 2, 1, 1, 1, 1, 1, None),
+        9: ("inect", 2, 1, 1, 1, 1, 1, None),
+        10: ("inect", 2, 1, 1, 1, 1, 1, None),
+        11: ("inect", 2, 1, 1, 1, 1, 1, None),
+        }
+    if whr == "havoc's rock":
+        actions = {
+        1: ("ip", 25, 1, 1, 1, 1, 1, None),
+        2: ("walord", 100, 7, 9, 1, 1, 1, None),
+        3: ("ditator", 75, 3, 3, 1, 1, 1, None),
+        4: ("banit", 10, 2, 2, 1, 1, 1, None),
+        5: ("wof", 7, 4, 4, 1, 1, 1, None),
+        6: ("inect", 2, 1, 1, 1, 1, 1, None),
+        7: ("en", 50, 7, 7, 1, 1, 1, None),
+        8: ("inect", 2, 1, 1, 1, 1, 1, None),
+        9: ("inect", 2, 1, 1, 1, 1, 1, None),
+        10: ("inect", 2, 1, 1, 1, 1, 1, None),
+        11: ("inect", 2, 1, 1, 1, 1, 1, None),
         }
     if whr == "duskmire":
         actions = {
