@@ -219,6 +219,22 @@ spellDict = {
     "A" : aetherList,
  }
 
+requirements = ["teleport scroll", "dandylion", "burdock",
+    "protect scroll", "pipewort", "ragwort",
+    "sprites scroll", "snapdragon", "toadflex",
+    "zombie scroll", "devilsbit", "bones",
+    "swift scroll", "speedwell", "sage",
+    "freeze scroll", "bind weed", "bog weed",
+    "doppleganger scroll", "fox glove", "catsear",
+    "invisible scroll", "chondrilla", "hemlock",
+    "reverse scroll", "thistle", "skullcap",
+    "heal scroll", "balm", "feverfew",
+    "fireball scroll", "dragonsteeth", "mousetail",
+    "lightning scroll", "cud weed", "knap weed"
+    ]
+create = ["teleport scroll", "protect scroll", "sprites scroll", "zombie scroll", "swift scroll", "freeze scroll",
+    "doppleganger scroll", "invisible scroll", "reverse scroll", "heal scroll", "fireball scroll", 
+    "lightning scroll"]
 summonStats = {
     "imp": (25, 1, 1, 2, 10,),
     "warlord": (100, 7, 9, 5, 1,),
@@ -1197,6 +1213,23 @@ def blacksmith():
     else:
         print("That is not an option.")
 
+def alchemist():
+    print(create)
+    q = input("Which item would you like to create? ")
+    if q in create:
+        h = requirements.index(q)
+        print(f"You need {requirements[h+1]} and {requirements[h+2]}")
+        cauldron(q, requirements.index(q))
+
+def cauldron(item, herb):
+  if requirements[herb+1] in inventory and requirements[herb+2] in inventory:
+    inventory.remove(requirements[herb+1])
+    inventory.remove(requirements[herb+2])
+    inventory.append(item)
+    print(item+" has been created")
+  else:
+    print("Cannot create "+item+": you don't have the correct herbs")
+
 def trainer():
     print("Knight, Summoner, Berserker, Mage, Priest")
     while True:
@@ -1576,7 +1609,7 @@ def chance():
         10: ("inect", 2, 1, 1, 1, 1, 1, None),
         11: ("inect", 2, 1, 1, 1, 1, 1, None),
         }
-    if whr == "havoc's rock":
+    if whr == "havocs rock":
         actions = {
         1: ("ip", 25, 1, 1, 1, 1, 1, None),
         2: ("walord", 100, 7, 9, 1, 1, 1, None),
@@ -1590,7 +1623,7 @@ def chance():
         10: ("inect", 2, 1, 1, 1, 1, 1, None),
         11: ("inect", 2, 1, 1, 1, 1, 1, None),
         }
-    if whr == "duskmire":
+    if whr == "giants mausoleum":
         actions = {
         1: ("ip", 25, 1, 1, 1, 1, 1, None),
         2: ("walord", 100, 7, 9, 1, 1, 1, None),
@@ -1657,7 +1690,7 @@ def chois():
                 #NOTE: The function can be used within its definition, as shown below
                 chois()
             case "Alchemist" | "P":
-                print("Going to the Alchemist")
+                alchemist()
                 chois()
             case "Armory" | "A":
                 armory()
