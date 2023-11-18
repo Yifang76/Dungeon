@@ -182,7 +182,7 @@ fenceDict = {
     "dragon tooth" : 50
 }
 
-pList = ["Stormcrag", "Havoc's Rock", "Duskmire", "Ironhold", "Thornwood"]
+pList = ["Stormcrag", "Havoc's Rock", "Duskmire", "Ironhold", "Thornwood", "Giant's Mausoleum"]
 crime = []
 liteList = [
 "leather", "iron" ]
@@ -785,11 +785,16 @@ def menu():
 
     spellDescDict = {
         "fireball" : "Basic sorcery for Elemental mages.\nFire was once deemed as taboo before its uses were brought to light.\nDeals 5 base fire damage multiplied by upgrade level.",
+        "curse" : "Basic sorcery for Occult mages.\n Once upon a time, occult magic was accepted in society, acting as a parallel to faith; after the First Tragedy, it's hideous visage was truly revealed to the world",
     }
     weaponDescDict = {
         "sword" : "A common sword, favoured by scavengers lucky enough to find one.",
         "Brandle" : "Brandle, Giant Slayer. Once wielded by a warmaster involved in the giant wars, this blade was used to fell many a giant. Its legend, whilst forgotten to many, still imbues this blade with giant-slaying capabilities.\n"
-        "And when the Giant Slayer died in battle, fallen like so many of his men, his soul couldn't bear. And so, his life became forfeit as he held onto one purpose. To slay giants. Thus, the urban legend of The Wicked was formed."
+        "And when the Giant Slayer died in battle, fallen like so many of his men, his soul couldn't bear. And so, his life became forfeit as he held onto one purpose. To slay giants. Thus, the urban legend of The Wicked was formed.",
+        "Vanta's Vessel" : "Vessel of Vanta the Vile, crushed by a destructive force unfamiliar to the natural order",
+        "Murmur's Mask" : "Mask of Murmur the Maelstrom, a silent force is imbued within the mask's eyes. It is said that when worn, one can hear the sounds of the sea."
+        #Need to edit to account for '
+
     }
     q = input("What would you like to do. View Stats (S), View Inventory (I), View Journal (J),"
     " View Spells (T), Use Item (U) or Check Level (L). ").capitalize()
@@ -905,11 +910,11 @@ def encounter(noun, opening):
     pv = choice(palist)
     
     
-    match noun:
-        case "warlord" | "dictator" | "bandit" | "wolf":
-            det = str("a")
-        case _:
+    match list(noun)[0]:
+        case "a" | "e" | "i" | "o" | "u":
             det = str("an")
+        case _:
+            det = str("a")
 
     if v == "looks" or v == "glares":
         ex = str("at you")
@@ -1625,17 +1630,17 @@ def chance():
         }
     if whr == "giants mausoleum":
         actions = {
-        1: ("ip", 25, 1, 1, 1, 1, 1, None),
-        2: ("walord", 100, 7, 9, 1, 1, 1, None),
-        3: ("ditator", 75, 3, 3, 1, 1, 1, None),
-        4: ("banit", 10, 2, 2, 1, 1, 1, None),
-        5: ("wof", 7, 4, 4, 1, 1, 1, None),
-        6: ("inect", 2, 1, 1, 1, 1, 1, None),
-        7: ("en", 50, 7, 7, 1, 1, 1, None),
-        8: ("inect", 2, 1, 1, 1, 1, 1, None),
-        9: ("inect", 2, 1, 1, 1, 1, 1, None),
-        10: ("inect", 2, 1, 1, 1, 1, 1, None),
-        11: ("inect", 2, 1, 1, 1, 1, 1, None),
+        1: ("shade", 25, 1, 1, 1, 1, 1, None),
+        2: ("ghoul", 100, 7, 9, 1, 1, 1, None),
+        3: ("spirit", 75, 3, 3, 1, 1, 1, None),
+        4: ("ice spirit", 10, 2, 2, 1, 1, 1, None),
+        5: ("snow wolf", 7, 4, 4, 1, 1, 1, None),
+        6: ("glacice", 2, 1, 1, 1, 1, 1, None),
+        7: ("mammoth", 50, 7, 7, 1, 1, 1, None),
+        8: ("zombie", 2, 1, 1, 1, 1, 1, None),
+        9: ("skeleton", 2, 1, 1, 1, 1, 1, None),
+        10: ("half giant", 2, 1, 1, 1, 1, 1, None),
+        11: ("shambling giant", 2, 1, 1, 1, 1, 1, None),
         }
     else:
         print("")
