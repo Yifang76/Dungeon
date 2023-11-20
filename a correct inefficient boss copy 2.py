@@ -288,6 +288,9 @@ def rarities(q):
         print("NO2")
 
 def guard(statement, tim, place):
+    count = 0
+    for i in range(count):
+    if tim.split()
     q = input(f"You are charged with {statement}. You will be sentenced for {tim}. "
     "What will you do? (Resist Arrest (F), Evade Arrest (E) Bribe Guard (B), "
     "Persuade Guard (P) Intimidate Guard (I) or Accept Arrest (A)) ").capitalize()
@@ -796,8 +799,12 @@ def menu():
         #Need to edit to account for '
 
     }
+    summonsDict = {
+        "Frost Knight Theodore" : "",
+        "Magma Blade Entil" : "",
+    }
     q = input("What would you like to do. View Stats (S), View Inventory (I), View Journal (J),"
-    " View Spells (T), Use Item (U) or Check Level (L). ").capitalize()
+    " View Spells (T), View Summons (M), Use Item (U) or Check Level (L). ").capitalize()
     match q:
         case "View Stats" | "Stats" | "S":
             print(f"Without modifiers, you have:\nHealth: {TotHea}\nStrength: {Str}\nDexterity: {Dex}\n"
@@ -815,6 +822,13 @@ def menu():
                     print(f"You do not have {whichDesc}.")
             elif checkDesc == "No" or checkDesc == "N":
                 print("You conclude your check.")
+            else:
+                print("That is not an option")
+        case "View Summons" | "Summons" | "M":
+            print(summons)
+            q = input("Which summon would you like to view? ")
+            if q in summonsDict and q in summons:
+                print(summonsDict[q])
             else:
                 print("That is not an option")
         case "View Spells" | "Spells" | "T":
