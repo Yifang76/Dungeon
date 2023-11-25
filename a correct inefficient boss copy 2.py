@@ -47,9 +47,10 @@ baseSpellsDict = {
 }
 
 name = input("Name, please ").capitalize()
-print("Knight: (Strength: 10, Agility: 3, Dexterity: 8,\nHealth: 7, Perception: 4, Charisma: 6 (Within lawful lands) or 0 (in foreign lands),\nIntelligence: 5 )")
-print("Merchant: (Strength: 1, Agility: 8, Dexterity: 1,\nHealth: 3, Perception: 8, Charisma: 10,\nIntelligence: 6 )")
-print("Summoner: (Strength: 1, Agility: 4, Dexterity: 1,\nHealth: 2, Perception: 9, Charisma: 2,\nIntelligence: 8 )")
+print("Knight: (Strength: 10, Agility: 3, Dexterity: 8,\nHealth: 7, Perception: 4, Charisma: 6 (Within lawful lands) or 0 (in foreign lands),\nIntelligence: 5)")
+print("Merchant: (Strength: 1, Agility: 8, Dexterity: 1,\nHealth: 3, Perception: 8, Charisma: 10,\nIntelligence: 6)")
+print("Summoner: (Strength: 1, Agility: 4, Dexterity: 1,\nHealth: 2, Perception: 9, Charisma: 2,\nIntelligence: 8)")
+print("Mage: (Strength: 2, Agility: 4, Dexterity: 4,\nHealth: 5, Perception: 7, Charisma: 3,\nIntelligence: 10)")
 attriQuery = input("Would you like a guide on the attributes? ").capitalize()
 if attriQuery == "Yes":
     print("Strength determines the base damage you do, Agility determines your evasion, Dexterity determines base damage,\nPerception determines your critical chance, Charisma determines your barter rate and speech, Intelligence determines your spellcraft\nand Health determines your HP.")
@@ -85,6 +86,14 @@ while True:
         case "Summoner":
             classv(26, 1, 4, 1, 2, 9, 2, 8, 20)
             totalSummonNumber = Int
+            while True:
+                print("Wolf")
+                whichSummo = input("Which summon would you like to start with? ").capitalize()
+                if whichSummo == "Wolf":
+                    summons.append("wolf")
+                    break
+                else:
+                    print("That is not an option")
             break
         case "Merchant":
             classv(37, 1, 8, 1, 3, 8, 10, 6, 30)
@@ -183,7 +192,7 @@ fenceDict = {
 }
 
 pList = ["Stormcrag", "Havoc's Rock", "Duskmire", "Ironhold", "Thornwood", "Giant's Mausoleum"]
-crime = []
+crime = {}
 liteList = [
 "leather", "iron" ]
 enemyList = ["imp", "warlord", "dictator", "insect", "bandit", "ent", "wolf"]
@@ -287,11 +296,20 @@ def rarities(q):
     else:
         print("NO2")
 
+def crimCheck(tim):
+    global crime
+    if tim.split()[1] == "Years" or tim.split()[1] == "Year":
+        crime.update({str("Years"): (crime["Years"]) + int(tim.split()[0])})
+
+    if tim.split()[1] == "Months" or tim.split()[1] == "Month":
+        crime.update({str("Months"): (crime["Months"]) + int(tim.split()[0])})
+
+    if tim.split()[1] == "Days" or tim.split()[1] == "Day":
+        crime.update({str("Days"): (crime["Days"]) + int(tim.split()[0])})
+    return (""+str(crime["Years"])+" year(s), "+str(crime["Months"])+" month(s) and "+str(crime["Days"])+" day(s)") #When f"" used [ is declared as unmatched
+
 def guard(statement, tim, place):
-    count = 0
-    for i in range(count):
-    if tim.split()
-    q = input(f"You are charged with {statement}. You will be sentenced for {tim}. "
+    q = input(f"You are charged with {statement}. You will be sentenced for {crimCheck(tim)}. "
     "What will you do? (Resist Arrest (F), Evade Arrest (E) Bribe Guard (B), "
     "Persuade Guard (P) Intimidate Guard (I) or Accept Arrest (A)) ").capitalize()
     answer = False
@@ -349,7 +367,7 @@ def guardF(place):
                 case _:
                     print("That is not an option")
         if eTotHea <= 0:       
-            tim = tim + 5
+            tim = str(int(tim.split()[0]) + int(5)) +" "+tim.split()[1]
             if randint(1,2) == 1:
                 print("Another guard arrives to stop you")
                 guardF(place, safe, danger)
@@ -362,7 +380,8 @@ def guardF(place):
     if TotHea <= 0:
         if place in safe:
             #change to 20 years eventually; make it compatible with months, ect.
-            tim = tim + 20
+            tim = str(int(tim.split()[0]) + int(5)) +" "+tim.split()[1]
+            crimCheck(tim)
             print(f"Wounded, you are dragged to prison by the guards, sentence increasing to {tim}.")
             if classn == "Knight":
                 #CHANGE LINE UNDER THIS COMMENT TO ACCOUNT FOR MULTIPLE ITEMS. (E.G. King's Charter, Queen's Pardon, ect.)
@@ -380,7 +399,7 @@ def guardE(place,tim):
     q = randint(1,100-Agi)
     if q <= 10:
         print("You successfully escaped the guards, however your crime has not been forgotten.")
-        crime.append(tim)
+        crimeCheck(tim)
     else:
         guardF(place)
 
@@ -417,7 +436,8 @@ def guardB(place):
 
     else:
         print("How dare you try to bribe an officer of the law!")
-        tim = tim + 5
+        tim = str(int(tim.split()[0]) + int(5)) +" "+tim.split()[1]
+        crimCheck(tim)
 
 
 def sell():
@@ -971,7 +991,7 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
             opt = input("Would you like to Fight (F), Use Item (I) or Retreat (R)? ").capitalize()
             match opt:
                 case "Fight" | "F":
-                    q = input("Physical (P), Spell (S) or Incantation (I) (R)? ").capitalize()
+                    q = input("Physical (P), Spell (S), Incantation (I) or Summon (R)? ").capitalize()
                     match q:
                         case "Physical" | "P":
                             usingSummon = False
@@ -994,6 +1014,7 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
                             usingSummon = False
                             print("Incantation")
                         case "Summon" | "R":
+                            print(summons)
                             whichSummon = input("Which summon would you like to use? ")
                             if whichSummon in summons:
                                 usingSummon = True
