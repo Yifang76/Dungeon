@@ -735,6 +735,17 @@ def depo():
         case _:
             print("That is not an option.")
 
+
+def correctPA(q, correctP):
+    count = 0
+    while count < len(correctP)-1:
+        if q.split()[count] in correctP:
+            return True
+        else:
+            count += 1
+    print("Invalid item for slot")
+
+
 def armory():
     WoR = input("Would you like to Equip (E) or Remove (R) equipment? ").capitalize()
     if WoR == "Equip" or WoR == "E":
@@ -755,7 +766,7 @@ def equip(whereEq):
         available_items = [item for item in inventory if item != equipped_items[whereEq]]
         if available_items:
             whichEq = input(f"Available items for {whereEq}: {available_items}\nWhat would you like to equip? ")
-            if whichEq in available_items: #and whichEq in correctItem:
+            if whichEq in available_items: and correctPA(whichEq,whereEq+"CorrectPlace") == True:
                 equipped_items[whereEq] = whichEq
                 inventory.remove(whichEq)
                 print(f"You are now wearing {whichEq}.")
