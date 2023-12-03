@@ -20,3 +20,4 @@ Add bountyboard !Done!
 Religion !DONE!
 Despair
 lines 949 - 951
+Add rewards for bounties (split, list, task, num, species)

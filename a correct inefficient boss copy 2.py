@@ -766,7 +766,7 @@ def equip(whereEq):
         available_items = [item for item in inventory if item != equipped_items[whereEq]]
         if available_items:
             whichEq = input(f"Available items for {whereEq}: {available_items}\nWhat would you like to equip? ")
-            if whichEq in available_items: and correctPA(whichEq,whereEq+"CorrectPlace") == True:
+            if whichEq in available_items and correctPA(whichEq,whereEq+"CorrectPlace") == True:
                 equipped_items[whereEq] = whichEq
                 inventory.remove(whichEq)
                 print(f"You are now wearing {whichEq}.")
@@ -1499,6 +1499,8 @@ def bounty():
     global liteList
     global enemyList
     global activeBounties
+    global bount
+    bount = {}
     bountyList = []
     for i in range(5):
         rand = randint(1,2)
@@ -1509,11 +1511,13 @@ def bounty():
             which = choice(liteList)
             act = "Retrieve"
         rend = randint(1,10)
+        cos = randint(1,50)
         if rend == 1:
-            state = f"{act} {rend} {which}."
+            state = f"{act} {rend} {which} ({cos} gold). "
         else:
-            state = f"{act} {rend} {which}s."
+            state = f"{act} {rend} {which}s ({cos} gold). "
         bountyList.append(state)
+        bount.update({state : cos})
     while True:
         print(bountyList)
         q = int(input("Which bounty would you like to take? 0 (first) - 4 (last). "))
