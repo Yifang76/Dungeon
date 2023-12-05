@@ -40,15 +40,7 @@ attriQuery = input("Would you like a guide on the attributes? ").capitalize()
 if attriQuery == "Yes":
     print("Strength determines the base damage you do, Agility determines your evasion, Dexterity determines base damage,\nPerception determines your critical chance, Charisma determines your barter rate and speech, Intelligence determines your spellcraft\nand Health determines your HP.")
 def classv(LevelG, StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG):
-    global Level
-    global Str
-    global Agi
-    global Dex
-    global Hea
-    global Per
-    global Cha
-    global Int
-    global TotHea
+    global Level, Str, Agi, Dex, Hea, Per, Cha, Int, TotHea
     print(f"Welcome, {classn} {name}.")
     Level = int(LevelG)
     Str = int(StrG)
@@ -318,12 +310,7 @@ def guard(statement, tim, place):
 #eStr and (presumably) eDex undefined. Try using method in chance?
 #danger not defined and time not defined, along with eStr and eDex
 def guardF(place):
-    global summonNumber
-    global summons
-    global TotHea
-    global classn
-    global totalSummonNumber
-    global tim
+    global summonNumber, summons, TotHea, classn, totalSummonNumber, tim
     enemyHealth = {
         "Cetus" : 10,
         "Ashborn" : 50,
@@ -661,10 +648,7 @@ def bank():
             print("That is not an option.")
 
 def wth():
-    global gold
-    global bankedGold
-    global bankedItems
-    global inventory
+    global gold, bankedGold, bankedItems, inventory
     wthWhch = input("Would you like to withdraw Items (I) or Gold (G)? ").capitalize()
     match wthWhch:
         case "Items" | "Item" | "I":
@@ -691,10 +675,7 @@ def wth():
             print("That is not an option.")
 
 def depo():
-    global gold
-    global bankedGold
-    global bankedItems
-    global inventory
+    global gold, bankedGold, bankedItems, inventory
     depWhch = input("Would you like to deposit Items (I) or Gold (G)? ").capitalize()
     match depWhch:
         case "Items" | "Item" | "I":
@@ -884,8 +865,7 @@ def menu():
 
 #Possibly Uneeded
 def nounList(firstV, secondV, thirdV, fourthV, fifthV, sixthV, seventhV, eighthV, ninthV, tenthV):
-    global n
-    global modNlist
+    global n, modNlist
     nlist = [firstV, secondV, thirdV, fourthV, fifthV, sixthV, seventhV, eighthV, ninthV, tenthV]
     modNlist = [item for item in nlist if item is not None]
     print(modNlist)
@@ -912,17 +892,7 @@ def where():
         print("That is not an option")
 
 def encounter(noun, opening):
-    global ad
-    global itemlist
-    global item
-    global n
-    global v
-    global pv
-    global ex
-    global eTotHea
-    global weapon
-    global resource
-    global valuable
+    global ad, itemlist, item, n, v, pv, ex, eTotHea, weapon, resource, valuable
     weaponlist = ["axe","sword","stick"]
     weapon = choice(weaponlist)
 
@@ -961,17 +931,7 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
     spellDamage = {
         "fireball" : "5 fire damage",
     }
-    global summonNumber
-    global summons
-    global TotHea
-    global classn
-    global totalSummonNumber
-    global bestiary
-    global experience
-    global livingBosses
-    global usingSummon
-    global health
-    global nTotHea
+    global summonNumber, summons, TotHea, classn, totalSummonNumber, bestiary, experience, livingBosses, usingSummon, health, nTotHea
     health = nTotHea
     strength = Str
     dexterity = Dex
@@ -1130,9 +1090,7 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
             sys.exit()
 
 def itemUse():
-    global TotHea
-    global inventory
-    global despair
+    global TotHea, inventory, despair
     healthHeal = {
         "apple" : 5,
         "1" : 10,
@@ -1169,11 +1127,7 @@ def itemUse():
                 print("Your despair completely subsides")
 
 def blacksmith():
-    global inventory
-    global ad
-    global adlist
-    global weaponModifier
-    global new
+    global inventory, ad, adlist, weaponModifier, new
     CraftorUpgrade = input("Would you like to craft or upgrade? ").capitalize()
     if CraftorUpgrade == "Craft":
         craft = input("What would you like to craft: charm or weapon? ").capitalize()
@@ -1300,8 +1254,7 @@ def trainer():
                 print("That is not an option")
 
 def journal():
-    global honor
-    global renown
+    global honor, renown
     q = input("What would you like to view? Honor (H), Bestiary (B), Quests (Q) or Bounties (C). ").capitalize()
     match q:
         case "Honor" | "H":
@@ -1343,8 +1296,7 @@ def bestiary():
         print("You close the bestiary.")
 
 def renownCheck():
-    global honor
-    global renown
+    global honor, renown
     if renown <= -100:
         honor = "Villain"
     elif renown <=-50 and renown > -100:
@@ -1358,10 +1310,7 @@ def renownCheck():
     else:
         honor = "Unidentified"
 def experienceCheck():
-    global experience
-    global Level
-    global experienceRequired
-    global statUpgrade
+    global experience, Level, experienceRequired, statUpgrade
     while True:
         experienceRequired = Level*100
         if experience >= experienceRequired:
@@ -1373,14 +1322,7 @@ def experienceCheck():
         else:
             break
 def chooseStat():
-    global statUpgrade
-    global Cha
-    global Str
-    global Dex
-    global TotHea
-    global Per
-    global Int
-    global Hea
+    global statUpgrade, Cha, Str, Dex, TotHea, Per, Int, Hea
     print(f"You have:\nHealth: {TotHea}\nStrength: {Str}\nDexterity: {Dex}\n"
     f"Perception: {Per}\nCharisma: {Cha}\nIntelligence: {Int}\nYou have {str(statUpgrade)} unspent stat points.")
 
@@ -1481,10 +1423,7 @@ def tavern():
 
 #ADD A SEPARATOR (E.G.) # MAYBE TRY bountyList.append(state"#")?
 def bounty():
-    global liteList
-    global enemyList
-    global activeBounties
-    global bount
+    global liteList, enemyList, activeBounties, bount
     bount = {}
     bountyList = []
     for i in range(5):
@@ -1574,8 +1513,7 @@ def faithBuff():
 
         
 def incantations():
-    global gold
-    global spells
+    global gold, spells
     spellGCost = {
         "Fireball" : 50,
         "Freeze" : 50,
@@ -1603,8 +1541,7 @@ def incantations():
                 break
                 
 def chance():
-    global modNlist
-    global whr
+    global modNlist, whr
     chanceEn = randint(1,100)
     if whr == "thornwood":
         #Works but MAKE MORE EFFICIENT!
