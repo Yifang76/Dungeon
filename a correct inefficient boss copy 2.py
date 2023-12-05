@@ -1,7 +1,7 @@
 from random import *
 import sys
-gold = 0
-statUpgrade = 0
+gold, bankedGold = 0, 0
+statUpgrade, experience = 0, 0
 summonNumber = int(0)
 totalSummonNumber = None
 activeBounties = []
@@ -12,30 +12,15 @@ faith = None
 eTotHea = int(1)
 carry = True
 summons = []
-shopStock = []
-bankedGold = 0
-bankedItems = []
-experience = 0
+shopStock, bankedItems = [], []
 n = None
-done = True
 renown = 0
-hEqItem = None
-cEqItem = None
-lEqItem = None
-gEqItem = None
-bEqItem = None
-rhEqItem = None
-lhEqItem = None
+hEqItem, cEqItem, lEqItem, gEqItem, bEqItem, rhEqItem, lhEqItem = None, None, None, None, None, None, None
 adlist = ["common ","rare ","mythical ","legendary "]
-ad = choice(adlist)
 weaponlist = ["axe","sword","stick"]
-weapon = choice(weaponlist)
-
 resourcelist = ["leather"]
-resource = choice(resourcelist)
-
 valuablelist = ["iron"]
-valuable = choice(valuablelist)
+ad, weapon, resource, valuable = choice(adlist), choice(weaponlist), choice(resourcelist), choice(valuablelist)
 
 baseSpellsDict = {
     "Elemental" : "Fireball",
