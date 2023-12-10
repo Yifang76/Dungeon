@@ -786,6 +786,13 @@ def menu():
     spellDescDict = {
         "fireball" : "Basic sorcery for Elemental mages.\nFire was once deemed as taboo before its uses were brought to light.\nDeals 5 base fire damage multiplied by upgrade level.",
         "curse" : "Basic sorcery for Occult mages.\n Once upon a time, occult magic was accepted in society, acting as a parallel to faith; after the First Tragedy, it's hideous visage was truly revealed to the world",
+    
+        "Abyssal Antonym" : "",
+        "Cursed Call" : "",
+        "Legacy's Lightning" : "",
+        "Murphy's Madness" : "",
+        "Soul Snatcher" : "",
+        "" : "",
     }
     weaponDescDict = {
         "sword" : "A common sword, favoured by scavengers lucky enough to find one.",
@@ -793,6 +800,8 @@ def menu():
         "And when the Giant Slayer died in battle, fallen like so many of his men, his soul couldn't bear. And so, his life became forfeit as he held onto one purpose. To slay giants. Thus, the urban legend of The Wicked was formed.",
         "Vanta's Vessel" : "Vessel of Vanta the Vile, crushed by a destructive force unfamiliar to the natural order",
         "Murmur's Mask" : "Mask of Murmur the Maelstrom, a silent force is imbued within the mask's eyes. It is said that when worn, one can hear the sounds of the sea."
+        "Skrill's Spine" : "",
+        "Fortress' Fangs" : "",
         #Need to edit to account for '
 
     }
@@ -1635,6 +1644,9 @@ def chance():
             case "ironhold":
                 encounter("Precept", "From the depths of Ironhold, the mechanical Precept, life of the city, reveals itself.")
                 fight("Precept", 5000, 15, 30, 1, 15000, "Machine Eye")
+            case "stormcrag":
+                encounter()
+                fight()
             case "giant's mausoleum":
                 if "The Wicked" in livingBosses:
                     encounter("The Wicked", "Rising from the corpses of the fallen giants, The Wicked rises for vengeance.")
