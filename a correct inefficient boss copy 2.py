@@ -1549,6 +1549,12 @@ def incantations():
             if continu == "Yes" or "Y":
                 break
                 
+def acti(numOfTimes):
+    actions = {}
+    for i in range(numOfTimes):
+        actions.update()
+
+
 def chance():
     global modNlist, whr
     chanceEn = randint(1,100)
