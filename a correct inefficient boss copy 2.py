@@ -1549,12 +1549,6 @@ def incantations():
             if continu == "Yes" or "Y":
                 break
                 
-def acti(numOfTimes):
-    actions = {}
-    for i in range(numOfTimes):
-        actions.update()
-
-
 def chance():
     global modNlist, whr
     chanceEn = randint(1,100)
@@ -1661,6 +1655,44 @@ def chance():
                     print("The corpse of The Wicked has disappeared.")
     experienceCheck()
     
+#DELETE FROM HERE
+
+def save():
+    opens = open("saveFile.txt", "r")
+    if opens:
+        q = input()
+        if q == "Save" or q == "S":
+            opens.write("\n"+name+"\n"+inventory)
+            opens.close()
+    else:
+        creates = open("saveFile.txt", "x")
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#TO HERE
+
+
 def chois():
     global carry
     #faithBuff()
