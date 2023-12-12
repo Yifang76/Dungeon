@@ -799,7 +799,7 @@ def menu():
         "Brandle" : "Brandle, Giant Slayer. Once wielded by a warmaster involved in the giant wars, this blade was used to fell many a giant. Its legend, whilst forgotten to many, still imbues this blade with giant-slaying capabilities.\n"
         "And when the Giant Slayer died in battle, fallen like so many of his men, his soul couldn't bear. And so, his life became forfeit as he held onto one purpose. To slay giants. Thus, the urban legend of The Wicked was formed.",
         "Vanta's Vessel" : "Vessel of Vanta the Vile, crushed by a destructive force unfamiliar to the natural order",
-        "Murmur's Mask" : "Mask of Murmur the Maelstrom, a silent force is imbued within the mask's eyes. It is said that when worn, one can hear the sounds of the sea."
+        "Murmur's Mask" : "Mask of Murmur the Maelstrom, a silent force is imbued within the mask's eyes. It is said that when worn, one can hear the sounds of the sea.",
         "Skrill's Spine" : "",
         "Fortress' Fangs" : "",
         #Need to edit to account for '
@@ -810,7 +810,7 @@ def menu():
         "Magma Blade Entil" : "",
     }
     q = input("What would you like to do. View Stats (S), View Inventory (I), View Journal (J),"
-    " View Spells (T), View Summons (M), Use Item (U) or Check Level (L). ").capitalize()
+    " View Spells (T), View Summons (M), Use Item (U), Save/Load (C) or Check Level (L). ").capitalize()
     match q:
         case "View Stats" | "Stats" | "S":
             print(f"Without modifiers, you have:\nHealth: {TotHea}\nStrength: {Str}\nDexterity: {Dex}\n"
@@ -864,6 +864,8 @@ def menu():
             else:
                 print("That is not an option")
                # chois() 
+        case "Save" | "Load" | "SL" | "C":
+            save()
         case "Check Level" | "L":
             print(f"You are currently level {Level}.")
             print(f"You have {experience} EXP and you will need {experienceRequired-experience} EXP to level up.")
@@ -1656,17 +1658,22 @@ def chance():
     experienceCheck()
     
 #DELETE FROM HERE
-
 def save():
-    opens = open("saveFile.txt", "r")
-    if opens:
-        q = input()
+    try:
+        open("saveFile.txt", "x")
+    #except:
+    #    print("Already exists")
+    finally:
+        opens = open("saveFile.txt", "a")
+        q = input("Which would you like to Save (S) or Load (L)? ").title()
         if q == "Save" or q == "S":
-            opens.write("\n"+name+"\n"+inventory)
-            opens.close()
-    else:
-        creates = open("saveFile.txt", "x")
-        
+            opens.write("\n"+name+"\n"+classn+)
+        elif q == "Load" or q == "L":
+            opens = open("saveFile.txt", "r")
+            name = 
+        else:
+            print("Exiting Save Files")
+        opens.close()
 
 
 
