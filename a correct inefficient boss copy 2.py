@@ -1659,18 +1659,20 @@ def chance():
     
 #DELETE FROM HERE
 def save():
+    global name, classn, inventory
     try:
         open("saveFile.txt", "x")
-    #except:
-    #    print("Already exists")
+    except:
+        print("Already exists")
     finally:
         opens = open("saveFile.txt", "a")
         q = input("Which would you like to Save (S) or Load (L)? ").title()
         if q == "Save" or q == "S":
-            opens.write("\n"+name+"\n"+classn+)
+            opens.write("\n"+name+"\n"+classn+"\n"+str(inventory))
         elif q == "Load" or q == "L":
             opens = open("saveFile.txt", "r")
-            name = 
+            name, classn, inventory = opens.readline(), opens.readline(), opens.readline()
+
         else:
             print("Exiting Save Files")
         opens.close()
