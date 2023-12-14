@@ -32,16 +32,16 @@ baseSpellsDict = {
 }
 
 name = input("Name, please ").capitalize()
-print("Knight: (Strength: 10, Agility: 3, Dexterity: 8,\nHealth: 7, Perception: 4, Charisma: 6 (Within lawful lands) or 0 (in foreign lands),\nIntelligence: 5)")
-print("Merchant: (Strength: 1, Agility: 8, Dexterity: 1,\nHealth: 3, Perception: 8, Charisma: 10,\nIntelligence: 6)")
-print("Summoner: (Strength: 1, Agility: 4, Dexterity: 1,\nHealth: 2, Perception: 9, Charisma: 2,\nIntelligence: 8)")
-print("Mage: (Strength: 2, Agility: 4, Dexterity: 4,\nHealth: 5, Perception: 7, Charisma: 3,\nIntelligence: 10)")
+print("Knight: (Strength: 10, Agility: 3, Dexterity: 8,\nHealth: 7, Perception: 4, Charisma: 6 (Within lawful lands) or 0 (in foreign lands),\nIntelligence: 5)\n")
+print("Merchant: (Strength: 1, Agility: 8, Dexterity: 1,\nHealth: 3, Perception: 8, Charisma: 10,\nIntelligence: 6)\n")
+print("Summoner: (Strength: 1, Agility: 4, Dexterity: 1,\nHealth: 2, Perception: 9, Charisma: 2,\nIntelligence: 8)\n")
+print("Mage: (Strength: 2, Agility: 4, Dexterity: 4,\nHealth: 5, Perception: 7, Charisma: 3,\nIntelligence: 10)\n")
 attriQuery = input("Would you like a guide on the attributes? ").capitalize()
 if attriQuery == "Yes":
-    print("Strength determines the base damage you do, Agility determines your evasion, Dexterity determines base damage,\nPerception determines your critical chance, Charisma determines your barter rate and speech, Intelligence determines your spellcraft\nand Health determines your HP.")
+    print("Strength determines the base damage you do, Agility determines your evasion, Dexterity determines base damage,\nPerception determines your critical chance, Charisma determines your barter rate and speech, Intelligence determines your spellcraft\nand Health determines your HP.\n")
 def classv(LevelG, StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG):
     global Level, Str, Agi, Dex, Hea, Per, Cha, Int, TotHea
-    print(f"Welcome, {classn} {name}.")
+    print(f"Welcome, {classn} {name}.\n")
     Level = int(LevelG)
     Str = int(StrG)
     Agi = int(AgiG)
@@ -1532,7 +1532,7 @@ def incantations():
         "Bind" : 40,
         "Barrage" : 50,
     }
-    print("Elemental (E), Divine (D), Nature (N), Aether (A)")
+    print("Elemental (E), Divine (D), Nature (N), Aether (A)\n")
     while True:
         q = input("Which category of spell would you like to see? ").capitalize()
         if q in legalSpells:
@@ -1665,14 +1665,14 @@ def save():
     except:
         print("Already exists")
     finally:
-        opens = open("saveFile.txt", "w")
         q = input("Which would you like to Save (S) or Load (L)? ").title()
         if q == "Save" or q == "S":
-            opens.write("\n"+name+"\n"+classn+"\n"+str(inventory)+"\n"+str(spells)+"\n"+faith+"\n"+str(bestiar))
+            opens = open("saveFile.txt", "w")
+            opens.write(name+"\n"+classn+"\n"+str(inventory)+"\n"+str(spells)+"\n"+faith+"\n"+str(bestiar))
             #error when trying to store an item from str(inventory) TRY .SPLIT(,)
         elif q == "Load" or q == "L":
             opens = open("saveFile.txt", "r")
-            name, classn, inventory, spells, bestiar = opens.readline(), opens.readline(), opens.readline(), opens.readline(), opens.readline() 
+            name, classn, inventory, spells, bestiar = opens.readline(), opens.readline(), opens.readline().split(","), opens.readline(), opens.readline() 
 
         else:
             print("Exiting Save Files")
@@ -1710,7 +1710,7 @@ def chois():
     experienceCheck()
     TotHea = Hea * 10
     while True:
-        townQuestion = input("Where would you like to go?"
+        townQuestion = input("\nWhere would you like to go?"
                     " You may go to the Alchemist (P),"
                     " the Blacksmith (W), the Armory (A), the Bank (B),"
                     " the Tavern (H), the Bounty Board (C), the Shrine (S),"
@@ -1718,11 +1718,11 @@ def chois():
                     " the Incantation Store (I) or back Out (O). ").capitalize()
         match townQuestion:
             case "Market" | "M":
-                print("Going to the Market")
+                print("Going to the Market\n")
                 shop()
                 chois()
             case "Blacksmith" | "W":
-                print("Going to the Blacksmith")
+                print("Going to the Blacksmith\n")
                 blacksmith()
                 #NOTE: The function can be used within its definition, as shown below
                 chois()
