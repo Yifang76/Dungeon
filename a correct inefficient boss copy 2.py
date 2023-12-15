@@ -4,15 +4,15 @@ gold, bankedGold = 0, 0
 statUpgrade, experience = 0, 0
 summonNumber = int(0)
 totalSummonNumber = None
-activeBounties = []
-bestiar = []
+activeBounties = ["None"]
+bestiar = ["None"]
 inventory = ["helmet", "sword"]
-spells = []
-faith = None
+spells = ["None"]
+faith = "None"
 eTotHea = int(1)
 carry = True
-summons = []
-shopStock, bankedItems = [], []
+summons = ["None"]
+shopStock, bankedItems = [""], ["None"]
 n = None
 renown = 0
 hEqItem, cEqItem, lEqItem, gEqItem, bEqItem, rhEqItem, lhEqItem = None, None, None, None, None, None, None
@@ -167,7 +167,7 @@ fenceDict = {
     "human flesh" : 5,
     "dragon tooth" : 50
 }
-
+listsConfig = ["totalSummonNumber", "activeBounties", "bestiar", "spells", "summons", "bankedItems"]
 pList = ["Stormcrag", "Havoc's Rock", "Duskmire", "Ironhold", "Thornwood", "Giant's Mausoleum"]
 crime = {}
 liteList = [
@@ -1656,14 +1656,18 @@ def chance():
                 else:
                     print("The corpse of The Wicked has disappeared.")
     experienceCheck()
-    
+
+def removeNoneFromLists(listName):
+    if len(listName) > 1 and listName[0] == "None":
+        listName.remove("None")
+
 #DELETE FROM HERE
 def save():
     global name, classn, inventory, spells, faith, bestiar
     try:
         open("saveFile.txt", "x")
     except:
-        print("Already exists")
+        print("Loading Save File")
     finally:
         q = input("Which would you like to Save (S) or Load (L)? ").title()
         if q == "Save" or q == "S":
@@ -1704,6 +1708,9 @@ def save():
 
 
 def chois():
+    for i in range(len(listsConfig)):
+        count = 0
+        removeNoneFromLists(listsConfig[count])
     global carry
     #faithBuff()
     renownCheck()
