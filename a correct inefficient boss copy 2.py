@@ -1672,12 +1672,15 @@ def save():
         q = input("Which would you like to Save (S) or Load (L)? ").title()
         if q == "Save" or q == "S":
             opens = open("saveFile.txt", "w")
-            opens.write(name+"\n"+classn+"\n"+str(inventory)+"\n"+str(spells)+"\n"+faith+"\n"+str(bestiar))
+            opens.write(name+"\n"+classn+"\n"+str(inventoryTwo)+"\n"+str(spells)+"\n"+faith+"\n"+str(bestiar))
             #error when trying to store an item from str(inventory) TRY .SPLIT(,)
         elif q == "Load" or q == "L":
             opens = open("saveFile.txt", "r")
             name, classn, inventory, spells, bestiar = opens.readline(), opens.readline(), opens.readline().replace("[","").replace("]","").replace("'","").split(","), opens.readline(), opens.readline() 
-
+            count = 0
+            for i in range(len(inventory)):
+                inventory[count].strip().replace("-","")
+                count += 1
         else:
             print("Exiting Save Files")
         opens.close()
@@ -1708,10 +1711,17 @@ def save():
 
 
 def chois():
+    global carry, inventoryTwo
+    countO = 0
+    count = 0
+    inventoryTwo = []
+    for i in range(len(inventory)):
+        inventoryTwo.append(inventory[countO].replace(" ","-"))
+        countO += 1
+    print(inventoryTwo)
     for i in range(len(listsConfig)):
-        count = 0
         removeNoneFromLists(listsConfig[count])
-    global carry
+        count += 1
     #faithBuff()
     renownCheck()
     experienceCheck()
