@@ -57,7 +57,7 @@ while True:
     match classn:
         case "Knight":
             classv(43, 10, 3, 8, 7, 4, 6, 5, 70)
-            inventory.append("King!s_Charter")
+            inventory.append("King's Charter")
             renown = 50
             break
         case "Summoner":
@@ -1671,8 +1671,23 @@ def save():
     finally:
         q = input("Which would you like to Save (S) or Load (L)? ").title()
         if q == "Save" or q == "S":
-            opens = open("saveFile.txt", "w")
-            opens.write(name+"\n"+classn+"\n"+str(inventory)+"\n"+str(spells)+"\n"+faith+"\n"+str(bestiar))
+            opens, appends = open("saveFile.txt", "w"), open("saveFile.txt", "a")
+            opens.write(name+"\n"+classn+"\n"+faith+"\n")
+            count1 = 0
+            for i in range(len(inventory)):
+                appends.write(inventory[count1]+", ")
+                count1 += 1
+            appends.write("\n")
+            count1 = 0
+            for i in range(len(spells)):
+                appends.write(spells[count1]+", ")
+                count1 += 1
+            appends.write("\n")
+            count1 = 0
+            for i in range(len(bestiar)):
+                appends.write(bestiar[count1]+", ")
+                count1 += 1
+            appends.write("\n")
             #error when trying to store an item from str(inventory) TRY .SPLIT(,)
         elif q == "Load" or q == "L":
             opens = open("saveFile.txt", "r")
