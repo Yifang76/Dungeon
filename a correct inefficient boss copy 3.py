@@ -1691,8 +1691,22 @@ def save():
             #error when trying to store an item from str(inventory) TRY .SPLIT(,)
         elif q == "Load" or q == "L":
             opens = open("saveFile.txt", "r")
-            name, classn, faith, inventory, spells, bestiar = opens.readline(), opens.readline(), opens.readline(), opens.readline().split(","), opens.readline().split(","), opens.readline().split(",") 
-            inventory.strip(" "), inventory.remove('\n')
+            name, classn, faith, inventory, spells, bestiar = opens.readline(), opens.readline(), opens.readline(), opens.readline().split(","), opens.readline().strip().split(","), opens.readline().strip().split(",") 
+            count2 = 0
+            for x in inventory:
+                inventory[count2] = inventory[count2].strip()
+                count2 += 1
+            inventory.pop(len(inventory)-1)
+            count2 = 0
+            for x in spells:
+                spells[count2] = spells[count2].strip()
+                count2 += 1
+            spells.pop(len(spells)-1)
+            count2 = 0
+            for x in bestiar:
+                bestiar[count2] = bestiar[count2].strip()
+                count2 += 1
+            bestiar.pop(len(bestiar)-1)
             count = 0
         else:
             print("Exiting Save Files")
