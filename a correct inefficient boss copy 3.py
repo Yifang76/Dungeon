@@ -2,8 +2,8 @@ from random import *
 import sys
 gold, bankedGold = 0, 0
 statUpgrade, experience = 0, 0
-summonNumber = int(0)
-totalSummonNumber = None
+summonNumber = 0
+totalSummonNumber = 0 #Changed from None to 0 for saveFile
 activeBounties = ["None"]
 bestiar = ["None"]
 inventory = ["helmet", "sword"]
@@ -15,7 +15,7 @@ summons = ["None"]
 shopStock, bankedItems = [""], ["None"]
 n = None
 renown = 0
-hEqItem, cEqItem, lEqItem, gEqItem, bEqItem, rhEqItem, lhEqItem = None, None, None, None, None, None, None
+hEqItem, cEqItem, lEqItem, gEqItem, bEqItem, rhEqItem, lhEqItem = "None", "None", "None", "None", "None", "None", "None" #Changed from None to "None" for saveFile
 adlist = ["common ","rare ","mythical ","legendary "]
 weaponlist = ["axe","sword","stick"]
 resourcelist = ["leather"]
@@ -236,7 +236,7 @@ summonStats = {
 }
 nTotHea = TotHea
 #NEED TO TEST
-def classChange(newClass, itemUsing, lev, stre, agi, dex, hea, per, cha, inte, totHea, specialAbility, specialAbilityValue):
+def classChange(newClass, itemUsing, lev, stre, agi, dex, hea, per, cha, inte, TotHea, specialAbility, specialAbilityValue):
     global classn
     while True:
         q = input(f"Would you like to switch class? You will change from {classn} to {newClass}. You will be reset to level 1 and the {itemUsing} will be consumed. ").capitalize()
@@ -1663,7 +1663,7 @@ def removeNoneFromLists(listName):
 
 #DELETE FROM HERE
 def save():
-    global name, classn, inventory, spells, faith, bestiar
+    global name, classn, faith, gold, bankedGold, experience, statUpgrade, summonNumber, totalSummonNumber, renown, honor, hEqItem, cEqItem, lEqItem, gEqItem, bEqItem, rhEqItem, Level, Str, Agi, Dex, Hea, Per, Cha, Int, TotHea, inventory, spells, bestiar
     try:
         open("saveFile.txt", "x")
     except:
@@ -1672,7 +1672,7 @@ def save():
         q = input("Which would you like to Save (S) or Load (L)? ").title()
         if q == "Save" or q == "S":
             opens, appends = open("saveFile.txt", "w"), open("saveFile.txt", "a")
-            opens.write(name+"\n"+classn+"\n"+faith+"\n"+gold+"\n"+bankedGold+"\n"+experience+"\n"+experienceRequired+"\n"+statUpgrade+"\n"+summonNumber+"\n"+totalSummonNumber+"\n"+renown+"\n"+hEqItem+"\n"+cEqItem+"\n"+lEqItem+"\n"+gEqItem+"\n"+bEqItem+"\n"+rhEqItem+"\n"+Level+"\n"+Str+"\n"+Agi+"\n"+Dex+"\n"+Hea+"\n"+Per+"\n"+Cha+"\n"+Int+"\n"+totHea+"\n")
+            opens.write(name+"\n"+classn+"\n"+faith+"\n"+str(gold)+"\n"+str(bankedGold)+"\n"+str(experience)+"\n"+str(statUpgrade)+"\n"+str(summonNumber)+"\n"+str(totalSummonNumber)+"\n"+str(renown)+"\n"+honor+"\n"+hEqItem+"\n"+cEqItem+"\n"+lEqItem+"\n"+gEqItem+"\n"+bEqItem+"\n"+rhEqItem+"\n"+str(Level)+"\n"+str(Str)+"\n"+str(Agi)+"\n"+str(Dex)+"\n"+str(Hea)+"\n"+str(Per)+"\n"+str(Cha)+"\n"+str(Int)+"\n"+str(TotHea)+"\n")
             count1 = 0
             for i in range(len(inventory)):
                 appends.write(inventory[count1]+", ")
@@ -1706,7 +1706,7 @@ def save():
             #error when trying to store an item from str(inventory) TRY .SPLIT(,)
         elif q == "Load" or q == "L":
             opens = open("saveFile.txt", "r")
-            name, classn, faith, gold, bankedGold, experience, experienceRequired, statUpgrade, summonNumber, totalSummonNumber, renown, hEqItem, cEqItem, lEqItem, gEqItem, bEqItem, rhEqItem, Level, Str, Agi, Dex, Hea, Per, Cha, Int, totHea, inventory, spells, bestiar = opens.readline(), opens.readline(), opens.readline(), opens.readline().split(","), opens.readline().strip().split(","), opens.readline().strip().split(",") 
+            name, classn, faith, gold, bankedGold, experience, statUpgrade, summonNumber, totalSummonNumber, renown, honor, hEqItem, cEqItem, lEqItem, gEqItem, bEqItem, rhEqItem, Level, Str, Agi, Dex, Hea, Per, Cha, Int, TotHea, inventory, spells, bestiar = opens.readline(), opens.readline(), opens.readline(), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), opens.readline(), opens.readline(), opens.readline(), opens.readline(), opens.readline(), opens.readline(), opens.readline(), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), opens.readline().split(","), opens.readline().strip().split(","), opens.readline().strip().split(",") 
             count2 = 0
             for x in inventory:
                 inventory[count2] = inventory[count2].strip()
