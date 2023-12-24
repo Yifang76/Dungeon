@@ -1726,17 +1726,17 @@ def save():
             for x in originClass:
                 originClass[count2] = originClass[count2].strip()
                 count2 += 1
-            originClass.pop(len(originClass)-1)
+            #originClass.pop(len(originClass)-1)
             count2 = 0
             for x in livingBosses:
                 livingBosses[count2] = livingBosses[count2].strip()
                 count2 += 1
-            livingBosses.pop(len(livingBosses)-1)
+            #livingBosses.pop(len(livingBosses)-1)
             count2 = 0
             for x in summons:
                 summons[count2] = summons[count2].strip()
                 count2 += 1
-            summons.pop(len(summons)-1)
+            #summons.pop(len(summons)-1)
             count = 0
             try:
                 spells.remove("None")
