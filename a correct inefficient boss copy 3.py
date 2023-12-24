@@ -173,14 +173,14 @@ crime = {}
 liteList = [
 "leather", "iron" ]
 enemyList = ["imp", "warlord", "dictator", "insect", "bandit", "ent", "wolf"]
-originClass = []
+originClass = ["None"]
 ascensionItems = ["Vanta's vessel", "Murmur's mask, Lautrec's boon"]
 invalidSell = ["King's Charter"]
 illItems = ["necronomicon", "demon heart", "dragon scale", "human flesh"]
 #cChangeItem are all items that perform a class change
 cChangeItem = ["necronomicon", "demon heart", "dragon tooth"]
 safe = ["Cetus","Ashborn"]
-livingBosses = ["Reign", "Quasar", "The Wicked",]
+livingBosses = ["None", "Reign", "Quasar", "The Wicked",]
 bosses = ["Reign", "Quasar", "The Wicked",]
 legalSpells = ["Elemental", "E", "Divine", "D", "Nature", "N", "Aether", "A"]
 illegalSpells = ["Chaos", "C", "Occult", "O"]
@@ -1672,7 +1672,7 @@ def save():
         q = input("Which would you like to Save (S) or Load (L)? ").title()
         if q == "Save" or q == "S":
             opens, appends = open("saveFile.txt", "w"), open("saveFile.txt", "a")
-            opens.write(name+"\n"+classn+"\n"+faith+"\n")
+            opens.write(name+"\n"+classn+"\n"+faith+"\n"+gold+"\n"+bankedGold+"\n"+experience+"\n"+experienceRequired+"\n"+statUpgrade+"\n"+summonNumber+"\n"+totalSummonNumber+"\n"+renown+"\n"+hEqItem+"\n"+cEqItem+"\n"+lEqItem+"\n"+gEqItem+"\n"+bEqItem+"\n"+rhEqItem+"\n"+Level+"\n"+Str+"\n"+Agi+"\n"+Dex+"\n"+Hea+"\n"+Per+"\n"+Cha+"\n"+Int+"\n"+totHea+"\n")
             count1 = 0
             for i in range(len(inventory)):
                 appends.write(inventory[count1]+", ")
@@ -1688,10 +1688,25 @@ def save():
                 appends.write(bestiar[count1]+", ")
                 count1 += 1
             appends.write("\n")
+            count1 = 0
+            for i in range(len(originClass)):
+                appends.write(originClass[count1]+", ")
+                count1 += 1
+            appends.write("\n")
+            count1 = 0
+            for i in range(len(livingBosses)):
+                appends.write(livingBosses[count1]+", ")
+                count1 += 1
+            appends.write("\n")
+            count1 = 0
+            for i in range(len(summons)):
+                appends.write(summons[count1]+", ")
+                count1 += 1
+            appends.write("\n")
             #error when trying to store an item from str(inventory) TRY .SPLIT(,)
         elif q == "Load" or q == "L":
             opens = open("saveFile.txt", "r")
-            name, classn, faith, inventory, spells, bestiar = opens.readline(), opens.readline(), opens.readline(), opens.readline().split(","), opens.readline().strip().split(","), opens.readline().strip().split(",") 
+            name, classn, faith, gold, bankedGold, experience, experienceRequired, statUpgrade, summonNumber, totalSummonNumber, renown, hEqItem, cEqItem, lEqItem, gEqItem, bEqItem, rhEqItem, Level, Str, Agi, Dex, Hea, Per, Cha, Int, totHea, inventory, spells, bestiar = opens.readline(), opens.readline(), opens.readline(), opens.readline().split(","), opens.readline().strip().split(","), opens.readline().strip().split(",") 
             count2 = 0
             for x in inventory:
                 inventory[count2] = inventory[count2].strip()
@@ -1707,17 +1722,34 @@ def save():
                 bestiar[count2] = bestiar[count2].strip()
                 count2 += 1
             bestiar.pop(len(bestiar)-1)
+            count2 = 0
+            for x in originClass:
+                originClass[count2] = originClass[count2].strip()
+                count2 += 1
+            originClass.pop(len(originClass)-1)
+            count2 = 0
+            for x in livingBosses:
+                livingBosses[count2] = livingBosses[count2].strip()
+                count2 += 1
+            livingBosses.pop(len(livingBosses)-1)
+            count2 = 0
+            for x in summons:
+                summons[count2] = summons[count2].strip()
+                count2 += 1
+            summons.pop(len(summons)-1)
             count = 0
             try:
                 spells.remove("None")
                 bestiar.remove("None")
+                originClass.remove("None")
+                livingBosses.remove("None")
+                summons.remove("None")
+                
             except:
                 print("")
         else:
             print("Exiting Save Files")
         opens.close()
-
-
 
 
 
@@ -1758,7 +1790,7 @@ def chois():
                     " the Blacksmith (W), the Armory (A), the Bank (B),"
                     " the Tavern (H), the Bounty Board (C), the Shrine (S),"
                     " the Market (M), the Trainer (T), the Menu,"
-                    " the Incantation Store (I) or back Out (O). ").capitalize()
+                    " the Incantation Store (I) or back Out (O). ").title()
         match townQuestion:
             case "Market" | "M":
                 print("Going to the Market\n")
@@ -1796,7 +1828,7 @@ def chois():
             case "Bounty Board" | "Bounty" | "C":
                 bounty()
                 chois()
-            case "Fence" | "BM":
+            case "Fence" | "BM" | "Bm":
                 fence()
                 chois()
             case "Out" | "O":
