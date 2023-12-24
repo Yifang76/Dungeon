@@ -1708,6 +1708,11 @@ def save():
                 count2 += 1
             bestiar.pop(len(bestiar)-1)
             count = 0
+            try:
+                spells.remove("None")
+                bestiar.remove("None")
+            except:
+                print("")
         else:
             print("Exiting Save Files")
         opens.close()
