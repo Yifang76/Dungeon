@@ -1704,6 +1704,8 @@ def save():
                 count1 += 1
             appends.write("\n")
             #error when trying to store an item from str(inventory) TRY .SPLIT(,)
+            with open("achievements.txt", "a") as data:
+                data.write(str(achievements))
         elif q == "Load" or q == "L":
             opens = open("saveFile.txt", "r")
             name, classn, faith, gold, bankedGold, experience, statUpgrade, summonNumber, totalSummonNumber, renown, honor, hEqItem, cEqItem, lEqItem, gEqItem, bEqItem, rhEqItem, Level, Str, Agi, Dex, Hea, Per, Cha, Int, TotHea, inventory, spells, bestiar = opens.readline(), opens.readline(), opens.readline(), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), opens.readline(), opens.readline(), opens.readline(), opens.readline(), opens.readline(), opens.readline(), opens.readline(), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), opens.readline().split(","), opens.readline().strip().split(","), opens.readline().strip().split(",") 
@@ -1747,6 +1749,9 @@ def save():
                 
             except:
                 print("")
+
+            with open("achievements.txt", "r") as data:
+                achievements = data.readline().strip(",")            
         else:
             print("Exiting Save Files")
         opens.close()
