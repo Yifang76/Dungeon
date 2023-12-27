@@ -724,7 +724,7 @@ def statBoosts(equipment):
         eList.pop(len(eList)-1)
         " ".join(eList)
     except:
-        print(equipment+" has no upgrades")
+        print(equipment.title()+" has no upgrades")
         upLevel = 0.5
 
     finally:
