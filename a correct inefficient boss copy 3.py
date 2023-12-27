@@ -718,7 +718,32 @@ def depo():
             print("That is not an option.")
 
 def statBoosts(equipment):
-    
+    eList = equipment.split(" ")
+    try:
+        upLevel = int(eList[len(eList)-1].replace("+",""))
+        eList.pop(len(eList)-1)
+        " ".join(eList)
+    except:
+        print(equipment+" has no upgrades")
+        upLevel = 0.5
+
+    finally:
+        equipmentBuff = {
+            "helmet" : [2*upLevel, "Health"],
+            "sword" : [1*upLevel, "Strength"],
+            "training sword": [0*upLevel, "Strength"],
+            "": ["N/A"],
+            "half life": ["N/A"],
+            "terra blade": [20*upLevel, "Strength"],
+            "stick": [-1*upLevel, "Strength"],
+            "axe": [1*upLevel, "Strength"],
+            "scimitar": [2*upLevel, "Dexterity"],
+            "war axe": [5*upLevel, "Strength"],
+            "hatchets": [2*upLevel, "Strength"],
+            "King's Charter": ["N/A"],
+        }
+        print(equipmentBuff[" ".join(eList)])
+
 
 def armory():
     WoR = input("Would you like to Equip (E) or Remove (R) equipment? ").capitalize()
@@ -740,7 +765,7 @@ def equip(whereEq):
         available_items = [item for item in inventory if item != equipped_items[whereEq]]
         if available_items:
             whichEq = input(f"Available items for {whereEq}: {available_items}\nWhat would you like to equip? ")
-            if whichEq in available_items and equipmentMapping[whichEq] == whereEq:
+            if whichEq in available_items and equipmentMapping["".join([i for i in whichEq if not i.isdigit()]).replace("+","").strip()] == whereEq:
                 equipped_items[whereEq] = whichEq
                 inventory.remove(whichEq)
                 print(f"You are now wearing {whichEq}.")
