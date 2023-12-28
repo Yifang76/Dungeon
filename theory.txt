@@ -1,0 +1,5 @@
+armory:
+opt 1) Creating 'true' variables of stats (e.g. trueHea, trueStr, trueDex) and assigning them for most areas
+
+opt 2) Creating 'buff' variables of stats (e.g. HeaBuff, StrBuff, DexBuff) and adding or multiplying
+them with their corresponding stats (e.g Hea, Str, Dex) to achieve same/similar result

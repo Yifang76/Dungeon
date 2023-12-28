@@ -43,14 +43,14 @@ def classv(LevelG, StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG):
     global Level, Str, Agi, Dex, Hea, Per, Cha, Int, TotHea
     print(f"Welcome, {classn} {name}.\n")
     Level = int(LevelG)
-    Str = int(StrG)
-    Agi = int(AgiG)
-    Dex = int(DexG)
-    Hea = int(HeaG)
-    Per = int(PerG)
-    Cha = int(ChaG)
-    Int = int(IntG)
-    TotHea = int(TotHeaG)
+    trueStr, Str = int(StrG), int(StrG)
+    trueAgi, Agi = int(AgiG), int(AgiG)
+    trueDex, Dex = int(DexG), int(DexG)
+    trueHea, Hea = int(HeaG), int(HeaG)
+    truePer, Per = int(PerG), int(PerG)
+    trueCha, Cha = int(ChaG) int(ChaG)
+    trueInt, Int = int(IntG) int(IntG)
+    trueTotHea, TotHea = int(TotHeaG), int(TotHeaG)
 
 while True:
     classn = input("Pick a class ").capitalize()
@@ -1147,20 +1147,20 @@ def itemUse():
     }
     if usingSummon == True:
         health, strength, dexterity, perception, agility = summonStats[whichSummon]
-        trueHea = health
+        tHea = health
     else:
         health = TotHea
-        trueHea = Hea*10
+        tHea = Hea*10
     print(inventory)
     q = input("Which item would you like to use? ")
     if q in inventory:
         if q in healthHeal:
             inventory.remove(q)
-            if health + healthHeal[q] <= trueHea:
+            if health + healthHeal[q] <= tHea:
                 health += healthHeal[q]
                 print(f"You currently have {health} health.")
             else:
-                health = trueHea
+                health = tHea
                 print("Your health is maxed out")
         if q in despairHeal:
             inventory.remove(q)
@@ -1367,7 +1367,7 @@ def experienceCheck():
         else:
             break
 def chooseStat():
-    global statUpgrade, Cha, Str, Dex, TotHea, Per, Int, Hea
+    global statUpgrade, Cha, Str, Dex, TotHea, Per, Int, Hea, trueCha, trueStr, trueDex, trueTotHea, truePer, trueInt, trueHea
     print(f"You have:\nHealth: {TotHea}\nStrength: {Str}\nDexterity: {Dex}\n"
     f"Perception: {Per}\nCharisma: {Cha}\nIntelligence: {Int}\nYou have {str(statUpgrade)} unspent stat points.")
 
@@ -1380,38 +1380,38 @@ def chooseStat():
                         number = int(input("How many points would you like to allocate? "))
                         if statUpgrade - number >= 0:
                             statUpgrade -= number
-                            Hea += number
-                            TotHea = Hea*10
+                            trueHea += number
+                            trueTotHea = trueHea*10
                             print(f"Stat points allocated. You have {statUpgrade} stat points remaining.")
                     case "Strength" | "Str" | "S":
                         number = int(input("How many points would you like to allocate? "))
                         if statUpgrade - number >= 0:
                             statUpgrade -= number
-                            Str += number
+                            trueStr += number
                             print(f"Stat points allocated. You have {statUpgrade} stat points remaining.")
                     case "Dexterity" | "Dex" | "D":
                         number = int(input("How many points would you like to allocate? "))
                         if statUpgrade - number >= 0:
                             statUpgrade -= number
-                            Dex += number
+                            trueDex += number
                             print(f"Stat points allocated. You have {statUpgrade} stat points remaining.")
                     case "Perception" | "Per" | "P":
                         number = int(input("How many points would you like to allocate? "))
                         if statUpgrade - number >= 0:
                             statUpgrade -= number
-                            Per += number
+                            truePer += number
                             print(f"Stat points allocated. You have {statUpgrade} stat points remaining.")
                     case "Charisma" | "Cha" | "C":
                         number = int(input("How many points would you like to allocate? "))
                         if statUpgrade - number >= 0:
                             statUpgrade -= number
-                            Cha += number
+                            trueCha += number
                             print(f"Stat points allocated. You have {statUpgrade} stat points remaining.")
                     case "Intelligence" | "Int" | "I":
                         number = int(input("How many points would you like to allocate? "))
                         if statUpgrade - number >= 0:
                             statUpgrade -= number
-                            Int += number
+                            trueInt += number
                             print(f"Stat points allocated. You have {statUpgrade} stat points remaining.")
                     case _:
                         confirm = input("Would you like to carry on allocating? ").capitalize()
