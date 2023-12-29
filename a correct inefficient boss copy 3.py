@@ -48,8 +48,8 @@ def classv(LevelG, StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG):
     trueDex, Dex = int(DexG), int(DexG)
     trueHea, Hea = int(HeaG), int(HeaG)
     truePer, Per = int(PerG), int(PerG)
-    trueCha, Cha = int(ChaG) int(ChaG)
-    trueInt, Int = int(IntG) int(IntG)
+    trueCha, Cha = int(ChaG), int(ChaG)
+    trueInt, Int = int(IntG), int(IntG)
     trueTotHea, TotHea = int(TotHeaG), int(TotHeaG)
 
 while True:
@@ -718,6 +718,7 @@ def depo():
             print("That is not an option.")
 
 def statBoosts(equipment):
+    global Str, Agi, Dex, Hea, Per, Int
     eList = equipment.split(" ")
     try:
         upLevel = int(eList[len(eList)-1].replace("+",""))
@@ -735,7 +736,7 @@ def statBoosts(equipment):
             "": ["N/A"],
             "half life": ["N/A"],
             "terra blade": [20*upLevel, "Strength"],
-            "stick": [-1*upLevel, "Strength"],
+            "stick": ["0", "N/A", -1*upLevel, "Strength"],
             "axe": [1*upLevel, "Strength"],
             "scimitar": [2*upLevel, "Dexterity"],
             "war axe": [5*upLevel, "Strength"],
@@ -743,6 +744,25 @@ def statBoosts(equipment):
             "King's Charter": ["N/A"],
         }
         print(equipmentBuff[" ".join(eList)])
+        count, count1 = 1, 0
+        for i in range(int(len(equipmentBuff[" ".join(eList)])/2)):
+            match equipmentBuff[" ".join(eList)][count]:
+                case "Strength":
+                    Str += equipmentBuff[" ".join(eList)][count1]
+                case "Agility":
+                    Agi += equipmentBuff[" ".join(eList)][count1]
+                case "Dexterity":
+                    Dex += equipmentBuff[" ".join(eList)][count1]
+                case "Health":
+                    Hea += equipmentBuff[" ".join(eList)][count1]
+                case "Perception":
+                    Per += equipmentBuff[" ".join(eList)][count1]
+                case "Intelligence":
+                    Int += equipmentBuff[" ".join(eList)][count1]
+                case "N/A":
+                    print("")
+            count += 2
+            count1 += 2
 
 
 def armory():
