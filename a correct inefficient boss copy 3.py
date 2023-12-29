@@ -40,7 +40,7 @@ attriQuery = input("Would you like a guide on the attributes? ").capitalize()
 if attriQuery == "Yes":
     print("Strength determines the base damage you do, Agility determines your evasion, Dexterity determines base damage,\nPerception determines your critical chance, Charisma determines your barter rate and speech, Intelligence determines your spellcraft\nand Health determines your HP.\n")
 def classv(LevelG, StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG):
-    global Level, Str, Agi, Dex, Hea, Per, Cha, Int, TotHea
+    global Level, Str, Agi, Dex, Hea, Per, Cha, Int, TotHea, trueStr, trueAgi, trueDex, trueHea, truePer, trueCha, trueInt, trueTotHea
     print(f"Welcome, {classn} {name}.\n")
     Level = int(LevelG)
     trueStr, Str = int(StrG), int(StrG)
@@ -847,8 +847,8 @@ def menu():
     " View Spells (T), View Summons (M), Use Item (U), Save/Load (C) or Check Level (L). ").capitalize()
     match q:
         case "View Stats" | "Stats" | "S":
-            print(f"Without modifiers, you have:\nHealth: {TotHea}\nStrength: {Str}\nDexterity: {Dex}\n"
-            f"Perception: {Per}\nCharisma: {Cha}\nIntelligence: {Int} ")
+            print(f"Without modifiers, you have:\nHealth: {trueTotHea}\nStrength: {trueStr}\nDexterity: {trueDex}\n"
+            f"Perception: {truePer}\nCharisma: {trueCha}\nIntelligence: {trueInt} ")
         #    print(f"With modifiers, you have:\nHealth: {nTotHea}\nStrength: {nStr}\n Dexterity: {nDex}"
         #    f"Perception: {nPer}\nCharisma: {nCha}\nIntelligence: {nInt} ")
         case "View Inventory" | "Inventory" | "I":
@@ -1420,8 +1420,8 @@ def chooseStat():
                         else:
                             print("You proceed to allocate stat points.")
     print(f"You have {statUpgrade} stat points left.")
-    print(f"You have:\nHealth: {TotHea}\nStrength: {Str}\nDexterity: {Dex}\n"
-    f"Perception: {Per}\nCharisma: {Cha}\nIntelligence: {Int}\nYou have {str(statUpgrade)} unspent stat points.") 
+    print(f"You have:\nHealth: {trueTotHea}\nStrength: {trueStr}\nDexterity: {trueDex}\n"
+    f"Perception: {truePer}\nCharisma: {trueCha}\nIntelligence: {trueInt}\nYou have {str(statUpgrade)} unspent stat points.") 
     
             
 def tavern():
@@ -1697,7 +1697,7 @@ def removeNoneFromLists(listName):
 
 #DELETE FROM HERE
 def save():
-    global name, classn, faith, gold, bankedGold, experience, statUpgrade, summonNumber, totalSummonNumber, renown, honor, hEqItem, cEqItem, lEqItem, gEqItem, bEqItem, rhEqItem, Level, Str, Agi, Dex, Hea, Per, Cha, Int, TotHea, inventory, spells, bestiar
+    global name, classn, faith, gold, bankedGold, experience, statUpgrade, summonNumber, totalSummonNumber, renown, honor, hEqItem, cEqItem, lEqItem, gEqItem, bEqItem, rhEqItem, Level, trueStr, trueAgi, trueDex, trueHea, truePer, trueCha, trueInt, trueTotHea, inventory, spells, bestiar
     try:
         open("saveFile.txt", "x")
     except:
@@ -1706,7 +1706,7 @@ def save():
         q = input("Which would you like to Save (S) or Load (L)? ").title()
         if q == "Save" or q == "S":
             opens, appends = open("saveFile.txt", "w"), open("saveFile.txt", "a")
-            opens.write(name+"\n"+classn+"\n"+faith+"\n"+str(gold)+"\n"+str(bankedGold)+"\n"+str(experience)+"\n"+str(statUpgrade)+"\n"+str(summonNumber)+"\n"+str(totalSummonNumber)+"\n"+str(renown)+"\n"+honor+"\n"+hEqItem+"\n"+cEqItem+"\n"+lEqItem+"\n"+gEqItem+"\n"+bEqItem+"\n"+rhEqItem+"\n"+str(Level)+"\n"+str(Str)+"\n"+str(Agi)+"\n"+str(Dex)+"\n"+str(Hea)+"\n"+str(Per)+"\n"+str(Cha)+"\n"+str(Int)+"\n"+str(TotHea)+"\n")
+            opens.write(name+"\n"+classn+"\n"+faith+"\n"+str(gold)+"\n"+str(bankedGold)+"\n"+str(experience)+"\n"+str(statUpgrade)+"\n"+str(summonNumber)+"\n"+str(totalSummonNumber)+"\n"+str(renown)+"\n"+honor+"\n"+hEqItem+"\n"+cEqItem+"\n"+lEqItem+"\n"+gEqItem+"\n"+bEqItem+"\n"+rhEqItem+"\n"+str(Level)+"\n"+str(trueStr)+"\n"+str(trueAgi)+"\n"+str(trueDex)+"\n"+str(trueHea)+"\n"+str(truePer)+"\n"+str(trueCha)+"\n"+str(trueInt)+"\n"+str(trueTotHea)+"\n")
             count1 = 0
             for i in range(len(inventory)):
                 appends.write(inventory[count1]+", ")
@@ -1742,7 +1742,7 @@ def save():
                 data.write(str(achievements))
         elif q == "Load" or q == "L":
             opens = open("saveFile.txt", "r")
-            name, classn, faith, gold, bankedGold, experience, statUpgrade, summonNumber, totalSummonNumber, renown, honor, hEqItem, cEqItem, lEqItem, gEqItem, bEqItem, rhEqItem, Level, Str, Agi, Dex, Hea, Per, Cha, Int, TotHea, inventory, spells, bestiar = opens.readline(), opens.readline(), opens.readline(), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), opens.readline(), opens.readline(), opens.readline(), opens.readline(), opens.readline(), opens.readline(), opens.readline(), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), opens.readline().split(","), opens.readline().strip().split(","), opens.readline().strip().split(",") 
+            name, classn, faith, gold, bankedGold, experience, statUpgrade, summonNumber, totalSummonNumber, renown, honor, hEqItem, cEqItem, lEqItem, gEqItem, bEqItem, rhEqItem, Level, trueStr, trueAgi, trueDex, trueHea, truePer, trueCha, trueInt, trueTotHea, inventory, spells, bestiar = opens.readline(), opens.readline(), opens.readline(), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), opens.readline(), opens.readline(), opens.readline(), opens.readline(), opens.readline(), opens.readline(), opens.readline(), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), opens.readline().split(","), opens.readline().strip().split(","), opens.readline().strip().split(",") 
             count2 = 0
             for x in inventory:
                 inventory[count2] = inventory[count2].strip()
