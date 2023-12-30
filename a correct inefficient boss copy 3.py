@@ -5,7 +5,7 @@ statUpgrade, experience = 0, 0
 summonNumber = 0
 totalSummonNumber = 0 #Changed from None to 0 for saveFile
 activeBounties = ["None"]
-bestiar = ["None"]
+bestiar, achievements = ["None"], ["None"]
 inventory = ["helmet", "sword"]
 spells = ["None"]
 faith = "None"
@@ -186,8 +186,7 @@ fenceDict = {
 listsConfig = ["totalSummonNumber", "activeBounties", "bestiar", "spells", "summons", "bankedItems"]
 pList = ["Stormcrag", "Havoc's Rock", "Duskmire", "Ironhold", "Thornwood", "Giant's Mausoleum"]
 crime = {}
-liteList = [
-"leather", "iron" ]
+liteList = ["leather", "iron" ]
 enemyList = ["imp", "warlord", "dictator", "insect", "bandit", "ent", "wolf"]
 originClass = ["None"]
 ascensionItems = ["Vanta's vessel", "Murmur's mask, Lautrec's boon"]
@@ -1717,7 +1716,7 @@ def removeNoneFromLists(listName):
 
 #DELETE FROM HERE
 def save():
-    global name, classn, faith, gold, bankedGold, experience, statUpgrade, summonNumber, totalSummonNumber, renown, honor, hEqItem, cEqItem, lEqItem, gEqItem, bEqItem, rhEqItem, Level, trueStr, trueAgi, trueDex, trueHea, truePer, trueCha, trueInt, trueTotHea, inventory, spells, bestiar
+    global name, classn, faith, gold, bankedGold, experience, statUpgrade, summonNumber, totalSummonNumber, renown, honor, Level, trueStr, trueAgi, trueDex, trueHea, truePer, trueCha, trueInt, trueTotHea, inventory, spells, bestiar, achievements, equipped_items
     try:
         open("saveFile.txt", "x")
     except:
@@ -1726,7 +1725,7 @@ def save():
         q = input("Which would you like to Save (S) or Load (L)? ").title()
         if q == "Save" or q == "S":
             opens, appends = open("saveFile.txt", "w"), open("saveFile.txt", "a")
-            opens.write(name+"\n"+classn+"\n"+faith+"\n"+str(gold)+"\n"+str(bankedGold)+"\n"+str(experience)+"\n"+str(statUpgrade)+"\n"+str(summonNumber)+"\n"+str(totalSummonNumber)+"\n"+str(renown)+"\n"+honor+"\n"+hEqItem+"\n"+cEqItem+"\n"+lEqItem+"\n"+gEqItem+"\n"+bEqItem+"\n"+rhEqItem+"\n"+str(Level)+"\n"+str(trueStr)+"\n"+str(trueAgi)+"\n"+str(trueDex)+"\n"+str(trueHea)+"\n"+str(truePer)+"\n"+str(trueCha)+"\n"+str(trueInt)+"\n"+str(trueTotHea)+"\n")
+            opens.write(name+"\n"+classn+"\n"+faith+"\n"+str(gold)+"\n"+str(bankedGold)+"\n"+str(experience)+"\n"+str(statUpgrade)+"\n"+str(summonNumber)+"\n"+str(totalSummonNumber)+"\n"+str(renown)+"\n"+honor+"\n"+str(Level)+"\n"+str(trueStr)+"\n"+str(trueAgi)+"\n"+str(trueDex)+"\n"+str(trueHea)+"\n"+str(truePer)+"\n"+str(trueCha)+"\n"+str(trueInt)+"\n"+str(trueTotHea)+"\n")
             count1 = 0
             for i in range(len(inventory)):
                 appends.write(inventory[count1]+", ")
@@ -1760,9 +1759,12 @@ def save():
             #error when trying to store an item from str(inventory) TRY .SPLIT(,)
             with open("achievements.txt", "a") as data:
                 data.write(str(achievements))
+            with open("equippedItems.txt", "a") as data:
+                data.write(str(equipped_items))
+            opens.close()
         elif q == "Load" or q == "L":
             opens = open("saveFile.txt", "r")
-            name, classn, faith, gold, bankedGold, experience, statUpgrade, summonNumber, totalSummonNumber, renown, honor, hEqItem, cEqItem, lEqItem, gEqItem, bEqItem, rhEqItem, Level, trueStr, trueAgi, trueDex, trueHea, truePer, trueCha, trueInt, trueTotHea, inventory, spells, bestiar = opens.readline(), opens.readline(), opens.readline(), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), opens.readline(), opens.readline(), opens.readline(), opens.readline(), opens.readline(), opens.readline(), opens.readline(), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), opens.readline().split(","), opens.readline().strip().split(","), opens.readline().strip().split(",") 
+            name, classn, faith, gold, bankedGold, experience, statUpgrade, summonNumber, totalSummonNumber, renown, honor, Level, trueStr, trueAgi, trueDex, trueHea, truePer, trueCha, trueInt, trueTotHea, inventory, spells, bestiar = opens.readline(), opens.readline(), opens.readline(), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), opens.readline(), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), opens.readline().split(","), opens.readline().strip().split(","), opens.readline().strip().split(",") 
             count2 = 0
             for x in inventory:
                 inventory[count2] = inventory[count2].strip()
@@ -1805,10 +1807,12 @@ def save():
                 print("")
 
             with open("achievements.txt", "r") as data:
-                achievements = data.readline().strip(",")            
+                achievements = data.readline().strip(",")
+            with open("equippedItems.txt", "r") as data:
+                equipped_items = {data.readline().replace("{","").replace("}","").strip()}
+            opens.close()
         else:
             print("Exiting Save Files")
-        opens.close()
 
 
 
