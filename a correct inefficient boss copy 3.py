@@ -148,6 +148,7 @@ equipped_items = {
     "Right Hand": None,
     "Left Hand": None,
 }
+equipped_itemsList = ["Head", "None", "Chest", "None", "Gloves", "None", "Leggings", "None", "Boots", "None", "Right Hand", "None", "Left Hand", "None"]
 
 slot_mapping = {
     "H": "Head",
@@ -786,6 +787,12 @@ def equip(whereEq):
             whichEq = input(f"Available items for {whereEq}: {available_items}\nWhat would you like to equip? ")
             if whichEq in available_items and equipmentMapping["".join([i for i in whichEq if not i.isdigit()]).replace("+","").strip()] == whereEq:
                 equipped_items[whereEq] = whichEq
+                count = 0
+                for x in equipped_itemsList:
+                    if x != whereEq:
+                        count += 1
+                    else:
+                        equipped_itemsList[count+1] = whichEq
                 inventory.remove(whichEq)
                 print(f"You are now wearing {whichEq}.")
                 statBoosts(whichEq)
@@ -802,6 +809,13 @@ def remove():
         item = equipped_items[whereRem]
         if item is not None:
             inventory.append(item)
+            count = 0
+            for x in equipped_itemsList:
+                if x != whereRem:
+                    count += 1
+                else:
+                    equipped_itemsList[count+1] = None
+                    print(equipped_itemsList)
             equipped_items[whereRem] = None
             print(f"You have removed the {item} from {whereRem}.")
         else:
@@ -1716,7 +1730,7 @@ def removeNoneFromLists(listName):
 
 #DELETE FROM HERE
 def save():
-    global name, classn, faith, gold, bankedGold, experience, statUpgrade, summonNumber, totalSummonNumber, renown, honor, Level, trueStr, trueAgi, trueDex, trueHea, truePer, trueCha, trueInt, trueTotHea, inventory, spells, bestiar, achievements, equipped_items
+    global name, classn, faith, gold, bankedGold, experience, statUpgrade, summonNumber, totalSummonNumber, renown, honor, Level, trueStr, trueAgi, trueDex, trueHea, truePer, trueCha, trueInt, trueTotHea, inventory, spells, bestiar, achievements, equipped_items, equipped_itemsList
     try:
         open("saveFile.txt", "x")
     except:
@@ -1757,10 +1771,11 @@ def save():
                 count1 += 1
             appends.write("\n")
             #error when trying to store an item from str(inventory) TRY .SPLIT(,)
-            with open("achievements.txt", "a") as data:
+            with open("achievements.txt", "w") as data:
                 data.write(str(achievements))
-            with open("equippedItems.txt", "a") as data:
-                data.write(str(equipped_items))
+            with open("equippedItems.txt", "w") as data:
+                data.write(str(equipped_itemsList))
+
             opens.close()
         elif q == "Load" or q == "L":
             opens = open("saveFile.txt", "r")
@@ -1809,7 +1824,14 @@ def save():
             with open("achievements.txt", "r") as data:
                 achievements = data.readline().strip(",")
             with open("equippedItems.txt", "r") as data:
-                equipped_items = {data.readline().replace("{","").replace("}","").strip()}
+                equipped_itemsList = data.readline().strip(",")
+                count, count1 = 0, 1
+                for i in range(int(len(equipped_itemsList)/2)):
+                    del equipped_items[equipped_itemsList[count]]
+                    equipped_items.update({equipped_itemsList[count] : equipped_itemsList[count1]})
+                    count += 1
+                    count1 += 1
+                print(equipped_items)
             opens.close()
         else:
             print("Exiting Save Files")

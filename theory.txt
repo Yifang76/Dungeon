@@ -3,3 +3,10 @@ opt 1) Creating 'true' variables of stats (e.g. trueHea, trueStr, trueDex) and a
 
 opt 2) Creating 'buff' variables of stats (e.g. HeaBuff, StrBuff, DexBuff) and adding or multiplying
 them with their corresponding stats (e.g Hea, Str, Dex) to achieve same/similar result
+
+Discarded:
+            with open("equippedItems.txt", "r") as data:
+                for i in range(4):
+                    name, value = data.readline(), data.readline()
+                    del equipped_items[name]
+                    equipped_items.update({name : value})
