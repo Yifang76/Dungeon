@@ -1774,7 +1774,11 @@ def save():
             with open("achievements.txt", "w") as data:
                 data.write(str(achievements))
             with open("equippedItems.txt", "w") as data:
-                data.write(str(equipped_itemsList))
+                count1 = 0
+                for i in range(len(equipped_itemsList)):
+                    data.write(equipped_itemsList[count1]+", ")
+                    count1 += 1
+                appends.write("\n")
 
             opens.close()
         elif q == "Load" or q == "L":
@@ -1822,12 +1826,15 @@ def save():
                 print("")
 
             with open("achievements.txt", "r") as data:
-                achievements = data.readline().strip(",")
+                achievements = data.readline().strip().split(",")
             with open("equippedItems.txt", "r") as data:
-                equipped_itemsList = data.readline().strip(",")
+                equipped_itemsList = data.readline().strip().split(",")
+                print(equipped_itemsList)
                 count, count1 = 0, 1
                 for i in range(int(len(equipped_itemsList)/2)):
-                    del equipped_items[equipped_itemsList[count]]
+                    #del equipped_items[equipped_itemsList[count]]
+                    #print(equipped_itemsList[count]) PROBLEM IDENTIFIED
+                    #print(equipped_itemsList[count1]) PROBLEM IDENTIFIED
                     equipped_items.update({equipped_itemsList[count] : equipped_itemsList[count1]})
                     count += 1
                     count1 += 1
