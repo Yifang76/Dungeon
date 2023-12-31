@@ -1653,9 +1653,9 @@ def chance():
         }
     if whr == "stormcrag":
         actions = {
-        1: ("ip", 25, 1, 1, 1, 1, 1, None),
-        2: ("walord", 100, 7, 9, 1, 1, 1, None),
-        3: ("ditator", 75, 3, 3, 1, 1, 1, None),
+        1: ("dragonfly", 25, 5, 5, 1, 15, 5, None),
+        2: ("dragonoid", 75, 9, 3, 6, 2, 50, None),
+        3: ("", 75, 3, 3, 1, 1, 1, None),
         4: ("banit", 10, 2, 2, 1, 1, 1, None),
         5: ("wof", 7, 4, 4, 1, 1, 1, None),
         6: ("inect", 2, 1, 1, 1, 1, 1, None),
@@ -1663,8 +1663,9 @@ def chance():
         8: ("inect", 2, 1, 1, 1, 1, 1, None),
         9: ("inect", 2, 1, 1, 1, 1, 1, None),
         10: ("inect", 2, 1, 1, 1, 1, 1, None),
-        11: ("inect", 2, 1, 1, 1, 1, 1, None),
+        11: ("lich", 150, 10, 4, 1, 4, 150, None),
         }
+        no, health, attack, dex, perception, agility, eXp, bossItem
     if whr == "havocs rock":
         actions = {
         1: ("ip", 25, 1, 1, 1, 1, 1, None),
@@ -1696,9 +1697,9 @@ def chance():
     else:
         print("")
     if chanceEn <= 33:
-        no, health, attack, defense, perception, agility, eXp, bossItem = actions[randint(1,11)]
+        no, health, attack, dexterity, perception, agility, eXp, bossItem = actions[randint(1,11)]
         encounter(no, None)
-        fight(no, health, attack, defense, perception, agility, eXp, bossItem)
+        fight(no, health, attack, dexterity, perception, agility, eXp, bossItem)
     elif chanceEn <= 66 and chanceEn > 33:
         print("Placeholder")
     elif chanceEn <= 99 and chanceEn > 66:
