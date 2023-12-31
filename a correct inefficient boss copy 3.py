@@ -1831,14 +1831,17 @@ def save():
                 equipped_itemsList = data.readline().strip().split(",")
                 print(equipped_itemsList)
                 count, count1 = 0, 1
+                #print(equipped_items)
+                equipped_items.clear()
+                #print(equipped_items)
                 for i in range(int(len(equipped_itemsList)/2)):
                     #del equipped_items[equipped_itemsList[count]]
-                    #print(equipped_itemsList[count]) PROBLEM IDENTIFIED
-                    #print(equipped_itemsList[count1]) PROBLEM IDENTIFIED
+                    #print(equipped_itemsList[count]) #PROBLEM IDENTIFIED
+                    #print(equipped_itemsList[count1]) #PROBLEM IDENTIFIED
                     equipped_items.update({equipped_itemsList[count] : equipped_itemsList[count1]})
-                    count += 1
-                    count1 += 1
-                print(equipped_items)
+                    count += 2
+                    count1 += 2
+                #print(equipped_items)
             opens.close()
         else:
             print("Exiting Save Files")
