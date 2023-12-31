@@ -140,13 +140,13 @@ items = {
 }
 
 equipped_items = {
-    "Head": None,
-    "Chest": None,
-    "Gloves": None,
-    "Leggings": None,
-    "Boots": None,
-    "Right Hand": None,
-    "Left Hand": None,
+    "Head": "None",
+    "Chest": "None",
+    "Gloves": "None",
+    "Leggings": "None",
+    "Boots": "None",
+    "Right Hand": "None",
+    "Left Hand": "None",
 }
 equipped_itemsList = ["Head", "None", "Chest", "None", "Gloves", "None", "Leggings", "None", "Boots", "None", "Right Hand", "None", "Left Hand", "None"]
 
@@ -742,6 +742,7 @@ def statBoosts(equipment):
             "war axe": [5*upLevel, "Strength"],
             "hatchets": [2*upLevel, "Strength"],
             "King's Charter": ["N/A"],
+            "None" : [0, "Strength"]
         }
         print(equipmentBuff[" ".join(eList)])
         count, count1 = 1, 0
@@ -781,7 +782,7 @@ def armory():
         print("That is not an option.")
        
 def equip(whereEq):
-    if equipped_items[whereEq] is None:
+    if equipped_items[whereEq] == "None":
         available_items = [item for item in inventory if item != equipped_items[whereEq]]
         if available_items:
             whichEq = input(f"Available items for {whereEq}: {available_items}\nWhat would you like to equip? ")
@@ -816,7 +817,7 @@ def remove():
                 else:
                     equipped_itemsList[count+1] = None
                     print(equipped_itemsList)
-            equipped_items[whereRem] = None
+            equipped_items[whereRem] = "None"
             print(f"You have removed the {item} from {whereRem}.")
         else:
             print(f"There is no equipment in {whereRem} to remove.")
@@ -1838,7 +1839,7 @@ def save():
                     #del equipped_items[equipped_itemsList[count]]
                     #print(equipped_itemsList[count]) #PROBLEM IDENTIFIED
                     #print(equipped_itemsList[count1]) #PROBLEM IDENTIFIED
-                    equipped_items.update({equipped_itemsList[count] : equipped_itemsList[count1]})
+                    equipped_items.update({equipped_itemsList[count].strip() : equipped_itemsList[count1].strip()})
                     count += 2
                     count1 += 2
                 #print(equipped_items)
@@ -1875,6 +1876,13 @@ def chois():
     for i in range(len(listsConfig)):
         removeNoneFromLists(listsConfig[count])
         count += 1
+    statBoosts(equipped_items["Head"])
+    statBoosts(equipped_items["Chest"])
+    statBoosts(equipped_items["Gloves"])
+    statBoosts(equipped_items["Leggings"])
+    statBoosts(equipped_items["Boots"])
+    statBoosts(equipped_items["Right Hand"])
+    statBoosts(equipped_items["Left Hand"])
     #faithBuff()
     renownCheck()
     experienceCheck()
