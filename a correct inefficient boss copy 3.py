@@ -4,7 +4,7 @@ gold, bankedGold = 0, 0
 statUpgrade, experience = 0, 0
 summonNumber = 0
 totalSummonNumber = 0 #Changed from None to 0 for saveFile
-activeBounties = ["None"]
+activeBounties = [["None"],["None"],["None"],["None"],["None"]]
 bestiar, achievements = ["None"], ["None"]
 inventory = ["helmet", "sword"]
 spells = ["None"]
@@ -21,7 +21,7 @@ weaponlist = ["axe","sword","stick"]
 resourcelist = ["leather"]
 valuablelist = ["iron"]
 ad, weapon, resource, valuable = choice(adlist), choice(weaponlist), choice(resourcelist), choice(valuablelist)
-
+enemiesKilled = []
 baseSpellsDict = {
     "Elemental" : "Fireball",
     "Chaos" : "Confusion",
@@ -1125,6 +1125,7 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
                 print(f"{noun.capitalize()} has been added to the bestiary.")
             else:
                 print(f"{noun.capitalize()} is already in the bestiary.")
+            enemiesKilled.append(noun)
             if noun in bosses:
                 inventory.append(bossDrop)
                 if noun in livingBosses:
@@ -1505,8 +1506,9 @@ def tavern():
 #ADD A SEPARATOR (E.G.) # MAYBE TRY bountyList.append(state"#")?
 def bounty():
     global liteList, enemyList, activeBounties, bount
-    bount = {}
+    bount = [["None"],["None"],["None"],["None"],["None"]]
     bountyList = []
+    count = 0
     for i in range(5):
         rand = randint(1,2)
         if rand == 1:
@@ -1522,23 +1524,60 @@ def bounty():
         else:
             state = f"{act} {rend} {which}s ({cos} gold). "
         bountyList.append(state)
-        bount.update({state : cos})
-    while True:
-        print(bountyList)
-        q = int(input("Which bounty would you like to take? 0 (first) - 4 (last). "))
-        if q >= 0 and q <= 4:
-            activeBounties.append(bountyList[q])
-            bountyList.remove(bountyList[q])
-            print(f"Active commissions: {activeBounties}")
-            break
+        bount[count].extend([state, cos]), bount[count].remove("None")
+        count += 1
+    
+    whichService = input("Would you like to undertake a bounty or submit a conclusion? ").title()
+    match whichService:
+        case "Undertake" | "Take" | "0":
+            while True:
+                print(bountyList)
+                q = int(input("Which bounty would you like to take? 0 (first) - 4 (last). "))
+                if q >= 0 and q <= 4:
+                    activeBounties[q].extend([bountyList[q], cos]), activeBounties[q].remove("None")
+                    bountyList.remove(bountyList[q])
+                    print(f"Active commissions: {activeBounties}")
+                    break
+                else:
+                    print("Invalid")
+                    leave = input("Would you like to leave the Commission Board? ").capitalize()
+                    if leave == "Yes" or leave == "Y":
+                        print("You leave the commission board.")
+                        break
+                    else:
+                        print("You gaze upon the bounties on display.")    
+        case "Submit" | "Conclusion" | "1":
+            print(activeBounties)
+            whichBounty = int(input("Which bounty would you like to conclude? "))
+            bountyCheck(whichBounty)
+        case _:
+            print("That is not an option")
+
+def bountyCheck(bountyNum):
+    global gold, activeBounties, inventory
+    bounty, secondBounty, count = activeBounties[bountyNum][0].split(), activeBounties[bountyNum][0].split(), 0
+    if len(bounty) > 5:
+        secondBounty.pop(0).pop(1).pop(len(bounty)-1).pop(len(bounty)-2)
+        if bounty[0] == "Retrieve":
+            if int(bounty[1]) < [x for x in inventory if x == bounty[1]]:
+                while reqs != bounty[1]:
+                    if x == int(bounty[1]):
+                        inventory.pop(count)
+                        reqs += 1
+                    count += 1
+                    inventory.remove(bounty[2])
+                    gold += activeBounties[bountyNum][1]
+                    activeBounties[bountyNum].replace(activeBounties[bountyNum][0],"None"), activeBounties[bountyNum].pop(1)
+                    print(f"Bounty completed. You now have {gold} gold")
+                    print(activeBounties)
         else:
-            print("Invalid")
-            leave = input("Would you like to leave the Commission Board? ").capitalize()
-            if leave == "Yes" or leave == "Y":
-                print("You leave the commission board.")
-                break
-            else:
-                print("You gaze upon the bounties on display.")
+            if int(bounty[1]) < [x for x in enemiesKilled if x == bounty[1]]:
+                gold += activeBounties[bountyNum][1]
+                activeBounties[bountyNum].replace(activeBounties[bountyNum][0],"None"), activeBounties[bountyNum].pop(1)
+                print(f"Bounty completed. You now have {gold} gold")
+                print(activeBounties)
+
+
 def shrine():
     global faith
     deities = {
