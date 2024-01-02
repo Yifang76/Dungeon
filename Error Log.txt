@@ -18,3 +18,4 @@ Health resets when entering another fight!FIXED!
 
 Armory - equipped items have no effect (reason: no dict for values YET)
 Summons have health reset when summoned again
+statBoosts + faithBuff - New valeus of stats not saved outside of function

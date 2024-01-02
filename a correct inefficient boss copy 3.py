@@ -1204,6 +1204,8 @@ def itemUse():
             else:
                 despair = 0
                 print("Your despair completely subsides")
+        else:
+            print("Invalid item")
 
 def blacksmith():
     global inventory, ad, adlist, weaponModifier, new
@@ -1554,7 +1556,7 @@ def shrine():
             print(f"{q}, {str(deities[q])}")
             confirm = input("Would you like to worship this deity? ").capitalize()
             if confirm == "Yes" or confirm == "Y":
-                if faith != None:
+                if faith != "None":
                     change = input(f"You are already following {faith}. If you worship {q}, your faith in {faith} will be annulled. Do you wish to proceed? ").capitalize()
                     if change == "Yes" or change == "Y":
                         faith = q
@@ -1576,20 +1578,30 @@ def shrine():
                 print("You leave the shrine.")
                 break
 def faithBuff():
+    global Str, Agi, Dex, Hea, Per, Cha, Int
     fBuff = {
-        "Galadrialus": "+5 Str"
+        "Galadrialus": [5, "Strength"],
+        "None" : [0, "Strength"]
     }
-    if faith in fBuff:
-        fate = fBuff[faith].split()
-        if len(fate) > 2:
-            count = 1
-            for i in range(int(fate/2)):
-                if fate[count] == "":
-                    variable = variable + fate[count-1]
-        else:
-            if fate[count] == "":
-                variable = variable + fate[count-1]
-
+    count, count1 = 1, 0
+    for i in range(int(len(fBuff[faith])/2)):
+        match fBuff[faith][count]:
+            case "Strength":
+                Str += fBuff[faith][count1]
+            case "Agility":
+                Agi += fBuff[faith][count1]
+            case "Dexterity":
+                Dex += fBuff[faith][count1]
+            case "Health":
+                Hea += fBuff[faith][count1]
+            case "Perception":
+                Per += fBuff[faith][count1]
+            case "Intelligence":
+                Int += fBuff[faith][count1]
+            case "N/A":
+                print("")
+        count += 2
+        count1 += 2
         
 def incantations():
     global gold, spells
@@ -1872,11 +1884,12 @@ def save():
 
 
 def chois():
-    global carry, inventoryTwo
+    global carry, inventoryTwo, trueStr, trueAgi, trueDex, trueHea, truePer, trueCha, trueInt, trueTotHea
     count = 0
     for i in range(len(listsConfig)):
         removeNoneFromLists(listsConfig[count])
         count += 1
+    Str, Agi, Dex, Hea, Per, Cha, Int, TotHea = trueStr, trueAgi, trueDex, trueHea, truePer, trueCha, trueInt, trueTotHea
     statBoosts(equipped_items["Head"])
     statBoosts(equipped_items["Chest"])
     statBoosts(equipped_items["Gloves"])
@@ -1884,7 +1897,7 @@ def chois():
     statBoosts(equipped_items["Boots"])
     statBoosts(equipped_items["Right Hand"])
     statBoosts(equipped_items["Left Hand"])
-    #faithBuff()
+    faithBuff()
     renownCheck()
     experienceCheck()
     TotHea = Hea * 10
