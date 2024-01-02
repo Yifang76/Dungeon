@@ -1884,12 +1884,12 @@ def save():
 
 
 def chois():
-    global carry, inventoryTwo, trueStr, trueAgi, trueDex, trueHea, truePer, trueCha, trueInt, trueTotHea
+    global carry, inventoryTwo, trueStr, trueAgi, trueDex, trueHea, truePer, trueCha, trueInt, Str, Agi, Dex, Hea, Per, Cha, Int
     count = 0
     for i in range(len(listsConfig)):
         removeNoneFromLists(listsConfig[count])
         count += 1
-    Str, Agi, Dex, Hea, Per, Cha, Int, TotHea = trueStr, trueAgi, trueDex, trueHea, truePer, trueCha, trueInt, trueTotHea
+    Str, Agi, Dex, Hea, Per, Cha, Int = trueStr, trueAgi, trueDex, trueHea, truePer, trueCha, trueInt
     statBoosts(equipped_items["Head"])
     statBoosts(equipped_items["Chest"])
     statBoosts(equipped_items["Gloves"])
