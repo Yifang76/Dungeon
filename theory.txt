@@ -10,3 +10,4 @@ Discarded:
                     name, value = data.readline(), data.readline()
                     del equipped_items[name]
                     equipped_items.update({name : value})
+enemiesKilled = ["wolf","wolf","wolf","wolf","wolf","wolf","wolf","wolf","wolf","wolf","imp","imp","imp","imp","imp","imp","imp","imp","imp","imp","ent","ent","ent","ent","ent","ent","ent","ent","ent","ent",]
