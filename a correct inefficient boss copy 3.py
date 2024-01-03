@@ -1527,9 +1527,9 @@ def bounty():
         bount[count].extend([state, cos]), bount[count].remove("None")
         count += 1
     
-    whichService = input("Would you like to undertake a bounty or submit a conclusion? ").title()
+    whichService = input("Would you like to undertake a bounty (1) or submit a conclusion (2)? ").title()
     match whichService:
-        case "Undertake" | "Take" | "0":
+        case "Undertake" | "Take" | "1":
             while True:
                 print(bountyList)
                 q = int(input("Which bounty would you like to take? 0 (first) - 4 (last). "))
@@ -1546,7 +1546,7 @@ def bounty():
                         break
                     else:
                         print("You gaze upon the bounties on display.")    
-        case "Submit" | "Conclusion" | "1":
+        case "Submit" | "Conclusion" | "2":
             print(activeBounties)
             whichBounty = int(input("Which bounty would you like to conclude? "))
             bountyCheck(whichBounty)
@@ -1556,26 +1556,33 @@ def bounty():
 def bountyCheck(bountyNum):
     global gold, activeBounties, inventory
     bounty, secondBounty, count = activeBounties[bountyNum][0].split(), activeBounties[bountyNum][0].split(), 0
+    print(bounty)
     if len(bounty) > 5:
-        secondBounty.pop(0).pop(1).pop(len(bounty)-1).pop(len(bounty)-2)
-        if bounty[0] == "Retrieve":
-            if int(bounty[1]) < [x for x in inventory if x == bounty[1]]:
-                while reqs != bounty[1]:
-                    if x == int(bounty[1]):
-                        inventory.pop(count)
-                        reqs += 1
-                    count += 1
-                    inventory.remove(bounty[2])
-                    gold += activeBounties[bountyNum][1]
-                    activeBounties[bountyNum].replace(activeBounties[bountyNum][0],"None"), activeBounties[bountyNum].pop(1)
-                    print(f"Bounty completed. You now have {gold} gold")
-                    print(activeBounties)
-        else:
-            if int(bounty[1]) < [x for x in enemiesKilled if x == bounty[1]]:
+        bounty.pop(0).pop(1).pop(len(secondBounty)-1).pop(len(secondBounty)-2)
+    if int(bounty[1]) != 1:
+        taskKill, taskRetrieve = [x for x in enemiesKilled if bounty[2] == x + "s"], [x for x in inventory if bounty[2] == x + "s"]
+    else: # Problem on lines 1563 - 1567
+        taskKill, taskRetrieve = [x for x in enemiesKilled if bounty[2] == x], [x for x in inventory if bounty[2] == x]
+    print(taskKill)
+    print(taskRetrieve)
+    if bounty[0] == "Retrieve":
+        if int(bounty[1]) < taskRetrieve:
+            while reqs != bounty[1]:
+                if x == int(bounty[1]):
+                    inventory.pop(count)
+                    reqs += 1
+                count += 1
+                inventory.remove(bounty[2])
                 gold += activeBounties[bountyNum][1]
                 activeBounties[bountyNum].replace(activeBounties[bountyNum][0],"None"), activeBounties[bountyNum].pop(1)
                 print(f"Bounty completed. You now have {gold} gold")
                 print(activeBounties)
+    else:
+        if int(bounty[1]) < taskKill:
+            gold += activeBounties[bountyNum][1]
+            activeBounties[bountyNum].replace(activeBounties[bountyNum][0],"None"), activeBounties[bountyNum].pop(1)
+            print(f"Bounty completed. You now have {gold} gold")
+            print(activeBounties)
 
 
 def shrine():
