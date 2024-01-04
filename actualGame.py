@@ -169,12 +169,9 @@ rarityValues = {
 
 
 places = {
-    "Stormcrag" : 10,
-    "Havoc's Rock" : 50,
-    "Duskmire" : 25,
-    "Ironhold" : 7,
-    "Thornwood" : 5,
-    "Giant's Mausoleum" : 100,
+    "Potter " : 4360,
+    "Tomtress" : 4361,
+    "Whitley World" : 4362,
 }
 
 fenceDict = {
@@ -190,7 +187,7 @@ crime = {}
 liteList = ["leather", "iron" ]
 enemyList = ["botter", "wotter"]
 originClass = ["None"]
-ascensionItems = ["Vanta's vessel", "Murmur's mask, Lautrec's boon"]
+ascensionItems = [""]
 invalidSell = ["King's Charter"]
 illItems = ["necronomicon", "demon heart", "dragon scale", "human flesh"]
 #cChangeItem are all items that perform a class change
@@ -1155,10 +1152,10 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
             sys.exit()
 
 def itemUse():
-    global TotHea, inventory, despair
+    global TotHea, inventory, despair, usingSummon
     healthHeal = {
         "apple" : 5,
-        "1" : 10,
+        "Taco" : 100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
     }
     despairHeal = {
         "Malchor's Maltor": 1,
@@ -1197,22 +1194,13 @@ def blacksmith():
     global inventory, ad, adlist, weaponModifier, new
     CraftorUpgrade = input("Would you like to craft or upgrade? ").capitalize()
     if CraftorUpgrade == "Craft":
-        craft = input("What would you like to craft: charm or weapon? ").capitalize()
-        if craft == "Charm":
-            if "gem" in inventory:
-                if "leather" in inventory:
-                    inventory.remove("gem")
-                    inventory.remove("leather")
-                    newCharm = ad + "charm"
-                    rarities(newCharm)
-                    inventory.append(newCharm)
-                    print("s")
-        elif craft == "Weapon":
+        craft = input("What would you like to craft: sword? ").capitalize()
+        if craft == "Weapon":
             if "leather" in inventory:
                 if "iron" in inventory:
                     inventory.remove("leather")
                     inventory.remove("iron")
-                    inventory.append("weapon")
+                    inventory.append("sword")
     elif CraftorUpgrade == "Upgrade":
         if not inventory:
             print("You have nothing to upgrade.")
@@ -1339,13 +1327,12 @@ def journal():
 def bestiary():
     global bestiar
     bestiaryDict = {
-        "imp" : "an imp",
-        "dictator" : "a dictator",
-        "warlord" : "a warlord",
-        "insect" : "an insect",
-        "bandit" : "a bandit",
-        "ent" : "an ent",
-        "wolf" : "a wolf",
+        "botter" : "unholy blend of bear and man, the botter attacks with an impossible speed. Under its paw, the words 'William Potter is a bot at Mario Kart 8 Deluxe' are inscribed.",
+        "wotter" : "unholy blend of wolf and man, the wotter terrifies others with rude slurs.",
+        "bitley" : "unholy machination of beetle and man, the bitley rains destruction with co-ordinated aerial strikes."
+        "william" : "most dumb-ass thing in existence",
+        "bradley" : "most racist, bringer of polygon Jesus; bomber of a foreign country beginning with F and ending with e.",
+        "tom" : "tommy gun",
     }
     print(f"Your bestiary currently contains: {bestiar}.")
     q = input("Would you like to view a certain creature? ").capitalize()
@@ -1365,15 +1352,15 @@ def bestiary():
 def renownCheck():
     global honor, renown
     if renown <= -100:
-        honor = "Villain"
+        honor = "Michael"
     elif renown <=-50 and renown > -100:
-        honor = "Feared"
+        honor = "Jeff"
     elif renown == 0:
         honor = "Neutral"
     elif renown <= 50 and renown > 100:
-        honor = "Loved"
+        honor = "Loser"
     elif renown <= 100:
-        honor = "Hero"
+        honor = "Bitch"
     else:
         honor = "Unidentified"
 def experienceCheck():
@@ -1449,11 +1436,11 @@ def chooseStat():
 def tavern():
     global gold
     drinksPrice = {
-        "Malchor's Maltor": 10,
-        "Alastor's Anchor": 25,
-        "Intrail's Ichor": 100,
+        "William's H2O": 0,
+        "Bradley's Blood": 10,
+        "Tom's Plasma": 25,
     }
-    drinks = ["Malchor's Maltor", "Alastor's Anchor", "Intrail's Ichor"]
+    drinks = ["William's H2O", "Bradley's Blood", "Tom's Plasma"]
     food = {
         "apple": 5,
     }
@@ -1487,89 +1474,6 @@ def tavern():
                     print("You do not have enough gold")
             else:
                 print("That is not an option.")
-
-#ADD A SEPARATOR (E.G.) # MAYBE TRY bountyList.append(state"#")?
-def bounty():
-    global liteList, enemyList, activeBounties, bount
-    bount = [["None"],["None"],["None"],["None"],["None"]]
-    bountyList = []
-    count = 0
-    for i in range(5):
-        rand = randint(1,2)
-        if rand == 1:
-            which = choice(enemyList)
-            act = "Kill"
-        else:
-            which = choice(liteList)
-            act = "Retrieve"
-        rend = randint(1,10)
-        cos = randint(1,50)
-        if rend == 1:
-            state = f"{act} {rend} {which} ({cos} gold). "
-        else:
-            state = f"{act} {rend} {which}s ({cos} gold). "
-        bountyList.append(state)
-        bount[count].extend([state, cos]), bount[count].remove("None")
-        count += 1
-    
-    whichService = input("Would you like to undertake a bounty (1) or submit a conclusion (2)? ").title()
-    match whichService:
-        case "Undertake" | "Take" | "1":
-            while True:
-                print(bountyList)
-                q = int(input("Which bounty would you like to take? 1 (first) - 5 (last). "))
-                if q >= 1 and q <= 5:
-                    activeBounties[q-1].extend([bount[q-1]])
-                    bountyList.remove(bountyList[q-1])
-                    print(f"Active commissions: {activeBounties}")
-                    break
-                else:
-                    print("Invalid")
-                    leave = input("Would you like to leave the Commission Board? ").capitalize()
-                    if leave == "Yes" or leave == "Y":
-                        print("You leave the commission board.")
-                        break
-                    else:
-                        print("You gaze upon the bounties on display.")    
-        case "Submit" | "Conclusion" | "2":
-            print(activeBounties)
-            whichBounty = int(input("Which bounty would you like to conclude? "))
-            bountyCheck(whichBounty-1)
-        case _:
-            print("That is not an option")
-
-def bountyCheck(bountyNum):
-    global gold, activeBounties, inventory
-    bounty, secondBounty, count = activeBounties[bountyNum][0][0].split(), activeBounties[bountyNum][0][0].split(), 0
-    if len(bounty) > 5:
-        bounty.pop(0).pop(1).pop(len(secondBounty)-1).pop(len(secondBounty)-2)
-    if int(bounty[1]) != 1:
-        taskKill, taskRetrieve = [x for x in enemiesKilled if bounty[2] == x + "s"], [x for x in inventory if bounty[2] == x + "s"]
-    else: # Problem on lines 1563 - 1567
-        taskKill, taskRetrieve = [x for x in enemiesKilled if bounty[2] == x], [x for x in inventory if bounty[2] == x]
-    if bounty[0] == "Retrieve":
-        if int(bounty[1]) <= len(taskRetrieve):
-            while reqs != bounty[1]:
-                if x == int(bounty[1]):
-                    inventory.pop(count)
-                    reqs += 1
-                count += 1
-                inventory.remove(bounty[2])
-                gold += activeBounties[bountyNum][1]
-                activeBounties[bountyNum].remove(activeBounties[bountyNum][0]), activeBounties[bountyNum].pop(0)
-                print(f"Bounty completed. You now have {gold} gold")
-                print(activeBounties)
-        else:
-            print("Bounty incomplete")
-    else:
-        if int(bounty[1]) <= len(taskKill):
-            gold += activeBounties[bountyNum][1]
-            activeBounties[bountyNum].remove(activeBounties[bountyNum][0]), activeBounties[bountyNum].pop(0)
-            print(f"Bounty completed. You now have {gold} gold")
-            print(activeBounties)
-        else:
-            print("Bounty incomplete")
-
 
 def shrine():
     global faith
@@ -1666,7 +1570,7 @@ def incantations():
 def chance():
     global modNlist, whr
     chanceEn = randint(1,100)
-    if whr == "thornwood":
+    if whr == "tomtress":
         #Works but MAKE MORE EFFICIENT!
         actions = {
         1: ("imp", 25, 1, 1, 2, 10, 5, None),
@@ -1681,63 +1585,37 @@ def chance():
         10: ("insect", 2, 1, 1, 1, 1, 1, None),
         11: ("insect", 2, 1, 1, 1, 1, 1, None),
         }
-    if whr == "ironhold":
+    if whr == "whitley world":
+        #Works but MAKE MORE EFFICIENT!
         actions = {
-        1: ("im", 25, 1, 1, 1, 1, 1, None),
-        2: ("wrlord", 100, 7, 9, 1, 1, 1, None),
-        3: ("dctator", 75, 3, 3, 1, 1, 1, None),
-        4: ("bndit", 10, 2, 2, 1, 1, 1, None),
-        5: ("wlf", 7, 4, 4, 1, 1, 1, None),
-        6: ("nsect", 2, 1, 1, 1, 1, 1, None),
-        7: ("nt", 50, 7, 7, 1, 1, 1, None),
-        8: ("nsect", 2, 1, 1, 1, 1, 1, None),
-        9: ("nsect", 2, 1, 1, 1, 1, 1, None),
-        10: ("nsect", 2, 1, 1, 1, 1, 1, None),
-        11: ("nsect", 2, 1, 1, 1, 1, 1, None),
+        1: ("imp", 25, 1, 1, 2, 10, 5, None),
+        2: ("bitley", 100, 7, 9, 5, 1, 50, None),
+        3: ("dictator", 75, 3, 3, 1, 5, 25, None),
+        4: ("bandit", 10, 2, 2, 10, 10, 5, None),
+        5: ("wolf", 7, 4, 4, 10, 3, 3, None),
+        6: ("insect", 2, 1, 1, 1, 1, 1, None),
+        7: ("ent", 50, 7, 7, 3, 1, 20, None),
+        8: ("insect", 2, 1, 1, 1, 1, 1, None),
+        9: ("insect", 2, 1, 1, 1, 1, 1, None),
+        10: ("insect", 2, 1, 1, 1, 1, 1, None),
+        11: ("insect", 2, 1, 1, 1, 1, 1, None),
         }
-    if whr == "stormcrag":
+    if whr == "potter ":
+        #Works but MAKE MORE EFFICIENT!
         actions = {
-        1: ("dragonfly", 25, 5, 5, 1, 15, 5, None),
-        2: ("dragonoid", 75, 9, 3, 6, 2, 50, None),
-        3: ("", 75, 3, 3, 1, 1, 1, None),
-        4: ("banit", 10, 2, 2, 1, 1, 1, None),
-        5: ("wof", 7, 4, 4, 1, 1, 1, None),
-        6: ("inect", 2, 1, 1, 1, 1, 1, None),
-        7: ("en", 50, 7, 7, 1, 1, 1, None),
-        8: ("inect", 2, 1, 1, 1, 1, 1, None),
-        9: ("inect", 2, 1, 1, 1, 1, 1, None),
-        10: ("inect", 2, 1, 1, 1, 1, 1, None),
-        11: ("lich", 150, 10, 4, 1, 4, 150, None),
+        1: ("wotter", 25, 1, 1, 2, 10, 5, None),
+        2: ("botter", 100, 7, 9, 5, 1, 50, None),
+        3: ("dictator", 75, 3, 3, 1, 5, 25, None),
+        4: ("bandit", 10, 2, 2, 10, 10, 5, None),
+        5: ("wolf", 7, 4, 4, 10, 3, 3, None),
+        6: ("insect", 2, 1, 1, 1, 1, 1, None),
+        7: ("ent", 50, 7, 7, 3, 1, 20, None),
+        8: ("insect", 2, 1, 1, 1, 1, 1, None),
+        9: ("insect", 2, 1, 1, 1, 1, 1, None),
+        10: ("insect", 2, 1, 1, 1, 1, 1, None),
+        11: ("insect", 2, 1, 1, 1, 1, 1, None),
         }
-        no, health, attack, dex, perception, agility, eXp, bossItem
-    if whr == "havocs rock":
-        actions = {
-        1: ("ip", 25, 1, 1, 1, 1, 1, None),
-        2: ("walord", 100, 7, 9, 1, 1, 1, None),
-        3: ("ditator", 75, 3, 3, 1, 1, 1, None),
-        4: ("banit", 10, 2, 2, 1, 1, 1, None),
-        5: ("wof", 7, 4, 4, 1, 1, 1, None),
-        6: ("inect", 2, 1, 1, 1, 1, 1, None),
-        7: ("en", 50, 7, 7, 1, 1, 1, None),
-        8: ("inect", 2, 1, 1, 1, 1, 1, None),
-        9: ("inect", 2, 1, 1, 1, 1, 1, None),
-        10: ("inect", 2, 1, 1, 1, 1, 1, None),
-        11: ("inect", 2, 1, 1, 1, 1, 1, None),
-        }
-    if whr == "giants mausoleum":
-        actions = {
-        1: ("shade", 25, 1, 1, 1, 1, 1, None),
-        2: ("ghoul", 100, 7, 9, 1, 1, 1, None),
-        3: ("spirit", 75, 3, 3, 1, 1, 1, None),
-        4: ("ice spirit", 10, 2, 2, 1, 1, 1, None),
-        5: ("snow wolf", 7, 4, 4, 1, 1, 1, None),
-        6: ("glacice", 2, 1, 1, 1, 1, 1, None),
-        7: ("mammoth", 50, 7, 7, 1, 1, 1, None),
-        8: ("zombie", 2, 1, 1, 1, 1, 1, None),
-        9: ("skeleton", 2, 1, 1, 1, 1, 1, None),
-        10: ("half giant", 2, 1, 1, 1, 1, 1, None),
-        11: ("shambling giant", 2, 1, 1, 1, 1, 1, None),
-        }
+
     else:
         print("")
     if chanceEn <= 33:
@@ -1750,24 +1628,21 @@ def chance():
         print("Nothing notable occurs.")
     else:
         match whr:
-            case "thornwood":
-                if "" in livingBosses:
-                    encounter("Name", "Statement")
-                    fight("Name", 100, 7, 15, 1, 1, 10000, "Drop")
+            case "tomtress":
+                if "Tom" in livingBosses:
+                    encounter("Tom", "Tom")
+                    fight("Tom", 100, 7, 15, 1, 1, 10000, "tommy gun")
                 else:
                     print("Placeholder")
-            case "ironhold":
-                encounter("Precept", "From the depths of Ironhold, the mechanical Precept, life of the city, reveals itself.")
-                fight("Precept", 5000, 15, 30, 1, 15000, "Machine Eye")
-            case "stormcrag":
-                encounter()
-                fight()
-            case "giant's mausoleum":
-                if "The Wicked" in livingBosses:
-                    encounter("The Wicked", "Rising from the corpses of the fallen giants, The Wicked rises for vengeance.")
-                    fight("The Wicked", 100, 7, 15, 25, 50, 10000, "Brandle")
+            case "whitley world":
+                encounter("Bradley", "Racist Porgrammer")
+                fight("Bradley", 69420, 69, 420, 2000000000, 856, -432000, "Taco")
+            case "potter ":
+                if "William" in livingBosses:
+                    encounter("William", "Dumb ass thing")
+                    fight("William", 69418, 999, 4, 1, 88, 10000, "Diabetes Type 3")
                 else:
-                    print("The corpse of The Wicked has disappeared.")
+                    print("William has already died.")
     experienceCheck()
 
 def removeNoneFromLists(listName):
