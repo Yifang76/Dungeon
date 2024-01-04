@@ -1,27 +1,14 @@
-from random import *
-import sys
-gold, bankedGold = 0, 0
-statUpgrade, experience = 0, 0
-summonNumber = 0
-totalSummonNumber = 0 #Changed from None to 0 for saveFile
+from random import *, import sys
+gold, bankedGold, statUpgrade, experience, summonNumber, totalSummonNumber, renown = 0, 0, 0, 0, 0, 0, 0
 activeBounties = [[],[],[],[],[]]
-bestiar, achievements = ["None"], ["None"]
-inventory = ["helmet", "sword"]
-spells = ["None"]
-faith = "None"
-eTotHea = int(1)
-carry = True
-summons = ["None"]
-shopStock, bankedItems = [""], ["None"]
-n = None
-renown = 0
+bestiar, achievements, inventory = ["None"], ["None"], ["helmet", "sword"]
+faith, eTotHea, carry, summons, spells, shopStock, bankedItems = "None", int(1), True, ["None"], ["None"], [""], ["None"]
 hEqItem, cEqItem, lEqItem, gEqItem, bEqItem, rhEqItem, lhEqItem = "None", "None", "None", "None", "None", "None", "None" #Changed from None to "None" for saveFile
 adlist = ["common ","rare ","mythical ","legendary "]
 weaponlist = ["axe","sword","stick"]
 resourcelist = ["leather"]
 valuablelist = ["iron"]
 ad, weapon, resource, valuable = choice(adlist), choice(weaponlist), choice(resourcelist), choice(valuablelist)
-enemiesKilled = []
 baseSpellsDict = {
     "Elemental" : "Fireball",
     "Chaos" : "Confusion",
@@ -30,8 +17,15 @@ baseSpellsDict = {
     "Nature" : "Bind",
     "Aether" : "Barrage",
 }
-
-name = input("Name, please ").capitalize()
+name = input("Name, please ").title()
+try:
+    name.split().remove("Yifang")
+    con = 1
+except:
+    con = 2
+finally:
+    if con == 1:
+        print("Fuck you")
 print("Knight: (Strength: 10, Agility: 3, Dexterity: 8,\nHealth: 7, Perception: 4, Charisma: 6 (Within lawful lands) or 0 (in foreign lands),\nIntelligence: 5)\n")
 print("Merchant: (Strength: 1, Agility: 8, Dexterity: 1,\nHealth: 3, Perception: 8, Charisma: 10,\nIntelligence: 6)\n")
 print("Summoner: (Strength: 1, Agility: 4, Dexterity: 1,\nHealth: 2, Perception: 9, Charisma: 2,\nIntelligence: 8)\n")
@@ -64,10 +58,10 @@ while True:
             classv(26, 1, 4, 1, 2, 9, 2, 8, 20)
             totalSummonNumber = Int
             while True:
-                print("Wolf")
+                print("Wotter")
                 whichSummo = input("Which summon would you like to start with? ").capitalize()
-                if whichSummo == "Wolf":
-                    summons.append("wolf")
+                if whichSummo == "Wotter":
+                    summons.append("wotter")
                     break
                 else:
                     print("That is not an option")
@@ -88,10 +82,14 @@ while True:
                 else:
                     print("That is not an option")
             break
+            LevelG, StrG, AgiG, DexG, HeaG, PerG, ChaG, IntG, TotHeaG
         case "Tom":
             if name == "Tom":
-                classv()
+                classv(100, 5, 7, 4, 8, 3, 0, 4, 80)
                 break
+        case "Bradley":
+            if name == "Bradley":
+                classv(90, 1, 1, 1, 4, 1000000000, 0, 53, 40)
         case "William":
             if name == "William":
                 classv(120,3,3,3,5,3,0,10,50)
@@ -183,7 +181,6 @@ fenceDict = {
 }
 listsConfig = ["totalSummonNumber", "activeBounties", "bestiar", "spells", "summons", "bankedItems"]
 pList = ["Potter ", "Tomtress", "Whitley World"]
-crime = {}
 liteList = ["leather", "iron" ]
 enemyList = ["botter", "wotter"]
 originClass = ["None"]
@@ -254,216 +251,41 @@ def classChange(newClass, itemUsing, lev, stre, agi, dex, hea, per, cha, inte, T
         else:
             print("That is not an option.")
             
-def rarities(q):
-    global weaponModifier
-    factors = [" int", " faith", " strength", " dexterity", " health"]
-    factor = choice(factors)
-    f = q.split()
-    print(f)
-    if q in inventory:
-        if f[0] in rarityValues:
-            tFactor = str(rarityValues[f[0]]) + factor
-            print(f"{q} has effect +{tFactor}.")
-            weaponModifier.update({q : tFactor})
-
-        else:
-            print("NO")
-    else:
-        print("NO2")
-
-def crimCheck(tim):
-    global crime
-    if tim.split()[1] == "Years" or tim.split()[1] == "Year":
-        crime.update({str("Years"): (crime["Years"]) + int(tim.split()[0])})
-
-    if tim.split()[1] == "Months" or tim.split()[1] == "Month":
-        crime.update({str("Months"): (crime["Months"]) + int(tim.split()[0])})
-
-    if tim.split()[1] == "Days" or tim.split()[1] == "Day":
-        crime.update({str("Days"): (crime["Days"]) + int(tim.split()[0])})
-    return (""+str(crime["Years"])+" year(s), "+str(crime["Months"])+" month(s) and "+str(crime["Days"])+" day(s)") #When f"" used [ is declared as unmatched
-
-def guard(statement, tim, place):
-    q = input(f"You are charged with {statement}. You will be sentenced for {crimCheck(tim)}. "
-    "What will you do? (Resist Arrest (F), Evade Arrest (E) Bribe Guard (B), "
-    "Persuade Guard (P) Intimidate Guard (I) or Accept Arrest (A)) ").capitalize()
-    answer = False
-    while answer == False:
-        match q:
-            case "Resist Arrest" | "Resist" | "Fight" |"F":
-                guardF(place)
-            case "Evade Arrest" | "Evade" |"E":
-                guardE(place,tim)
-            case "Accept Arrest" | "Accept" | "A":
-                guardA()
-            case "Bribe Guard" | "Bribe" | "B":
-                guardB(place)
-            case "Persuade Guard" | "Persuade" | "P":
-                print("Persuade")
-            case "Intimidate Guard" | "Intimidate" | "I":
-                print("Intimidate")
-            case _:
-                print("Hey, stop trying to evade justice!")
-
-#eStr and (presumably) eDex undefined. Try using method in chance?
-#danger not defined and time not defined, along with eStr and eDex
-def guardF(place):
-    global summonNumber, summons, TotHea, classn, totalSummonNumber, tim
-    enemyHealth = {
-        "Cetus" : 10,
-        "Ashborn" : 50,
-    }
-    eTotHea = int(enemyHealth[place])
-    while TotHea > 0:
-        if eTotHea > 0:
-            opt = input("What will you do? (Fight (F), Use Item (U), Surrender (S) or Retreat (R).) ").capitalize()
-            match opt:
-                case "Fight" | "F":
-                    eTotHea = eTotHea - (int(Str) * int(Dex))
-                    print(f"The guard currently has {eTotHea} health left.")
-                    TotHea = TotHea - (int(eStr) * int(eDex))
-                    print(f"You currently have {TotHea} health left.")
-                case "Use Item" | "Use" | "Item" | "I":
-                    print("Item")
-                case "Surrender" | "S":
-                    print("Surrender")
-                case "Retreat" | "R":
-                    retreat = randint(1+Agi,100)
-                    if retreat >= 50:
-                        print("You successfully fled, coward.")
-                        break
-                    else:
-                        print("You failed to escape.")
-                case _:
-                    print("That is not an option")
-        if eTotHea <= 0:       
-            tim = str(int(tim.split()[0]) + int(5)) +" "+tim.split()[1]
-            if randint(1,2) == 1:
-                print("Another guard arrives to stop you")
-                guardF(place, safe, danger)
-            else:
-                print(f"Escaping, the knowledge that you cannot enter {place} again without "
-                "being pursued by the guards sets in.")
-                chois()
-
-
-    if TotHea <= 0:
-        if place in safe:
-            #change to 20 years eventually; make it compatible with months, ect.
-            tim = str(int(tim.split()[0]) + int(5)) +" "+tim.split()[1]
-            crimCheck(tim)
-            print(f"Wounded, you are dragged to prison by the guards, sentence increasing to {tim}.")
-            if classn == "Knight":
-                #CHANGE LINE UNDER THIS COMMENT TO ACCOUNT FOR MULTIPLE ITEMS. (E.G. King's Charter, Queen's Pardon, ect.)
-                if "King's Charter" in inventory:
-                    inventory.remove("King's Charter")
-                    print("Due to your crime, you have lost the King's Charter.")
-                    
-        else:
-            print("You died")
-            sys.exit()
-
-#Need to Run
-def guardE(place,tim):
-    global crime
-    q = randint(1,100-Agi)
-    if q <= 10:
-        print("You successfully escaped the guards, however your crime has not been forgotten.")
-        crimeCheck(tim)
-    else:
-        guardF(place)
-
-#ADD
-def guardA():
-    print("You have been apprehended.")
-
-def guardB(place):
-    bribe = {
-        "Cetus" : 100,
-    }
-    if place in bribe:
-        if int(bribe[place])-Cha <= 0:
-            print(f"Give me {int(bribe[place])} gold and we'll call it even.")
-            if q == "Yes" or q == "Y":
-                gold = gold - int(bribe[place])
-                print(f"You have {gold} gold left.")
-                tim = 0
-            else:
-                guardF(place)
-        success = randint(1,int(bribe[place])-Cha)
-        if success < 10:
-            print(f"Give me {int(bribe[place])} gold and we'll call it even.")
-            if q == "Yes" or q == "Y":
-                gold = gold - int(bribe[place])
-                print(f"You have {gold} gold left.")
-                tim = 0
-            else:
-                guardF(place)
-        else:
-            print("No bribery!")
-            guardF(place)
-
-
-    else:
-        print("How dare you try to bribe an officer of the law!")
-        tim = str(int(tim.split()[0]) + int(5)) +" "+tim.split()[1]
-        crimCheck(tim)
-
-
 def sell():
     global gold
     while True:
         print(f"You currently have {gold} gold.")
         print(inventory)
         sellWhich = input("What would you like to sell? ")
-        if sellWhich in fenceDict:
-            q = input(f"{sellWhich.capitalize()}! Get that thing away from me; it's illegal. "
-            "Of course, only if you don't have the gold. How about you give me 10,000 gold and I'll "
-            "tell you where you can sell it. ").capitalize()
-            if q == "Yes" or q == "Y":
-                if int(gold)-int(10000) >= 0:
-                    gold = gold - 10000
-                    print("Thanks for the gold. As promised, if you go to the 'Fence', and say "
-                    " then you can buy and sell less 'savoury' wares.")
+        if sellWhich in inventory:
+            if sellWhich not in invalidSell:
+                if sellWhich not in ascensionItems:
+                    YN = input(f"Would you like to sell {sellWhich} for {str(items[sellWhich]+Cha)} gold? ").capitalize()
+                    if YN == "Yes":
+                        inventory.remove(sellWhich)
+                        gold = int(gold) + items[sellWhich]
+                        again = input("Would you like to use the shop again? ").capitalize()
+                        if again == "No":
+                            break
+                    elif YN == "No":
+                        esc = input("Would you like to stop selling? ").capitalize()
+                        if esc == "Yes":
+                            break
                 else:
-                    print("Seems like you can't pay up. Well then, guards!")
-                    guard("intention to sell an illegal item", "20 years","Cetus")
-                    break
+                    print("Sorry; that's useless.")
             else:
-                print("I see, I see. Well then, guards!")
-                guard("intention to sell an illegal item", "20 years","Cetus")
-                break
+                print("You can't sell that!")
         else:
-            if sellWhich in inventory:
-                if sellWhich not in invalidSell:
-                    if sellWhich not in ascensionItems:
-                        YN = input(f"Would you like to sell {sellWhich} for {str(items[sellWhich]+Cha)} gold? ").capitalize()
-                        if YN == "Yes":
-                            inventory.remove(sellWhich)
-                            gold = int(gold) + items[sellWhich]
-                            again = input("Would you like to use the shop again? ").capitalize()
-                            if again == "No":
-                                break
-                        elif YN == "No":
-                            esc = input("Would you like to stop selling? ").capitalize()
-                            if esc == "Yes":
-                                break
-                    else:
-                        print("Sorry; that's useless.")
-                else:
-                    print("You can't sell that!")
-            else:
-                print("You do not have this item")
-                esc = input("Would you like to stop selling? ").capitalize()
-                if esc == "Yes":
-                    break
+            print("You do not have this item")
+            esc = input("Would you like to stop selling? ").capitalize()
+            if esc == "Yes":
+                break
 
     print(f"You currently have {gold} gold.")
 
 def buy():
     global gold
     shopStock = []
-
     for i in range(randint(1,20)):
         shopStock.append(choice(liteList))
     print(f"You currently have {gold} gold.")
@@ -505,118 +327,6 @@ def buy():
         shopStock.append(choice(liteList))
     print(f"You currently have {gold} gold.")
     print(f"You currently have {inventory}.")
-
-def fence():
-    IVLoop = True
-    passw = input("What is the passcode? ")
-    if passw == "":
-        print("You may enter, sinner.")
-        if classn == "Knight":
-            Char = -5
-            print("Surrounded by sinners, miscreants, spies and traitors, the King's Charter has no"
-            f" effect here. On the contrary, it enrages the inhabitants. Charisma drops to {Char}")
-        while IVLoop == True:
-            BoS = input("Would you like to buy or sell, sinful one? ").capitalize()
-            if BoS == "Buy" or BoS == "B":
-                IVLoop = False
-                fenBuy()
-            if BoS == "Sell" or BoS == "S":
-                if not inventory:
-                    print("You have nothing of value, devious one.")
-                else:
-                    IVLoop = False
-                    fenSell()
-                    
-    else:
-        print("You are not one of us. Leave.")
-        chois()
-
-def fenBuy():
-    global gold
-    shopStock = []
-
-    for i in range(randint(1,20)):
-        shopStock.append(choice(illItems))
-    print(f"You currently have {gold} gold.")
-    print(f"You currently have {inventory}.")
-    while True:
-        print(f"The shop currently has {shopStock}")
-        buyWhich = input("What would you like to buy? ")
-        if buyWhich in shopStock:
-            YN = input(f"Would you like to buy {buyWhich} for {str(fenceDict[buyWhich])} gold? ").capitalize()
-            if YN == "Yes":
-                phGold = int(gold) - fenceDict[buyWhich]
-                if phGold > 0:
-                    gold = phGold
-                    shopStock.remove(buyWhich)
-                    inventory.append(buyWhich)
-                    print(f"You currently have {gold} gold.")
-                    again = input("Would you like to use the shop again? ").capitalize()
-                    if again == "No":
-                        break
-                else:
-                    print(f"You do not have enough gold; you need {str(int(fenceDict[buyWhich]) - int(gold))} more gold.")
-                    esc = input("Would you like to stop buying? ").capitalize()
-                    if esc == "Yes":
-                        break
-
-            elif YN == "No":
-                esc = input("Would you like to stop buying? ").capitalize()
-                if esc == "Yes":
-                    break
-            else:
-                print("That is not an option")
-        else:
-            print(f"The shop does not have {buyWhich} in stock")
-            esc = input("Would you like to stop buying? ").capitalize()
-            if esc == "Yes":
-                break
-
-    for i in range(randint(1,20)):
-        shopStock.append(choice(liteList))
-    print(f"You currently have {gold} gold.")
-    print(f"You currently have {inventory}.")
-
-def fenSell():
-    global gold
-    while True:
-        print(f"You currently have {gold} gold.")
-        print(inventory)
-        sellWhich = input("What would you like to sell? ")
-        if sellWhich in fenceDict:
-            if sellWhich in inventory:
-                if sellWhich not in invalidSell:
-                    YN = input(f"Would you like to sell {sellWhich} for {str(fenceDict[sellWhich])} gold? ").capitalize()
-                    if YN == "Yes":
-                        inventory.remove(sellWhich)
-                        gold = int(gold) + fenceDict[sellWhich]
-                        again = input("Would you like to use the shop again? ").capitalize()
-                        if again == "No":
-                            break
-                    elif YN == "No":
-                        esc = input("Would you like to stop selling? ").capitalize()
-                        if esc == "Yes":
-                            break
-                else:
-                    print("You can't sell that!")
-            else:
-                print("You do not have this item")
-                esc = input("Would you like to stop selling? ").capitalize()
-                if esc == "Yes":
-                    break
-        else:
-            if sellWhich in inventory:
-                if sellWhich in ascensionItems:
-                    print("Sorry; that's useless.")
-                    break
-                else:
-                    print("Sorry, we don't accept common goods here.")
-                    break
-            else:
-                print("You do not have this item.")
-                break
-
-    print(f"You currently have {gold} gold.")
 
 def shop():
     IVLoop = True
@@ -707,9 +417,7 @@ def statBoosts(equipment):
         eList.pop(len(eList)-1)
         " ".join(eList)
     except:
-        print(equipment.title()+" has no upgrades")
         upLevel = 0.5
-
     finally:
         equipmentBuff = {
             "helmet" : [2*upLevel, "Health"],
@@ -726,7 +434,6 @@ def statBoosts(equipment):
             "King's Charter": ["N/A"],
             "None" : [0, "Strength"]
         }
-        print(equipmentBuff[" ".join(eList)])
         count, count1 = 1, 0
         for i in range(int(len(equipmentBuff[" ".join(eList)])/2)):
             match equipmentBuff[" ".join(eList)][count]:
@@ -923,15 +630,6 @@ def menu():
             print("That is not an option.")
 
 
-
-#Possibly Uneeded
-def nounList(firstV, secondV, thirdV, fourthV, fifthV, sixthV, seventhV, eighthV, ninthV, tenthV):
-    global n, modNlist
-    nlist = [firstV, secondV, thirdV, fourthV, fifthV, sixthV, seventhV, eighthV, ninthV, tenthV]
-    modNlist = [item for item in nlist if item is not None]
-    print(modNlist)
-    n = choice(modNlist)
-
 def where():
     global whr
     whr = input(f"Where would you like to go? {pList} ").replace("'","").lower()
@@ -1107,7 +805,6 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
                 print(f"{noun.capitalize()} has been added to the bestiary.")
             else:
                 print(f"{noun.capitalize()} is already in the bestiary.")
-            enemiesKilled.append(noun)
             if noun in bosses:
                 inventory.append(bossDrop)
                 if noun in livingBosses:
@@ -1158,9 +855,9 @@ def itemUse():
         "Taco" : 100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
     }
     despairHeal = {
-        "Malchor's Maltor": 1,
-        "Alastor's Anchor": 5,
-        "Intrail's Ichor": 10,
+        "Bradley's Blood": 10,
+        "Tom's Plasma": 5,
+        "William's H2O": 1,
     }
     if usingSummon == True:
         health, strength, dexterity, perception, agility = summonStats[whichSummon]
@@ -1212,43 +909,15 @@ def blacksmith():
                 if correct == "Yes" or correct == "Y":
                     if "iron" in inventory:
                         splinch = whichUp.split()
-                        if splinch[0] not in rarityValues:
-                            if splinch[0] == "Charm":
-                                inventory.remove("iron")
-                                inventory.remove(whichUp)
-                                inventory.append(ad + splinch[1])
-                                print(inventory)
-                            else:
-                                if len(splinch) == 1:
-                                    new = 1
-                                    inventory.remove(whichUp)
-                                    inventory.remove("iron")
-                                    splinch.append("+1")
-                                    print(splinch)
-                                    inventory.append(" ".join(splinch))
-                                    print(inventory)
-                                    weaponModifier.update({" ".join(splinch) : int(new)})
-                                else:
-                                    inventory.remove(whichUp)
-                                    inventory.remove("iron")
-                                    ne = splinch[len(splinch)-1].replace("+","")
-                                    ne = int(ne) + 1
-                                    new = "+" + str(ne)
-                                    splinch.remove(splinch[len(splinch)-1])
-                                    splinch.append(new)
-                                    inventory.append(" ".join(splinch)) 
-                                    print(inventory)
-                                    weaponModifier.update({" ".join(splinch) : ne})
-                        else:
-                            q = input(f"{whichUp} has modifier {splinch[0]}. Would you like to change this? ").capitalize()
-                            if q == "Yes" or q == "Y":
-                                inventory.remove("iron")
-                                inventory.remove(whichUp)
-                                ad = choice(adlist)
-                                inventory.append(ad + splinch[1])
-                                print(inventory)
-                            else:
-                                print("Cancelling process")
+                        if len(splinch) == 1:
+                            new = 1
+                            inventory.remove(whichUp)
+                            inventory.remove("iron")
+                            splinch.append("+1")
+                            print(splinch)
+                            inventory.append(" ".join(splinch))
+                            print(inventory)
+                            weaponModifier.update({" ".join(splinch) : int(new)})
 
                     else:
                         print(f"You do not meet the requirements to upgrade {whichUp}.")
@@ -1258,69 +927,15 @@ def blacksmith():
     else:
         print("That is not an option.")
 
-def alchemist():
-    print(create)
-    q = input("Which item would you like to create? ")
-    if q in create:
-        h = requirements.index(q)
-        print(f"You need {requirements[h+1]} and {requirements[h+2]}")
-        cauldron(q, requirements.index(q))
-
-def cauldron(item, herb):
-  if requirements[herb+1] in inventory and requirements[herb+2] in inventory:
-    inventory.remove(requirements[herb+1])
-    inventory.remove(requirements[herb+2])
-    inventory.append(item)
-    print(item+" has been created")
-  else:
-    print("Cannot create "+item+": you don't have the correct herbs")
-
-def trainer():
-    print("Knight, Summoner, Berserker, Mage, Priest")
-    while True:
-        classn = input("Which class would you like to become? ").capitalize()
-        match classn:
-            case "Knight":
-                classv(15, 10, 3, 8, 7, 4, 6, 5, 70)
-                inventory.append("King's Charter")
-                break
-            case "Summoner":
-                classv(5, 1, 4, 1, 2, 9, 2, 8, 20)
-                totalSummonNumber = Int
-                break
-            case "Berserker":
-                print("Berserker")
-                break
-            case "Mage":
-                print("Mage")
-                break
-            case "Priest":
-                print("Priest")
-                break
-            case "Tom":
-                if name == "Tom":
-                    classv()
-                    break
-            case "William":
-                if name == "William":
-                    classv(120,3,3,3,5,3,0,10,50)
-                    break
-            case _:
-                print("That is not an option")
-
 def journal():
     global honor, renown
-    q = input("What would you like to view? Honor (H), Bestiary (B), Quests (Q) or Bounties (C). ").capitalize()
+    q = input("What would you like to view? Honor (H) or Bestiary (B). ").capitalize()
     match q:
         case "Honor" | "H":
             print(f"Title: {honor}")
             print(f"You have {renown} renown.")
         case "Bestiary" | "B":
             bestiary()
-        case "Quests" | "Q":
-            print("Active Quests Go Here")
-        case "Bounties" | "C":
-            print(activeBounties)
         case _:
             print("That is not an option.")
 
@@ -1329,7 +944,7 @@ def bestiary():
     bestiaryDict = {
         "botter" : "unholy blend of bear and man, the botter attacks with an impossible speed. Under its paw, the words 'William Potter is a bot at Mario Kart 8 Deluxe' are inscribed.",
         "wotter" : "unholy blend of wolf and man, the wotter terrifies others with rude slurs.",
-        "bitley" : "unholy machination of beetle and man, the bitley rains destruction with co-ordinated aerial strikes."
+        "bitley" : "unholy machination of beetle and man, the bitley rains destruction with co-ordinated aerial strikes.",
         "william" : "most dumb-ass thing in existence",
         "bradley" : "most racist, bringer of polygon Jesus; bomber of a foreign country beginning with F and ending with e.",
         "tom" : "tommy gun",
@@ -1478,11 +1093,9 @@ def tavern():
 def shrine():
     global faith
     deities = {
-    "Galadrialus" : "the deity of warriors and gladiators alike. ", 
-    "2" : "the deity of 2____, ",
-    "3" : "the deity of 3____, ",
-    "4" : "the deity of 4____, ",
-    "5" : "the deity of 5____, ",
+    "Bradely" : "deity of explosives, warcrimes and slurs. ", 
+    "Will-Meister" : "the deity of arduous idiocy, ",
+    "Tommy" : "deity of guns, ",
     }
     print("Welcome to the shrine, the primary place of worship within the city. "
     f"the existing deities are {deities}.")
@@ -1506,7 +1119,7 @@ def shrine():
                     print(f"You have entered the faith of {q}.")
                     break
             else:
-                print("You decide to browse the holy texts of the other deities.")
+                print("You decide to browse the unholy texts of the other deities.")
         else:
             print("That is not a deity worshipped here.")
             leave = input("Would you like to leave the shrine? ").capitalize()
@@ -1516,7 +1129,9 @@ def shrine():
 def faithBuff():
     global Str, Agi, Dex, Hea, Per, Cha, Int
     fBuff = {
-        "Galadrialus": [5, "Strength"],
+        "Tommy": [-5, "Strength"],
+        "Will-Meister": [-100000000, "Intelligence"],
+        "Bradely": [-63, "Health"]
         "None" : [0, "Strength"]
     }
     count, count1 = 1, 0
@@ -1571,51 +1186,47 @@ def chance():
     global modNlist, whr
     chanceEn = randint(1,100)
     if whr == "tomtress":
-        #Works but MAKE MORE EFFICIENT!
         actions = {
-        1: ("imp", 25, 1, 1, 2, 10, 5, None),
-        2: ("warlord", 100, 7, 9, 5, 1, 50, None),
-        3: ("dictator", 75, 3, 3, 1, 5, 25, None),
-        4: ("bandit", 10, 2, 2, 10, 10, 5, None),
-        5: ("wolf", 7, 4, 4, 10, 3, 3, None),
-        6: ("insect", 2, 1, 1, 1, 1, 1, None),
-        7: ("ent", 50, 7, 7, 3, 1, 20, None),
-        8: ("insect", 2, 1, 1, 1, 1, 1, None),
-        9: ("insect", 2, 1, 1, 1, 1, 1, None),
-        10: ("insect", 2, 1, 1, 1, 1, 1, None),
-        11: ("insect", 2, 1, 1, 1, 1, 1, None),
+        1: ("timp", 25, 1, 1, 2, 10, 5, None),
+        2: ("tabybara", 100, 7, 9, 5, 1, 50, None),
+        3: ("terodactyl", 75, 3, 3, 1, 5, 25, None),
+        4: ("turtom", 10, 2, 2, 10, 10, 5, None),
+        5: ("wot", 7, 4, 4, 10, 3, 3, None),
+        6: ("tomsect", 2, 1, 1, 1, 1, 1, None),
+        7: ("tont", 50, 7, 7, 3, 1, 20, None),
+        8: ("tomilla", 2, 1, 1, 1, 1, 1, None),
+        9: ("hippotomamus", 2, 1, 1, 1, 1, 1, None),
+        10: ("shtom", 2, 1, 1, 1, 1, 1, None),
+        11: ("tomala", 2, 1, 1, 1, 1, 1, None),
         }
     if whr == "whitley world":
-        #Works but MAKE MORE EFFICIENT!
         actions = {
-        1: ("imp", 25, 1, 1, 2, 10, 5, None),
+        1: ("itley", 25, 1, 1, 2, 10, 5, None),
         2: ("bitley", 100, 7, 9, 5, 1, 50, None),
-        3: ("dictator", 75, 3, 3, 1, 5, 25, None),
-        4: ("bandit", 10, 2, 2, 10, 10, 5, None),
-        5: ("wolf", 7, 4, 4, 10, 3, 3, None),
-        6: ("insect", 2, 1, 1, 1, 1, 1, None),
-        7: ("ent", 50, 7, 7, 3, 1, 20, None),
-        8: ("insect", 2, 1, 1, 1, 1, 1, None),
-        9: ("insect", 2, 1, 1, 1, 1, 1, None),
-        10: ("insect", 2, 1, 1, 1, 1, 1, None),
-        11: ("insect", 2, 1, 1, 1, 1, 1, None),
+        3: ("witley", 75, 3, 3, 1, 5, 25, None),
+        4: ("hitley", 10, 2, 2, 10, 10, 5, None),
+        5: ("ditley", 7, 4, 4, 10, 3, 3, None),
+        6: ("mitley", 2, 1, 1, 1, 1, 1, None),
+        7: ("citley", 50, 7, 7, 3, 1, 20, None),
+        8: ("sitley", 2, 1, 1, 1, 1, 1, None),
+        9: ("litley", 2, 1, 1, 1, 1, 1, None),
+        10: ("pterodactyl-ley", 2, 1, 1, 1, 1, 1, None),
+        11: ("ritley", 2, 1, 1, 1, 1, 1, None),
         }
     if whr == "potter ":
-        #Works but MAKE MORE EFFICIENT!
         actions = {
         1: ("wotter", 25, 1, 1, 2, 10, 5, None),
         2: ("botter", 100, 7, 9, 5, 1, 50, None),
-        3: ("dictator", 75, 3, 3, 1, 5, 25, None),
-        4: ("bandit", 10, 2, 2, 10, 10, 5, None),
-        5: ("wolf", 7, 4, 4, 10, 3, 3, None),
-        6: ("insect", 2, 1, 1, 1, 1, 1, None),
-        7: ("ent", 50, 7, 7, 3, 1, 20, None),
-        8: ("insect", 2, 1, 1, 1, 1, 1, None),
-        9: ("insect", 2, 1, 1, 1, 1, 1, None),
-        10: ("insect", 2, 1, 1, 1, 1, 1, None),
-        11: ("insect", 2, 1, 1, 1, 1, 1, None),
+        3: ("otter", 75, 3, 3, 1, 5, 25, None),
+        4: ("caby-otter", 10, 2, 2, 10, 10, 5, None),
+        5: ("caby-otter", 7, 4, 4, 10, 3, 3, None),
+        6: ("totter", 2, 1, 1, 1, 1, 1, None),
+        7: ("kotter", 50, 7, 7, 3, 1, 20, None),
+        8: ("gotter", 2, 1, 1, 1, 1, 1, None),
+        9: ("cotter", 2, 1, 1, 1, 1, 1, None),
+        10: ("girotter", 2, 1, 1, 1, 1, 1, None),
+        11: ("hipotter", 2, 1, 1, 1, 1, 1, None),
         }
-
     else:
         print("")
     if chanceEn <= 33:
@@ -1635,11 +1246,11 @@ def chance():
                 else:
                     print("Placeholder")
             case "whitley world":
-                encounter("Bradley", "Racist Porgrammer")
+                encounter("Bradley", "Racist Programmer")
                 fight("Bradley", 69420, 69, 420, 2000000000, 856, -432000, "Taco")
             case "potter ":
                 if "William" in livingBosses:
-                    encounter("William", "Dumb ass thing")
+                    encounter("William", "Porgy")
                     fight("William", 69418, 999, 4, 1, 88, 10000, "Diabetes Type 3")
                 else:
                     print("William has already died.")
@@ -1649,11 +1260,10 @@ def removeNoneFromLists(listName):
     if len(listName) > 1 and listName[0] == "None":
         listName.remove("None")
 
-#DELETE FROM HERE
 def save():
     global name, classn, faith, gold, bankedGold, experience, statUpgrade, summonNumber, totalSummonNumber, renown, honor, Level, trueStr, trueAgi, trueDex, trueHea, truePer, trueCha, trueInt, trueTotHea, inventory, spells, bestiar, achievements, equipped_items, equipped_itemsList
     try:
-        open("saveFile.txt", "x")
+        open("saveFileG.txt", "x")
     except:
         print("Loading Save File")
     finally:
@@ -1691,19 +1301,17 @@ def save():
                 appends.write(summons[count1]+", ")
                 count1 += 1
             appends.write("\n")
-            #error when trying to store an item from str(inventory) TRY .SPLIT(,)
-            with open("achievements.txt", "w") as data:
+            with open("achievementsG.txt", "w") as data:
                 data.write(str(achievements))
-            with open("equippedItems.txt", "w") as data:
+            with open("equippedItemsG.txt", "w") as data:
                 count1 = 0
                 for i in range(len(equipped_itemsList)):
                     data.write(equipped_itemsList[count1]+", ")
                     count1 += 1
                 appends.write("\n")
-
             opens.close()
         elif q == "Load" or q == "L":
-            opens = open("saveFile.txt", "r")
+            opens = open("saveFileG.txt", "r")
             name, classn, faith, gold, bankedGold, experience, statUpgrade, summonNumber, totalSummonNumber, renown, honor, Level, trueStr, trueAgi, trueDex, trueHea, truePer, trueCha, trueInt, trueTotHea, inventory, spells, bestiar = opens.readline(), opens.readline(), opens.readline(), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), opens.readline(), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), int(opens.readline()), opens.readline().split(","), opens.readline().strip().split(","), opens.readline().strip().split(",") 
             count2 = 0
             for x in inventory:
@@ -1724,45 +1332,34 @@ def save():
             for x in originClass:
                 originClass[count2] = originClass[count2].strip()
                 count2 += 1
-            #originClass.pop(len(originClass)-1)
             count2 = 0
             for x in livingBosses:
                 livingBosses[count2] = livingBosses[count2].strip()
                 count2 += 1
-            #livingBosses.pop(len(livingBosses)-1)
             count2 = 0
             for x in summons:
                 summons[count2] = summons[count2].strip()
                 count2 += 1
-            #summons.pop(len(summons)-1)
             count = 0
             try:
                 spells.remove("None")
                 bestiar.remove("None")
                 originClass.remove("None")
                 livingBosses.remove("None")
-                summons.remove("None")
-                
+                summons.remove("None")  
             except:
                 print("")
-
-            with open("achievements.txt", "r") as data:
+            with open("achievementsG.txt", "r") as data:
                 achievements = data.readline().strip().split(",")
-            with open("equippedItems.txt", "r") as data:
+            with open("equippedItemsG.txt", "r") as data:
                 equipped_itemsList = data.readline().strip().split(",")
                 print(equipped_itemsList)
                 count, count1 = 0, 1
-                #print(equipped_items)
                 equipped_items.clear()
-                #print(equipped_items)
                 for i in range(int(len(equipped_itemsList)/2)):
-                    #del equipped_items[equipped_itemsList[count]]
-                    #print(equipped_itemsList[count]) #PROBLEM IDENTIFIED
-                    #print(equipped_itemsList[count1]) #PROBLEM IDENTIFIED
                     equipped_items.update({equipped_itemsList[count].strip() : equipped_itemsList[count1].strip()})
                     count += 2
                     count1 += 2
-                #print(equipped_items)
             opens.close()
         else:
             print("Exiting Save Files")
@@ -1869,6 +1466,3 @@ def car():
             print("That is not an option.")
 chois()
 car()
-
-#ctrl + k, ctrl + 0 = collapse all
-#ctrl + k, ctrl + j = expand all
