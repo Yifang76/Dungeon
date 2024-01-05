@@ -1189,20 +1189,20 @@ def chance():
         actions = {
         1: ("timp", 25, 1, 1, 2, 10, 5, None),
         2: ("tabybara", 100, 7, 9, 5, 1, 50, None),
-        3: ("terodactyl", 75, 3, 3, 1, 5, 25, None),
-        4: ("turtom", 10, 2, 2, 10, 10, 5, None),
+        3: ("terodactyl", 125, 7, 7, 4, 10, 125, None),
+        4: ("turtom", 1000, 1, 1, 1, 0, 5, None),
         5: ("wot", 7, 4, 4, 10, 3, 3, None),
         6: ("tomsect", 2, 1, 1, 1, 1, 1, None),
         7: ("tont", 50, 7, 7, 3, 1, 20, None),
         8: ("tomilla", 2, 1, 1, 1, 1, 1, None),
-        9: ("hippotomamus", 2, 1, 1, 1, 1, 1, None),
+        9: ("hippotomamus", 150, 10, 2, 3, 4, 150, None),
         10: ("shtom", 2, 1, 1, 1, 1, 1, None),
-        11: ("tomala", 2, 1, 1, 1, 1, 1, None),
+        11: ("tomala", 50, 5, 5, 3, 1, 50, None),
         }
     if whr == "whitley world":
         actions = {
-        1: ("itley", 25, 1, 1, 2, 10, 5, None),
-        2: ("bitley", 100, 7, 9, 5, 1, 50, None),
+        1: ("itley", 22 1, 1, 1, 1, 1, None),
+        2: ("bitley", 100, 1, 1, 7, 9, 5, None),
         3: ("witley", 75, 3, 3, 1, 5, 25, None),
         4: ("hitley", 10, 2, 2, 10, 10, 5, None),
         5: ("ditley", 7, 4, 4, 10, 3, 3, None),
@@ -1210,7 +1210,7 @@ def chance():
         7: ("citley", 50, 7, 7, 3, 1, 20, None),
         8: ("sitley", 2, 1, 1, 1, 1, 1, None),
         9: ("litley", 2, 1, 1, 1, 1, 1, None),
-        10: ("pterodactyl-ley", 2, 1, 1, 1, 1, 1, None),
+        10: ("pterodactyl-ley", 200, 8, 8, 5, 15, 200, None),
         11: ("ritley", 2, 1, 1, 1, 1, 1, None),
         }
     if whr == "potter ":
