@@ -1,4 +1,5 @@
-from random import *, import sys
+from random import *
+import sys
 gold, bankedGold, statUpgrade, experience, summonNumber, totalSummonNumber, renown = 0, 0, 0, 0, 0, 0, 0
 activeBounties = [[],[],[],[],[]]
 bestiar, achievements, inventory = ["None"], ["None"], ["helmet", "sword"]
@@ -114,6 +115,7 @@ equipmentMapping = {
     "war axe": "Right Hand",
     "hatchets": "Right Hand",
     "King's Charter": "Accessory",
+    "tommy gun": "Right Hand"
 }
 
 
@@ -185,7 +187,7 @@ liteList = ["leather", "iron" ]
 enemyList = ["botter", "wotter"]
 originClass = ["None"]
 ascensionItems = [""]
-invalidSell = ["King's Charter"]
+invalidSell = ["King's Charter", "Taco", "Diabetes Type 3", "tommy gun"]
 illItems = ["necronomicon", "demon heart", "dragon scale", "human flesh"]
 #cChangeItem are all items that perform a class change
 cChangeItem = ["necronomicon", "demon heart", "dragon tooth"]
@@ -432,6 +434,7 @@ def statBoosts(equipment):
             "war axe": [5*upLevel, "Strength"],
             "hatchets": [2*upLevel, "Strength"],
             "King's Charter": ["N/A"],
+            "tommy gun": [1000*upLevel, "Strength"]
             "None" : [0, "Strength"]
         }
         count, count1 = 1, 0
@@ -534,40 +537,23 @@ def lootIsDropped():
 
 def menu():
     cChangeDict = {
-        "necronomicon" : "Necromancer",
-        "demon heart" : "Demon",
-        "dragon tooth" : "Dragonkin",
-        "Vanta's vessel" : "Lost Soul",
     }
 
     spellDescDict = {
         "fireball" : "Basic sorcery for Elemental mages.\nFire was once deemed as taboo before its uses were brought to light.\nDeals 5 base fire damage multiplied by upgrade level.",
         "curse" : "Basic sorcery for Occult mages.\n Once upon a time, occult magic was accepted in society, acting as a parallel to faith; after the First Tragedy, it's hideous visage was truly revealed to the world",
-    
-        "Abyssal Antonym" : "",
-        "Cursed Call" : "",
-        "Legacy's Lightning" : "",
-        "Murphy's Madness" : "",
-        "Soul Snatcher" : "",
-        "" : "",
+        "barrage": "Basic sorcery for Aether mages.\n First came into existence after Will-Meister got his ass beat by Bradely."
+        "freeze": "Basic sorcery for Ice mages.\n First incepted by a freezing Tommy."
     }
     weaponDescDict = {
-        "sword" : "A common sword, favoured by scavengers lucky enough to find one.",
-        "Brandle" : "Brandle, Giant Slayer. Once wielded by a warmaster involved in the giant wars, this blade was used to fell many a giant. Its legend, whilst forgotten to many, still imbues this blade with giant-slaying capabilities.\n"
-        "And when the Giant Slayer died in battle, fallen like so many of his men, his soul couldn't bear. And so, his life became forfeit as he held onto one purpose. To slay giants. Thus, the urban legend of The Wicked was formed.",
-        "Vanta's Vessel" : "Vessel of Vanta the Vile, crushed by a destructive force unfamiliar to the natural order",
-        "Murmur's Mask" : "Mask of Murmur the Maelstrom, a silent force is imbued within the mask's eyes. It is said that when worn, one can hear the sounds of the sea.",
-        "Skrill's Spine" : "",
-        "Fortress' Fangs" : "",
+        "sword" : "A common sword",
+        "axe" : "A common axe",
+        "stick" : "Useless",
         #Need to edit to account for '
 
     }
-    summonsDict = {
-        "Frost Knight Theodore" : "",
-        "Magma Blade Entil" : "",
-    }
     q = input("What would you like to do. View Stats (S), View Inventory (I), View Journal (J),"
-    " View Spells (T), View Summons (M), Use Item (U), Save/Load (C) or Check Level (L). ").capitalize()
+    " View Spells (T), Use Item (U), Save/Load (C) or Check Level (L). ").capitalize()
     match q:
         case "View Stats" | "Stats" | "S":
             print(f"Without modifiers, you have:\nHealth: {trueTotHea}\nStrength: {trueStr}\nDexterity: {trueDex}\n"
@@ -585,13 +571,6 @@ def menu():
                     print(f"You do not have {whichDesc}.")
             elif checkDesc == "No" or checkDesc == "N":
                 print("You conclude your check.")
-            else:
-                print("That is not an option")
-        case "View Summons" | "Summons" | "M":
-            print(summons)
-            q = input("Which summon would you like to view? ")
-            if q in summonsDict and q in summons:
-                print(summonsDict[q])
             else:
                 print("That is not an option")
         case "View Spells" | "Spells" | "T":
@@ -614,7 +593,14 @@ def menu():
                             case "necronomicon":
                             #check for adverse affects using an integer instead of inte*2 for specialAbilityValue
                                 classChange(str(cChangeDict[whichItem]),whichItem, 1, 2, 6, 2, 1, 10, 0, 15, 10, totalSummonNumber, 30)
-
+                    if whichItem in useList:
+                        match whichItem:
+                            case "Diabetes Type 3":
+                                trueHea = trueHea - (trueHea - 1)
+                                inventory.remove(whichItem)
+                                print("Item used")
+                    else:
+                        print("Invalid")
                 else:
                     print(f"You have decided to not use {whichItem}.")
 
@@ -689,6 +675,12 @@ def encounter(noun, opening):
 def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
     spellDamage = {
         "fireball" : "5 fire damage",
+        "freeze" : "5 frost damage",
+        "bless" : "5 holy damage",
+        "bind" : "5 damage",
+        "barrage" : "10 damage",
+        "curse" : "7 dark damage",
+        "confusion" : "5 damage",
     }
     global summonNumber, summons, TotHea, classn, totalSummonNumber, bestiary, experience, livingBosses, usingSummon, health, nTotHea
     health = nTotHea
@@ -706,7 +698,7 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
             opt = input("Would you like to Fight (F), Use Item (I) or Retreat (R)? ").capitalize()
             match opt:
                 case "Fight" | "F":
-                    q = input("Physical (P), Spell (S), Incantation (I) or Summon (R)? ").capitalize()
+                    q = input("Physical (P), Spell (S) or Summon (R)? ").capitalize()
                     match q:
                         case "Physical" | "P":
                             usingSummon = False
@@ -725,9 +717,6 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
                                     print("Invalid spell")
                             else:
                                 print("You do not have this spell")
-                        case "Incantation" | "I":
-                            usingSummon = False
-                            print("Incantation")
                         case "Summon" | "R":
                             print(summons)
                             whichSummon = input("Which summon would you like to use? ")
@@ -876,7 +865,7 @@ def itemUse():
             else:
                 health = tHea
                 print("Your health is maxed out")
-        if q in despairHeal:
+        elif q in despairHeal:
             inventory.remove(q)
             if despair - despairHeal[q] < 0:
                 despair -= despairHeal[q]
@@ -1096,11 +1085,12 @@ def shrine():
     "Bradely" : "deity of explosives, warcrimes and slurs. ", 
     "Will-Meister" : "the deity of arduous idiocy, ",
     "Tommy" : "deity of guns, ",
+    "Lord Windbreaker" : "best mathematician"
     }
     print("Welcome to the shrine, the primary place of worship within the city. "
     f"the existing deities are {deities}.")
     while True:
-        q = input("Which deity would you like to study? ").capitalize()
+        q = input("Which deity would you like to study? ").title()
         if q in deities:
             print(f"{q}, {str(deities[q])}")
             confirm = input("Would you like to worship this deity? ").capitalize()
@@ -1131,7 +1121,8 @@ def faithBuff():
     fBuff = {
         "Tommy": [-5, "Strength"],
         "Will-Meister": [-100000000, "Intelligence"],
-        "Bradely": [-63, "Health"]
+        "Bradely": [-63, "Health"],
+        "Lord Windbreaker": [+1000, "Intelligence"],
         "None" : [0, "Strength"]
     }
     count, count1 = 1, 0
@@ -1194,22 +1185,47 @@ def chance():
         5: ("wot", 7, 4, 4, 10, 3, 3, None),
         6: ("tomsect", 2, 1, 1, 1, 1, 1, None),
         7: ("tont", 50, 7, 7, 3, 1, 20, None),
-        8: ("tomilla", 2, 1, 1, 1, 1, 1, None),
+        8: ("tomilla", 60, 6, 2, 1, 6, 60, None),
         9: ("hippotomamus", 150, 10, 2, 3, 4, 150, None),
-        10: ("shtom", 2, 1, 1, 1, 1, 1, None),
+        10: ("tombra", 30, 2, 3, 2, 5, 15, None),
         11: ("tomala", 50, 5, 5, 3, 1, 50, None),
         }
+        no, health, attack, dexterity, perception, agility, eXp, bossItem = actions[randint(1,11)]
     if whr == "whitley world":
+summonStats = {
+    "timp": (25, 1, 1, 2, 10,),
+    "tabybara": (100, 7, 9, 5, 1,),
+    "terodactyl": (125, 7, 7, 4, 10),
+    "turtom": (1000, 1, 1, 1, 0),
+    "wot": (7, 4, 4, 10, 3,),
+    "tomsect": (2, 1, 1, 1, 1,),
+    "tont": (50, 7, 7, 3, 1),
+    "tomilla": (60, 6, 2, 1, 6),
+    "hippotomamus": (150, 10, 2, 3, 4),
+    "tombra": (30, 2, 3, 2, 5),
+    "tomala": (50, 5, 5, 3, 1),
+    "itley": (2, 1, 1, 1, 1),
+    "bitley": (100, 1, 1, 7, 9),
+    "witley": (25, 2, 2, 4, 5),
+    "hitley": (10, 2, 2, 10, 10),
+    "ditley": (7, 4, 4, 10, 3),
+    "pitley": (20000000000000, 1000000000, 10000000, 1000000, 1000000),
+    "citley": (50, 7, 7, 3, 1),
+    "kitley": (20, 1, 1, 1, 8),
+    "litley": (40, 6, 5, 7, 7),
+    "pterodactyl-ley", (200, 8, 8, 5, 15),
+    "ritley": (2, 1, 1, 1, 1),
+}
         actions = {
-        1: ("itley", 22 1, 1, 1, 1, 1, None),
+        1: ("itley", 2, 1, 1, 1, 1, 1, None),
         2: ("bitley", 100, 1, 1, 7, 9, 5, None),
-        3: ("witley", 75, 3, 3, 1, 5, 25, None),
+        3: ("witley", 25, 2, 2, 4, 5, 20, None),
         4: ("hitley", 10, 2, 2, 10, 10, 5, None),
         5: ("ditley", 7, 4, 4, 10, 3, 3, None),
-        6: ("mitley", 2, 1, 1, 1, 1, 1, None),
+        6: ("citley", 50, 7, 7, 3, 1, 20, None),
         7: ("citley", 50, 7, 7, 3, 1, 20, None),
-        8: ("sitley", 2, 1, 1, 1, 1, 1, None),
-        9: ("litley", 2, 1, 1, 1, 1, 1, None),
+        8: ("kitley", 20, 1, 1, 1, 8, 10, None),
+        9: ("litley", 40, 6, 5, 7, 7, 80, None),
         10: ("pterodactyl-ley", 200, 8, 8, 5, 15, 200, None),
         11: ("ritley", 2, 1, 1, 1, 1, 1, None),
         }
@@ -1244,10 +1260,13 @@ def chance():
                     encounter("Tom", "Tom")
                     fight("Tom", 100, 7, 15, 1, 1, 10000, "tommy gun")
                 else:
-                    print("Placeholder")
+                    print("Tom has already died.")
             case "whitley world":
-                encounter("Bradley", "Racist Programmer")
-                fight("Bradley", 69420, 69, 420, 2000000000, 856, -432000, "Taco")
+            if "Bradley" in livingBosses:
+                    encounter("Bradley", "Racist Programmer")
+                    fight("Bradley", 69420, 69, 420, 2000000000, 856, -432000, "Taco")
+                else:
+                    print("Bradley has already died.")
             case "potter ":
                 if "William" in livingBosses:
                     encounter("William", "Porgy")
@@ -1365,28 +1384,6 @@ def save():
             print("Exiting Save Files")
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#TO HERE
-
-
 def chois():
     global carry, inventoryTwo, trueStr, trueAgi, trueDex, trueHea, truePer, trueCha, trueInt, Str, Agi, Dex, Hea, Per, Cha, Int
     count = 0
@@ -1431,9 +1428,6 @@ def chois():
             case "Menu":
                 menu()
                 chois()
-            case "Trainer" | "Teacher" | "T":
-                trainer()
-                chois()
             case "Tavern" | "H":
                 tavern()
                 chois()
@@ -1442,9 +1436,6 @@ def chois():
                 chois()
             case "Incantations" | "Incantation Store" | "I":
                 incantations()
-                chois()
-            case "Fence" | "BM" | "Bm":
-                fence()
                 chois()
             case "Out" | "O":
                 where()
