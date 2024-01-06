@@ -169,7 +169,7 @@ rarityValues = {
 
 
 places = {
-    "Potter " : 4360,
+    "Potter Estate" : 4360,
     "Tomtress" : 4361,
     "Whitley World" : 4362,
 }
@@ -182,7 +182,7 @@ fenceDict = {
     "dragon tooth" : 50
 }
 listsConfig = ["totalSummonNumber", "activeBounties", "bestiar", "spells", "summons", "bankedItems"]
-pList = ["Potter ", "Tomtress", "Whitley World"]
+pList = ["Potter Estate", "Tomtress", "Whitley World"]
 liteList = ["leather", "iron" ]
 enemyList = ["botter", "wotter"]
 originClass = ["None"]
@@ -1209,12 +1209,16 @@ summonStats = {
     "witley": (25, 2, 2, 4, 5),
     "hitley": (10, 2, 2, 10, 10),
     "ditley": (7, 4, 4, 10, 3),
-    "pitley": (20000000000000, 1000000000, 10000000, 1000000, 1000000),
     "citley": (50, 7, 7, 3, 1),
     "kitley": (20, 1, 1, 1, 8),
     "litley": (40, 6, 5, 7, 7),
     "pterodactyl-ley", (200, 8, 8, 5, 15),
     "ritley": (2, 1, 1, 1, 1),
+    "wotter": (25, 3, 3, 2, 6),
+    "botter": (75, 9, 9, 1, 9),
+    "otter-otter": (40, 2, 2, 6, 7),
+    "caby-otter": (10, 2, 2, 4, 4),
+    "kotter": (20, 4, 4, 1, 0),
 }
         actions = {
         1: ("itley", 2, 1, 1, 1, 1, 1, None),
@@ -1229,16 +1233,16 @@ summonStats = {
         10: ("pterodactyl-ley", 200, 8, 8, 5, 15, 200, None),
         11: ("ritley", 2, 1, 1, 1, 1, 1, None),
         }
-    if whr == "potter ":
+    if whr == "potter estate":
         actions = {
-        1: ("wotter", 25, 1, 1, 2, 10, 5, None),
-        2: ("botter", 100, 7, 9, 5, 1, 50, None),
-        3: ("otter", 75, 3, 3, 1, 5, 25, None),
-        4: ("caby-otter", 10, 2, 2, 10, 10, 5, None),
-        5: ("caby-otter", 7, 4, 4, 10, 3, 3, None),
-        6: ("totter", 2, 1, 1, 1, 1, 1, None),
-        7: ("kotter", 50, 7, 7, 3, 1, 20, None),
-        8: ("gotter", 2, 1, 1, 1, 1, 1, None),
+        1: ("wotter", 25, 3, 3, 2, 6, 25, None),
+        2: ("botter", 75, 9, 9, 1, 9, 100, None),
+        3: ("otter-otter", 40, 2, 2, 6, 7, 10, None),
+        4: ("caby-otter", 10, 2, 2, 4, 4, 5, None),
+        5: ("caby-otter", 10, 2, 2, 4, 4, 5, None),
+        6: ("totter", 2, 1, 1, 1, 1, 1, None),#
+        7: ("kotter", 20, 4, 4, 1, 0, 20, None),
+        8: ("gotter", 50, 5, 1, 1, 5, 50, None),#
         9: ("cotter", 2, 1, 1, 1, 1, 1, None),
         10: ("girotter", 2, 1, 1, 1, 1, 1, None),
         11: ("hipotter", 2, 1, 1, 1, 1, 1, None),
@@ -1267,7 +1271,7 @@ summonStats = {
                     fight("Bradley", 69420, 69, 420, 2000000000, 856, -432000, "Taco")
                 else:
                     print("Bradley has already died.")
-            case "potter ":
+            case "potter estate":
                 if "William" in livingBosses:
                     encounter("William", "Porgy")
                     fight("William", 69418, 999, 4, 1, 88, 10000, "Diabetes Type 3")
