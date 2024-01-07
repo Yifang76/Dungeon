@@ -219,17 +219,36 @@ spellDict = {
 
 
 summonStats = {
-    "imp": (25, 1, 1, 2, 10,),
-    "warlord": (100, 7, 9, 5, 1,),
-    "dictator": (75, 3, 3, 1, 5,),
-    "bandit": (10, 2, 2, 10, 10,),
-    "wolf": (7, 4, 4, 10, 3,),
-    "insect": (2, 1, 1, 1, 1,),
-    "ent": (50, 7, 7, 3, 1,),
-    "insect": (2, 1, 1, 1, 1,),
-    "insect": (2, 1, 1, 1, 1,),
-    "insect": (2, 1, 1, 1, 1,),
-    "insect": (2, 1, 1, 1, 1,),
+    "timp": (25, 1, 1, 2, 10,),
+    "tabybara": (100, 7, 9, 5, 1,),
+    "terodactyl": (125, 7, 7, 4, 10),
+    "turtom": (1000, 1, 1, 1, 0),
+    "wot": (7, 4, 4, 10, 3,),
+    "tomsect": (2, 1, 1, 1, 1,),
+    "tont": (50, 7, 7, 3, 1),
+    "tomilla": (60, 6, 2, 1, 6),
+    "hippotomamus": (150, 10, 2, 3, 4),
+    "tombra": (30, 2, 3, 2, 5),
+    "tomala": (50, 5, 5, 3, 1),
+    "itley": (2, 1, 1, 1, 1),
+    "bitley": (100, 1, 1, 7, 9),
+    "witley": (25, 2, 2, 4, 5),
+    "hitley": (10, 2, 2, 10, 10),
+    "ditley": (7, 4, 4, 10, 3),
+    "citley": (50, 7, 7, 3, 1),
+    "kitley": (20, 1, 1, 1, 8),
+    "litley": (40, 6, 5, 7, 7),
+    "pterodactyl-ley", (200, 8, 8, 5, 15),
+    "ritley": (2, 1, 1, 1, 1),
+    "wotter": (25, 3, 3, 2, 6),
+    "botter": (75, 9, 9, 1, 9),
+    "otter-otter": (40, 2, 2, 6, 7),
+    "caby-otter": (10, 2, 2, 4, 4),
+    "totter": (10, 2, 2, 5, 6),
+    "kotter": (20, 4, 4, 1, 0),
+    "gotter": (25, 1, 4, 3, 4),
+    "cotter": (2, 1, 1, 1, 1),
+    "hapotter": (2, 1, 1, 4, 5),
 }
 nTotHea = TotHea
 #NEED TO TEST
@@ -1192,34 +1211,6 @@ def chance():
         }
         no, health, attack, dexterity, perception, agility, eXp, bossItem = actions[randint(1,11)]
     if whr == "whitley world":
-summonStats = {
-    "timp": (25, 1, 1, 2, 10,),
-    "tabybara": (100, 7, 9, 5, 1,),
-    "terodactyl": (125, 7, 7, 4, 10),
-    "turtom": (1000, 1, 1, 1, 0),
-    "wot": (7, 4, 4, 10, 3,),
-    "tomsect": (2, 1, 1, 1, 1,),
-    "tont": (50, 7, 7, 3, 1),
-    "tomilla": (60, 6, 2, 1, 6),
-    "hippotomamus": (150, 10, 2, 3, 4),
-    "tombra": (30, 2, 3, 2, 5),
-    "tomala": (50, 5, 5, 3, 1),
-    "itley": (2, 1, 1, 1, 1),
-    "bitley": (100, 1, 1, 7, 9),
-    "witley": (25, 2, 2, 4, 5),
-    "hitley": (10, 2, 2, 10, 10),
-    "ditley": (7, 4, 4, 10, 3),
-    "citley": (50, 7, 7, 3, 1),
-    "kitley": (20, 1, 1, 1, 8),
-    "litley": (40, 6, 5, 7, 7),
-    "pterodactyl-ley", (200, 8, 8, 5, 15),
-    "ritley": (2, 1, 1, 1, 1),
-    "wotter": (25, 3, 3, 2, 6),
-    "botter": (75, 9, 9, 1, 9),
-    "otter-otter": (40, 2, 2, 6, 7),
-    "caby-otter": (10, 2, 2, 4, 4),
-    "kotter": (20, 4, 4, 1, 0),
-}
         actions = {
         1: ("itley", 2, 1, 1, 1, 1, 1, None),
         2: ("bitley", 100, 1, 1, 7, 9, 5, None),
@@ -1240,12 +1231,12 @@ summonStats = {
         3: ("otter-otter", 40, 2, 2, 6, 7, 10, None),
         4: ("caby-otter", 10, 2, 2, 4, 4, 5, None),
         5: ("caby-otter", 10, 2, 2, 4, 4, 5, None),
-        6: ("totter", 2, 1, 1, 1, 1, 1, None),#
+        6: ("totter", 10, 2, 2, 5, 6, 5, None),
         7: ("kotter", 20, 4, 4, 1, 0, 20, None),
-        8: ("gotter", 50, 5, 1, 1, 5, 50, None),#
-        9: ("cotter", 2, 1, 1, 1, 1, 1, None),
-        10: ("girotter", 2, 1, 1, 1, 1, 1, None),
-        11: ("hipotter", 2, 1, 1, 1, 1, 1, None),
+        8: ("gotter", 25, 1, 4, 3, 4, 25, None),
+        9: ("cotter", 2, 1, 1, 1, 1, 2, None),
+        10: ("gotter", 25, 1, 4, 3, 4, 25, None),
+        11: ("hapotter", 2, 1, 1, 4, 5, 2, None),
         }
     else:
         print("")
