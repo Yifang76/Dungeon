@@ -220,7 +220,7 @@ spellDict = {
 
 summonStats = {
     "timp": (25, 1, 1, 2, 10,),
-    "tabybara": (100, 7, 9, 5, 1,),
+    "tapybara": (100, 7, 9, 5, 1,),
     "terodactyl": (125, 7, 7, 4, 10),
     "turtom": (1000, 1, 1, 1, 0),
     "wot": (7, 4, 4, 10, 3,),
@@ -243,7 +243,7 @@ summonStats = {
     "wotter": (25, 3, 3, 2, 6),
     "botter": (75, 9, 9, 1, 9),
     "otter-otter": (40, 2, 2, 6, 7),
-    "caby-otter": (10, 2, 2, 4, 4),
+    "capy-otter": (10, 2, 2, 4, 4),
     "totter": (10, 2, 2, 5, 6),
     "kotter": (20, 4, 4, 1, 0),
     "gotter": (25, 1, 4, 3, 4),
@@ -950,9 +950,43 @@ def journal():
 def bestiary():
     global bestiar
     bestiaryDict = {
-        "botter" : "unholy blend of bear and man, the botter attacks with an impossible speed. Under its paw, the words 'William Potter is a bot at Mario Kart 8 Deluxe' are inscribed.",
-        "wotter" : "unholy blend of wolf and man, the wotter terrifies others with rude slurs.",
-        "bitley" : "unholy machination of beetle and man, the bitley rains destruction with co-ordinated aerial strikes.",
+        "botter" : "unholy blend of bear and William, the botter attacks with an impossible speed. Under its paw, the words 'William Potter is a bot at Mario Kart 8 Deluxe' are inscribed.",
+        "wotter" : "unholy blend of wolf and William, the wotter terrifies others with rude slurs.",
+
+        "otter-otter" : "unholy blend of otter and William, the otter-otter ",
+        "capy-otter" : "unholy blend of capybara and William, the capy-otter ",
+        "totter" : "unholy blend of wolf and William, the totter",
+        "kotter" : "unholy blend of wolf and William, the kotter",
+        "gotter" : "unholy blend of wolf and William, the otter",
+        "cotter" : "unholy blend of wolf and William, the cotter",
+        "hapotter" : "unholy blend of wolf and William, the hapotter",
+
+        "bitley" : "unholy machination of beetle and Bradley, the bitley rains destruction with co-ordinated aerial strikes.",
+        "itley" : "unholy machination of insect and Bradley, the itley ",
+        "witley" : "unholy machination of wolf and Bradley, the witley ",
+        "hitley" : "unholy machination of horse and Bradley, the hitley ",
+        "ditley" : "unholy machination of deer and Bradley, the ditley ",
+        "citley" : "unholy machination of crocodile and Bradley, the citley ",
+        "kitley" : "unholy machination of kangaroo and Bradley, the kitley ",
+        "litley" : "unholy machination of lion and Bradley, the litley ",
+        "ritley" : "unholy machination of rat and Bradley, the ritley ",
+        "pterodactyl-ley" : "unholy machination of pterodactyl and Bradley, the pterodactyl-leybitley ",
+
+        "timp" : "unholy combination of imp and Tom, the timp ",
+        "tapybara" : "unholy combination of capybara and Tom, the tapybara ",
+        "terodactyl" : "unholy combination of pterodactyl and Tom, the terodactyl suffers from a severe case of polydactyl.",
+        "turtom" : "unholy combination of turtle and Tom, the turtom ",
+        "wot" : "unholy combination of wolf and Tom, the wot ",
+        "tomsect" : "unholy combination of insect and Tom, the tomsect ",
+        "tont" : "unholy combination of ant and Tom, the tont ",
+        "tomilla" : "unholy combination of gorilla and Tom, the tomilla ",
+        "hippotomamus" : "unholy combination of hippo and Tom, the hippotomamus ",
+        "tombra" : "unholy combination of cobra and Tom, the tombra ",
+        "tomala" : "unholy combination of koala and Tom, the tomala ",
+
+
+
+
         "william" : "most dumb-ass thing in existence",
         "bradley" : "most racist, bringer of polygon Jesus; bomber of a foreign country beginning with F and ending with e.",
         "tom" : "tommy gun",
@@ -1198,7 +1232,7 @@ def chance():
     if whr == "tomtress":
         actions = {
         1: ("timp", 25, 1, 1, 2, 10, 5, None),
-        2: ("tabybara", 100, 7, 9, 5, 1, 50, None),
+        2: ("tapybara", 100, 7, 9, 5, 1, 50, None),
         3: ("terodactyl", 125, 7, 7, 4, 10, 125, None),
         4: ("turtom", 1000, 1, 1, 1, 0, 5, None),
         5: ("wot", 7, 4, 4, 10, 3, 3, None),
@@ -1229,8 +1263,8 @@ def chance():
         1: ("wotter", 25, 3, 3, 2, 6, 25, None),
         2: ("botter", 75, 9, 9, 1, 9, 100, None),
         3: ("otter-otter", 40, 2, 2, 6, 7, 10, None),
-        4: ("caby-otter", 10, 2, 2, 4, 4, 5, None),
-        5: ("caby-otter", 10, 2, 2, 4, 4, 5, None),
+        4: ("capy-otter", 10, 2, 2, 4, 4, 5, None),
+        5: ("capy-otter", 10, 2, 2, 4, 4, 5, None),
         6: ("totter", 10, 2, 2, 5, 6, 5, None),
         7: ("kotter", 20, 4, 4, 1, 0, 20, None),
         8: ("gotter", 25, 1, 4, 3, 4, 25, None),
