@@ -969,8 +969,8 @@ def bestiary():
         "citley" : "unholy machination of crocodile and Bradley, the citley ",
         "kitley" : "unholy machination of kangaroo and Bradley, the kitley ",
         "litley" : "unholy machination of lion and Bradley, the litley ",
-        "ritley" : "unholy machination of rat and Bradley, the ritley ",
-        "pterodactyl-ley" : "unholy machination of pterodactyl and Bradley, the pterodactyl-leybitley ",
+        "ritley" : "unholy machination of rat and Bradley, the ritley scurries after weak people (usually found in potter estate).",
+        "pterodactyl-ley" : "unholy machination of pterodactyl and Bradley, the pterodactyl-ley hunts after other itleys, savaging their corpses.",
 
         "timp" : "unholy combination of imp and Tom, the timp ",
         "tapybara" : "unholy combination of capybara and Tom, the tapybara ",
