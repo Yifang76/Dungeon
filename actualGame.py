@@ -18,6 +18,7 @@ baseSpellsDict = {
     "Nature" : "Bind",
     "Aether" : "Barrage",
 }
+complete = False
 name = input("Name, please ").title()
 try:
     name.split().remove("Yifang")
@@ -172,6 +173,7 @@ places = {
     "Potter Estate" : 4360,
     "Tomtress" : 4361,
     "Whitley World" : 4362,
+    "Domain of the Death Star" : 10000
 }
 
 fenceDict = {
@@ -638,6 +640,8 @@ def menu():
 
 def where():
     global whr
+    if len(livingBosses) == 0 and complete == False:
+        pList.append("Domain of the Death Star")
     whr = input(f"Where would you like to go? {pList} ").replace("'","").lower()
     if whr in [x.lower().replace("'", "") for x in pList]:
         location = [x for x in pList if whr == x.lower().replace("'", "")][0] #x is the number of elems in the list
@@ -993,6 +997,7 @@ def bestiary():
         "william" : "most dumb-ass thing in existence",
         "bradley" : "most racist, bringer of polygon Jesus; bomber of a foreign country beginning with F and ending with e.",
         "tom" : "tommy gun",
+        "windbreaker" : "incontrovertibly the most intelligent existence ever",
     }
     print(f"Your bestiary currently contains: {bestiar}.")
     print("DISCLAIMER: All descriptions provided by Bradley Whitley and William Potter. In no part conceptualised by Lord Windbreaker.")
@@ -1276,6 +1281,20 @@ def chance():
         10: ("gotter", 25, 1, 4, 3, 4, 25, None),
         11: ("hapotter", 2, 1, 1, 4, 5, 2, None),
         }
+    if whr == "domain of the death star":
+        actions = {
+        1: ("pterodactyl-ley", 200, 8, 8, 5, 15, 200, None),
+        2: ("terodactyl", 125, 7, 7, 4, 10, 125, None),
+        3: ("capy-otter", 10, 2, 2, 4, 4, 5, None),
+        4: ("pterodactyl-ley", 200, 8, 8, 5, 15, 200, None),
+        5: ("terodactyl", 125, 7, 7, 4, 10, 125, None),
+        6: ("capy-otter", 10, 2, 2, 4, 4, 5, None),
+        7: ("pterodactyl-ley", 200, 8, 8, 5, 15, 200, None),
+        8: ("terodactyl", 125, 7, 7, 4, 10, 125, None),
+        9: ("capy-otter", 10, 2, 2, 4, 4, 5, None),
+        10: ("pterodactyl-ley", 200, 8, 8, 5, 15, 200, None),
+        11: ("terodactyl", 125, 7, 7, 4, 10, 125, None),
+        }
     else:
         print("")
     if chanceEn <= 33:
@@ -1306,6 +1325,15 @@ def chance():
                     fight("William", 69418, 999, 4, 1, 88, 10000, "Diabetes Type 3")
                 else:
                     print("William has already died.")
+            case "domain of the death star":
+                if "Windbreaker" in livingBosses:
+                    encounter("Windbreaker", "Breaker of Wind")
+                    fight("Winbreaker", 1, 70000000, 1500000, 1000000, 10000000, 100000000000000000, "God")
+                else:
+                    print("Windbreaker has already died.")
+                    gameFinish = True
+
+    
     experienceCheck()
 
 def removeNoneFromLists(listName):
@@ -1423,6 +1451,10 @@ def chois():
     for i in range(len(listsConfig)):
         removeNoneFromLists(listsConfig[count])
         count += 1
+    if gameFinish == "True":
+        print("Check new file")
+        with open("conclusion.txt", "a") as data:
+            data.write("Well done\nYou finish game\nEnding")
     Str, Agi, Dex, Hea, Per, Cha, Int = trueStr, trueAgi, trueDex, trueHea, truePer, trueCha, trueInt
     statBoosts(equipped_items["Head"])
     statBoosts(equipped_items["Chest"])
