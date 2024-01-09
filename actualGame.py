@@ -238,7 +238,7 @@ summonStats = {
     "citley": (50, 7, 7, 3, 1),
     "kitley": (20, 1, 1, 1, 8),
     "litley": (40, 6, 5, 7, 7),
-    "pterodactyl-ley", (200, 8, 8, 5, 15),
+    "pterodactyl-ley": (200, 8, 8, 5, 15),
     "ritley": (2, 1, 1, 1, 1),
     "wotter": (25, 3, 3, 2, 6),
     "botter": (75, 9, 9, 1, 9),
@@ -249,6 +249,7 @@ summonStats = {
     "gotter": (25, 1, 4, 3, 4),
     "cotter": (2, 1, 1, 1, 1),
     "hapotter": (2, 1, 1, 4, 5),
+    "None": (0,0,0,0,0)
 }
 nTotHea = TotHea
 #NEED TO TEST
@@ -453,7 +454,7 @@ def statBoosts(equipment):
             "war axe": [5*upLevel, "Strength"],
             "hatchets": [2*upLevel, "Strength"],
             "King's Charter": ["N/A"],
-            "tommy gun": [1000*upLevel, "Strength"]
+            "tommy gun": [1000*upLevel, "Strength"],
             "None" : [0, "Strength"]
         }
         count, count1 = 1, 0
@@ -561,7 +562,7 @@ def menu():
     spellDescDict = {
         "fireball" : "Basic sorcery for Elemental mages.\nFire was once deemed as taboo before its uses were brought to light.\nDeals 5 base fire damage multiplied by upgrade level.",
         "curse" : "Basic sorcery for Occult mages.\n Once upon a time, occult magic was accepted in society, acting as a parallel to faith; after the First Tragedy, it's hideous visage was truly revealed to the world",
-        "barrage": "Basic sorcery for Aether mages.\n First came into existence after Will-Meister got his ass beat by Bradely."
+        "barrage": "Basic sorcery for Aether mages.\n First came into existence after Will-Meister got his ass beat by Bradely.",
         "freeze": "Basic sorcery for Ice mages.\n First incepted by a freezing Tommy."
     }
     weaponDescDict = {
@@ -955,34 +956,36 @@ def bestiary():
 
         "otter-otter" : "unholy blend of otter and William, the otter-otter ",
         "capy-otter" : "unholy blend of capybara and William, the capy-otter ",
-        "totter" : "unholy blend of wolf and William, the totter",
-        "kotter" : "unholy blend of wolf and William, the kotter",
-        "gotter" : "unholy blend of wolf and William, the otter",
-        "cotter" : "unholy blend of wolf and William, the cotter",
-        "hapotter" : "unholy blend of wolf and William, the hapotter",
+        "totter" : "unholy blend of toad and William, the totter",
+        "kotter" : "unholy blend of kangaroo and William, the kotter",
+        "gotter" : "unholy blend of wolf and William, the gotter",
+        "cotter" : "unholy blend of wolf and William, the cotter is very nice to children, specifically children (On every pedophile list).",
+        "hapotter" : "unholy blend of hare and William, the hapotter",
 
         "bitley" : "unholy machination of beetle and Bradley, the bitley rains destruction with co-ordinated aerial strikes.",
-        "itley" : "unholy machination of insect and Bradley, the itley ",
-        "witley" : "unholy machination of wolf and Bradley, the witley ",
-        "hitley" : "unholy machination of horse and Bradley, the hitley ",
-        "ditley" : "unholy machination of deer and Bradley, the ditley ",
-        "citley" : "unholy machination of crocodile and Bradley, the citley ",
-        "kitley" : "unholy machination of kangaroo and Bradley, the kitley ",
-        "litley" : "unholy machination of lion and Bradley, the litley ",
+        "itley" : "unholy machination of insect and Bradley, the itley gives malaria to children.",
+        "witley" : "unholy machination of wolf and Bradley, the witley eats babies.",
+        "hitley" : "unholy machination of horse and Bradley, the hitley chases babies.",
+        "ditley" : "unholy machination of deer and Bradley, the ditley gets hit by cars (very poor situational awareness).",
+        "citley" : "unholy machination of crocodile and Bradley, the citley bites babies but doesn't swallow (on a list).",
+        "kitley" : "unholy machination of kangaroo and Bradley, the kitley kidnaps children in its pouch (on a list). ",
+        "litley" : "unholy machination of lion and Bradley, the litley roars at babies (is a child itself).",
         "ritley" : "unholy machination of rat and Bradley, the ritley scurries after weak people (usually found in potter estate).",
         "pterodactyl-ley" : "unholy machination of pterodactyl and Bradley, the pterodactyl-ley hunts after other itleys, savaging their corpses.",
 
-        "timp" : "unholy combination of imp and Tom, the timp ",
-        "tapybara" : "unholy combination of capybara and Tom, the tapybara ",
+        "timp" : "unholy combination of imp and Tom, the timp can't spell.",
+        "tapybara" : "unholy combination of capybara and Tom, the tapybara can't spell.",
         "terodactyl" : "unholy combination of pterodactyl and Tom, the terodactyl suffers from a severe case of polydactyl.",
-        "turtom" : "unholy combination of turtle and Tom, the turtom ",
-        "wot" : "unholy combination of wolf and Tom, the wot ",
-        "tomsect" : "unholy combination of insect and Tom, the tomsect ",
-        "tont" : "unholy combination of ant and Tom, the tont ",
-        "tomilla" : "unholy combination of gorilla and Tom, the tomilla ",
-        "hippotomamus" : "unholy combination of hippo and Tom, the hippotomamus ",
-        "tombra" : "unholy combination of cobra and Tom, the tombra ",
-        "tomala" : "unholy combination of koala and Tom, the tomala ",
+        "turtom" : "unholy combination of turtle and Tom, the turtom can't spell.",
+        "wot" : "unholy combination of wolf and Tom, the wot can't spell.",
+        "tomsect" : "unholy combination of insect and Tom, the tomsect can't spel.",
+        "tont" : "unholy combination of ant and Tom, the tont can't spel.",
+        "tomilla" : "unholy combination of gorilla and Tom, the tomilla can't spel.",
+        "hippotomamus" : "unholy combination of hippo and Tom, the hippotomamus can't spel.",
+        "tombra" : "unholy combination of cobra and Tom, the tombra can't spel.",
+        "tomala" : "unholy combination of koala and Tom, the tomala can't spel.",
+
+        "None" : "None",
 
 
 
@@ -992,6 +995,7 @@ def bestiary():
         "tom" : "tommy gun",
     }
     print(f"Your bestiary currently contains: {bestiar}.")
+    print("DISCLAIMER: All descriptions provided by Bradley Whitley and William Potter. In no part conceptualised by Lord Windbreaker.")
     q = input("Would you like to view a certain creature? ").capitalize()
     if q == "Yes" or q == "Y":
         while True:
@@ -1291,9 +1295,9 @@ def chance():
                 else:
                     print("Tom has already died.")
             case "whitley world":
-            if "Bradley" in livingBosses:
-                    encounter("Bradley", "Racist Programmer")
-                    fight("Bradley", 69420, 69, 420, 2000000000, 856, -432000, "Taco")
+                if "Bradley" in livingBosses:
+                        encounter("Bradley", "Racist Programmer")
+                        fight("Bradley", 69420, 69, 420, 2000000000, 856, -432000, "Taco")
                 else:
                     print("Bradley has already died.")
             case "potter estate":
