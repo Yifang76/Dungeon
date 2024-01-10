@@ -1,7 +1,7 @@
 from random import *
 import sys
 gold, bankedGold, statUpgrade, experience, summonNumber, totalSummonNumber, renown = 0, 0, 0, 0, 0, 0, 0
-activeBounties = [[],[],[],[],[]]
+activeBounties, gameFinish = [[],[],[],[],[]], False
 bestiar, achievements, inventory = ["None"], ["None"], ["helmet", "sword"]
 faith, eTotHea, carry, summons, spells, shopStock, bankedItems = "None", int(1), True, ["None"], ["None"], [""], ["None"]
 hEqItem, cEqItem, lEqItem, gEqItem, bEqItem, rhEqItem, lhEqItem = "None", "None", "None", "None", "None", "None", "None" #Changed from None to "None" for saveFile
@@ -116,7 +116,9 @@ equipmentMapping = {
     "war axe": "Right Hand",
     "hatchets": "Right Hand",
     "King's Charter": "Accessory",
-    "tommy gun": "Right Hand"
+    "tommy gun": "Right Hand",
+    "iron" : "N/A",
+    "leather" : "N/A"
 }
 
 
@@ -225,7 +227,7 @@ summonStats = {
     "tapybara": (100, 7, 9, 5, 1,),
     "terodactyl": (125, 7, 7, 4, 10),
     "turtom": (1000, 1, 1, 1, 0),
-    "wot": (7, 4, 4, 10, 3,),
+    "wom": (7, 4, 4, 10, 3,),
     "tomsect": (2, 1, 1, 1, 1,),
     "tont": (50, 7, 7, 3, 1),
     "tomilla": (60, 6, 2, 1, 6),
@@ -240,7 +242,7 @@ summonStats = {
     "citley": (50, 7, 7, 3, 1),
     "kitley": (20, 1, 1, 1, 8),
     "litley": (40, 6, 5, 7, 7),
-    "pterodactyl-ley": (200, 8, 8, 5, 15),
+    "pterodactyley": (200, 8, 8, 5, 15),
     "ritley": (2, 1, 1, 1, 1),
     "wotter": (25, 3, 3, 2, 6),
     "botter": (75, 9, 9, 1, 9),
@@ -961,10 +963,10 @@ def bestiary():
         "otter-otter" : "unholy blend of otter and William, the otter-otter ",
         "capy-otter" : "unholy blend of capybara and William, the capy-otter ",
         "totter" : "unholy blend of toad and William, the totter",
-        "kotter" : "unholy blend of kangaroo and William, the kotter",
-        "gotter" : "unholy blend of wolf and William, the gotter",
-        "cotter" : "unholy blend of wolf and William, the cotter is very nice to children, specifically children (On every pedophile list).",
-        "hapotter" : "unholy blend of hare and William, the hapotter",
+        "kotter" : "unholy blend of kangaroo and William, the kotter ",
+        "gotter" : "unholy blend of goat and William, the gotter ",
+        "cotter" : "unholy blend of cot and William, the cotter is very nice to children, specifically children (On every pedophile list).",
+        "hapotter" : "unholy blend of hare and William, the hapotter is racist to monkeys.",
 
         "bitley" : "unholy machination of beetle and Bradley, the bitley rains destruction with co-ordinated aerial strikes.",
         "itley" : "unholy machination of insect and Bradley, the itley gives malaria to children.",
@@ -975,13 +977,13 @@ def bestiary():
         "kitley" : "unholy machination of kangaroo and Bradley, the kitley kidnaps children in its pouch (on a list). ",
         "litley" : "unholy machination of lion and Bradley, the litley roars at babies (is a child itself).",
         "ritley" : "unholy machination of rat and Bradley, the ritley scurries after weak people (usually found in potter estate).",
-        "pterodactyl-ley" : "unholy machination of pterodactyl and Bradley, the pterodactyl-ley hunts after other itleys, savaging their corpses.",
+        "pterodactyley" : "unholy machination of pterodactyl and Bradley, the pterodactyley hunts after other itleys, savaging their corpses.",
 
         "timp" : "unholy combination of imp and Tom, the timp can't spell.",
         "tapybara" : "unholy combination of capybara and Tom, the tapybara can't spell.",
         "terodactyl" : "unholy combination of pterodactyl and Tom, the terodactyl suffers from a severe case of polydactyl.",
         "turtom" : "unholy combination of turtle and Tom, the turtom can't spell.",
-        "wot" : "unholy combination of wolf and Tom, the wot can't spell.",
+        "wom" : "unholy combination of wolf and Tom, the wom can't spell.",
         "tomsect" : "unholy combination of insect and Tom, the tomsect can't spel.",
         "tont" : "unholy combination of ant and Tom, the tont can't spel.",
         "tomilla" : "unholy combination of gorilla and Tom, the tomilla can't spel.",
@@ -1244,7 +1246,7 @@ def chance():
         2: ("tapybara", 100, 7, 9, 5, 1, 50, None),
         3: ("terodactyl", 125, 7, 7, 4, 10, 125, None),
         4: ("turtom", 1000, 1, 1, 1, 0, 5, None),
-        5: ("wot", 7, 4, 4, 10, 3, 3, None),
+        5: ("wom", 7, 4, 4, 10, 3, 3, None),
         6: ("tomsect", 2, 1, 1, 1, 1, 1, None),
         7: ("tont", 50, 7, 7, 3, 1, 20, None),
         8: ("tomilla", 60, 6, 2, 1, 6, 60, None),
@@ -1264,7 +1266,7 @@ def chance():
         7: ("citley", 50, 7, 7, 3, 1, 20, None),
         8: ("kitley", 20, 1, 1, 1, 8, 10, None),
         9: ("litley", 40, 6, 5, 7, 7, 80, None),
-        10: ("pterodactyl-ley", 200, 8, 8, 5, 15, 200, None),
+        10: ("pterodactyley", 200, 8, 8, 5, 15, 200, None),
         11: ("ritley", 2, 1, 1, 1, 1, 1, None),
         }
     if whr == "potter estate":
@@ -1283,16 +1285,16 @@ def chance():
         }
     if whr == "domain of the death star":
         actions = {
-        1: ("pterodactyl-ley", 200, 8, 8, 5, 15, 200, None),
+        1: ("pterodactyley", 200, 8, 8, 5, 15, 200, None),
         2: ("terodactyl", 125, 7, 7, 4, 10, 125, None),
         3: ("capy-otter", 10, 2, 2, 4, 4, 5, None),
-        4: ("pterodactyl-ley", 200, 8, 8, 5, 15, 200, None),
+        4: ("pterodactyley", 200, 8, 8, 5, 15, 200, None),
         5: ("terodactyl", 125, 7, 7, 4, 10, 125, None),
         6: ("capy-otter", 10, 2, 2, 4, 4, 5, None),
-        7: ("pterodactyl-ley", 200, 8, 8, 5, 15, 200, None),
+        7: ("pterodactyley", 200, 8, 8, 5, 15, 200, None),
         8: ("terodactyl", 125, 7, 7, 4, 10, 125, None),
         9: ("capy-otter", 10, 2, 2, 4, 4, 5, None),
-        10: ("pterodactyl-ley", 200, 8, 8, 5, 15, 200, None),
+        10: ("pterodactyley", 200, 8, 8, 5, 15, 200, None),
         11: ("terodactyl", 125, 7, 7, 4, 10, 125, None),
         }
     else:
