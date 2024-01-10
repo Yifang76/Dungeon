@@ -2,8 +2,8 @@ from random import *
 import sys
 gold, bankedGold, statUpgrade, experience, summonNumber, totalSummonNumber, renown = 0, 0, 0, 0, 0, 0, 0
 activeBounties, gameFinish = [[],[],[],[],[]], False
-bestiar, achievements, inventory = ["None"], ["None"], ["helmet", "sword"]
-faith, eTotHea, carry, summons, spells, shopStock, bankedItems = "None", int(1), True, ["None"], ["None"], [""], ["None"]
+bestiar, achievements, inventory = ["None"], ["None"], ["helmet", "sword", "Potter's Heart"]
+faith, eTotHea, carry, summons, spells, shopStock, bankedItems = "None", int(1), True, ["None"], ["None"], [""], ["None", "Potter's Heart"]
 hEqItem, cEqItem, lEqItem, gEqItem, bEqItem, rhEqItem, lhEqItem = "None", "None", "None", "None", "None", "None", "None" #Changed from None to "None" for saveFile
 adlist = ["common ","rare ","mythical ","legendary "]
 weaponlist = ["axe","sword","stick"]
@@ -573,6 +573,7 @@ def menu():
         "sword" : "A common sword",
         "axe" : "A common axe",
         "stick" : "Useless",
+        "Potter's Heart" : "Could have a use"
         #Need to edit to account for '
 
     }
@@ -590,7 +591,10 @@ def menu():
             if checkDesc == "Yes" or checkDesc == "Y":
                 whichDesc = input("Which item would you like check? ")
                 if whichDesc in inventory:
-                    print(f"{whichDesc.capitalize()}: {str(weaponDescDict[whichDesc])}")
+                    try:
+                        print(f"{whichDesc.capitalize()}: {str(weaponDescDict[whichDesc])}")
+                    except:
+                        print("Invalid Item")
                 else:
                     print(f"You do not have {whichDesc}.")
             elif checkDesc == "No" or checkDesc == "N":
@@ -744,60 +748,70 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
                             else:
                                 print("You do not have this spell")
                         case "Summon" | "R":
-                            print(summons)
-                            whichSummon = input("Which summon would you like to use? ")
-                            if whichSummon in summons:
-                                usingSummon = True
-                                health, strength, dexterity, perception, agility = summonStats[whichSummon]
-                                print(f"{health},{strength},{dexterity},{perception},{agility}")
+                            while True:
+                                print(summons)
+                                whichSummon = input("Which summon would you like to use? ")
+                                if whichSummon in summons:
+                                    usingSummon = True
+                                    health, strength, dexterity, perception, agility = summonStats[whichSummon]
+                                    print(f"{health},{strength},{dexterity},{perception},{agility}")
+                                else:
+                                    print("Not a summon")
+                    repeat = int(input("How many times would you like to repeat this action? "))
+                    try:
+                        if str(repeat).isdigit() == True:
+                            repeat = repeat
+                    except:
+                        repeat = 1
+                    finally:
+                        for i in range(repeat):
+                            NeTotHea = eTotHea
+                            nTotHea = health
+                            if perception+1 >= 100:
+                                eTotHea -= (strength*dexterity)*2
+                                print("You perform a Critical Hit.")
                             else:
-                                print("Not a summon")
-                    NeTotHea = eTotHea
-                    nTotHea = health
-                    if perception+1 >= 100:
-                        eTotHea -= (strength*dexterity)*2
-                        print("You perform a Critical Hit.")
-                    else:
-                        if randint(1+perception, 100) >= 90:
-                            eTotHea -= (strength*dexterity)*2
-                            print("You perform a Critical Hit.")
-                        else:
-                            eTotHea -= (int(strength) * int(dexterity))
-                            print("You perform a normal attack.")
-                    if eAgi+1 >= 100:
-                        eTotHea = NeTotHea
-                        print("The attack misses the enemy.")
-                    else:
-                        if randint(1+eAgi, 100) >= 90:
-                            eTotHea = NeTotHea
-                            print("The attack misses the enemy.")
-                        else:
-                            print("The attack hits the enemy.")
-                    if eTotHea <= 0:
-                        eTotHea = 0
-                    print(f"{determiner}{noun} currently has {eTotHea} health left.")
-                    if ePer+1 >= 100:
-                        health -= (eStr*eDex)*2
-                        print("The enemy performs a Critical Hit.")
-                    else:
-                        if randint(1+ePer, 100) >= 90:
-                            health -= (eStr*eDex)*2
-                            print("The enemy performs a Critical Hit.")
-                        else:
-                            health -= (int(eStr) * int(eDex))
-                            print("The enemy performs a normal attack.")
-                    if agility+1 >= 100:
-                        #health = nTotHea
-                        print("The attack misses you.")
-                    else:
-                        if randint(1+agility, 100) >= 90:
-                            #health = nTotHea
-                            print("The attack misses you.")
-                        else:
-                            print("The attack hits you.")
-                    if health <= 0:
-                        health = 0
-                    print(f"You currently have {health} health left.")
+                                if randint(1+perception, 100) >= 90:
+                                    eTotHea -= (strength*dexterity)*2
+                                    print("You perform a Critical Hit.")
+                                else:
+                                    eTotHea -= (int(strength) * int(dexterity))
+                                    print("You perform a normal attack.")
+                            if eAgi+1 >= 100:
+                                eTotHea = NeTotHea
+                                print("The attack misses the enemy.")
+                            else:
+                                if randint(1+eAgi, 100) >= 90:
+                                    eTotHea = NeTotHea
+                                    print("The attack misses the enemy.")
+                                else:
+                                    print("The attack hits the enemy.")
+                            if eTotHea <= 0:
+                                eTotHea = 0
+                            print(f"{determiner}{noun} currently has {eTotHea} health left.")
+                            if ePer+1 >= 100:
+                                health -= (eStr*eDex)*2
+                                print("The enemy performs a Critical Hit.")
+                            else:
+                                if randint(1+ePer, 100) >= 90:
+                                    health -= (eStr*eDex)*2
+                                    print("The enemy performs a Critical Hit.")
+                                else:
+                                    health -= (int(eStr) * int(eDex))
+                                    print("The enemy performs a normal attack.")
+                            if agility+1 >= 100:
+                                #health = nTotHea
+                                print("The attack misses you.")
+                            else:
+                                if randint(1+agility, 100) >= 90:
+                                    #health = nTotHea
+                                    print("The attack misses you.")
+                                else:
+                                    print("The attack hits you.")
+                            if health <= 0:
+                                health = 0
+                            print(f"You currently have {health} health left.")
+                            
                 case "Use Item" | "Use" | "Item" | "I":
                     itemUse()
                     health = health - (int(eStr) * int(eDex))
@@ -812,6 +826,9 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
                         break
                     else:
                         print("You failed to escape.")
+                case "IWantToInstaKillEverything":
+                    strength += 1000000000000000000000000000000000000000000000000000000000
+                    dexterity += 1000000000000000000000000000000000000000000000000000000000000000
                 case _:
                     print("That is not an option")
         if eTotHea <= 0:
@@ -860,8 +877,22 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
             print("Your summon dies")
             usingSummon = False
         else:
-            print("You died.")
-            sys.exit()
+            if "Potter's Heart" in inventory:
+                while True:
+                    q = input("Would you like to use Potter's Heart? ").title()
+                    if q == "Y" or q == "Yes":
+                        nTotHea = 999999999999999999999999999999999999999999999999999999999999999999
+                        inventory.remove("Potter's Heart")
+                        fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop)
+                        break
+                    elif q == "N" or q == "No":
+                        print("You died.")
+                        sys.exit()                        
+                    else:
+                        print("That is not an option")
+            else:
+                print("You died.")
+                sys.exit()
 
 def itemUse():
     global TotHea, inventory, despair, usingSummon
@@ -960,11 +991,11 @@ def bestiary():
         "botter" : "unholy blend of bear and William, the botter attacks with an impossible speed. Under its paw, the words 'William Potter is a bot at Mario Kart 8 Deluxe' are inscribed.",
         "wotter" : "unholy blend of wolf and William, the wotter terrifies others with rude slurs.",
 
-        "otter-otter" : "unholy blend of otter and William, the otter-otter ",
-        "capy-otter" : "unholy blend of capybara and William, the capy-otter ",
-        "totter" : "unholy blend of toad and William, the totter",
-        "kotter" : "unholy blend of kangaroo and William, the kotter ",
-        "gotter" : "unholy blend of goat and William, the gotter ",
+        "otter-otter" : "unholy blend of otter and William, the otter-otter is a moron.",
+        "capy-otter" : "unholy blend of capybara and William, the capy-otter is a moron.",
+        "totter" : "unholy blend of toad and William, the totter is a moron.",
+        "kotter" : "unholy blend of kangaroo and William, the kotter is a moron.",
+        "gotter" : "unholy blend of goat and William, the gotter is a moron.",
         "cotter" : "unholy blend of cot and William, the cotter is very nice to children, specifically children (On every pedophile list).",
         "hapotter" : "unholy blend of hare and William, the hapotter is racist to monkeys.",
 
@@ -1474,7 +1505,7 @@ def chois():
                     " You may go to "
                     " the Blacksmith (W), the Armory (A), the Bank (B),"
                     " the Tavern (H), the Shrine (S),"
-                    " the Market (M), the Trainer (T), the Menu,"
+                    " the Market (M), the Menu,"
                     " the Incantation Store (I) or back Out (O). ").title()
         match townQuestion:
             case "Market" | "M":
