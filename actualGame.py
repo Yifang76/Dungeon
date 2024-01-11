@@ -757,60 +757,67 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
                                     print(f"{health},{strength},{dexterity},{perception},{agility}")
                                 else:
                                     print("Not a summon")
-                    repeat = int(input("How many times would you like to repeat this action? "))
+                    repeat = str(input("How many times would you like to repeat this action? "))
                     try:
-                        if str(repeat).isdigit() == True:
-                            repeat = repeat
+                        if repeat.isdigit() == True:
+                            repeat = int(repeat)
+                        else:
+                            repeat = 1
                     except:
                         repeat = 1
                     finally:
                         for i in range(repeat):
-                            NeTotHea = eTotHea
-                            nTotHea = health
-                            if perception+1 >= 100:
-                                eTotHea -= (strength*dexterity)*2
-                                print("You perform a Critical Hit.")
+                            if health <= 0:
+                                break
                             else:
-                                if randint(1+perception, 100) >= 90:
+                                print("S")
+                                NeTotHea = eTotHea
+                                nTotHea = health
+                                if perception+1 >= 100:
                                     eTotHea -= (strength*dexterity)*2
                                     print("You perform a Critical Hit.")
                                 else:
-                                    eTotHea -= (int(strength) * int(dexterity))
-                                    print("You perform a normal attack.")
-                            if eAgi+1 >= 100:
-                                eTotHea = NeTotHea
-                                print("The attack misses the enemy.")
-                            else:
-                                if randint(1+eAgi, 100) >= 90:
+                                    if randint(1+perception, 100) >= 90:
+                                        eTotHea -= (strength*dexterity)*2
+                                        print("You perform a Critical Hit.")
+                                    else:
+                                        eTotHea -= (int(strength) * int(dexterity))
+                                        print("You perform a normal attack.")
+                                if eAgi+1 >= 100:
                                     eTotHea = NeTotHea
                                     print("The attack misses the enemy.")
                                 else:
-                                    print("The attack hits the enemy.")
-                            if eTotHea <= 0:
-                                eTotHea = 0
-                            print(f"{determiner}{noun} currently has {eTotHea} health left.")
-                            if ePer+1 >= 100:
-                                health -= (eStr*eDex)*2
-                                print("The enemy performs a Critical Hit.")
-                            else:
-                                if randint(1+ePer, 100) >= 90:
+                                    if randint(1+eAgi, 100) >= 90:
+                                        eTotHea = NeTotHea
+                                        print("The attack misses the enemy.")
+                                    else:
+                                        print("The attack hits the enemy.")
+                                if eTotHea <= 0:
+                                    eTotHea = 0
+                                print(f"{determiner}{noun} currently has {eTotHea} health left.")
+                                if ePer+1 >= 100:
                                     health -= (eStr*eDex)*2
                                     print("The enemy performs a Critical Hit.")
                                 else:
-                                    health -= (int(eStr) * int(eDex))
-                                    print("The enemy performs a normal attack.")
-                            if agility+1 >= 100:
-                                #health = nTotHea
-                                print("The attack misses you.")
-                            else:
-                                if randint(1+agility, 100) >= 90:
+                                    if randint(1+ePer, 100) >= 90:
+                                        health -= (eStr*eDex)*2
+                                        print("The enemy performs a Critical Hit.")
+                                    else:
+                                        health -= (int(eStr) * int(eDex))
+                                        print("The enemy performs a normal attack.")
+                                if agility+1 >= 100:
                                     #health = nTotHea
                                     print("The attack misses you.")
                                 else:
-                                    print("The attack hits you.")
-                            if health <= 0:
-                                health = 0
-                            print(f"You currently have {health} health left.")
+                                    if randint(1+agility, 100) >= 90:
+                                        #health = nTotHea
+                                        print("The attack misses you.")
+                                    else:
+                                        print("The attack hits you.")
+                                if health <= 0:
+                                    health = 0
+                                print(f"You currently have {health} health left.")
+                            #break
                             
                 case "Use Item" | "Use" | "Item" | "I":
                     itemUse()
@@ -826,9 +833,10 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
                         break
                     else:
                         print("You failed to escape.")
-                case "IWantToInstaKillEverything":
+                case "IWantToInstaKillEverything" | "IwTIsKE":
                     strength += 1000000000000000000000000000000000000000000000000000000000
                     dexterity += 1000000000000000000000000000000000000000000000000000000000000000
+                    print("CHEAT ENTERED")
                 case _:
                     print("That is not an option")
         if eTotHea <= 0:
