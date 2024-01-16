@@ -757,6 +757,7 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
                                     print(f"{health},{strength},{dexterity},{perception},{agility}")
                                 else:
                                     print("Not a summon")
+                                    usingSummon == False
                     repeat = str(input("How many times would you like to repeat this action? "))
                     try:
                         if repeat.isdigit() == True:
