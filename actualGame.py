@@ -185,7 +185,8 @@ fenceDict = {
     "human flesh" : 5,
     "dragon tooth" : 50
 }
-listsConfig = ["totalSummonNumber", "activeBounties", "bestiar", "spells", "summons", "bankedItems"]
+livingBosses = ["None", "Tom", "Bradley", "William"]
+listsConfig = [totalSummonNumber, activeBounties, bestiar, spells, summons, bankedItems, livingBosses, achievements]
 pList = ["Potter Estate", "Tomtress", "Whitley World"]
 liteList = ["leather", "iron" ]
 enemyList = ["botter", "wotter"]
@@ -196,7 +197,6 @@ illItems = ["necronomicon", "demon heart", "dragon scale", "human flesh"]
 #cChangeItem are all items that perform a class change
 cChangeItem = ["necronomicon", "demon heart", "dragon tooth"]
 safe = ["Cetus","Ashborn"]
-livingBosses = ["None", "Tom", "Bradley", "William"]
 bosses = ["Tom", "Bradley", "William"]
 legalSpells = ["Elemental", "E", "Divine", "D", "Nature", "N", "Aether", "A"]
 illegalSpells = ["Chaos", "C", "Occult", "O"]
@@ -567,13 +567,15 @@ def menu():
         "fireball" : "Basic sorcery for Elemental mages.\nFire was once deemed as taboo before its uses were brought to light.\nDeals 5 base fire damage multiplied by upgrade level.",
         "curse" : "Basic sorcery for Occult mages.\n Once upon a time, occult magic was accepted in society, acting as a parallel to faith; after the First Tragedy, it's hideous visage was truly revealed to the world",
         "barrage": "Basic sorcery for Aether mages.\n First came into existence after Will-Meister got his ass beat by Bradely.",
-        "freeze": "Basic sorcery for Ice mages.\n First incepted by a freezing Tommy."
+        "freeze": "Basic sorcery for Ice mages.\n First incepted by a freezing Tommy.",
+        "None" : "Nothing"
     }
     weaponDescDict = {
         "sword" : "A common sword",
         "axe" : "A common axe",
         "stick" : "Useless",
-        "Potter's Heart" : "Could have a use"
+        "Potter's Heart" : "Could have a use",
+        "None" : "Nothing"
         #Need to edit to account for '
 
     }
@@ -711,6 +713,7 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
         "barrage" : "10 damage",
         "curse" : "7 dark damage",
         "confusion" : "5 damage",
+        "None" : "0 damage",
     }
     global summonNumber, summons, TotHea, classn, totalSummonNumber, bestiary, experience, livingBosses, usingSummon, health, nTotHea
     health = nTotHea
