@@ -185,8 +185,9 @@ fenceDict = {
     "human flesh" : 5,
     "dragon tooth" : 50
 }
-livingBosses = ["None", "Tom", "Bradley", "William"]
-listsConfig = [totalSummonNumber, activeBounties, bestiar, spells, summons, bankedItems, livingBosses, achievements]
+livingBosses = ["None", "Tom", "Bradley", "William", "Windbreaker"]
+#totalSummonNumber, 
+listsConfig = [activeBounties, bestiar, spells, summons, bankedItems, livingBosses, achievements]
 pList = ["Potter Estate", "Tomtress", "Whitley World"]
 liteList = ["leather", "iron" ]
 enemyList = ["botter", "wotter"]
@@ -648,7 +649,7 @@ def menu():
 
 def where():
     global whr
-    if len(livingBosses) == 0 and complete == False:
+    if len(livingBosses) == 1 and complete == False:
         pList.append("Domain of the Death Star")
     whr = input(f"Where would you like to go? {pList} ").replace("'","").lower()
     if whr in [x.lower().replace("'", "") for x in pList]:
@@ -851,8 +852,8 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
                 print(f"{noun.capitalize()} is already in the bestiary.")
             if noun in bosses:
                 inventory.append(bossDrop)
-                if noun in livingBosses:
-                    livingBosses.remove(noun)
+            if noun in livingBosses:
+                livingBosses.remove(noun)
             if classn == "Summoner" or classn == "Necromancer":
                 lootIsDropped()
                 print(f"You currently have {summons} under your control.\nYou can only convert {totalSummonNumber - summonNumber} more. You will not gain experience.")
@@ -1281,7 +1282,7 @@ def incantations():
                 break
                 
 def chance():
-    global modNlist, whr
+    global modNlist, whr, gameFinish
     chanceEn = randint(1,100)
     if whr == "tomtress":
         actions = {
@@ -1373,7 +1374,7 @@ def chance():
             case "domain of the death star":
                 if "Windbreaker" in livingBosses:
                     encounter("Windbreaker", "Breaker of Wind")
-                    fight("Winbreaker", 1, 70000000, 1500000, 1000000, 10000000, 100000000000000000, "God")
+                    fight("Windbreaker", 1, 70000000, 1500000, 1000000, 10000000, 100000000000000000, "God")
                 else:
                     print("Windbreaker has already died.")
                     gameFinish = True
@@ -1491,15 +1492,11 @@ def save():
 
 
 def chois():
-    global carry, inventoryTwo, trueStr, trueAgi, trueDex, trueHea, truePer, trueCha, trueInt, Str, Agi, Dex, Hea, Per, Cha, Int
+    global carry, inventoryTwo, trueStr, trueAgi, trueDex, trueHea, truePer, trueCha, trueInt, Str, Agi, Dex, Hea, Per, Cha, Int, gameFinish
     count = 0
     for i in range(len(listsConfig)):
         removeNoneFromLists(listsConfig[count])
         count += 1
-    if gameFinish == "True":
-        print("Check new file")
-        with open("conclusion.txt", "a") as data:
-            data.write("Well done\nYou finish game\nEnding")
     Str, Agi, Dex, Hea, Per, Cha, Int = trueStr, trueAgi, trueDex, trueHea, truePer, trueCha, trueInt
     statBoosts(equipped_items["Head"])
     statBoosts(equipped_items["Chest"])
@@ -1513,6 +1510,12 @@ def chois():
     experienceCheck()
     TotHea = Hea * 10
     while True:
+        if len(livingBosses) == 0:
+            gameFinish == True
+        if gameFinish == True:
+            print("Check new file")
+            with open("conclusion.txt", "a") as data:
+                data.write("Well done\nYou finish game\nEnding")
         townQuestion = input("\nWhere would you like to go?"
                     " You may go to "
                     " the Blacksmith (W), the Armory (A), the Bank (B),"
