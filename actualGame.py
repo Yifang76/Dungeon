@@ -172,7 +172,7 @@ rarityValues = {
 
 
 places = {
-    "Potter Estate" : 4360,
+    "womp potter, womp, the wompotous potter" : 4360,
     "Tomtress" : 4361,
     "Whitley World" : 4362,
     "Domain of the Death Star" : 10000
@@ -188,7 +188,7 @@ fenceDict = {
 livingBosses = ["None", "Tom", "Bradley", "William", "Windbreaker"]
 #totalSummonNumber, 
 listsConfig = [activeBounties, bestiar, spells, summons, bankedItems, livingBosses, achievements]
-pList = ["Potter Estate", "Tomtress", "Whitley World"]
+pList = ["womp potter, womp, the wompotous potter", "Tomtress", "Whitley World"]
 liteList = ["leather", "iron" ]
 enemyList = ["botter", "wotter"]
 originClass = ["None"]
@@ -1011,6 +1011,7 @@ def bestiary():
         "gotter" : "unholy blend of goat and William, the gotter is a moron.",
         "cotter" : "unholy blend of cot and William, the cotter is very nice to children, specifically children (On every pedophile list).",
         "hapotter" : "unholy blend of hare and William, the hapotter is racist to monkeys.",
+        "wompcrates-potter" : "blend of a Greek philosopher and William, it once said 'i think therefore i hate monkeys'."
 
         "bitley" : "unholy machination of beetle and Bradley, the bitley rains destruction with co-ordinated aerial strikes.",
         "itley" : "unholy machination of insect and Bradley, the itley gives malaria to children.",
@@ -1020,7 +1021,7 @@ def bestiary():
         "citley" : "unholy machination of crocodile and Bradley, the citley bites babies but doesn't swallow (on a list).",
         "kitley" : "unholy machination of kangaroo and Bradley, the kitley kidnaps children in its pouch (on a list). ",
         "litley" : "unholy machination of lion and Bradley, the litley roars at babies (is a child itself).",
-        "ritley" : "unholy machination of rat and Bradley, the ritley scurries after weak people (usually found in potter estate).",
+        "ritley" : "unholy machination of rat and Bradley, the ritley scurries after weak people (usually found in womp potter, womp, the wompotous potter).",
         "pterodactyley" : "unholy machination of pterodactyl and Bradley, the pterodactyley hunts after other itleys, savaging their corpses.",
 
         "timp" : "unholy combination of imp and Tom, the timp can't spell.",
@@ -1313,13 +1314,13 @@ def chance():
         10: ("pterodactyley", 200, 8, 8, 5, 15, 200, None),
         11: ("ritley", 2, 1, 1, 1, 1, 1, None),
         }
-    if whr == "potter estate":
+    if whr == "womp potter, womp, the wompotous potter":
         actions = {
         1: ("wotter", 25, 3, 3, 2, 6, 25, None),
         2: ("botter", 75, 9, 9, 1, 9, 100, None),
         3: ("otter-otter", 40, 2, 2, 6, 7, 10, None),
         4: ("capy-otter", 10, 2, 2, 4, 4, 5, None),
-        5: ("capy-otter", 10, 2, 2, 4, 4, 5, None),
+        5: ("wompcrates-potter", 100, 25, 21, 41, 41, 51, None),
         6: ("totter", 10, 2, 2, 5, 6, 5, None),
         7: ("kotter", 20, 4, 4, 1, 0, 20, None),
         8: ("gotter", 25, 1, 4, 3, 4, 25, None),
@@ -1365,7 +1366,7 @@ def chance():
                         fight("Bradley", 69420, 69, 420, 2000000000, 856, -432000, "Taco")
                 else:
                     print("Bradley has already died.")
-            case "potter estate":
+            case "womp potter, womp, the wompotous potter":
                 if "William" in livingBosses:
                     encounter("William", "Porgy")
                     fight("William", 69418, 999, 4, 1, 88, 10000, "Diabetes Type 3")
