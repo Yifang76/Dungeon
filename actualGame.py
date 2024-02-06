@@ -1001,7 +1001,7 @@ def journal():
 def bestiary():
     global bestiar
     bestiaryDict = {
-        "botter" : "unholy blend of bear and William, the botter attacks with an impossible speed. Under its paw, the words 'William Potter is a bot at Mario Kart 8 Deluxe' are inscribed.",
+        "botter" : "unholy blend of bear and William, the botter attacks with an impossible speed. On its paw, the words 'William Potter is a bot at Mario Kart 8 Deluxe' are inscribed.",
         "wotter" : "unholy blend of wolf and William, the wotter terrifies others with rude slurs.",
 
         "otter-otter" : "unholy blend of otter and William, the otter-otter is a moron.",
