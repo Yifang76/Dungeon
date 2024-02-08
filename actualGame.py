@@ -758,7 +758,8 @@ def fight(noun, eTotHea, eStr, eDex, ePer, eAgi, exp, bossDrop):
                                 if whichSummon in summons:
                                     usingSummon = True
                                     health, strength, dexterity, perception, agility = summonStats[whichSummon]
-                                    print(f"{health},{strength},{dexterity},{perception},{agility}")
+                                    print(f"{health},{strength},{dexterity},{perception},{agility}")````
+                                    break
                                 else:
                                     print("Not a summon")
                                     usingSummon == False
@@ -1011,7 +1012,7 @@ def bestiary():
         "gotter" : "unholy blend of goat and William, the gotter is a moron.",
         "cotter" : "unholy blend of cot and William, the cotter is very nice to children, specifically children (On every pedophile list).",
         "hapotter" : "unholy blend of hare and William, the hapotter is racist to monkeys.",
-        "wompcrates-potter" : "blend of a Greek philosopher and William, it once said 'i think therefore i hate monkeys'."
+        "wompcrates-potter" : "blend of a Greek philosopher and William, it once said 'i think therefore i hate monkeys'.",
 
         "bitley" : "unholy machination of beetle and Bradley, the bitley rains destruction with co-ordinated aerial strikes.",
         "itley" : "unholy machination of insect and Bradley, the itley gives malaria to children.",
