@@ -1313,6 +1313,7 @@ def alchemist():
         h = requirements.index(q)
         print(f"You need {requirements[h+1]} and {requirements[h+2]}")
         cauldron(q, requirements.index(q))
+        #index uses the variable 'q' and outputs where the first instance of 'q' in the list 'requirements' is
 
 def cauldron(item, herb):
   if requirements[herb+1] in inventory and requirements[herb+2] in inventory:
@@ -1956,6 +1957,7 @@ def chois():
     count = 0
     for i in range(len(listsConfig)):
         removeNoneFromLists(listsConfig[count])
+        #Removes the placeholder variable none from all lists in 'listsConfig'
         count += 1
     Str, Agi, Dex, Hea, Per, Cha, Int = trueStr, trueAgi, trueDex, trueHea, truePer, trueCha, trueInt
     statBoosts(equipped_items["Head"])
